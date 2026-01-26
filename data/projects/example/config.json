@@ -45,12 +45,21 @@
       "credit": "1845 OS Lancashire - National Library of Scotland via Allmaps"
     },
     {
-      "type": "osm",
-      "name": "Modern (OpenStreetMap)",
+      "type": "google",
+      "name": "Modern (Google Satellite)",
+      "mapType": "s",
       "yearStart": 1950,
       "yearEnd": 2100,
-      "alpha": 0.8,
-      "credit": "OpenStreetMap Contributors"
+      "alpha": 1.0,
+      "credit": "Google Maps"
+    }
+  ],
+  "tilesets": [
+    {
+      "type": "google_3d",
+      "name": "Google Photorealistic 3D",
+      "yearStart": 1950,
+      "yearEnd": 2100
     }
   ]
 }

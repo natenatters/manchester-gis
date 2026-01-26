@@ -8,6 +8,7 @@ import { createUrlTemplateProvider } from './urlTemplate.js';
 import { createSingleTileProvider } from './singleTile.js';
 import { createWmtsProvider } from './wmts.js';
 import { createAllmapsProvider } from './allmaps.js';
+import { createGoogleProvider } from './google.js';
 
 // Default imagery configuration
 export const DEFAULT_IMAGERY = {
@@ -22,7 +23,8 @@ const providers = {
     url_template: createUrlTemplateProvider,
     single_tile: createSingleTileProvider,
     wmts: createWmtsProvider,
-    allmaps: createAllmapsProvider
+    allmaps: createAllmapsProvider,
+    google: createGoogleProvider
 };
 
 /**
@@ -58,4 +60,5 @@ export { createUrlTemplateProvider } from './urlTemplate.js';
 export { createSingleTileProvider } from './singleTile.js';
 export { createWmtsProvider } from './wmts.js';
 export { createAllmapsProvider } from './allmaps.js';
+export { createGoogleProvider } from './google.js';
 export { ImageryManager } from './manager.js';

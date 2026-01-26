@@ -98,22 +98,6 @@
       ]
     },
     {
-      "id": "mamucium_ruins",
-      "name": "Mamucium (Reconstruction)",
-      "description": "Modern partial reconstruction at Castlefield",
-      "centerFrom": "mamucium",
-      "dimensionsFrom": "mamucium",
-      "startYear": 1984,
-      "endYear": 2100,
-      "material": "ruins",
-      "wallHeight": 2,
-      "wallThickness": 2.4,
-      "towerHeight": 3,
-      "ditchWidth": 0,
-      "ditchDepth": 0,
-      "partialWalls": true
-    },
-    {
       "id": "castleshaw",
       "name": "Castleshaw Fortlet",
       "description": "Small fortlet on the road to York",
