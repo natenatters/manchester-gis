@@ -9,6 +9,10 @@
  */
 
 import * as Cesium from 'cesium';
+import { loadReconstructionsDataSource, updateReconstructionsVisibility } from './reconstructions3D.js';
+
+// Current project path (set during init)
+let projectPath = '/data/projects/example';
 
 // Layer definitions
 export const LAYER_GROUPS = {
@@ -18,18 +22,12 @@ export const LAYER_GROUPS = {
         defaultVisible: true,
         layers: {
             roman: { name: 'Roman Sites', color: '#8B0000' },
+            roman3d: { name: '3D Fort Reconstructions', color: '#CD853F' },
             medieval: { name: 'Medieval Sites', color: '#DAA520' },
             ownership: { name: 'Ownership Chains', color: '#4169E1' }
         }
     },
-    reconstructions: {
-        name: '3D Reconstructions',
-        description: '3D fort models',
-        defaultVisible: false,
-        layers: {
-            roman3d: { name: 'Roman Fort Models', color: '#CD853F' }
-        }
-    },
+    // Note: reconstructions group removed - 3D forts are now in curated
     reference: {
         name: 'Reference Data',
         description: 'Third-party sources for research',
@@ -50,17 +48,28 @@ export const LAYER_GROUPS = {
     }
 };
 
+// Current year state (for visibility filtering)
+let currentYear = 200;
+
 /**
  * Load all data layers
  * @param {Cesium.Viewer} viewer
+ * @param {string} projPath - Path to project folder
+ * @param {Object} config - Project configuration
  * @returns {Object} Layer data sources by key
  */
-export async function loadAllLayers(viewer) {
+export async function loadAllLayers(viewer, projPath, config = {}) {
+    projectPath = projPath;
+    currentYear = config.defaultYear || 200;
+
     const layers = {};
 
-    // Create DataSource for each layer
+    // Create DataSource for each layer (except 3D reconstructions which load async)
     for (const [groupKey, group] of Object.entries(LAYER_GROUPS)) {
         for (const [layerKey, layer] of Object.entries(group.layers)) {
+            // Skip roman3d - loaded separately below
+            if (layerKey === 'roman3d') continue;
+
             const dataSource = new Cesium.CustomDataSource(layerKey);
             dataSource.show = group.defaultVisible;
 
@@ -72,6 +81,21 @@ export async function loadAllLayers(viewer) {
 
             viewer.dataSources.add(dataSource);
         }
+    }
+
+    // Load 3D reconstructions asynchronously
+    try {
+        const reconstructions = await loadReconstructionsDataSource(projectPath, currentYear);
+        reconstructions.show = LAYER_GROUPS.curated.defaultVisible;
+        layers.roman3d = {
+            dataSource: reconstructions,
+            group: 'curated',
+            config: LAYER_GROUPS.curated.layers.roman3d
+        };
+        viewer.dataSources.add(reconstructions);
+        console.log('Loaded 3D reconstructions');
+    } catch (err) {
+        console.warn('Could not load 3D reconstructions:', err);
     }
 
     // Load reference data from unified GeoJSON
@@ -88,11 +112,11 @@ export async function loadAllLayers(viewer) {
 
     // Load curated project data
     try {
-        const response = await fetch('/data/projects/example/sites.json');
+        const response = await fetch(`${projectPath}/sites.json`);
         if (response.ok) {
             const data = await response.json();
             populateCuratedLayers(data, layers);
-            console.log(`Loaded curated project: ${data.metadata.project}`);
+            console.log(`Loaded curated project: ${data.metadata?.project || 'unnamed'}`);
         }
     } catch (err) {
         console.warn('Could not load curated project:', err);
@@ -268,4 +292,27 @@ export function toggleGroup(layers, groupKey, visible) {
             layer.dataSource.show = visible;
         }
     }
+}
+
+/**
+ * Update the current year and refresh visibility
+ * @param {Object} layers
+ * @param {number} year
+ */
+export function setYear(layers, year) {
+    currentYear = year;
+
+    // Update 3D reconstruction visibility
+    if (layers.roman3d) {
+        updateReconstructionsVisibility(layers.roman3d.dataSource, year);
+    }
+
+    // TODO: Update other layers based on year
+}
+
+/**
+ * Get current year
+ */
+export function getYear() {
+    return currentYear;
 }

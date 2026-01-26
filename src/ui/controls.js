@@ -2,14 +2,19 @@
  * UI Controls
  */
 
-import { LAYER_GROUPS, toggleLayer, toggleGroup } from '../layers/index.js';
+import { LAYER_GROUPS, toggleLayer, toggleGroup, setYear } from '../layers/index.js';
+
+// Store config for building UI
+let projectConfig = {};
 
 /**
  * Initialize the UI controls
  * @param {Cesium.Viewer} viewer
  * @param {Object} layers - Layer data sources
+ * @param {Object} config - Project configuration
  */
-export function initUI(viewer, layers) {
+export function initUI(viewer, layers, config = {}) {
+    projectConfig = config;
     const container = document.getElementById('controls');
     container.innerHTML = buildControlsHTML();
 
@@ -25,10 +30,13 @@ export function initUI(viewer, layers) {
  * Build the controls panel HTML
  */
 function buildControlsHTML() {
+    const title = projectConfig.name || 'Historical GIS';
+    const defaultYear = projectConfig.defaultYear || 200;
+
     let html = `
         <div class="controls-panel">
             <div class="controls-header">
-                <h2>Manchester GIS</h2>
+                <h2>${title}</h2>
                 <button id="toggleControls" class="toggle-btn">-</button>
             </div>
             <div id="controlsContent">
@@ -38,8 +46,8 @@ function buildControlsHTML() {
     html += `
         <div class="layer-group">
             <div class="layer-group-title">Time Period</div>
-            <div id="yearDisplay" class="year-display">200 AD</div>
-            <input type="range" id="yearSlider" min="0" max="2026" value="200">
+            <div id="yearDisplay" class="year-display">${defaultYear} AD</div>
+            <input type="range" id="yearSlider" min="0" max="2026" value="${defaultYear}">
         </div>
     `;
 
@@ -133,7 +141,8 @@ function attachYearSlider(viewer, layers) {
     slider.addEventListener('input', (e) => {
         const year = parseInt(e.target.value);
         display.textContent = `${year} AD`;
-        // TODO: Filter entities by year
+        setYear(layers, year);
+        viewer.scene.requestRender();
     });
 }
 

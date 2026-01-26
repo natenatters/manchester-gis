@@ -1,5 +1,5 @@
 /**
- * Manchester Historical GIS - Main Entry Point
+ * Historical GIS - Main Entry Point
  */
 
 // Cesium imports
@@ -14,18 +14,38 @@ import { loadAllLayers } from './layers/index.js';
 // Styles
 import './styles.css';
 
+// Default project path (can be overridden via URL param)
+const DEFAULT_PROJECT = '/data/projects/example';
+
+/**
+ * Load project configuration
+ */
+async function loadProjectConfig(projectPath) {
+    const response = await fetch(`${projectPath}/config.json`);
+    if (!response.ok) {
+        throw new Error(`Could not load project config from ${projectPath}`);
+    }
+    return response.json();
+}
+
 // Initialize the application
 async function init() {
-    console.log('Initializing Manchester Historical GIS...');
+    // Get project path from URL or use default
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectPath = urlParams.get('project') || DEFAULT_PROJECT;
 
-    // Create Cesium viewer
-    const viewer = createViewer('cesiumContainer');
+    // Load project config
+    const config = await loadProjectConfig(projectPath);
+    console.log(`Initializing ${config.name}...`);
+
+    // Create Cesium viewer with project config
+    const viewer = createViewer('cesiumContainer', config);
 
     // Load all data layers
-    const layers = await loadAllLayers(viewer);
+    const layers = await loadAllLayers(viewer, projectPath, config);
 
     // Initialize UI controls
-    initUI(viewer, layers);
+    initUI(viewer, layers, config);
 
     console.log('Application initialized');
 }

@@ -4,19 +4,21 @@
 
 import * as Cesium from 'cesium';
 
-// Greater Manchester bounding box center
-const MANCHESTER_CENTER = {
-    lon: -2.24,
-    lat: 53.48,
-    height: 80000  // Initial camera height in meters
+// Fallback center if no config provided
+const DEFAULT_CENTER = {
+    lon: 0,
+    lat: 51.5,
+    height: 100000
 };
 
 /**
  * Create and configure the Cesium viewer
  * @param {string} containerId - DOM element ID for the viewer
+ * @param {Object} config - Project configuration with center coordinates
  * @returns {Cesium.Viewer} Configured viewer instance
  */
-export function createViewer(containerId) {
+export function createViewer(containerId, config = {}) {
+    const center = config.center || DEFAULT_CENTER;
     // Initialize viewer with reduced GPU usage
     const viewer = new Cesium.Viewer(containerId, {
         timeline: false,
@@ -50,12 +52,12 @@ export function createViewer(containerId) {
     );
     osmLayer.alpha = 0.8;
 
-    // Set camera over Manchester
+    // Set camera over project center
     viewer.camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(
-            MANCHESTER_CENTER.lon,
-            MANCHESTER_CENTER.lat,
-            MANCHESTER_CENTER.height
+            center.lon,
+            center.lat,
+            center.height
         ),
         orientation: {
             heading: 0,

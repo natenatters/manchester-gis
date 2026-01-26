@@ -1,0 +1,151 @@
+{
+  "metadata": {
+    "description": "3D fort reconstructions based on archaeological evidence",
+    "sources": [
+      "Pleiades (fort polygon)",
+      "UMAU excavations 2001-5",
+      "Greater Manchester Archaeological Unit"
+    ]
+  },
+  "referencePoints": {
+    "mamucium": {
+      "corners": {
+        "SW": [-2.254356, 53.474163],
+        "SE": [-2.253184, 53.475033],
+        "NE": [-2.254879, 53.475864],
+        "NW": [-2.256027, 53.47496]
+      },
+      "knownLocations": {
+        "north_gate": { "coords": [-2.2547, 53.4759], "source": "Modern reconstruction 1984" },
+        "granaries": { "coords": [-2.2545, 53.4752], "source": "Excavation" },
+        "mansio": { "coords": [-2.2515, 53.4765], "source": "UMAU excavations 2001-5" },
+        "temple": { "coords": [-2.2520, 53.4768], "source": "UMAU excavations" }
+      }
+    }
+  },
+  "materials": {
+    "timber": {
+      "wall": "#654321",
+      "tower": "#4A3728",
+      "building": "#8B4513",
+      "roof": "#5C4033"
+    },
+    "stone": {
+      "wall": "#C9B896",
+      "tower": "#A69372",
+      "building": "#D4C4A8",
+      "roof": "#8B4513",
+      "parapet": "#B8A888",
+      "road": "#8B7355"
+    },
+    "ruins": {
+      "wall": "#808080",
+      "tower": "#696969",
+      "building": "#A9A9A9",
+      "roof": "#D3D3D3",
+      "opacity": 0.8
+    },
+    "ditch": "#3D2B1F"
+  },
+  "forts": [
+    {
+      "id": "mamucium_timber",
+      "name": "Mamucium (Timber Phase)",
+      "description": "First Roman fort, built of turf and timber",
+      "centerFrom": "mamucium",
+      "dimensionsFrom": "mamucium",
+      "startYear": 79,
+      "endYear": 199,
+      "material": "timber",
+      "wallHeight": 3.0,
+      "wallThickness": 4.5,
+      "towerHeight": 6,
+      "ditchWidth": 3,
+      "ditchDepth": 2
+    },
+    {
+      "id": "mamucium_stone",
+      "name": "Mamucium (Stone Phase)",
+      "description": "Rebuilt in stone with enhanced defenses",
+      "centerFrom": "mamucium",
+      "dimensionsFrom": "mamucium",
+      "startYear": 200,
+      "endYear": 410,
+      "material": "stone",
+      "wallHeight": 5.5,
+      "wallThickness": 2.4,
+      "towerHeight": 10,
+      "intervalTowerHeight": 8,
+      "parapetHeight": 1.2,
+      "rampartWidth": 3.5,
+      "ditchWidth": 4,
+      "ditchDepth": 2.5,
+      "buildings": [
+        { "name": "Principia (HQ)", "x": 0, "y": 5, "w": 35, "h": 30, "height": 7, "type": "hq" },
+        { "name": "Praetorium", "x": 0, "y": -25, "w": 25, "h": 20, "height": 6, "type": "commander" },
+        { "name": "Horreum", "x": -32, "y": -25, "w": 15, "h": 28, "height": 5, "type": "granary" },
+        { "name": "Horreum", "x": 32, "y": -25, "w": 15, "h": 28, "height": 5, "type": "granary" },
+        { "name": "Barracks", "x": -40, "y": 28, "w": 12, "h": 42, "height": 4, "type": "barracks" },
+        { "name": "Barracks", "x": -25, "y": 28, "w": 12, "h": 42, "height": 4, "type": "barracks" },
+        { "name": "Barracks", "x": 25, "y": 28, "w": 12, "h": 42, "height": 4, "type": "barracks" },
+        { "name": "Barracks", "x": 40, "y": 28, "w": 12, "h": 42, "height": 4, "type": "barracks" },
+        { "name": "Bathhouse", "x": -45, "y": -45, "w": 18, "h": 14, "height": 4.5, "type": "bath" },
+        { "name": "Fabrica", "x": 45, "y": -45, "w": 16, "h": 12, "height": 4, "type": "workshop" },
+        { "name": "Valetudinarium", "x": -8, "y": 35, "w": 14, "h": 16, "height": 4.5, "type": "hospital" },
+        { "name": "Valetudinarium", "x": 8, "y": 35, "w": 14, "h": 16, "height": 4.5, "type": "hospital" },
+        { "name": "Stables", "x": 50, "y": 20, "w": 10, "h": 30, "height": 3.5, "type": "stable" },
+        { "name": "Stables", "x": -50, "y": 20, "w": 10, "h": 30, "height": 3.5, "type": "stable" }
+      ]
+    },
+    {
+      "id": "mamucium_ruins",
+      "name": "Mamucium (Reconstruction)",
+      "description": "Modern partial reconstruction at Castlefield",
+      "centerFrom": "mamucium",
+      "dimensionsFrom": "mamucium",
+      "startYear": 1984,
+      "endYear": 2100,
+      "material": "ruins",
+      "wallHeight": 2,
+      "wallThickness": 2.4,
+      "towerHeight": 3,
+      "ditchWidth": 0,
+      "ditchDepth": 0,
+      "partialWalls": true
+    },
+    {
+      "id": "castleshaw",
+      "name": "Castleshaw Fortlet",
+      "description": "Small fortlet on the road to York",
+      "center": [-1.9839, 53.5608],
+      "length": 40,
+      "width": 33,
+      "rotation": 0,
+      "startYear": 105,
+      "endYear": 125,
+      "material": "stone",
+      "wallHeight": 4,
+      "wallThickness": 1.5,
+      "towerHeight": 6,
+      "ditchWidth": 5,
+      "ditchDepth": 1.5
+    },
+    {
+      "id": "melandra",
+      "name": "Melandra Castle (Ardotalia)",
+      "description": "Auxiliary fort guarding the Peak District approach",
+      "center": [-1.9674, 53.4442],
+      "length": 127,
+      "width": 110,
+      "rotation": -10,
+      "startYear": 78,
+      "endYear": 140,
+      "material": "stone",
+      "wallHeight": 5,
+      "wallThickness": 2,
+      "towerHeight": 7,
+      "ditchWidth": 7,
+      "ditchDepth": 2
+    }
+  ]
+}
