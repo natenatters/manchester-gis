@@ -3,7 +3,7 @@
  */
 
 import * as Cesium from 'cesium';
-import { createImageryProvider, DEFAULT_IMAGERY } from './imagery/index.js';
+import { ImageryManager } from './imagery/manager.js';
 
 // Fallback center if no config provided
 const DEFAULT_CENTER = {
@@ -16,7 +16,7 @@ const DEFAULT_CENTER = {
  * Create and configure the Cesium viewer
  * @param {string} containerId - DOM element ID for the viewer
  * @param {Object} config - Project configuration with center coordinates and imagery
- * @returns {Cesium.Viewer} Configured viewer instance
+ * @returns {{ viewer: Cesium.Viewer, imageryManager: ImageryManager }}
  */
 export function createViewer(containerId, config = {}) {
     const center = config.center || DEFAULT_CENTER;
@@ -46,11 +46,9 @@ export function createViewer(containerId, config = {}) {
     viewer.scene.highDynamicRange = false;
     viewer.infoBox.frame.sandbox = 'allow-same-origin allow-popups allow-forms allow-scripts';
 
-    // Add base imagery layer from config
-    const imageryConfig = config.imagery || DEFAULT_IMAGERY;
-    const provider = createImageryProvider(imageryConfig);
-    const baseLayer = viewer.imageryLayers.addImageryProvider(provider);
-    baseLayer.alpha = imageryConfig.alpha !== undefined ? imageryConfig.alpha : 0.8;
+    // Set up temporal imagery manager
+    const imageryManager = new ImageryManager(viewer);
+    imageryManager.load(config.imagery);
 
     // Set camera over project center
     viewer.camera.setView({
@@ -66,7 +64,7 @@ export function createViewer(containerId, config = {}) {
         }
     });
 
-    return viewer;
+    return { viewer, imageryManager };
 }
 
 /**

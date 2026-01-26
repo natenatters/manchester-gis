@@ -6,21 +6,24 @@ import { getLayerGroups, getLayerDefs, toggleLayer, toggleGroup, setYear } from 
 
 // Store config for building UI
 let projectConfig = {};
+let storedImageryManager = null;
 
 /**
  * Initialize the UI controls
  * @param {Cesium.Viewer} viewer
  * @param {Object} layers - Layer data sources
  * @param {Object} config - Project configuration
+ * @param {Object} [imageryManager] - Temporal imagery manager
  */
-export function initUI(viewer, layers, config = {}) {
+export function initUI(viewer, layers, config = {}, imageryManager = null) {
     projectConfig = config;
+    storedImageryManager = imageryManager;
     const container = document.getElementById('controls');
     container.innerHTML = buildControlsHTML();
 
     // Attach event listeners
     attachLayerToggles(layers);
-    attachYearSlider(viewer, layers);
+    attachYearSlider(viewer, layers, imageryManager);
 
     // Update status
     updateStatus('Ready');
@@ -50,6 +53,7 @@ function buildControlsHTML() {
             <div class="layer-group-title">Time Period</div>
             <div id="yearDisplay" class="year-display">${defaultYear} AD</div>
             <input type="range" id="yearSlider" min="0" max="2026" value="${defaultYear}">
+            <div id="imageryDisplay" class="imagery-display"></div>
         </div>
     `;
 
@@ -143,16 +147,31 @@ function attachLayerToggles(layers) {
 /**
  * Attach year slider event listener
  */
-function attachYearSlider(viewer, layers) {
+function attachYearSlider(viewer, layers, imageryManager) {
     const slider = document.getElementById('yearSlider');
     const display = document.getElementById('yearDisplay');
 
     slider.addEventListener('input', (e) => {
         const year = parseInt(e.target.value);
         display.textContent = `${year} AD`;
-        setYear(layers, year);
+        setYear(layers, year, imageryManager);
+        updateImageryDisplay(imageryManager);
         viewer.scene.requestRender();
     });
+}
+
+/**
+ * Update the imagery layer display
+ */
+function updateImageryDisplay(imageryManager) {
+    const display = document.getElementById('imageryDisplay');
+    if (!display || !imageryManager) return;
+
+    const active = imageryManager.getActiveLayer();
+    if (active) {
+        const name = active.config.name || active.config.credit || 'Base imagery';
+        display.textContent = name;
+    }
 }
 
 /**

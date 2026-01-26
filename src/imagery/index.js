@@ -58,3 +58,4 @@ export { createUrlTemplateProvider } from './urlTemplate.js';
 export { createSingleTileProvider } from './singleTile.js';
 export { createWmtsProvider } from './wmts.js';
 export { createAllmapsProvider } from './allmaps.js';
+export { ImageryManager } from './manager.js';

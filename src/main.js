@@ -39,13 +39,17 @@ async function init() {
     console.log(`Initializing ${config.name}...`);
 
     // Create Cesium viewer with project config
-    const viewer = createViewer('cesiumContainer', config);
+    const { viewer, imageryManager } = createViewer('cesiumContainer', config);
 
     // Load all data layers
-    const layers = await loadAllLayers(viewer, projectPath, config);
+    const layers = await loadAllLayers(viewer, projectPath, config, imageryManager);
 
     // Initialize UI controls
-    initUI(viewer, layers, config);
+    initUI(viewer, layers, config, imageryManager);
+
+    // Set initial year (triggers imagery and entity filtering)
+    const { setYear } = await import('./layers/index.js');
+    setYear(layers, config.defaultYear || 200, imageryManager);
 
     console.log('Application initialized');
 }

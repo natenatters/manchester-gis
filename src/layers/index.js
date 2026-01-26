@@ -33,9 +33,10 @@ async function loadLayerConfig(projPath) {
  * @param {Cesium.Viewer} viewer
  * @param {string} projPath - Path to project folder
  * @param {Object} config - Project configuration
+ * @param {Object} imageryManager - Temporal imagery manager
  * @returns {Object} Layer data sources by key
  */
-export async function loadAllLayers(viewer, projPath, config = {}) {
+export async function loadAllLayers(viewer, projPath, config = {}, imageryManager = null) {
     projectPath = projPath;
     currentYear = config.defaultYear || 200;
 
@@ -292,18 +293,59 @@ export function toggleGroup(layers, groupKey, visible) {
  * Update the current year and refresh visibility
  * @param {Object} layers
  * @param {number} year
+ * @param {Object} [imageryManager] - Temporal imagery manager
  */
-export function setYear(layers, year) {
+export function setYear(layers, year, imageryManager = null) {
     currentYear = year;
 
-    // Update reconstruction layers
-    for (const [key, layer] of Object.entries(layers)) {
-        if (layer.config.type === 'reconstruction') {
-            updateReconstructionsVisibility(layer.dataSource, year);
-        }
+    // Update imagery layer
+    if (imageryManager) {
+        imageryManager.setYear(year);
     }
 
-    // TODO: Update other layers based on year
+    // Update all layers
+    for (const [key, layer] of Object.entries(layers)) {
+        if (layer.config.type === 'reconstruction') {
+            // Reconstruction layers have their own visibility logic
+            updateReconstructionsVisibility(layer.dataSource, year);
+        } else {
+            // Standard layers: filter entities by year
+            updateEntityVisibility(layer.dataSource, year);
+        }
+    }
+}
+
+/**
+ * Update entity visibility based on year
+ * Entities with start_year/end_year properties are shown/hidden accordingly
+ * @param {Cesium.CustomDataSource} dataSource
+ * @param {number} year
+ */
+function updateEntityVisibility(dataSource, year) {
+    const entities = dataSource.entities.values;
+
+    for (const entity of entities) {
+        const props = entity.properties;
+        if (!props) {
+            continue;
+        }
+
+        // Get temporal bounds from properties
+        const startYear = props.start_year?.getValue();
+        const endYear = props.end_year?.getValue();
+
+        // If no temporal data, always show
+        if (startYear === undefined && endYear === undefined) {
+            entity.show = true;
+            continue;
+        }
+
+        // Check if current year is within range
+        const afterStart = startYear === undefined || year >= startYear;
+        const beforeEnd = endYear === undefined || year <= endYear;
+
+        entity.show = afterStart && beforeEnd;
+    }
 }
 
 /**

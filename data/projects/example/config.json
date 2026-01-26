@@ -8,15 +8,49 @@
     "lat": 53.48,
     "height": 80000
   },
-  "defaultYear": 200,
+  "defaultYear": 1845,
   "bounds": {
     "southwest": { "lat": 53.35, "lon": -2.75 },
     "northeast": { "lat": 53.70, "lon": -1.90 }
   },
-  "imagery": {
-    "type": "osm",
-    "url": "https://a.tile.openstreetmap.org/",
-    "alpha": 0.8,
-    "credit": "OpenStreetMap Contributors"
-  }
+  "imagery": [
+    {
+      "type": "allmaps",
+      "name": "1750 Berry Map",
+      "mapId": "811b04a06391adb1",
+      "yearStart": 1700,
+      "yearEnd": 1780,
+      "bounds": {
+        "west": -2.26377,
+        "south": 53.47093,
+        "east": -2.22844,
+        "north": 53.4907
+      },
+      "alpha": 1.0,
+      "credit": "1750 Berry - University of Manchester via Allmaps"
+    },
+    {
+      "type": "allmaps",
+      "name": "1845 OS Lancashire",
+      "mapId": "a3940ebbf9b3662d",
+      "yearStart": 1840,
+      "yearEnd": 1890,
+      "bounds": {
+        "west": -2.2955,
+        "south": 53.4565,
+        "east": -2.1655,
+        "north": 53.5095
+      },
+      "alpha": 1.0,
+      "credit": "1845 OS Lancashire - National Library of Scotland via Allmaps"
+    },
+    {
+      "type": "osm",
+      "name": "Modern (OpenStreetMap)",
+      "yearStart": 1950,
+      "yearEnd": 2100,
+      "alpha": 0.8,
+      "credit": "OpenStreetMap Contributors"
+    }
+  ]
 }
