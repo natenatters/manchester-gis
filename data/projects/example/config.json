@@ -9,6 +9,10 @@
     "height": 80000
   },
   "defaultYear": 1845,
+  "terrain": {
+    "enabled": true,
+    "exaggeration": 2.0
+  },
   "bounds": {
     "southwest": { "lat": 53.35, "lon": -2.75 },
     "northeast": { "lat": 53.70, "lon": -1.90 }

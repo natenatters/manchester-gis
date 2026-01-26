@@ -143,7 +143,21 @@ export class TilesetManager {
             this.activeTileset = null;
         }
 
+        // Adjust terrain exaggeration - reduce when 3D tilesets are shown
+        // (they have real elevation data, don't want to double-exaggerate)
+        if (this.baseExaggeration !== undefined) {
+            this.viewer.scene.verticalExaggeration = this.activeTileset ? 1.0 : this.baseExaggeration;
+        }
+
         return this.activeTileset;
+    }
+
+    /**
+     * Store the base terrain exaggeration (called by viewer setup)
+     * @param {number} exaggeration
+     */
+    setBaseExaggeration(exaggeration) {
+        this.baseExaggeration = exaggeration;
     }
 
     /**

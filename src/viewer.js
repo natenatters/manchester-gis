@@ -55,6 +55,25 @@ export async function createViewer(containerId, config = {}) {
     const tilesetManager = new TilesetManager(viewer);
     await tilesetManager.load(config.tilesets);
 
+    // Set up terrain (LIDAR/elevation) if configured
+    if (config.terrain?.enabled) {
+        try {
+            viewer.scene.setTerrain(Cesium.Terrain.fromWorldTerrain());
+
+            // Apply vertical exaggeration (makes hills more dramatic)
+            const exaggeration = config.terrain.exaggeration || 1.0;
+            viewer.scene.verticalExaggeration = exaggeration;
+
+            // Store base exaggeration so tilesetManager can adjust it
+            // (reduce to 1.0 when 3D tilesets are shown - they have real elevation)
+            tilesetManager.setBaseExaggeration(exaggeration);
+
+            console.log(`Cesium World Terrain enabled (${exaggeration}x exaggeration)`);
+        } catch (err) {
+            console.warn('Could not load terrain:', err.message);
+        }
+    }
+
     // Set camera over project center
     viewer.camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(
