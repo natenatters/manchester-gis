@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manchester Historical Land Ownership</title>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <style>
+        html, body, #cesiumContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: sans-serif;
+            font-size: 13px;
+            z-index: 1000;
+            min-width: 240px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+        #controls h1 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            border-bottom: 1px solid #555;
+            padding-bottom: 8px;
+        }
+        #controls label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        #controls input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        #controls input[type="range"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+        #controls select {
+            width: 100%;
+            padding: 4px;
+            margin-top: 4px;
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            border-radius: 3px;
+        }
+        .layer-group {
+            margin: 12px 0;
+            padding-top: 10px;
+            border-top: 1px solid #444;
+        }
+        .layer-group-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #aaa;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        .filter-row {
+            margin: 6px 0;
+        }
+        .filter-label {
+            font-size: 11px;
+            color: #ccc;
+            margin-bottom: 2px;
+        }
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 4px;
+        }
+        .filter-tag {
+            background: #444;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            cursor: pointer;
+            border: 1px solid #666;
+        }
+        .filter-tag.active {
+            background: #0066cc;
+            border-color: #0088ff;
+        }
+        .filter-tag:hover {
+            background: #555;
+        }
+        .filter-tag.active:hover {
+            background: #0077dd;
+        }
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .collapsible-header:hover {
+            color: #fff;
+        }
+        .collapse-icon {
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+        .collapse-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+        .collapsible-content {
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+        .collapsible-content.collapsed {
+            max-height: 0 !important;
+        }
+        .source-summary {
+            font-size: 10px;
+            color: #888;
+            margin-top: 4px;
+        }
+        .nav-btn {
+            flex: 1;
+            padding: 6px;
+            background: #444;
+            color: white;
+            border: 1px solid #666;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+        .nav-btn:hover {
+            background: #555;
+        }
+        .nav-btn:active {
+            background: #333;
+        }
+        #status {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #444;
+            font-size: 11px;
+            color: #888;
+        }
+        #legend {
+            max-height: 150px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+    <button id="toggleControls" style="position: absolute; top: 10px; left: 10px; z-index: 1001; padding: 8px 12px; background: rgba(0,0,0,0.8); color: white; border: 1px solid #555; border-radius: 4px; cursor: pointer; font-size: 13px;">☰ Menu</button>
+    <div id="controls">
+        <h1 style="cursor: pointer;" onclick="document.getElementById('controls').style.display='none'; document.getElementById('toggleControls').style.display='block';">Manchester Historical GIS <span style="float:right; font-size: 12px;">✕</span></h1>
+
+        <div class="layer-group">
+            <div class="layer-group-title">Base Maps</div>
+            <label>
+                <input type="checkbox" id="toggleOSM" checked> OpenStreetMap
+            </label>
+            <label>
+                <input type="checkbox" id="autoHistoricMap" checked> Fade map for ancient periods
+            </label>
+            <label>
+                <input type="checkbox" id="showArchMarkers" checked> Show archaeological markers
+            </label>
+            <label>
+                <input type="checkbox" id="show3DForts"> Show 3D fort reconstructions
+            </label>
+            <div id="mapFadeInfo" style="font-size: 10px; color: #888; margin-top: 4px;"></div>
+        </div>
+
+        <div class="layer-group">
+            <div class="layer-group-title">Filter Sites</div>
+
+            <div class="filter-row">
+                <div class="filter-label collapsible-header" onclick="toggleSourceFilters()">
+                    <span>Source:</span>
+                    <span class="collapse-icon" id="sourceCollapseIcon">▼</span>
+                </div>
+                <div id="sourceSummary" class="source-summary"></div>
+                <div class="collapsible-content" id="sourceFiltersContainer">
+                    <div class="filter-tags" id="sourceFilters"></div>
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-label">Site Type:</div>
+                <select id="typeFilter">
+                    <option value="all">All Types</option>
+                </select>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-label">Listed Grade:</div>
+                <select id="gradeFilter">
+                    <option value="all">All Grades</option>
+                </select>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-label">Road Evidence:</div>
+                <select id="evidenceFilter">
+                    <option value="all">All Evidence Levels</option>
+                    <option value="confirmed">Confirmed Only (excavated/surveyed)</option>
+                    <option value="hide_conjecture">Hide Conjecture</option>
+                    <option value="conjecture_only">Conjecture Only</option>
+                </select>
+            </div>
+
+            <div class="filter-row">
+                <label>
+                    <input type="checkbox" id="ownershipOnly"> Only sites with ownership data
+                </label>
+            </div>
+        </div>
+
+        <div class="layer-group">
+            <div class="layer-group-title">Time Period</div>
+            <div id="yearDisplay" style="font-size: 24px; font-weight: bold; text-align: center; margin: 5px 0;">200 AD</div>
+            <div style="position: relative; height: 40px; margin-bottom: -8px;">
+                <canvas id="yearHistogram" style="width: 100%; height: 30px; opacity: 0.6;"></canvas>
+            </div>
+            <input type="range" id="yearSlider" min="0" max="2026" value="200" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; margin-top: 8px; gap: 8px;">
+                <button id="prevChange" class="nav-btn">◀ Prev</button>
+                <button id="nextChange" class="nav-btn">Next ▶</button>
+            </div>
+            <div id="viewChangeInfo" style="font-size: 10px; color: #888; text-align: center; margin-top: 4px;"></div>
+        </div>
+
+        <div class="layer-group">
+            <div class="layer-group-title">Owner Families</div>
+            <div id="legend" style="font-size: 11px; line-height: 1.6;"></div>
+        </div>
+
+        <div id="status">Loading...</div>
+    </div>
+
+    <script>
+        // Initialize viewer with reduced GPU usage
+        const viewer = new Cesium.Viewer('cesiumContainer', {
+            timeline: false,
+            animation: false,
+            baseLayerPicker: false,
+            geocoder: false,
+            homeButton: true,
+            sceneModePicker: true,
+            navigationHelpButton: false,
+            imageryProvider: false,
+            requestRenderMode: true,
+            maximumRenderTimeChange: Infinity,
+            targetFrameRate: 30,
+            useBrowserRecommendedResolution: true,
+            shadows: false,
+            terrainShadows: Cesium.ShadowMode.DISABLED
+        });
+
+        // Disable expensive effects
+        viewer.scene.fog.enabled = false;
+        viewer.scene.globe.showGroundAtmosphere = false;
+        viewer.scene.skyAtmosphere.show = false;
+        viewer.scene.highDynamicRange = false;
+        viewer.infoBox.frame.sandbox = 'allow-same-origin allow-popups allow-forms allow-scripts';
+
+        // Layer references
+        let osmLayer;
+        let sitesDataSource;
+        let unifiedData = null;
+
+        // Current filter state
+        let filters = {
+            sources: new Set(),
+            type: 'all',
+            grade: 'all',
+            evidence: 'all',  // For Roman roads: all, confirmed, hide_conjecture, conjecture_only
+            ownershipOnly: false
+        };
+        let currentYear = 200;  // Default to Roman stone fort period
+
+        // Family colors for map visualization
+        const FAMILY_COLORS = {
+            Roman: Cesium.Color.PURPLE,
+            Saxon: Cesium.Color.BROWN,
+            Church: Cesium.Color.WHITE,
+            Grelley: Cesium.Color.BLUE,
+            Mascy: Cesium.Color.DARKGREEN,
+            Radcliffe: Cesium.Color.RED,
+            Byron: Cesium.Color.ORANGE,
+            Clayton: Cesium.Color.TEAL,
+            Trafford: Cesium.Color.GOLD,
+            Chetham: Cesium.Color.CYAN,
+            Baguley: Cesium.Color.LIME,
+            Legh: Cesium.Color.MAGENTA,
+            Hulton: Cesium.Color.SALMON,
+            Birch: Cesium.Color.OLIVE,
+            Egerton: Cesium.Color.NAVY,
+            Barton: Cesium.Color.CORAL,
+            Byrom: Cesium.Color.KHAKI,
+            Brownlow: Cesium.Color.SIENNA,
+            Norris: Cesium.Color.PLUM,
+            Worsley: Cesium.Color.INDIANRED,
+            Downes: Cesium.Color.STEELBLUE,
+            Langley: Cesium.Color.TOMATO,
+            Dauntesey: Cesium.Color.VIOLET,
+            Pilkington: Cesium.Color.YELLOWGREEN,
+            Buckton: Cesium.Color.DARKSLATEGRAY,
+            PreRoman: Cesium.Color.GRAY,
+            Ruin: Cesium.Color.DARKGRAY,
+            Other: Cesium.Color.LIGHTGRAY,
+            Unknown: Cesium.Color.GRAY
+        };
+
+        // Grade colors for listed buildings and parks
+        const GRADE_COLORS = {
+            'I': Cesium.Color.CRIMSON,
+            'II*': Cesium.Color.DARKORANGE,
+            'II': Cesium.Color.GOLD
+        };
+
+        // Source colors (fallback when no grade or ownership)
+        const SOURCE_COLORS = {
+            'he_scheduled_monuments': Cesium.Color.PURPLE,
+            'he_listed_buildings': Cesium.Color.DODGERBLUE,
+            'he_parks_gardens': Cesium.Color.FORESTGREEN,
+            'he_heritage_at_risk': Cesium.Color.CRIMSON,
+            'he_battlefields': Cesium.Color.DARKRED,
+            'he_conservation_areas': Cesium.Color.MEDIUMSEAGREEN,
+            'wikidata': Cesium.Color.ORANGE,
+            'osm': Cesium.Color.DEEPSKYBLUE,
+            'domesday': Cesium.Color.SADDLEBROWN,
+            'gb1900': Cesium.Color.DARKGOLDENROD,
+            'roman_roads': Cesium.Color.DARKRED,
+            'curated': Cesium.Color.PURPLE
+        };
+
+        // Add OpenStreetMap base layer
+        osmLayer = viewer.imageryLayers.addImageryProvider(
+            new Cesium.UrlTemplateImageryProvider({
+                url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                credit: '© OpenStreetMap contributors'
+            })
+        );
+
+        // Set camera over Manchester
+        viewer.camera.setView({
+            destination: Cesium.Cartesian3.fromDegrees(-2.24, 53.48, 80000),
+            orientation: {
+                heading: 0,
+                pitch: Cesium.Math.toRadians(-90),
+                roll: 0
+            }
+        });
+
+        // Get current owner for a site at a given year
+        function getOwnerAtYear(owners, year) {
+            if (!owners || owners.length === 0) return null;
+            for (const owner of owners) {
+                const from = owner.from;
+                const to = owner.to || 2025;
+                if (year >= from && year <= to) return owner;
+            }
+            return null;
+        }
+
+        // Check if site exists at given year
+        // Sites without dates are always shown
+        function siteExistsAtYear(props, year) {
+            if (props.start_year && year < props.start_year) return false;
+            if (props.end_year && year > props.end_year) return false;
+            return true;
+        }
+
+        // Check if a feature passes current filters
+        function passesFilters(feature) {
+            const props = feature.properties;
+
+            // Source filter
+            if (filters.sources.size > 0 && !filters.sources.has(props.source)) {
+                return false;
+            }
+
+            // Type filter
+            if (filters.type !== 'all' && props.site_type !== filters.type) {
+                return false;
+            }
+
+            // Grade filter
+            if (filters.grade !== 'all') {
+                if (!props.grade || props.grade !== filters.grade) {
+                    return false;
+                }
+            }
+
+            // Ownership only filter
+            if (filters.ownershipOnly && !props.has_ownership_data) {
+                return false;
+            }
+
+            // Evidence level filter (for Roman roads)
+            if (filters.evidence !== 'all' && props.source === 'roman_roads') {
+                const level = props.evidence_level || 'unknown';
+                const isConjecture = level === 'conjecture';
+                const isConfirmed = level === 'excavated' || level === 'surveyed';
+
+                if (filters.evidence === 'confirmed' && !isConfirmed) {
+                    return false;
+                }
+                if (filters.evidence === 'hide_conjecture' && isConjecture) {
+                    return false;
+                }
+                if (filters.evidence === 'conjecture_only' && !isConjecture) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Get color for a feature
+        function getFeatureColor(feature, year) {
+            const props = feature.properties;
+
+            // If has ownership data, color by current owner
+            if (props.has_ownership_data && props.owners.length > 0) {
+                const owner = getOwnerAtYear(props.owners, year);
+                if (owner) {
+                    return FAMILY_COLORS[owner.family] || Cesium.Color.GOLD;
+                }
+            }
+
+            // If has grade, color by grade
+            if (props.grade) {
+                return GRADE_COLORS[props.grade] || Cesium.Color.GRAY;
+            }
+
+            // Fallback to source color
+            return SOURCE_COLORS[props.source] || Cesium.Color.GOLD;
+        }
+
+        // Build HTML description for popup - shows ALL properties
+        function buildDescription(feature, year) {
+            const props = feature.properties;
+            const owner = getOwnerAtYear(props.owners, year);
+
+            // Properties to skip (internal/redundant)
+            const skipProps = new Set(['source', 'has_ownership_data', 'list_entry', 'object_id', 'osm_tags']);
+
+            // Properties to show first (in order)
+            const priorityProps = ['name', 'source_display', 'site_type', 'grade', 'evidence_level', 'start_year', 'end_year'];
+
+            // Friendly labels for properties
+            const labels = {
+                name: 'Name',
+                source_display: 'Source',
+                site_type: 'Type',
+                grade: 'Grade',
+                start_year: 'Built/Date',
+                end_year: 'Demolished',
+                listed_year: 'Listed',
+                ngr: 'Grid Ref',
+                hyperlink: 'Link',
+                // Domesday
+                households: 'Households',
+                hundred: 'Hundred',
+                county_1086: 'County (1086)',
+                resources: 'Resources',
+                description: 'Description',
+                phillimore_ref: 'Phillimore Ref',
+                folio: 'Folio',
+                // OSM
+                architect: 'Architect',
+                building_levels: 'Floors',
+                building_type: 'Building Type',
+                address: 'Address',
+                addr_city: 'City',
+                addr_postcode: 'Postcode',
+                heritage: 'Heritage Grade',
+                osm_id: 'OSM ID',
+                start_date_raw: 'Date (raw)',
+                wikipedia: 'Wikipedia',
+                wikidata_id: 'Wikidata ID',
+                // Wikidata
+                borough: 'Borough',
+                inception_year: 'Founded',
+                // HE
+                easting: 'Easting',
+                northing: 'Northing',
+                area_ha: 'Area (ha)',
+                capture_scale: 'Scale',
+                amend_date: 'Amended',
+                // Roman Roads
+                road_type: 'Road Type',
+                evidence_level: 'Evidence',
+                certainty: 'Certainty'
+            };
+
+            // Format a value for display
+            function formatValue(key, value) {
+                if (value === null || value === undefined) return null;
+                if (Array.isArray(value) && value.length === 0) return null;
+                if (typeof value === 'object' && Object.keys(value).length === 0) return null;
+
+                // Special formatting
+                if (key === 'hyperlink') {
+                    const linkText = props.source === 'osm' ? 'OpenStreetMap' :
+                                     props.source === 'wikidata' ? 'Wikidata' :
+                                     props.source === 'domesday' ? 'Open Domesday' : 'Historic England';
+                    return `<a href="${value}" target="_blank">${linkText}</a>`;
+                }
+                if (key === 'resources' && typeof value === 'object') {
+                    return Object.entries(value).map(([k, v]) => `${v} ${k}`).join(', ');
+                }
+                if (key === 'area_ha' && typeof value === 'number') {
+                    return value.toFixed(2) + ' ha';
+                }
+                if (key === 'wikipedia') {
+                    const [lang, title] = value.includes(':') ? value.split(':') : ['en', value];
+                    return `<a href="https://${lang}.wikipedia.org/wiki/${title}" target="_blank">${value}</a>`;
+                }
+                if (key === 'wikidata_id') {
+                    return `<a href="https://www.wikidata.org/wiki/${value}" target="_blank">${value}</a>`;
+                }
+
+                return String(value);
+            }
+
+            let html = '<table style="font-size: 12px;">';
+
+            // Show priority properties first
+            priorityProps.forEach(key => {
+                if (props[key] !== undefined && props[key] !== null) {
+                    const formatted = formatValue(key, props[key]);
+                    if (formatted) {
+                        const label = labels[key] || key;
+                        html += `<tr><td><strong>${label}:</strong></td><td>${formatted}</td></tr>`;
+                    }
+                }
+            });
+
+            // Show remaining properties
+            Object.keys(props).forEach(key => {
+                if (skipProps.has(key) || priorityProps.includes(key) || key === 'owners') return;
+                const formatted = formatValue(key, props[key]);
+                if (formatted) {
+                    const label = labels[key] || key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                    html += `<tr><td><strong>${label}:</strong></td><td>${formatted}</td></tr>`;
+                }
+            });
+
+            // Owner at current year
+            if (owner) {
+                html += `<tr><td><strong>Owner (${year}):</strong></td><td>${owner.name}</td></tr>`;
+            }
+
+            // Ownership history
+            if (props.owners && props.owners.length > 0) {
+                html += '<tr><td colspan="2"><strong>Ownership History:</strong></td></tr>';
+                props.owners.forEach(o => {
+                    const to = o.to || 'present';
+                    const current = owner && o.name === owner.name ? ' ← current' : '';
+                    html += `<tr><td></td><td>${o.from}-${to}: ${o.name}${current}</td></tr>`;
+                });
+            }
+
+            html += '</table>';
+            return html;
+        }
+
+        // Load unified data and create entities
+        async function loadUnifiedData() {
+            try {
+                const response = await fetch('data/unified_sites.geojson');
+                unifiedData = await response.json();
+
+                // Populate filter options from metadata
+                populateFilters(unifiedData.metadata.available_filters);
+
+                // Initialize sources filter to show all
+                filters.sources = new Set(unifiedData.metadata.available_filters.source);
+                updateSourceFilterUI();
+
+                // Create data source
+                sitesDataSource = new Cesium.CustomDataSource('sites');
+
+                // Add entities for all features
+                unifiedData.features.forEach((feature, index) => {
+                    const geom = feature.geometry;
+                    const props = feature.properties;
+                    const color = getFeatureColor(feature, currentYear);
+                    const show = passesFilters(feature) && siteExistsAtYear(props, currentYear);
+
+                    if (geom.type === 'LineString' || geom.type === 'MultiLineString') {
+                        // Render as polyline (e.g., Roman roads)
+                        // Flatten MultiLineString to single array of positions
+                        let allCoords = [];
+                        if (geom.type === 'MultiLineString') {
+                            geom.coordinates.forEach(line => allCoords = allCoords.concat(line));
+                        } else {
+                            allCoords = geom.coordinates;
+                        }
+                        const positions = allCoords.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
+
+                        // Style based on evidence level (dashed for conjecture)
+                        const evidenceLevel = props.evidence_level || 'unknown';
+                        const isConjecture = evidenceLevel === 'conjecture';
+                        const isUnknown = evidenceLevel === 'unknown' || evidenceLevel === 'inferred';
+
+                        let lineMaterial = color;
+                        let lineWidth = 4;
+                        if (isConjecture) {
+                            // Dashed line for conjectural roads
+                            lineMaterial = new Cesium.PolylineDashMaterialProperty({
+                                color: color.withAlpha(0.6),
+                                dashLength: 16.0
+                            });
+                            lineWidth = 3;
+                        } else if (isUnknown) {
+                            // Slightly faded for unknown certainty
+                            lineMaterial = color.withAlpha(0.7);
+                        }
+
+                        sitesDataSource.entities.add({
+                            id: `site_${index}`,
+                            name: props.name,
+                            show: show,
+                            polyline: {
+                                positions: positions,
+                                width: lineWidth,
+                                material: lineMaterial,
+                                clampToGround: true
+                            },
+                            description: buildDescription(feature, currentYear)
+                        });
+                    } else if (geom.type === 'Point') {
+                        // Render as point
+                        const coords = geom.coordinates;
+
+                        // Determine point size based on significance
+                        let pointSize = 6;
+                        if (props.grade === 'I') pointSize = 10;
+                        else if (props.grade === 'II*') pointSize = 8;
+                        else if (props.source === 'he_scheduled_monuments') pointSize = 10;
+                        else if (props.source === 'he_parks_gardens') pointSize = 8;
+
+                        sitesDataSource.entities.add({
+                            id: `site_${index}`,
+                            name: props.name,
+                            position: Cesium.Cartesian3.fromDegrees(coords[0], coords[1]),
+                            show: show,
+                            point: {
+                                pixelSize: pointSize,
+                                color: color,
+                                outlineColor: Cesium.Color.BLACK,
+                                outlineWidth: 1
+                            },
+                            label: {
+                                text: props.name,
+                                font: '10px sans-serif',
+                                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                                outlineWidth: 2,
+                                verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                                pixelOffset: new Cesium.Cartesian2(0, -10),
+                                distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 15000)
+                            },
+                            description: buildDescription(feature, currentYear)
+                        });
+                    }
+                });
+
+                viewer.dataSources.add(sitesDataSource);
+                updateStatus();
+                updateLegend();
+                drawYearHistogram();
+                viewer.scene.requestRender();
+
+            } catch (error) {
+                console.error('Failed to load unified data:', error);
+                document.getElementById('status').textContent = 'Error loading data';
+            }
+        }
+
+        // Source display names
+        const SOURCE_LABELS = {
+            'he_scheduled_monuments': 'Monuments',
+            'he_listed_buildings': 'Listed',
+            'he_parks_gardens': 'Parks',
+            'he_heritage_at_risk': 'At Risk',
+            'he_battlefields': 'Battles',
+            'he_conservation_areas': 'Conserv.',
+            'wikidata': 'Wikidata',
+            'osm': 'OSM',
+            'domesday': '1086',
+            'gb1900': '1900 OS',
+            'roman_roads': 'Roman',
+            'curated': 'Curated'
+        };
+
+        // Populate filter dropdowns/tags from metadata
+        function populateFilters(availableFilters) {
+            // Source filters as clickable tags
+            const sourceContainer = document.getElementById('sourceFilters');
+            sourceContainer.innerHTML = '';
+            availableFilters.source.forEach(source => {
+                const tag = document.createElement('span');
+                tag.className = 'filter-tag active';
+                tag.dataset.source = source;
+                tag.textContent = SOURCE_LABELS[source] || source;
+                tag.onclick = () => toggleSourceFilter(source, tag);
+                sourceContainer.appendChild(tag);
+            });
+
+            // Type dropdown
+            const typeSelect = document.getElementById('typeFilter');
+            availableFilters.site_type.forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                typeSelect.appendChild(option);
+            });
+
+            // Grade dropdown
+            const gradeSelect = document.getElementById('gradeFilter');
+            availableFilters.grade.forEach(grade => {
+                const option = document.createElement('option');
+                option.value = grade;
+                option.textContent = `Grade ${grade}`;
+                gradeSelect.appendChild(option);
+            });
+        }
+
+        // Toggle a source filter
+        function toggleSourceFilter(source, tagElement) {
+            if (filters.sources.has(source)) {
+                filters.sources.delete(source);
+                tagElement.classList.remove('active');
+            } else {
+                filters.sources.add(source);
+                tagElement.classList.add('active');
+            }
+            updateSourceSummary();
+            applyFilters();
+        }
+
+        // Toggle source filters visibility
+        let sourceFiltersCollapsed = true;
+        function toggleSourceFilters() {
+            sourceFiltersCollapsed = !sourceFiltersCollapsed;
+            const container = document.getElementById('sourceFiltersContainer');
+            const icon = document.getElementById('sourceCollapseIcon');
+            if (sourceFiltersCollapsed) {
+                container.classList.add('collapsed');
+                icon.classList.add('collapsed');
+            } else {
+                container.classList.remove('collapsed');
+                container.style.maxHeight = container.scrollHeight + 'px';
+                icon.classList.remove('collapsed');
+            }
+        }
+
+        // Update source summary text
+        function updateSourceSummary() {
+            const totalSources = Object.keys(SOURCE_LABELS).length;
+            const activeSources = filters.sources.size;
+            const summary = document.getElementById('sourceSummary');
+            if (activeSources === totalSources) {
+                summary.textContent = 'All sources';
+            } else if (activeSources === 0) {
+                summary.textContent = 'No sources selected';
+            } else {
+                summary.textContent = `${activeSources} of ${totalSources} sources`;
+            }
+        }
+
+        // Update source filter UI to match state
+        function updateSourceFilterUI() {
+            const tags = document.querySelectorAll('#sourceFilters .filter-tag');
+            tags.forEach(tag => {
+                if (filters.sources.has(tag.dataset.source)) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+            updateSourceSummary();
+            // Start collapsed
+            document.getElementById('sourceFiltersContainer').classList.add('collapsed');
+            document.getElementById('sourceCollapseIcon').classList.add('collapsed');
+        }
+
+        // Apply all filters and update visibility
+        function applyFilters() {
+            if (!unifiedData || !sitesDataSource) return;
+
+            unifiedData.features.forEach((feature, index) => {
+                const entity = sitesDataSource.entities.getById(`site_${index}`);
+                if (!entity) return;
+
+                const props = feature.properties;
+                const passes = passesFilters(feature);
+                const exists = siteExistsAtYear(props, currentYear);
+
+                entity.show = passes && exists;
+
+                if (entity.show) {
+                    const color = getFeatureColor(feature, currentYear);
+                    if (entity.point) {
+                        entity.point.color = color;
+                    }
+                    if (entity.polyline) {
+                        entity.polyline.material = color;
+                    }
+                    entity.description = buildDescription(feature, currentYear);
+                }
+            });
+
+            updateStatus();
+            updateLegend();
+            viewer.scene.requestRender();
+        }
+
+        // Update status text
+        function updateStatus() {
+            if (!unifiedData) return;
+            const visible = unifiedData.features.filter((f, i) => {
+                const entity = sitesDataSource.entities.getById(`site_${i}`);
+                return entity && entity.show;
+            }).length;
+            document.getElementById('status').textContent = `${visible} of ${unifiedData.features.length} sites visible`;
+        }
+
+        // Update legend
+        function updateLegend() {
+            if (!unifiedData) return;
+
+            const visibleFamilies = new Set();
+            const visibleGrades = new Set();
+            const visibleSources = new Set();
+
+            unifiedData.features.forEach((feature, index) => {
+                const entity = sitesDataSource.entities.getById(`site_${index}`);
+                if (!entity || !entity.show) return;
+
+                const props = feature.properties;
+
+                if (props.has_ownership_data) {
+                    const owner = getOwnerAtYear(props.owners, currentYear);
+                    if (owner) visibleFamilies.add(owner.family);
+                } else if (props.grade) {
+                    visibleGrades.add(props.grade);
+                } else {
+                    visibleSources.add(props.source);
+                }
+            });
+
+            const colorToCSS = (cesiumColor) => {
+                return `rgb(${Math.round(cesiumColor.red * 255)}, ${Math.round(cesiumColor.green * 255)}, ${Math.round(cesiumColor.blue * 255)})`;
+            };
+
+            let legendHtml = '';
+
+            // Owner families (if any ownership data exists)
+            if (visibleFamilies.size > 0) {
+                legendHtml += '<div style="font-size:10px; color:#888; margin-bottom:4px;">Owners:</div>';
+                const sortedFamilies = [...visibleFamilies].sort();
+                sortedFamilies.forEach(family => {
+                    const color = FAMILY_COLORS[family] || Cesium.Color.GOLD;
+                    const cssColor = colorToCSS(color);
+                    legendHtml += `<div><span style="display:inline-block; width:12px; height:12px; background:${cssColor}; border:1px solid #000; border-radius:50%; margin-right:6px; vertical-align:middle;"></span>${family}</div>`;
+                });
+            }
+
+            // Grades (for listed buildings and parks)
+            if (visibleGrades.size > 0) {
+                if (legendHtml) legendHtml += '<div style="margin-top:8px; padding-top:6px; border-top:1px solid #444;"></div>';
+                legendHtml += '<div style="font-size:10px; color:#888; margin-bottom:4px;">By Grade:</div>';
+                const sortedGrades = ['I', 'II*', 'II'].filter(g => visibleGrades.has(g));
+                sortedGrades.forEach(grade => {
+                    const color = GRADE_COLORS[grade] || Cesium.Color.GRAY;
+                    const cssColor = colorToCSS(color);
+                    legendHtml += `<div><span style="display:inline-block; width:12px; height:12px; background:${cssColor}; border:1px solid #000; border-radius:50%; margin-right:6px; vertical-align:middle;"></span>Grade ${grade}</div>`;
+                });
+            }
+
+            // Sources (for monuments without grades)
+            if (visibleSources.size > 0) {
+                if (legendHtml) legendHtml += '<div style="margin-top:8px; padding-top:6px; border-top:1px solid #444;"></div>';
+                legendHtml += '<div style="font-size:10px; color:#888; margin-bottom:4px;">By Type:</div>';
+                visibleSources.forEach(source => {
+                    const color = SOURCE_COLORS[source] || Cesium.Color.GOLD;
+                    const cssColor = colorToCSS(color);
+                    const label = SOURCE_LABELS[source] || source;
+                    legendHtml += `<div><span style="display:inline-block; width:12px; height:12px; background:${cssColor}; border:1px solid #000; border-radius:50%; margin-right:6px; vertical-align:middle;"></span>${label}</div>`;
+                });
+            }
+
+            document.getElementById('legend').innerHTML = legendHtml || '<div style="color:#666;">No sites visible</div>';
+        }
+
+        // Draw year histogram showing data density
+        function drawYearHistogram() {
+            if (!unifiedData) return;
+
+            const canvas = document.getElementById('yearHistogram');
+            const ctx = canvas.getContext('2d');
+
+            // Set actual pixel dimensions
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * 2;  // 2x for retina
+            canvas.height = rect.height * 2;
+            ctx.scale(2, 2);
+
+            const minYear = 0;  // Start of Common Era
+            const maxYear = 2026;
+            const bucketSize = 10;  // Group years into decades
+            const numBuckets = Math.ceil((maxYear - minYear) / bucketSize);
+
+            // Count sites per bucket
+            const buckets = new Array(numBuckets).fill(0);
+            unifiedData.features.forEach(f => {
+                const year = f.properties.start_year;
+                if (year && year >= minYear && year <= maxYear) {
+                    const bucketIndex = Math.floor((year - minYear) / bucketSize);
+                    if (bucketIndex >= 0 && bucketIndex < numBuckets) {
+                        buckets[bucketIndex]++;
+                    }
+                }
+            });
+
+            // Find max for scaling (use log scale to handle spikes)
+            const maxCount = Math.max(...buckets);
+            const useLog = maxCount > 100;
+
+            // Draw bars
+            const barWidth = rect.width / numBuckets;
+            const maxHeight = rect.height - 2;
+
+            ctx.fillStyle = '#4a9eff';
+            buckets.forEach((count, i) => {
+                if (count > 0) {
+                    let height;
+                    if (useLog) {
+                        height = (Math.log(count + 1) / Math.log(maxCount + 1)) * maxHeight;
+                    } else {
+                        height = (count / maxCount) * maxHeight;
+                    }
+                    height = Math.max(height, 2);  // Minimum visible height
+                    ctx.fillRect(
+                        i * barWidth,
+                        rect.height - height,
+                        barWidth - 1,
+                        height
+                    );
+                }
+            });
+        }
+
+        // =============================================
+        // 3D ROMAN FORT RECONSTRUCTIONS
+        // Using actual archaeological polygon data
+        // =============================================
+
+        // Archaeological reference points from mamucium_roman_fort.geojson
+        // These are known dig sites, features, and documented locations
+        const MAMUCIUM_REFERENCE_POINTS = {
+            // Fort polygon corners from Pleiades (simplified boundary)
+            corner_SW: { coords: [-2.254356, 53.474163], name: 'Fort Corner SW', source: 'Pleiades polygon' },
+            corner_SE: { coords: [-2.253184, 53.475033], name: 'Fort Corner SE', source: 'Pleiades polygon' },
+            corner_NE: { coords: [-2.254879, 53.475864], name: 'Fort Corner NE', source: 'Pleiades polygon' },
+            corner_NW: { coords: [-2.256027, 53.47496], name: 'Fort Corner NW', source: 'Pleiades polygon' },
+
+            // Key reference points from the geojson
+            dare_center: { coords: [-2.253643, 53.475624], name: 'Fort Center (DARE)', source: 'Digital Atlas of Roman Empire' },
+            north_gate: { coords: [-2.2547, 53.4759], name: 'North Gate Reconstruction', source: 'Modern reconstruction 1984' },
+            granaries: { coords: [-2.2545, 53.4752], name: 'Granaries (Horrea)', source: 'Excavation' },
+            mansio: { coords: [-2.2515, 53.4765], name: 'Mansio (Roman Hotel)', source: 'UMAU excavations 2001-5' },
+            temple: { coords: [-2.2520, 53.4768], name: 'Romano-Celtic Temple', source: 'UMAU excavations' },
+        };
+
+        // Detailed OSM outline points (from detailed survey)
+        const MAMUCIUM_OSM_OUTLINE = [
+            [-2.2536642, 53.4753062], [-2.2532414, 53.4751276], [-2.253222, 53.4750467],
+            [-2.2532675, 53.4749884], [-2.2536565, 53.4746492], [-2.2541742, 53.4741958],
+            [-2.2542681, 53.4741623], [-2.2543485, 53.4741703], [-2.2550726, 53.4744887],
+            [-2.2560505, 53.4749109], [-2.2561051, 53.4749589], [-2.2560788, 53.4750396],
+            [-2.2556623, 53.4754433], [-2.2561125, 53.4755924], [-2.2557487, 53.4758439],
+            [-2.2553488, 53.4757217], [-2.2553426, 53.4757271], [-2.2551584, 53.4758885],
+            [-2.2550499, 53.4758937], [-2.2549519, 53.4758839], [-2.2542786, 53.4755917],
+            [-2.2538709, 53.4757936], [-2.2536639, 53.4758628], [-2.253488, 53.4761171],
+            [-2.2531475, 53.4760139], [-2.2532806, 53.4756629], [-2.2536642, 53.4753062]
+        ];
+
+        // Fort corners from Pleiades simplified polygon
+        const MAMUCIUM_CORNERS = {
+            SW: [-2.254356, 53.474163],
+            SE: [-2.253184, 53.475033],
+            NE: [-2.254879, 53.475864],
+            NW: [-2.256027, 53.47496]
+        };
+
+        // Calculate center from actual polygon
+        const MAMUCIUM_CENTER = [
+            (MAMUCIUM_CORNERS.SW[0] + MAMUCIUM_CORNERS.SE[0] + MAMUCIUM_CORNERS.NE[0] + MAMUCIUM_CORNERS.NW[0]) / 4,
+            (MAMUCIUM_CORNERS.SW[1] + MAMUCIUM_CORNERS.SE[1] + MAMUCIUM_CORNERS.NE[1] + MAMUCIUM_CORNERS.NW[1]) / 4
+        ]; // = [-2.254611, 53.475005]
+
+        // Calculate rotation from SW->SE edge
+        const dLng = MAMUCIUM_CORNERS.SE[0] - MAMUCIUM_CORNERS.SW[0];
+        const dLat = MAMUCIUM_CORNERS.SE[1] - MAMUCIUM_CORNERS.SW[1];
+        const cosLat = Math.cos(MAMUCIUM_CENTER[1] * Math.PI / 180);
+        const dxMeters = dLng * 111000 * cosLat;
+        const dyMeters = dLat * 111000;
+        const MAMUCIUM_ROTATION = Math.atan2(dyMeters, dxMeters) * 180 / Math.PI; // ~51° from east = ~39° from north
+
+        // Calculate actual dimensions from polygon
+        const MAMUCIUM_LENGTH = Math.sqrt(dxMeters * dxMeters + dyMeters * dyMeters); // SW-SE edge ~124m
+        const dLng2 = MAMUCIUM_CORNERS.NE[0] - MAMUCIUM_CORNERS.SE[0];
+        const dLat2 = MAMUCIUM_CORNERS.NE[1] - MAMUCIUM_CORNERS.SE[1];
+        const dx2 = dLng2 * 111000 * cosLat;
+        const dy2 = dLat2 * 111000;
+        const MAMUCIUM_WIDTH = Math.sqrt(dx2 * dx2 + dy2 * dy2); // SE-NE edge ~145m
+
+        console.log('Mamucium calculated:', {
+            center: MAMUCIUM_CENTER,
+            rotation: MAMUCIUM_ROTATION,
+            length: MAMUCIUM_LENGTH,
+            width: MAMUCIUM_WIDTH
+        });
+
+        const ROMAN_FORTS = {
+            // Mamucium Phase 1: Timber & Turf (79-200 AD)
+            mamucium_timber: {
+                name: 'Mamucium (Timber Phase)',
+                // Use calculated center from actual polygon
+                center: MAMUCIUM_CENTER,
+                length: MAMUCIUM_LENGTH,
+                width: MAMUCIUM_WIDTH,
+                wallHeight: 3.0, wallThickness: 4.5, towerHeight: 6,
+                startYear: 79, endYear: 199,
+                rotation: MAMUCIUM_ROTATION,
+                ditchWidth: 3, ditchDepth: 2,
+                material: 'timber'
+            },
+            // Mamucium Phase 2: Stone Fort (200-410 AD)
+            // Full Roman auxiliary fort with walls, interval towers, and internal buildings
+            mamucium_stone: {
+                name: 'Mamucium (Stone Phase)',
+                center: MAMUCIUM_CENTER,
+                length: MAMUCIUM_LENGTH,
+                width: MAMUCIUM_WIDTH,
+                wallHeight: 5.5,          // ~18 Roman feet - standard auxiliary fort wall
+                wallThickness: 2.4,       // Archaeological evidence: 2.1-2.7m
+                towerHeight: 10,          // Corner towers ~33 Roman feet
+                intervalTowerHeight: 8,   // Interval towers slightly shorter
+                parapetHeight: 1.2,       // Crenellated parapet
+                rampartWidth: 3.5,        // Walkway width
+                startYear: 200, endYear: 410,
+                rotation: MAMUCIUM_ROTATION,
+                ditchWidth: 4, ditchDepth: 2.5,  // Double ditch system
+                material: 'stone'
+            },
+            // Mamucium Phase 3: Modern Ruins/Reconstruction (1984-present)
+            mamucium_ruins: {
+                name: 'Mamucium (Reconstruction)',
+                center: MAMUCIUM_CENTER,
+                length: MAMUCIUM_LENGTH,
+                width: MAMUCIUM_WIDTH,
+                wallHeight: 2, wallThickness: 2.4, towerHeight: 3,
+                startYear: 1984, endYear: 2100,
+                rotation: MAMUCIUM_ROTATION,
+                ditchWidth: 0, ditchDepth: 0,
+                material: 'ruins'
+            },
+            castleshaw: {
+                name: 'Castleshaw Fortlet',
+                center: [-1.9839, 53.5608],
+                length: 40, width: 33,
+                wallHeight: 4, wallThickness: 1.5, towerHeight: 6,
+                startYear: 105, endYear: 125,
+                rotation: 0,
+                ditchWidth: 5, ditchDepth: 1.5,
+                material: 'stone'
+            },
+            melandra: {
+                name: 'Melandra Castle (Ardotalia)',
+                center: [-1.9674, 53.4442],
+                length: 127, width: 110,
+                wallHeight: 5, wallThickness: 2, towerHeight: 7,
+                startYear: 78, endYear: 140,
+                rotation: -10,
+                ditchWidth: 7, ditchDepth: 2,
+                material: 'stone'
+            }
+        };
+
+        // Coordinate helpers
+        const toLatDeg = (m) => m / 111000;
+        const toLonDeg = (m, lat) => m / (111000 * Math.cos(lat * Math.PI / 180));
+
+        function rotatePoint(x, y, angleDeg) {
+            const rad = angleDeg * Math.PI / 180;
+            return [x * Math.cos(rad) - y * Math.sin(rad), x * Math.sin(rad) + y * Math.cos(rad)];
+        }
+
+        // Convert local meter offsets to Cartesian3, accounting for fort rotation
+        // The rotation is measured from EAST (standard math convention)
+        function toCartesian(cx, cy, offsets, rotationDeg) {
+            return offsets.map(([x, y]) => {
+                const [rx, ry] = rotatePoint(x, y, rotationDeg);
+                return Cesium.Cartesian3.fromDegrees(cx + toLonDeg(rx, cy), cy + toLatDeg(ry));
+            });
+        }
+
+        let romanDataSource;
+        let romanEntityIds = [];
+
+        function loadRomanReconstructions() {
+            romanDataSource = new Cesium.CustomDataSource('roman');
+            romanEntityIds = [];
+
+            // Material palettes for different fort phases
+            const MATERIALS = {
+                timber: {
+                    wall: Cesium.Color.fromCssColorString('#654321'),      // Dark wood
+                    tower: Cesium.Color.fromCssColorString('#4A3728'),     // Darker wood
+                    building: Cesium.Color.fromCssColorString('#8B4513'),  // Saddle brown
+                    roof: Cesium.Color.fromCssColorString('#5C4033'),      // Dark brown
+                },
+                stone: {
+                    wall: Cesium.Color.fromCssColorString('#C9B896'),      // Roman sandstone/buff limestone
+                    tower: Cesium.Color.fromCssColorString('#A69372'),     // Darker sandstone
+                    building: Cesium.Color.fromCssColorString('#D4C4A8'),  // Light sandstone for buildings
+                    roof: Cesium.Color.fromCssColorString('#8B4513'),      // Terracotta tiles
+                    parapet: Cesium.Color.fromCssColorString('#B8A888'),   // Wall top
+                    road: Cesium.Color.fromCssColorString('#8B7355'),      // Gravel/packed earth
+                },
+                ruins: {
+                    wall: Cesium.Color.fromCssColorString('#808080').withAlpha(0.8),   // Grey
+                    tower: Cesium.Color.fromCssColorString('#696969').withAlpha(0.8),  // Dim grey
+                    building: Cesium.Color.fromCssColorString('#A9A9A9').withAlpha(0.5), // Faded
+                    roof: Cesium.Color.fromCssColorString('#D3D3D3').withAlpha(0.5),
+                }
+            };
+            const DITCH = Cesium.Color.fromCssColorString('#3D2B1F').withAlpha(0.6);
+
+            Object.entries(ROMAN_FORTS).forEach(([id, f]) => {
+                const [cx, cy] = f.center;
+                const hL = f.length / 2, hW = f.width / 2;
+                const wt = f.wallThickness;
+                const show = currentYear >= f.startYear && currentYear <= f.endYear;
+                const mat = MATERIALS[f.material] || MATERIALS.stone;
+                const isRuins = f.material === 'ruins';
+
+                // Helper to add entity and track ID
+                const add = (config) => {
+                    config.show = show;
+                    romanDataSource.entities.add(config);
+                    romanEntityIds.push(config.id);
+                };
+
+                // === DEFENSIVE DITCH (outer ring) - skip for ruins ===
+                if (f.ditchDepth > 0) {
+                    const ditchOuter = [[-hL - f.ditchWidth - 5, -hW - f.ditchWidth - 5], [hL + f.ditchWidth + 5, -hW - f.ditchWidth - 5],
+                                        [hL + f.ditchWidth + 5, hW + f.ditchWidth + 5], [-hL - f.ditchWidth - 5, hW + f.ditchWidth + 5]];
+                    const ditchInner = [[-hL - 5, -hW - 5], [hL + 5, -hW - 5], [hL + 5, hW + 5], [-hL - 5, hW + 5]];
+                    add({
+                        id: `${id}_ditch`,
+                        polygon: {
+                            hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, ditchOuter, f.rotation),
+                                [new Cesium.PolygonHierarchy(toCartesian(cx, cy, ditchInner, f.rotation))]),
+                            height: -f.ditchDepth,
+                            extrudedHeight: 0,
+                            material: DITCH
+                        }
+                    });
+                }
+
+                // === FORT WALLS (4 separate wall segments with gaps for gates) ===
+                const gateW = 8;
+                // For ruins, only show partial walls (north gate area)
+                const wallSegments = isRuins ? [
+                    // Just north wall fragments (where modern reconstruction is)
+                    [[-hL, hW - wt], [-gateW - 5, hW - wt], [-gateW - 5, hW], [-hL, hW]],
+                    [[gateW + 5, hW - wt], [hL * 0.3, hW - wt], [hL * 0.3, hW], [gateW + 5, hW]],
+                ] : [
+                    // Full walls for timber/stone phases
+                    // South wall (two segments for gate)
+                    [[-hL, -hW], [-gateW, -hW], [-gateW, -hW + wt], [-hL, -hW + wt]],
+                    [[gateW, -hW], [hL, -hW], [hL, -hW + wt], [gateW, -hW + wt]],
+                    // North wall (two segments for gate)
+                    [[-hL, hW - wt], [-gateW, hW - wt], [-gateW, hW], [-hL, hW]],
+                    [[gateW, hW - wt], [hL, hW - wt], [hL, hW], [gateW, hW]],
+                    // West wall (two segments for gate)
+                    [[-hL, -hW], [-hL + wt, -hW], [-hL + wt, -gateW], [-hL, -gateW]],
+                    [[-hL, gateW], [-hL + wt, gateW], [-hL + wt, hW], [-hL, hW]],
+                    // East wall (two segments for gate)
+                    [[hL - wt, -hW], [hL, -hW], [hL, -gateW], [hL - wt, -gateW]],
+                    [[hL - wt, gateW], [hL, gateW], [hL, hW], [hL - wt, hW]],
+                ];
+                wallSegments.forEach((seg, i) => {
+                    add({
+                        id: `${id}_wall_${i}`,
+                        polygon: {
+                            hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, seg, f.rotation)),
+                            height: 0, extrudedHeight: f.wallHeight,
+                            material: mat.wall, outline: true, outlineColor: Cesium.Color.BLACK
+                        }
+                    });
+                });
+
+                // === CORNER TOWERS - skip for ruins ===
+                if (!isRuins) {
+                    const tSize = 5;
+                    const corners = [[-hL, -hW], [hL, -hW], [hL, hW], [-hL, hW]];
+                    corners.forEach(([tx, ty], i) => {
+                        const tower = [[tx - tSize/2, ty - tSize/2], [tx + tSize/2, ty - tSize/2],
+                                       [tx + tSize/2, ty + tSize/2], [tx - tSize/2, ty + tSize/2]];
+                        add({
+                            id: `${id}_tower_${i}`,
+                            polygon: {
+                                hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, tower, f.rotation)),
+                                height: 0, extrudedHeight: f.towerHeight,
+                                material: mat.tower, outline: true, outlineColor: Cesium.Color.BLACK
+                            }
+                        });
+                    });
+
+                    // === GATE TOWERS ===
+                    const gtSize = 4;
+                    const gateTowers = [
+                        // South gate towers
+                        [-gateW - gtSize/2, -hW + wt/2], [gateW + gtSize/2, -hW + wt/2],
+                        // North gate towers
+                        [-gateW - gtSize/2, hW - wt/2], [gateW + gtSize/2, hW - wt/2],
+                        // West gate towers
+                        [-hL + wt/2, -gateW - gtSize/2], [-hL + wt/2, gateW + gtSize/2],
+                        // East gate towers
+                        [hL - wt/2, -gateW - gtSize/2], [hL - wt/2, gateW + gtSize/2],
+                    ];
+                    gateTowers.forEach(([tx, ty], i) => {
+                        const tower = [[tx - gtSize/2, ty - gtSize/2], [tx + gtSize/2, ty - gtSize/2],
+                                       [tx + gtSize/2, ty + gtSize/2], [tx - gtSize/2, ty + gtSize/2]];
+                        add({
+                            id: `${id}_gatetower_${i}`,
+                            polygon: {
+                                hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, tower, f.rotation)),
+                                height: 0, extrudedHeight: f.towerHeight - 1,
+                                material: mat.tower, outline: true, outlineColor: Cesium.Color.BLACK
+                            }
+                        });
+                    });
+
+                    // === INTERVAL TOWERS (Stone forts only) ===
+                    // Roman forts had interval towers spaced ~30m along walls
+                    if (f.material === 'stone' && f.intervalTowerHeight) {
+                        const itSize = 4.5;  // Interval tower size
+                        const itHeight = f.intervalTowerHeight || (f.towerHeight - 2);
+                        const spacing = 30;  // ~100 Roman feet between towers
+
+                        // South and North walls - interval towers
+                        for (let x = -hL + spacing; x < hL - spacing/2; x += spacing) {
+                            if (Math.abs(x) > gateW + 6) {  // Skip near gates
+                                // South wall tower
+                                const sTower = [[x - itSize/2, -hW - itSize/3], [x + itSize/2, -hW - itSize/3],
+                                               [x + itSize/2, -hW + wt + itSize/3], [x - itSize/2, -hW + wt + itSize/3]];
+                                add({
+                                    id: `${id}_itower_s_${x}`,
+                                    polygon: {
+                                        hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, sTower, f.rotation)),
+                                        height: 0, extrudedHeight: itHeight,
+                                        material: mat.tower, outline: true, outlineColor: Cesium.Color.BLACK
+                                    }
+                                });
+                                // North wall tower
+                                const nTower = [[x - itSize/2, hW - wt - itSize/3], [x + itSize/2, hW - wt - itSize/3],
+                                               [x + itSize/2, hW + itSize/3], [x - itSize/2, hW + itSize/3]];
+                                add({
+                                    id: `${id}_itower_n_${x}`,
+                                    polygon: {
+                                        hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, nTower, f.rotation)),
+                                        height: 0, extrudedHeight: itHeight,
+                                        material: mat.tower, outline: true, outlineColor: Cesium.Color.BLACK
+                                    }
+                                });
+                            }
+                        }
+                        // West and East walls - interval towers
+                        for (let y = -hW + spacing; y < hW - spacing/2; y += spacing) {
+                            if (Math.abs(y) > gateW + 6) {  // Skip near gates
+                                // West wall tower
+                                const wTower = [[-hL - itSize/3, y - itSize/2], [-hL + wt + itSize/3, y - itSize/2],
+                                               [-hL + wt + itSize/3, y + itSize/2], [-hL - itSize/3, y + itSize/2]];
+                                add({
+                                    id: `${id}_itower_w_${y}`,
+                                    polygon: {
+                                        hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, wTower, f.rotation)),
+                                        height: 0, extrudedHeight: itHeight,
+                                        material: mat.tower, outline: true, outlineColor: Cesium.Color.BLACK
+                                    }
+                                });
+                                // East wall tower
+                                const eTower = [[hL - wt - itSize/3, y - itSize/2], [hL + itSize/3, y - itSize/2],
+                                               [hL + itSize/3, y + itSize/2], [hL - wt - itSize/3, y + itSize/2]];
+                                add({
+                                    id: `${id}_itower_e_${y}`,
+                                    polygon: {
+                                        hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, eTower, f.rotation)),
+                                        height: 0, extrudedHeight: itHeight,
+                                        material: mat.tower, outline: true, outlineColor: Cesium.Color.BLACK
+                                    }
+                                });
+                            }
+                        }
+
+                        // === RAMPART WALKWAY (elevated platform on walls) ===
+                        const rampW = f.rampartWidth || 3;
+                        const rampH = f.wallHeight - 0.8;  // Slightly below wall top
+                        // Inner walkway around the entire fort
+                        const rampOuter = [[-hL + wt, -hW + wt], [hL - wt, -hW + wt],
+                                          [hL - wt, hW - wt], [-hL + wt, hW - wt]];
+                        const rampInner = [[-hL + wt + rampW, -hW + wt + rampW], [hL - wt - rampW, -hW + wt + rampW],
+                                          [hL - wt - rampW, hW - wt - rampW], [-hL + wt + rampW, hW - wt - rampW]];
+                        add({
+                            id: `${id}_rampart`,
+                            polygon: {
+                                hierarchy: new Cesium.PolygonHierarchy(
+                                    toCartesian(cx, cy, rampOuter, f.rotation),
+                                    [new Cesium.PolygonHierarchy(toCartesian(cx, cy, rampInner, f.rotation))]
+                                ),
+                                height: rampH - 1,
+                                extrudedHeight: rampH,
+                                material: mat.parapet || mat.wall,
+                                outline: true, outlineColor: Cesium.Color.DARKGRAY
+                            }
+                        });
+
+                        // === CRENELLATIONS (merlons on top of walls) ===
+                        const merlonW = 1.2, merlonD = 0.8, merlonH = 1.5;
+                        const merlonSpacing = 3;
+                        // Add merlons along south wall
+                        for (let x = -hL + 2; x < hL - 2; x += merlonSpacing) {
+                            if (Math.abs(x) > gateW + 4) {  // Skip gates
+                                const merlon = [[x - merlonW/2, -hW], [x + merlonW/2, -hW],
+                                               [x + merlonW/2, -hW + merlonD], [x - merlonW/2, -hW + merlonD]];
+                                add({
+                                    id: `${id}_merlon_s_${x}`,
+                                    polygon: {
+                                        hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, merlon, f.rotation)),
+                                        height: f.wallHeight, extrudedHeight: f.wallHeight + merlonH,
+                                        material: mat.parapet || mat.wall
+                                    }
+                                });
+                            }
+                        }
+                        // Add merlons along north wall
+                        for (let x = -hL + 2; x < hL - 2; x += merlonSpacing) {
+                            if (Math.abs(x) > gateW + 4) {
+                                const merlon = [[x - merlonW/2, hW - merlonD], [x + merlonW/2, hW - merlonD],
+                                               [x + merlonW/2, hW], [x - merlonW/2, hW]];
+                                add({
+                                    id: `${id}_merlon_n_${x}`,
+                                    polygon: {
+                                        hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, merlon, f.rotation)),
+                                        height: f.wallHeight, extrudedHeight: f.wallHeight + merlonH,
+                                        material: mat.parapet || mat.wall
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    // === INTERNAL BUILDINGS - skip for ruins ===
+                    const scale = Math.min(f.length / 160, f.width / 130);
+                    const isStone = f.material === 'stone';
+
+                    // Standard auxiliary fort layout
+                    const buildings = [
+                        // Central range (Latera Praetorii)
+                        { name: 'Principia (HQ)', x: 0, y: 5, w: 35, h: 30, ht: isStone ? 7 : 6, type: 'hq' },
+                        { name: 'Praetorium', x: 0, y: -25, w: 25, h: 20, ht: isStone ? 6 : 5, type: 'commander' },
+                        // Granaries (Horrea) - raised floors for grain storage
+                        { name: 'Horreum', x: -32, y: -25, w: 15, h: 28, ht: isStone ? 5 : 4, type: 'granary' },
+                        { name: 'Horreum', x: 32, y: -25, w: 15, h: 28, ht: isStone ? 5 : 4, type: 'granary' },
+                        // Barracks (Contubernia) - long barracks blocks
+                        { name: 'Barracks', x: -40, y: 28, w: 12, h: 42, ht: isStone ? 4 : 3.5, type: 'barracks' },
+                        { name: 'Barracks', x: -25, y: 28, w: 12, h: 42, ht: isStone ? 4 : 3.5, type: 'barracks' },
+                        { name: 'Barracks', x: 25, y: 28, w: 12, h: 42, ht: isStone ? 4 : 3.5, type: 'barracks' },
+                        { name: 'Barracks', x: 40, y: 28, w: 12, h: 42, ht: isStone ? 4 : 3.5, type: 'barracks' },
+                    ];
+
+                    // Stone fort has additional buildings
+                    if (isStone) {
+                        buildings.push(
+                            // Bathhouse (Thermae) - outside or corner
+                            { name: 'Bathhouse', x: -45, y: -45, w: 18, h: 14, ht: 4.5, type: 'bath' },
+                            // Workshop (Fabrica)
+                            { name: 'Fabrica', x: 45, y: -45, w: 16, h: 12, ht: 4, type: 'workshop' },
+                            // Hospital (Valetudinarium)
+                            { name: 'Valetudinarium', x: -8, y: 35, w: 14, h: 16, ht: 4.5, type: 'hospital' },
+                            { name: 'Valetudinarium', x: 8, y: 35, w: 14, h: 16, ht: 4.5, type: 'hospital' },
+                            // Stables
+                            { name: 'Stables', x: 50, y: 20, w: 10, h: 30, ht: 3.5, type: 'stable' },
+                            { name: 'Stables', x: -50, y: 20, w: 10, h: 30, ht: 3.5, type: 'stable' }
+                        );
+                    }
+
+                    buildings.forEach((b, i) => {
+                        const bx = b.x * scale, by = b.y * scale;
+                        const bw = b.w * scale / 2, bh = b.h * scale / 2;
+                        const rect = [[bx - bw, by - bh], [bx + bw, by - bh], [bx + bw, by + bh], [bx - bw, by + bh]];
+
+                        // Building colors by type
+                        let bMat = mat.roof;
+                        if (b.type === 'hq' || b.type === 'commander') {
+                            bMat = mat.building;  // Main buildings in stone/sandstone
+                        } else if (b.type === 'granary') {
+                            bMat = mat.building;
+                        } else if (b.type === 'bath' && isStone) {
+                            bMat = Cesium.Color.fromCssColorString('#C4A77D');  // Warm sandstone
+                        } else if (b.type === 'workshop' && isStone) {
+                            bMat = Cesium.Color.fromCssColorString('#8B7355');  // Darker work building
+                        }
+
+                        add({
+                            id: `${id}_building_${i}`,
+                            name: `${f.name} - ${b.name}`,
+                            polygon: {
+                                hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, rect, f.rotation)),
+                                height: 0.1, extrudedHeight: b.ht * scale,
+                                material: bMat, outline: true, outlineColor: Cesium.Color.BLACK
+                            }
+                        });
+
+                        // Add terracotta roof sections for stone buildings
+                        if (isStone && (b.type === 'hq' || b.type === 'commander' || b.type === 'bath')) {
+                            const roofInset = 0.5;
+                            const roofRect = [[bx - bw + roofInset, by - bh + roofInset],
+                                             [bx + bw - roofInset, by - bh + roofInset],
+                                             [bx + bw - roofInset, by + bh - roofInset],
+                                             [bx - bw + roofInset, by + bh - roofInset]];
+                            add({
+                                id: `${id}_roof_${i}`,
+                                polygon: {
+                                    hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, roofRect, f.rotation)),
+                                    height: b.ht * scale, extrudedHeight: b.ht * scale + 1.5,
+                                    material: mat.roof  // Terracotta
+                                }
+                            });
+                        }
+                    });
+
+                    // === ROMAN ROAD SYSTEM ===
+                    const roadW = isStone ? 7 * scale : 6 * scale;
+                    const roadMat = isStone && mat.road
+                        ? mat.road
+                        : Cesium.Color.fromCssColorString('#5C4033').withAlpha(0.8);
+
+                    // Via Principalis (main E-W road through center)
+                    const viaPrincipalis = [[-hL + wt + 2, -roadW/2], [hL - wt - 2, -roadW/2],
+                                            [hL - wt - 2, roadW/2], [-hL + wt + 2, roadW/2]];
+                    add({
+                        id: `${id}_via_principalis`,
+                        polygon: {
+                            hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, viaPrincipalis, f.rotation)),
+                            height: 0.08,
+                            material: roadMat
+                        }
+                    });
+
+                    // Via Praetoria (N-S road from south gate to principia)
+                    const viaPraetoria = [[-roadW/2, -hW + wt + 2], [roadW/2, -hW + wt + 2],
+                                          [roadW/2, -5], [-roadW/2, -5]];
+                    add({
+                        id: `${id}_via_praetoria`,
+                        polygon: {
+                            hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, viaPraetoria, f.rotation)),
+                            height: 0.08,
+                            material: roadMat
+                        }
+                    });
+
+                    // Via Decumana (N-S road from principia to north gate)
+                    const viaDecumana = [[-roadW/2, 20], [roadW/2, 20],
+                                         [roadW/2, hW - wt - 2], [-roadW/2, hW - wt - 2]];
+                    add({
+                        id: `${id}_via_decumana`,
+                        polygon: {
+                            hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, viaDecumana, f.rotation)),
+                            height: 0.08,
+                            material: roadMat
+                        }
+                    });
+
+                    // Stone fort: add parade ground (central open area)
+                    if (isStone) {
+                        const paradeGround = [[-15, -8], [15, -8], [15, -18], [-15, -18]];
+                        add({
+                            id: `${id}_parade`,
+                            polygon: {
+                                hierarchy: new Cesium.PolygonHierarchy(toCartesian(cx, cy, paradeGround.map(p => [p[0] * scale, p[1] * scale]), f.rotation)),
+                                height: 0.03,
+                                material: Cesium.Color.fromCssColorString('#A0927A').withAlpha(0.6)  // Packed earth
+                            }
+                        });
+                    }
+                }
+
+                // === LABEL ===
+                add({
+                    id: `${id}_label`,
+                    position: Cesium.Cartesian3.fromDegrees(cx, cy, f.towerHeight + 10),
+                    label: {
+                        text: `${f.name}\n(${f.startYear}-${f.endYear > 2026 ? 'present' : f.endYear} AD)`,
+                        font: 'bold 14px sans-serif',
+                        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                        outlineWidth: 3, outlineColor: Cesium.Color.BLACK,
+                        fillColor: Cesium.Color.WHITE,
+                        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                        horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+                        distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 25000)
+                    }
+                });
+            });
+
+            viewer.dataSources.add(romanDataSource);
+            // Start hidden so user can verify reference markers first
+            romanDataSource.show = false;
+            viewer.scene.requestRender();
+        }
+
+        function updateRomanVisibility() {
+            if (!romanDataSource) return;
+            Object.entries(ROMAN_FORTS).forEach(([id, f]) => {
+                const show = currentYear >= f.startYear && currentYear <= f.endYear;
+                romanEntityIds.filter(eid => eid.startsWith(id)).forEach(eid => {
+                    const e = romanDataSource.entities.getById(eid);
+                    if (e) e.show = show;
+                });
+            });
+            viewer.scene.requestRender();
+        }
+
+        // =============================================
+        // ARCHAEOLOGICAL REFERENCE MARKERS
+        // Shows dig sites and known locations for verification
+        // =============================================
+        let refMarkersDataSource;
+
+        function loadArchaeologicalMarkers() {
+            refMarkersDataSource = new Cesium.CustomDataSource('arch_markers');
+
+            // Add reference point markers
+            Object.entries(MAMUCIUM_REFERENCE_POINTS).forEach(([id, point]) => {
+                const [lng, lat] = point.coords;
+                const isCorner = id.startsWith('corner_');
+
+                refMarkersDataSource.entities.add({
+                    id: `ref_${id}`,
+                    name: point.name,
+                    position: Cesium.Cartesian3.fromDegrees(lng, lat),
+                    point: {
+                        pixelSize: isCorner ? 12 : 16,
+                        color: isCorner ? Cesium.Color.YELLOW : Cesium.Color.RED,
+                        outlineColor: Cesium.Color.BLACK,
+                        outlineWidth: 2
+                    },
+                    label: {
+                        text: point.name,
+                        font: 'bold 12px sans-serif',
+                        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                        outlineWidth: 2,
+                        outlineColor: Cesium.Color.BLACK,
+                        fillColor: isCorner ? Cesium.Color.YELLOW : Cesium.Color.WHITE,
+                        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                        pixelOffset: new Cesium.Cartesian2(0, -12),
+                        distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5000)
+                    },
+                    description: `<b>${point.name}</b><br>Source: ${point.source}<br>Coords: ${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                });
+            });
+
+            // Add calculated polygon center marker
+            refMarkersDataSource.entities.add({
+                id: 'ref_polygon_center',
+                name: 'Polygon Center (calculated)',
+                position: Cesium.Cartesian3.fromDegrees(MAMUCIUM_CENTER[0], MAMUCIUM_CENTER[1]),
+                point: {
+                    pixelSize: 14,
+                    color: Cesium.Color.CYAN,
+                    outlineColor: Cesium.Color.BLACK,
+                    outlineWidth: 2
+                },
+                label: {
+                    text: 'Polygon Center',
+                    font: 'bold 12px sans-serif',
+                    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                    outlineWidth: 2,
+                    outlineColor: Cesium.Color.BLACK,
+                    fillColor: Cesium.Color.CYAN,
+                    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                    pixelOffset: new Cesium.Cartesian2(0, -12),
+                    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5000)
+                }
+            });
+
+            // Add Pleiades simplified polygon outline (yellow)
+            const pleiadesPolygon = [
+                MAMUCIUM_CORNERS.SW, MAMUCIUM_CORNERS.SE, MAMUCIUM_CORNERS.NE, MAMUCIUM_CORNERS.NW, MAMUCIUM_CORNERS.SW
+            ].map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
+
+            refMarkersDataSource.entities.add({
+                id: 'ref_pleiades_outline',
+                name: 'Pleiades Fort Boundary',
+                polyline: {
+                    positions: pleiadesPolygon,
+                    width: 4,
+                    material: Cesium.Color.YELLOW.withAlpha(0.8),
+                    clampToGround: true
+                }
+            });
+
+            // Add detailed OSM outline (magenta)
+            const osmOutlinePositions = MAMUCIUM_OSM_OUTLINE.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
+
+            refMarkersDataSource.entities.add({
+                id: 'ref_osm_outline',
+                name: 'OSM Detailed Outline',
+                polyline: {
+                    positions: osmOutlinePositions,
+                    width: 3,
+                    material: Cesium.Color.MAGENTA.withAlpha(0.8),
+                    clampToGround: true
+                }
+            });
+
+            viewer.dataSources.add(refMarkersDataSource);
+            viewer.scene.requestRender();
+
+            console.log('Archaeological reference markers loaded');
+        }
+
+        // Auto-fade base map for historical periods
+        let autoHistoricMap = true;
+
+        function updateMapOpacityForYear() {
+            if (!autoHistoricMap || !osmLayer) return;
+
+            // Fade map based on how far back we go
+            let opacity;
+            if (currentYear >= 1900) {
+                opacity = 1.0;
+            } else if (currentYear >= 1000) {
+                opacity = 0.7;
+            } else if (currentYear >= 0) {
+                opacity = 0.4;
+            } else {
+                opacity = 0.2;
+            }
+
+            osmLayer.alpha = opacity;
+
+            const info = document.getElementById('mapFadeInfo');
+            if (currentYear < 1900) {
+                const pct = Math.round(opacity * 100);
+                info.textContent = `Map at ${pct}% (historical view)`;
+            } else {
+                info.textContent = '';
+            }
+
+            viewer.scene.requestRender();
+        }
+
+        // Load data
+        loadUnifiedData();
+        loadRomanReconstructions();
+        loadArchaeologicalMarkers();
+        updateMapOpacityForYear();
+
+        // Toggle controls panel
+        document.getElementById('toggleControls').style.display = 'none';  // Hidden initially (panel visible)
+        document.getElementById('toggleControls').addEventListener('click', () => {
+            document.getElementById('controls').style.display = 'block';
+            document.getElementById('toggleControls').style.display = 'none';
+        });
+
+        // UI Controls
+        document.getElementById('toggleOSM').addEventListener('change', (e) => {
+            osmLayer.show = e.target.checked;
+            viewer.scene.requestRender();
+        });
+
+        document.getElementById('autoHistoricMap').addEventListener('change', (e) => {
+            autoHistoricMap = e.target.checked;
+            if (!autoHistoricMap) {
+                osmLayer.alpha = 1.0;
+                document.getElementById('mapFadeInfo').textContent = '';
+            } else {
+                updateMapOpacityForYear();
+            }
+            viewer.scene.requestRender();
+        });
+
+        document.getElementById('showArchMarkers').addEventListener('change', (e) => {
+            if (refMarkersDataSource) {
+                refMarkersDataSource.show = e.target.checked;
+                viewer.scene.requestRender();
+            }
+        });
+
+        document.getElementById('show3DForts').addEventListener('change', (e) => {
+            if (romanDataSource) {
+                romanDataSource.show = e.target.checked;
+                viewer.scene.requestRender();
+            }
+        });
+
+        
+        document.getElementById('typeFilter').addEventListener('change', (e) => {
+            filters.type = e.target.value;
+            applyFilters();
+        });
+
+        document.getElementById('gradeFilter').addEventListener('change', (e) => {
+            filters.grade = e.target.value;
+            applyFilters();
+        });
+
+        document.getElementById('evidenceFilter').addEventListener('change', (e) => {
+            filters.evidence = e.target.value;
+            applyFilters();
+        });
+
+        document.getElementById('ownershipOnly').addEventListener('change', (e) => {
+            filters.ownershipOnly = e.target.checked;
+            applyFilters();
+        });
+
+        document.getElementById('yearSlider').addEventListener('input', (e) => {
+            currentYear = parseInt(e.target.value);
+            document.getElementById('yearDisplay').textContent = `${currentYear} AD`;
+            applyFilters();
+            updateRomanVisibility();
+            updateMapOpacityForYear();
+        });
+
+        // Get current view bounds as [west, south, east, north] in degrees
+        function getViewBounds() {
+            const camera = viewer.camera;
+            const canvas = viewer.canvas;
+
+            // Get corners of the view in world coordinates
+            const corners = [
+                new Cesium.Cartesian2(0, 0),                          // top-left
+                new Cesium.Cartesian2(canvas.width, 0),               // top-right
+                new Cesium.Cartesian2(canvas.width, canvas.height),   // bottom-right
+                new Cesium.Cartesian2(0, canvas.height)               // bottom-left
+            ];
+
+            let minLon = Infinity, maxLon = -Infinity;
+            let minLat = Infinity, maxLat = -Infinity;
+
+            corners.forEach(corner => {
+                const ray = camera.getPickRay(corner);
+                if (ray) {
+                    const position = viewer.scene.globe.pick(ray, viewer.scene);
+                    if (position) {
+                        const cartographic = Cesium.Cartographic.fromCartesian(position);
+                        const lon = Cesium.Math.toDegrees(cartographic.longitude);
+                        const lat = Cesium.Math.toDegrees(cartographic.latitude);
+                        minLon = Math.min(minLon, lon);
+                        maxLon = Math.max(maxLon, lon);
+                        minLat = Math.min(minLat, lat);
+                        maxLat = Math.max(maxLat, lat);
+                    }
+                }
+            });
+
+            // If we couldn't get bounds (e.g., looking at sky), return null
+            if (minLon === Infinity) return null;
+
+            return { west: minLon, south: minLat, east: maxLon, north: maxLat };
+        }
+
+        // Check if a point is within bounds
+        function isInBounds(lon, lat, bounds) {
+            return lon >= bounds.west && lon <= bounds.east &&
+                   lat >= bounds.south && lat <= bounds.north;
+        }
+
+        // Get all change years for sites in current view
+        function getChangeYearsInView() {
+            const bounds = getViewBounds();
+            if (!bounds) return [];
+
+            const changeYears = new Set();
+
+            // Include Roman fort years if they're in view
+            Object.values(ROMAN_FORTS).forEach(fort => {
+                const [lon, lat] = fort.center;
+                if (isInBounds(lon, lat, bounds)) {
+                    changeYears.add(fort.startYear);
+                    if (fort.endYear <= 2026) changeYears.add(fort.endYear);
+                }
+            });
+
+            // Include unified data years
+            if (unifiedData) {
+                unifiedData.features.forEach(feature => {
+                    const props = feature.properties;
+                    const geom = feature.geometry;
+
+                    // Skip if doesn't pass current source/type filters
+                    if (filters.sources.size > 0 && !filters.sources.has(props.source)) return;
+                    if (filters.type !== 'all' && props.site_type !== filters.type) return;
+                    if (filters.grade !== 'all' && props.grade !== filters.grade) return;
+                    if (filters.ownershipOnly && !props.has_ownership_data) return;
+
+                    // Check if feature is in view
+                    let inView = false;
+                    if (geom.type === 'Point') {
+                        const [lon, lat] = geom.coordinates;
+                        inView = isInBounds(lon, lat, bounds);
+                    } else if (geom.type === 'LineString') {
+                        inView = geom.coordinates.some(([lon, lat]) => isInBounds(lon, lat, bounds));
+                    } else if (geom.type === 'MultiLineString') {
+                        inView = geom.coordinates.some(line =>
+                            line.some(([lon, lat]) => isInBounds(lon, lat, bounds))
+                        );
+                    }
+
+                    if (!inView) return;
+
+                    // Add change years
+                    if (props.start_year) changeYears.add(props.start_year);
+                    if (props.end_year) changeYears.add(props.end_year);
+
+                    // Also add ownership change years
+                    if (props.owners) {
+                        props.owners.forEach(owner => {
+                            if (owner.from) changeYears.add(owner.from);
+                            if (owner.to) changeYears.add(owner.to);
+                        });
+                    }
+                });
+            }
+
+            return [...changeYears].sort((a, b) => a - b);
+        }
+
+        // Navigate to a year
+        function goToYear(year) {
+            currentYear = year;
+            document.getElementById('yearSlider').value = year;
+            document.getElementById('yearDisplay').textContent = `${year} AD`;
+            applyFilters();
+            updateRomanVisibility();
+            updateMapOpacityForYear();
+        }
+
+        // Update change info display
+        function updateChangeInfo() {
+            const years = getChangeYearsInView();
+            const info = document.getElementById('viewChangeInfo');
+
+            if (years.length === 0) {
+                info.textContent = 'No dated sites in view';
+                return;
+            }
+
+            const prevYear = years.filter(y => y < currentYear).pop();
+            const nextYear = years.find(y => y > currentYear);
+
+            let text = `${years.length} change years in view`;
+            if (prevYear !== undefined || nextYear !== undefined) {
+                const prevText = prevYear !== undefined ? prevYear : '—';
+                const nextText = nextYear !== undefined ? nextYear : '—';
+                text += ` (◀ ${prevText} | ${nextText} ▶)`;
+            }
+            info.textContent = text;
+        }
+
+        // Prev/Next button handlers
+        document.getElementById('prevChange').addEventListener('click', () => {
+            const years = getChangeYearsInView();
+            const prevYear = years.filter(y => y < currentYear).pop();
+            if (prevYear !== undefined) {
+                goToYear(prevYear);
+                updateChangeInfo();
+            }
+        });
+
+        document.getElementById('nextChange').addEventListener('click', () => {
+            const years = getChangeYearsInView();
+            const nextYear = years.find(y => y > currentYear);
+            if (nextYear !== undefined) {
+                goToYear(nextYear);
+                updateChangeInfo();
+            }
+        });
+
+        // Update change info when camera moves or filters change
+        viewer.camera.moveEnd.addEventListener(() => {
+            updateChangeInfo();
+        });
+
+        // Also update when filters change
+        const originalApplyFilters = applyFilters;
+        applyFilters = function() {
+            originalApplyFilters();
+            updateChangeInfo();
+        };
+    </script>
+</body>
+</html>

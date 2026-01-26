@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Logs
+*.log
+
+# Generated data files
+data/unified_sites.geojson
+
+# User projects (each person creates their own)
+data/projects/*
+!data/projects/example/
+!data/projects/README.md
+
+# Environment
+.env
+.env.local
+
+# Claude Code
+.claude/
+
+# Cache
+data/cache/

@@ -1,0 +1,3187 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 4895,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.52005224961874,
+          53.4940198833881
+        ]
+      },
+      "properties": {
+        "FID": 4895,
+        "uid": "{051F7210-B717-42F4-A127-85FDD25DFCCE}",
+        "List_Entry": 162,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Leigh, Leigh Bridge",
+        "Shape_Leng": 2246.10960142,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/3325",
+        "ORIG_FID": 8
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4897,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.46849606966225,
+          53.5136571981463
+        ]
+      },
+      "properties": {
+        "FID": 4897,
+        "uid": "{3A79604D-C659-45E9-BAA1-101E7671212F}",
+        "List_Entry": 179,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Tyldesley Town Centre",
+        "Shape_Leng": 3962.84107892,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/3332",
+        "ORIG_FID": 10
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4917,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.0566464845331,
+          53.4837494465174
+        ]
+      },
+      "properties": {
+        "FID": 4917,
+        "uid": "{A3FA254E-6547-4E53-989C-DC3DD979F99E}",
+        "List_Entry": 1027,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Stalybridge Town Centre, Stalybridge",
+        "Shape_Leng": 4558.1083842,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/2362",
+        "ORIG_FID": 30
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4944,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.73194370395355,
+          53.4527395847775
+        ]
+      },
+      "properties": {
+        "FID": 4944,
+        "uid": "{0FD135CE-DE3C-41B6-921C-356876C26050}",
+        "List_Entry": 1315,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "George Street, St Helens",
+        "Shape_Leng": 2351.51701123,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/3197",
+        "ORIG_FID": 57
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4956,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.15425227056904,
+          53.4064409375724
+        ]
+      },
+      "properties": {
+        "FID": 4956,
+        "uid": "{282D5E0B-8F1D-4FD8-A174-68516561C433}",
+        "List_Entry": 1585,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Hillgate, Stockport Town Centre",
+        "Shape_Leng": 4925.15842283,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/3229",
+        "ORIG_FID": 69
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4991,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.10997559480564,
+          53.5411647385409
+        ]
+      },
+      "properties": {
+        "FID": 4991,
+        "uid": "{253BC398-6D1A-4159-B323-3743EDEC0AA6}",
+        "List_Entry": 2495,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Oldham Town Centre, Oldham",
+        "Shape_Leng": 2714.00128836,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/6511",
+        "ORIG_FID": 104
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5066,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.59670949660386,
+          53.3925804040274
+        ]
+      },
+      "properties": {
+        "FID": 5066,
+        "uid": "{CEC09E36-DF39-4B47-946C-513D3BC4F557}",
+        "List_Entry": 4018,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Bewsey Street, Bewsey",
+        "Shape_Leng": 1101.30374588,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/6761",
+        "ORIG_FID": 179
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5067,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.59434556376403,
+          53.3884360643514
+        ]
+      },
+      "properties": {
+        "FID": 5067,
+        "uid": "{D2BB1CDB-AB52-41F0-9FCD-BB9DD3EB12CF}",
+        "List_Entry": 4024,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Bridge Street, Warrington Town Centre",
+        "Shape_Leng": 2653.49691911,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/6762",
+        "ORIG_FID": 180
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5068,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.58102404307227,
+          53.3910449714894
+        ]
+      },
+      "properties": {
+        "FID": 5068,
+        "uid": "{30F0965C-22D2-42E8-AABD-FC4CBB0D2655}",
+        "List_Entry": 4077,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Church Street, Warrington Town Centre",
+        "Shape_Leng": 2944.75766484,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/6764",
+        "ORIG_FID": 181
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5138,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.29875383795289,
+          53.5930210886283
+        ]
+      },
+      "properties": {
+        "FID": 5138,
+        "uid": "{8BAE7A34-99F7-4E2B-A604-0B2548529CE6}",
+        "List_Entry": 5319,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Bury Town Centre",
+        "Shape_Leng": 3393.51989448,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/4436",
+        "ORIG_FID": 251
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5139,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.31339102222664,
+          53.6291055808397
+        ]
+      },
+      "properties": {
+        "FID": 5139,
+        "uid": "{29B8FEE3-5DFE-45B4-8FF1-DCEC6B36D4FF}",
+        "List_Entry": 5325,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Rowlands/Brookbottoms, Ramsbottom",
+        "Shape_Leng": 5349.23300119,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/5340",
+        "ORIG_FID": 252
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5229,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.5449522611104,
+          53.5916268409725
+        ]
+      },
+      "properties": {
+        "FID": 5229,
+        "uid": "{40FF9528-1871-4BED-9FC8-E33F42AD7BFA}",
+        "List_Entry": 7612,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Horwich Locomotive Works, Bolton",
+        "Shape_Leng": 4334.67075609,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/8259",
+        "ORIG_FID": 342
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5238,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.19651687730118,
+          53.5533738358793
+        ]
+      },
+      "properties": {
+        "FID": 5238,
+        "uid": "{66A04B6F-5597-4EFA-B548-83DD6B4DCD59}",
+        "List_Entry": 7706,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Middleton Town Centre",
+        "Shape_Leng": 8790.31981471,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/8580",
+        "ORIG_FID": 351
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5239,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.15765129617815,
+          53.615605671574
+        ]
+      },
+      "properties": {
+        "FID": 5239,
+        "uid": "{21F78EF8-2298-4AF0-ABA0-B2BBA01FD922}",
+        "List_Entry": 7707,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Rochdale Town Centre",
+        "Shape_Leng": 4751.08745365,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/8584",
+        "ORIG_FID": 352
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5240,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.17429077760951,
+          53.5905970026832
+        ]
+      },
+      "properties": {
+        "FID": 5240,
+        "uid": "{8B6AF6BA-4E78-4E3B-91D9-F6E50E1F88E0}",
+        "List_Entry": 7719,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Castleton (South)",
+        "Shape_Leng": 5918.75197062,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/8571",
+        "ORIG_FID": 353
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5269,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.43168044581424,
+          53.5996619714503
+        ]
+      },
+      "properties": {
+        "FID": 5269,
+        "uid": "{CE4C5AE6-FBD6-4951-AB67-0C8B0B774884}",
+        "List_Entry": 8343,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Birley Street, Bolton",
+        "Shape_Leng": 698.765533635,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/7483",
+        "ORIG_FID": 382
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5288,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.26751143489108,
+          53.5041284224436
+        ]
+      },
+      "properties": {
+        "FID": 5288,
+        "uid": "{72AE82ED-07B2-485F-8DE2-DF00DB028F32}",
+        "List_Entry": 8839,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Cliff, Higher Broughton",
+        "Shape_Leng": 5210.06251346,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/2982",
+        "ORIG_FID": 401
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5289,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.27087918924682,
+          53.4877516856588
+        ]
+      },
+      "properties": {
+        "FID": 5289,
+        "uid": "{2CF9BF33-B150-4F18-892B-4FC56DC4AE70}",
+        "List_Entry": 8840,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Crescent",
+        "Shape_Leng": 6853.49166608,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/2983",
+        "ORIG_FID": 402
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5290,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.30968114539323,
+          53.4997802021046
+        ]
+      },
+      "properties": {
+        "FID": 5290,
+        "uid": "{A4DCC48C-FB32-40B9-B9F9-E94FF0805DEE}",
+        "List_Entry": 8843,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Irlams o' th' Height",
+        "Shape_Leng": 822.35620685,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/2986",
+        "ORIG_FID": 403
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5291,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.32236002929705,
+          53.5111333161469
+        ]
+      },
+      "properties": {
+        "FID": 5291,
+        "uid": "{A2AD3B64-7861-4AF1-B1BD-67933CA1EB7D}",
+        "List_Entry": 8848,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "St Augustine's, Pendlebury",
+        "Shape_Leng": 1004.10934726,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/2991",
+        "ORIG_FID": 404
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5300,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.35334166849988,
+          53.473606103999
+        ]
+      },
+      "properties": {
+        "FID": 5300,
+        "uid": "{C593037C-B6BC-4E86-9A10-0402808D4A2C}",
+        "List_Entry": 9015,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Barton-upon-Irwell",
+        "Shape_Leng": 1676.51976927,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/2038",
+        "ORIG_FID": 413
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5301,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.26886096406095,
+          53.4649957374739
+        ]
+      },
+      "properties": {
+        "FID": 5301,
+        "uid": "{133F186E-BD56-4C3E-A4B5-D548E8347B1E}",
+        "List_Entry": 9020,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Empress, Old Trafford",
+        "Shape_Leng": 3209.83225515,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/2043",
+        "ORIG_FID": 414
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5302,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.35104225086713,
+          53.3866094892629
+        ]
+      },
+      "properties": {
+        "FID": 5302,
+        "uid": "{7109C221-8B8B-4AEF-862B-06F16899710C}",
+        "List_Entry": 9022,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "George Street, Altrincham",
+        "Shape_Leng": 933.660771621,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/2045",
+        "ORIG_FID": 415
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5344,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.64221857200385,
+          53.4529836701155
+        ]
+      },
+      "properties": {
+        "FID": 5344,
+        "uid": "{1C62005B-C54A-4F47-B878-F4180D071989}",
+        "List_Entry": 10152,
+        "HeritageCa": "Conservation Area",
+        "Risk_Metho": "Conservation area",
+        "EntryName": "Earlestown, Newton le Willows",
+        "Shape_Leng": 5961.03739348,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/2289490",
+        "ORIG_FID": 457
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5852,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.98769640269832,
+          53.452025164439
+        ]
+      },
+      "properties": {
+        "FID": 5852,
+        "uid": "{AD023895-AE36-4B29-A07B-9AFC5749C455}",
+        "List_Entry": 1004595,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Archaeology",
+        "EntryName": "Melandra Castle Roman fort",
+        "Shape_Leng": 1794.70987606,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/35502",
+        "ORIG_FID": 965
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5907,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.73072964072854,
+          53.4476348134465
+        ]
+      },
+      "properties": {
+        "FID": 5907,
+        "uid": "{D42DA846-E368-48DD-B761-426A081E7081}",
+        "List_Entry": 1004917,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Cannington Shaw Bottle Shop, Site of Sherdley Works",
+        "Shape_Leng": 282.945043543,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48565",
+        "ORIG_FID": 1020
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6127,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.60759909007362,
+          53.3838650861127
+        ]
+      },
+      "properties": {
+        "FID": 6127,
+        "uid": "{2A80BE42-11D1-4751-839F-1ACCE90E68C5}",
+        "List_Entry": 1006768,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Bank Quay transporter bridge, Warrington",
+        "Shape_Leng": 351.868001839,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46484",
+        "ORIG_FID": 1240
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6359,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.60753740006811,
+          53.6336730183274
+        ]
+      },
+      "properties": {
+        "FID": 6359,
+        "uid": "{A0323C2F-FEA3-47B3-90A1-D4BFA3F16C1D}",
+        "List_Entry": 1009350,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Archaeology",
+        "EntryName": "Bretters Farm moated site and two fishponds",
+        "Shape_Leng": 521.751284012,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/45147",
+        "ORIG_FID": 1472
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6478,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.58282440703881,
+          53.434250883381
+        ]
+      },
+      "properties": {
+        "FID": 6478,
+        "uid": "{727B3F28-4603-4D22-82F7-3D022380985B}",
+        "List_Entry": 1011124,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Archaeology",
+        "EntryName": "Bowl barrow west of Highfield Lane",
+        "Shape_Leng": 188.68127413,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/40590",
+        "ORIG_FID": 1591
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6621,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.7381766510777,
+          53.6579457645277
+        ]
+      },
+      "properties": {
+        "FID": 6621,
+        "uid": "{0CE241F2-01A3-44F2-9A96-7D170FDC0654}",
+        "List_Entry": 1012502,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Archaeology",
+        "EntryName": "Ingrave Farm moated site, moated site 100 metres west of Ingrave Farm and connecting channel",
+        "Shape_Leng": 967.652846743,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/34685",
+        "ORIG_FID": 1734
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6694,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.72144068339833,
+          53.5401767830851
+        ]
+      },
+      "properties": {
+        "FID": 6694,
+        "uid": "{CD1D9FE6-E8AC-4FD9-9ECB-2C0F25A7959E}",
+        "List_Entry": 1013649,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Archaeology",
+        "EntryName": "Up Holland Benedictine Priory, Church Street",
+        "Shape_Leng": 366.93990773,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/33684",
+        "ORIG_FID": 1807
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6695,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.72144068339833,
+          53.5401767830851
+        ]
+      },
+      "properties": {
+        "FID": 6695,
+        "uid": "{3C3762B3-0D7B-4FFF-9BCA-8D51EC0D6F9C}",
+        "List_Entry": 1013649,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Remains of Up Holland Benedictine Priory, Church Street",
+        "Shape_Leng": 366.93990773,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48403",
+        "ORIG_FID": 1808
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7051,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.10963121845496,
+          53.5410250553763
+        ]
+      },
+      "properties": {
+        "FID": 7051,
+        "uid": "{39BA751D-44C4-4548-BE58-10CA7833C322}",
+        "List_Entry": 1282575,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Union Street United Reformed and Methodist Church, Union Street, Oldham",
+        "Shape_Leng": 12.6132240652,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/23975",
+        "ORIG_FID": 2164
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7055,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.25753278612,
+          53.5288300936179
+        ]
+      },
+      "properties": {
+        "FID": 7055,
+        "uid": "{FC1DE8A6-2E53-4129-9E08-4168BAB2B4F4}",
+        "List_Entry": 1282992,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Colonnade by Lake to south of Heaton Hall, Heaton Park",
+        "Shape_Leng": 12.609673085,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/239313",
+        "ORIG_FID": 2168
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7056,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.2260789537763,
+          53.4902114328511
+        ]
+      },
+      "properties": {
+        "FID": 7056,
+        "uid": "{94208E92-483A-4F46-B525-600AA0F28BC6}",
+        "List_Entry": 1283012,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Roman Catholic Church of St Patrick, Livesey Street, Collyhurst",
+        "Shape_Leng": 12.5981747389,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/10234",
+        "ORIG_FID": 2169
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7076,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.66133526832395,
+          53.587150820199
+        ]
+      },
+      "properties": {
+        "FID": 7076,
+        "uid": "{1F2C1943-6430-4CD5-805C-DD09700562F4}",
+        "List_Entry": 1287160,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Wilfrid, Market Place, Standish",
+        "Shape_Leng": 12.6268692664,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/17428",
+        "ORIG_FID": 2189
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7077,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.68881294072615,
+          53.5225842179885
+        ]
+      },
+      "properties": {
+        "FID": 7077,
+        "uid": "{D0B33355-BDED-4518-B812-2C043E115134}",
+        "List_Entry": 1287365,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Winstanley Hall, Pemberton Road, Winstanley",
+        "Shape_Leng": 12.6074429283,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46529",
+        "ORIG_FID": 2190
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7107,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.27786432540278,
+          53.3951477460927
+        ]
+      },
+      "properties": {
+        "FID": 7107,
+        "uid": "{E815AAD5-2E85-47F4-9D10-32585E596A57}",
+        "List_Entry": 1291962,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Baguley Hall, Hall Lane, Manchester",
+        "Shape_Leng": 12.5701413528,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46504",
+        "ORIG_FID": 2220
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7191,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.16785360569203,
+          53.4128272622894
+        ]
+      },
+      "properties": {
+        "FID": 7191,
+        "uid": "{792DF95F-2AFD-4D59-8024-27A37AB96F63}",
+        "List_Entry": 1309408,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Wycliffe Congregational Chapel, Wellington Road North, Heaton Norris",
+        "Shape_Leng": 12.5752912109,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20715",
+        "ORIG_FID": 2303
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7193,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.15523699929192,
+          53.4112484927332
+        ]
+      },
+      "properties": {
+        "FID": 7193,
+        "uid": "{9B8427FA-BD19-448C-822D-023EC1900752}",
+        "List_Entry": 1309701,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "St Mary's in the Marketplace, Churchgate, Stockport",
+        "Shape_Leng": 12.5748130195,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20729",
+        "ORIG_FID": 2305
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7223,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.12484648208877,
+          53.4451758319178
+        ]
+      },
+      "properties": {
+        "FID": 7223,
+        "uid": "{091EC840-7372-4864-83BE-6CA38CE08A86}",
+        "List_Entry": 1318129,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Hyde Hall, Town Lane",
+        "Shape_Leng": 12.5848623468,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48602",
+        "ORIG_FID": 2335
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7335,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.74038646086255,
+          53.4570663261062
+        ]
+      },
+      "properties": {
+        "FID": 7335,
+        "uid": "{B6D9EECF-FBF1-4706-9D8E-A7698F795EA9}",
+        "List_Entry": 1343271,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Mary, North Road, St Helens",
+        "Shape_Leng": 12.5880005333,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20719",
+        "ORIG_FID": 2447
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7345,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.21847140729934,
+          53.5933132648807
+        ]
+      },
+      "properties": {
+        "FID": 7345,
+        "uid": "{30BC7B1B-2BB7-4412-BF90-8427FC1A4423}",
+        "List_Entry": 1346240,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Luke, York Street",
+        "Shape_Leng": 12.6288002147,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/16187",
+        "ORIG_FID": 2457
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7363,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.1043954246524,
+          53.54793795707
+        ]
+      },
+      "properties": {
+        "FID": 7363,
+        "uid": "{2E5A377D-9867-43FA-B718-CA604ED6783E}",
+        "List_Entry": 1350344,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Stephen and All Martyrs, St Stephen's Street, Oldham",
+        "Shape_Leng": 12.6153121844,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/15606",
+        "ORIG_FID": 2475
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7364,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.37068575879568,
+          53.5477701555599
+        ]
+      },
+      "properties": {
+        "FID": 7364,
+        "uid": "{35306172-B6E4-41F9-836B-D6D2DE4926DE}",
+        "List_Entry": 1350354,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of the Holy Trinity, Church Road, Prestolee",
+        "Shape_Leng": 12.6150605955,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/13505",
+        "ORIG_FID": 2476
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7365,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.55236275224832,
+          53.5977346208192
+        ]
+      },
+      "properties": {
+        "FID": 7365,
+        "uid": "{22B74731-6A3F-44BA-81DC-F01AA5CBE493}",
+        "List_Entry": 1350355,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Catherine, Richmond Street, Horwich",
+        "Shape_Leng": 12.6297436397,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/12594",
+        "ORIG_FID": 2477
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7389,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.15452255926501,
+          53.5117362163517
+        ]
+      },
+      "properties": {
+        "FID": 7389,
+        "uid": "{379B48CF-6AAE-4CC0-8CBA-8A0E30D28577}",
+        "List_Entry": 1356416,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St John, Oldham Road, Failsworth",
+        "Shape_Leng": 12.6046453973,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/11091",
+        "ORIG_FID": 2501
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7390,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.09947690323177,
+          53.4699449783973
+        ]
+      },
+      "properties": {
+        "FID": 7390,
+        "uid": "{195C88E0-18CD-4DF9-BA1B-5A693D664790}",
+        "List_Entry": 1356422,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Old Hall Chapel, Old Hall Street, Dukinfield",
+        "Shape_Leng": 12.5924157118,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46522",
+        "ORIG_FID": 2502
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7391,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.16074583512678,
+          53.5385402272793
+        ]
+      },
+      "properties": {
+        "FID": 7391,
+        "uid": "{7DD70447-3F4F-45E6-AF0D-A6EBB3A45EE6}",
+        "List_Entry": 1356429,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Foxdenton Hall, Foxdenton Lane, Chadderton",
+        "Shape_Leng": 12.6124214237,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/50306",
+        "ORIG_FID": 2503
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7392,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.0100339671471,
+          53.4544091094148
+        ]
+      },
+      "properties": {
+        "FID": 7392,
+        "uid": "{6EC1B5F9-C92C-4D88-AA11-89A6D50404E7}",
+        "List_Entry": 1356436,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Michael and All Angels, War Hill, Longdendale",
+        "Shape_Leng": 12.5881151657,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/14517",
+        "ORIG_FID": 2504
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7393,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.08697939457371,
+          53.4877249064942
+        ]
+      },
+      "properties": {
+        "FID": 7393,
+        "uid": "{1D529623-178A-402A-B2D9-3914F5004A89}",
+        "List_Entry": 1356460,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Albion Congregational Church, Stamford Street East, Ashton-under-Lyne",
+        "Shape_Leng": 12.5973874206,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/23033",
+        "ORIG_FID": 2505
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7395,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.29855142506151,
+          53.5501602556997
+        ]
+      },
+      "properties": {
+        "FID": 7395,
+        "uid": "{4CD57CB9-70A5-43C7-A045-461C3CC10C65}",
+        "List_Entry": 1356818,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of All Saints, Church Lane, Stand",
+        "Shape_Leng": 12.6154730012,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/18012",
+        "ORIG_FID": 2507
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7396,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.29925584707638,
+          53.5911966038902
+        ]
+      },
+      "properties": {
+        "FID": 7396,
+        "uid": "{42EC0201-41AC-4E10-94B9-D98959F3E615}",
+        "List_Entry": 1356824,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Marie, Manchester Road, Bury",
+        "Shape_Leng": 12.6283555645,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/10216",
+        "ORIG_FID": 2508
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7475,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.66301366712604,
+          53.6757525963348
+        ]
+      },
+      "properties": {
+        "FID": 7475,
+        "uid": "{411AC0B6-2270-42F1-A09D-0AD8D3086D6B}",
+        "List_Entry": 1362139,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Buckshaw Hall, Euxton Lane (off)",
+        "Shape_Leng": 12.6529791221,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48596",
+        "ORIG_FID": 2587
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7613,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.21385343252839,
+          53.6092758202351
+        ]
+      },
+      "properties": {
+        "FID": 7613,
+        "uid": "{8EC38ADC-B275-4D78-832E-2253E19571AA}",
+        "List_Entry": 1084292,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Bamford United Reformed Church, Norden Road",
+        "Shape_Leng": 12.6335354695,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/16189",
+        "ORIG_FID": 2725
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7615,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.10343995854991,
+          53.4891319346263
+        ]
+      },
+      "properties": {
+        "FID": 7615,
+        "uid": "{91CD7BBD-D3D9-47B6-9FF0-E8A7955ACBBE}",
+        "List_Entry": 1084305,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Holy Trinity Church, Dean Street, Ashton-under-Lyne",
+        "Shape_Leng": 12.5977148152,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20767",
+        "ORIG_FID": 2727
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7771,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.44675130975769,
+          53.4955665517652
+        ]
+      },
+      "properties": {
+        "FID": 7771,
+        "uid": "{9B2BC6A1-0FC6-4A48-8CDD-B5041BB170B3}",
+        "List_Entry": 1017061,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Astley Green Colliery, Higher Green Lane, Astley Green, Tyldesley",
+        "Shape_Leng": 242.168911269,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/50006",
+        "ORIG_FID": 2883
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7830,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.20559630887958,
+          53.6013114757854
+        ]
+      },
+      "properties": {
+        "FID": 7830,
+        "uid": "{69481B45-D09D-4EEF-A60F-FF38C55CB2D7}",
+        "List_Entry": 1187124,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Crimble Mill, Crimble Lane",
+        "Shape_Leng": 336.309358976,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48794",
+        "ORIG_FID": 2942
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7958,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.93436252506655,
+          53.6607448865176
+        ]
+      },
+      "properties": {
+        "FID": 7958,
+        "uid": "{65EE6D82-0D26-427C-81AC-270448E11B86}",
+        "List_Entry": 1018559,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Archaeology",
+        "EntryName": "Ring cairn known as the Ring of Stones on Ringstone Edge Moor, 800 metres south of Upper Gosling Royd",
+        "Shape_Leng": 189.501409416,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/32783",
+        "ORIG_FID": 4072
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7962,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.92874528233983,
+          53.6648304480015
+        ]
+      },
+      "properties": {
+        "FID": 7962,
+        "uid": "{4BD0A18E-1E91-415B-ACF1-90B57B7500D3}",
+        "List_Entry": 1018560,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Archaeology",
+        "EntryName": "Cairnfield on Ringstone Edge Moor, 240 metres south west of Clay House",
+        "Shape_Leng": 487.274870626,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/32784",
+        "ORIG_FID": 4076
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7986,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.58243511222896,
+          53.3723057499435
+        ]
+      },
+      "properties": {
+        "FID": 7986,
+        "uid": "{6770ECA4-D5C0-434D-92D8-D74E653F602C}",
+        "List_Entry": 1135939,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Thomas, London Road, Stockton Heath",
+        "Shape_Leng": 12.5631637182,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/18336",
+        "ORIG_FID": 4100
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8106,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.23253122547536,
+          53.4766985604303
+        ]
+      },
+      "properties": {
+        "FID": 8106,
+        "uid": "{369DA64A-F106-4921-96EC-8844E3A4466C}",
+        "List_Entry": 1197918,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Police and Fire Station, London Road, Manchester",
+        "Shape_Leng": 12.5939762428,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46496",
+        "ORIG_FID": 3027
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8109,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.73496139741951,
+          53.4516527206117
+        ]
+      },
+      "properties": {
+        "FID": 8109,
+        "uid": "{1A51614E-D47B-407F-8813-DD68495E6ECF}",
+        "List_Entry": 1199141,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Helen, Church Street, St Helens",
+        "Shape_Leng": 12.5865453268,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20713",
+        "ORIG_FID": 3030
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8110,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.72096998056249,
+          53.4533020051612
+        ]
+      },
+      "properties": {
+        "FID": 8110,
+        "uid": "{7DD4DC83-8794-4B6D-A0D3-2AD14DF9454D}",
+        "List_Entry": 1199308,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of Holy Trinity, Traverse Street, St Helens",
+        "Shape_Leng": 12.5868447554,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/17994",
+        "ORIG_FID": 3031
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8119,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.2164614780551,
+          53.4601272966385
+        ]
+      },
+      "properties": {
+        "FID": 8119,
+        "uid": "{F098E22E-0071-4C42-8CE6-D1F49097843E}",
+        "List_Entry": 1200808,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Victoria Baths with attached forecourt walls, Hathersage Road, Longsight",
+        "Shape_Leng": 12.5893156257,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46511",
+        "ORIG_FID": 3040
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8120,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.25315074846853,
+          53.5361960201281
+        ]
+      },
+      "properties": {
+        "FID": 8120,
+        "uid": "{2C363FCB-97D9-4175-BEFD-81E3F6CB11B9}",
+        "List_Entry": 1200809,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Heaton Hall, Heaton Park, Crumpsall",
+        "Shape_Leng": 12.6117596741,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46507",
+        "ORIG_FID": 3041
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8121,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.72105842239715,
+          53.5404368059371
+        ]
+      },
+      "properties": {
+        "FID": 8121,
+        "uid": "{49C167CB-0AD6-4505-899E-F5AD6D41341C}",
+        "List_Entry": 1201666,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Thomas the Martyr, Church Street, Up Holland",
+        "Shape_Leng": 12.6128828811,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/10422",
+        "ORIG_FID": 3042
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8122,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.09682278670739,
+          53.5355353951314
+        ]
+      },
+      "properties": {
+        "FID": 8122,
+        "uid": "{ADC996F8-AF0D-43DC-BB65-D992D62A029E}",
+        "List_Entry": 1201673,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Mark with Christchurch, Glodwick Road, Glodwick",
+        "Shape_Leng": 12.6115414456,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20693",
+        "ORIG_FID": 3043
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8150,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.25137078075049,
+          53.4468730056262
+        ]
+      },
+      "properties": {
+        "FID": 8150,
+        "uid": "{DB75A0D9-AE85-4DB7-B060-2512630E2443}",
+        "List_Entry": 1207509,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of English Martyrs, Alexandra Road South, Whalley Range",
+        "Shape_Leng": 12.5856297227,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/11882",
+        "ORIG_FID": 3071
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8155,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.23304103467044,
+          53.4183075006603
+        ]
+      },
+      "properties": {
+        "FID": 8155,
+        "uid": "{C7D8BA2F-9873-4866-A2EE-051D81B87DA0}",
+        "List_Entry": 1207907,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of Emmanuel, Barlow Moor Road, Didsbury",
+        "Shape_Leng": 12.5773506726,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20282",
+        "ORIG_FID": 3076
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8165,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.23998459589673,
+          53.4923164822503
+        ]
+      },
+      "properties": {
+        "FID": 8165,
+        "uid": "{A6DD6690-13C9-4A33-98B7-FDD487672C45}",
+        "List_Entry": 1208542,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Roman Catholic Church of St Chad and presbytery, Cheetham Hill Road, Strangeways",
+        "Shape_Leng": 943.686205428,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/11857",
+        "ORIG_FID": 3086
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8209,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.1145193310049,
+          53.5253444231785
+        ]
+      },
+      "properties": {
+        "FID": 8209,
+        "uid": "{B2F03D36-C3E9-4DF8-B280-C78D2EE78C1A}",
+        "List_Entry": 1217873,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "1-5, Hollins Road, Oldham",
+        "Shape_Leng": 12.6086371454,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/342896",
+        "ORIG_FID": 3130
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8217,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.16838334311339,
+          53.4599086109041
+        ]
+      },
+      "properties": {
+        "FID": 8217,
+        "uid": "{EE28FC01-D438-430D-9A67-EBDA01567530}",
+        "List_Entry": 1218832,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Brookfield Unitarian Church, Hyde Road, Gorton",
+        "Shape_Leng": 12.5892068122,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20716",
+        "ORIG_FID": 3138
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8219,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.21446627848655,
+          53.4198710088166
+        ]
+      },
+      "properties": {
+        "FID": 8219,
+        "uid": "{53E1521C-8F86-40D7-A35F-5104F5851B45}",
+        "List_Entry": 1219254,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Nicholas, Kingsway, Burnage",
+        "Shape_Leng": 12.5774896959,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20322",
+        "ORIG_FID": 3140
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8225,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.71846014155759,
+          53.5408931885199
+        ]
+      },
+      "properties": {
+        "FID": 8225,
+        "uid": "{1ED7C24C-9227-4D1A-AC66-BEE50DB0CC53}",
+        "List_Entry": 1220218,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Old Grammar School, School Lane",
+        "Shape_Leng": 12.6130514121,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46557",
+        "ORIG_FID": 3146
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8274,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.68756233493369,
+          53.5226123642125
+        ]
+      },
+      "properties": {
+        "FID": 8274,
+        "uid": "{52CAE8DD-2703-4A6D-B5C8-2BA58FE6E35C}",
+        "List_Entry": 1228164,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Barn and stable to east of Winstanley Hall and two attached gateways, Pemberton Road, Winstanley",
+        "Shape_Leng": 12.6075264675,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46528",
+        "ORIG_FID": 3195
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8276,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.60924359364346,
+          53.571699751689
+        ]
+      },
+      "properties": {
+        "FID": 8276,
+        "uid": "{02D8A564-DA0B-4DBB-BEFB-11C30B306EFF}",
+        "List_Entry": 1228292,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Haigh Hall, School Lane, Wigan",
+        "Shape_Leng": 12.6219428108,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48054",
+        "ORIG_FID": 3197
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8332,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.4075092402075,
+          53.6330631063484
+        ]
+      },
+      "properties": {
+        "FID": 8332,
+        "uid": "{703ECA6D-CE5A-4087-8EA8-B3FC3EE41B1F}",
+        "List_Entry": 1241997,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Summerhouse east of Turton Tower, Chapeltown Road (off)",
+        "Shape_Leng": 12.6406630491,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46532",
+        "ORIG_FID": 3253
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8364,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.1772136538972,
+          53.4856651344258
+        ]
+      },
+      "properties": {
+        "FID": 8364,
+        "uid": "{85581044-C641-4F74-A676-7C2F89398166}",
+        "List_Entry": 1246271,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Roman Catholic Church of St Willibrords, North Road, Clayton",
+        "Shape_Leng": 12.5966839635,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/10232",
+        "ORIG_FID": 3285
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8365,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.17769594140695,
+          53.5001267909359
+        ]
+      },
+      "properties": {
+        "FID": 8365,
+        "uid": "{B6E43B8F-D4B2-4CB2-927B-BE726A7CD914}",
+        "List_Entry": 1246272,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of All Saints, Old Church Street, Newton Heath",
+        "Shape_Leng": 12.6010361433,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/15133",
+        "ORIG_FID": 3286
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8366,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.24087993146905,
+          53.4237984539752
+        ]
+      },
+      "properties": {
+        "FID": 8366,
+        "uid": "{2A9442A3-D5E5-493B-A55D-7864681EDFD0}",
+        "List_Entry": 1246274,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Synagogue of Withington Congregation of Spanish and Portuguese Jews, Old Lansdowne Road, Didsbury",
+        "Shape_Leng": 12.579032811,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20285",
+        "ORIG_FID": 3287
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8370,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.2397438312309,
+          53.4222223121924
+        ]
+      },
+      "properties": {
+        "FID": 8370,
+        "uid": "{09334EB5-B6C0-48E1-AFC1-79902E163A62}",
+        "List_Entry": 1246658,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "St Aidan United Reform Church, Palatine Road, Didsbury",
+        "Shape_Leng": 12.578622152,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20286",
+        "ORIG_FID": 3291
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8375,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.24581335773688,
+          53.4816667573957
+        ]
+      },
+      "properties": {
+        "FID": 8375,
+        "uid": "{F4AC858A-843B-4834-B394-D9B3A4CF17CD}",
+        "List_Entry": 1247612,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Ann, St Ann Street, Manchester City Centre",
+        "Shape_Leng": 12.595339044,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20706",
+        "ORIG_FID": 3296
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8395,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.49315618336237,
+          53.4932275455842
+        ]
+      },
+      "properties": {
+        "FID": 8395,
+        "uid": "{5AFC52F3-95BB-44FD-9C9D-B6C2ED16651F}",
+        "List_Entry": 1253119,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Leigh Spinners Mill, Park Lane",
+        "Shape_Leng": 12.5991473602,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48399",
+        "ORIG_FID": 3316
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8409,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.24259190210996,
+          53.5051088148362
+        ]
+      },
+      "properties": {
+        "FID": 8409,
+        "uid": "{65C9166C-548F-4FCA-888D-DD112F237F34}",
+        "List_Entry": 1254832,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St John the Evangelist, Waterloo Road, Manchester",
+        "Shape_Leng": 12.6027502248,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/14553",
+        "ORIG_FID": 3330
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8412,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.27816924325459,
+          53.4049356544966
+        ]
+      },
+      "properties": {
+        "FID": 8412,
+        "uid": "{50EF53D9-85B6-488B-97AE-09F6293F3CD2}",
+        "List_Entry": 1255034,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Wythenshawe Hall, Wythenshawe Park",
+        "Shape_Leng": 12.5732002009,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/219878",
+        "ORIG_FID": 3333
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8433,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.08941269891306,
+          53.4127859447804
+        ]
+      },
+      "properties": {
+        "FID": 8433,
+        "uid": "{741714F7-0651-4B2A-976C-2E80C3FD95D6}",
+        "List_Entry": 1259982,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Chad, Church Lane, Romiley",
+        "Shape_Leng": 12.5754398169,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20295",
+        "ORIG_FID": 3354
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8503,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.23105995032999,
+          53.4644755206041
+        ]
+      },
+      "properties": {
+        "FID": 8503,
+        "uid": "{92349436-A4A9-4918-AF6E-A31603001D96}",
+        "List_Entry": 1271296,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Roman Catholic Church of the Holy Name of Jesus, Oxford Road, Chorlton on Medlock",
+        "Shape_Leng": 12.5907656585,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/10229",
+        "ORIG_FID": 3425
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8504,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.28211304857453,
+          53.4098971310425
+        ]
+      },
+      "properties": {
+        "FID": 8504,
+        "uid": "{5E3EE35B-8D88-48B4-9C33-D46171B07E1F}",
+        "List_Entry": 1271360,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Michael and All Angels, Orton Road, Wythenshawe",
+        "Shape_Leng": 12.5745816728,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20324",
+        "ORIG_FID": 3426
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8670,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.17414651715803,
+          53.637886849198
+        ]
+      },
+      "properties": {
+        "FID": 8670,
+        "uid": "{D7ECBE4B-DE72-462C-BB1C-D5D082B40DF6}",
+        "List_Entry": 1055744,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of Christ, Gandy Lane, Rochdale",
+        "Shape_Leng": 12.642023178,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/16557",
+        "ORIG_FID": 3592
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8734,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.67483285521812,
+          53.4250511556364
+        ]
+      },
+      "properties": {
+        "FID": 8734,
+        "uid": "{242A8C4E-70AA-45A6-AAEA-DE997F9D5A8C}",
+        "List_Entry": 1017582,
+        "HeritageCa": "Scheduled Monument",
+        "Risk_Metho": "Archaeology",
+        "EntryName": "Old Moat House medieval moated house",
+        "Shape_Leng": 426.206248896,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/33685",
+        "ORIG_FID": 3656
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8850,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.15991244647814,
+          53.409404649082
+        ]
+      },
+      "properties": {
+        "FID": 8850,
+        "uid": "{97F03738-7207-41DB-A436-2D91801826C2}",
+        "List_Entry": 1067159,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Parish Church of St Peter, St Peters Square, Stockport",
+        "Shape_Leng": 12.57431878,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20298",
+        "ORIG_FID": 3772
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8851,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.15503155997635,
+          53.4035644460257
+        ]
+      },
+      "properties": {
+        "FID": 8851,
+        "uid": "{9D93A4EA-39C3-4F83-93C1-1037D55C3A76}",
+        "List_Entry": 1067160,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Parish Church of St Thomas, St Thomas's Place, Stockport",
+        "Shape_Leng": 12.5724875611,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20299",
+        "ORIG_FID": 3773
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8852,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.15777690670602,
+          53.4095603078784
+        ]
+      },
+      "properties": {
+        "FID": 8852,
+        "uid": "{CE215B44-606B-4230-80BA-139A95660B31}",
+        "List_Entry": 1067167,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "St Joseph's Church, Tatton Street, Stockport",
+        "Shape_Leng": 12.5743409203,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20306",
+        "ORIG_FID": 3774
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8854,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.16594510522652,
+          53.4365956007769
+        ]
+      },
+      "properties": {
+        "FID": 8854,
+        "uid": "{BCF69116-9EEE-4B92-8D2B-1B28FCB333AF}",
+        "List_Entry": 1067171,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Houldsworth Mill Engine House, Houldsworth Street, Reddish, Stockport",
+        "Shape_Leng": 12.5824647142,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48571",
+        "ORIG_FID": 3776
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8855,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.18596334537583,
+          53.4223640829423
+        ]
+      },
+      "properties": {
+        "FID": 8855,
+        "uid": "{AEDD82EC-09CF-46DC-BC35-731FFC15C352}",
+        "List_Entry": 1067209,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Paul, Heaton Moor Road, Stockport",
+        "Shape_Leng": 12.578295008,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20296",
+        "ORIG_FID": 3777
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8858,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.33456121608225,
+          53.4844170017861
+        ]
+      },
+      "properties": {
+        "FID": 8858,
+        "uid": "{4DE42209-C877-489B-8EE0-23585DC6EE17}",
+        "List_Entry": 1067498,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Mary, Church Street, Eccles",
+        "Shape_Leng": 12.5964853504,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/10571",
+        "ORIG_FID": 3780
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8861,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.3414320488048,
+          53.5119151254451
+        ]
+      },
+      "properties": {
+        "FID": 8861,
+        "uid": "{4560182E-2F8A-4835-B4BC-094877453414}",
+        "List_Entry": 1067510,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Peter, Chorley Road, Swinton",
+        "Shape_Leng": 12.6045246863,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20701",
+        "ORIG_FID": 3783
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8870,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.04841487573332,
+          53.5167528360091
+        ]
+      },
+      "properties": {
+        "FID": 8870,
+        "uid": "{F00BE4FF-BB17-4285-B701-E3917957F083}",
+        "List_Entry": 1068005,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St George, Stamford Street",
+        "Shape_Leng": 12.6062113501,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/15110",
+        "ORIG_FID": 3792
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8872,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.08646345707176,
+          53.4783773070874
+        ]
+      },
+      "properties": {
+        "FID": 8872,
+        "uid": "{FC7D148B-D9E1-47CD-8F91-A0852571BDEF}",
+        "List_Entry": 1068077,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Dukinfield Old Chapel, Chapel Hill, Dukinfield",
+        "Shape_Leng": 12.5948883565,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/23005",
+        "ORIG_FID": 3794
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8874,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.0845890153319,
+          53.4380740723905
+        ]
+      },
+      "properties": {
+        "FID": 8874,
+        "uid": "{4DBF2BAF-5851-49DE-B530-E6839A1FAB6F}",
+        "List_Entry": 1068079,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Apethorn Farmhouse, Apethorn Lane",
+        "Shape_Leng": 12.5826759803,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46523",
+        "ORIG_FID": 3796
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8876,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.19048190269599,
+          53.5711600796705
+        ]
+      },
+      "properties": {
+        "FID": 8876,
+        "uid": "{C4D5FDAF-2A9A-4E92-85EA-F8D66FE08296}",
+        "List_Entry": 1068466,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Hopwood Hall, Rochdale Road",
+        "Shape_Leng": 12.6222579973,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46514",
+        "ORIG_FID": 3798
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8877,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.10496630581209,
+          53.4241527900099
+        ]
+      },
+      "properties": {
+        "FID": 8877,
+        "uid": "{56BA78EF-E3D3-4DCB-B6AB-E992010E7847}",
+        "List_Entry": 1117378,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Mark, Redhouse Lane, Woodley",
+        "Shape_Leng": 12.5787388918,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20711",
+        "ORIG_FID": 3799
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8878,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.18626138931912,
+          53.5488936862045
+        ]
+      },
+      "properties": {
+        "FID": 8878,
+        "uid": "{E7304AE1-083C-4AEB-9A4E-ABEC7DDB3765}",
+        "List_Entry": 1068469,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Tonge Hall, William Street, Middleton",
+        "Shape_Leng": 12.6155783571,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46515",
+        "ORIG_FID": 3800
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8880,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.19708346631044,
+          53.552291894266
+        ]
+      },
+      "properties": {
+        "FID": 8880,
+        "uid": "{DF2A9ECA-9695-4D37-8E56-ED61984D26C7}",
+        "List_Entry": 1068504,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Long Street Methodist Church, Long Street",
+        "Shape_Leng": 12.6167897537,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/14262",
+        "ORIG_FID": 3802
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8890,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.00292013115706,
+          53.3648742021597
+        ]
+      },
+      "properties": {
+        "FID": 8890,
+        "uid": "{8EC8712A-3381-4917-856C-AA9BC7DEB913}",
+        "List_Entry": 1119721,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Torr Vale Mill",
+        "Shape_Leng": 12.5615148941,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48066",
+        "ORIG_FID": 3812
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8905,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.62921279116814,
+          53.6521259977705
+        ]
+      },
+      "properties": {
+        "FID": 8905,
+        "uid": "{C3B472FF-E0FD-4F77-AEFF-1AA0CE72B558}",
+        "List_Entry": 1072441,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St George, St George's Street, Chorley",
+        "Shape_Leng": 12.6460105976,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/23714",
+        "ORIG_FID": 3827
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8917,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.33025191591763,
+          53.6872081291808
+        ]
+      },
+      "properties": {
+        "FID": 8917,
+        "uid": "{A6846C0E-4CFE-4C33-870F-2005AB2E8A6D}",
+        "List_Entry": 1072810,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Thomas, Helmshore Road, Haslingden",
+        "Shape_Leng": 12.6566593733,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20280",
+        "ORIG_FID": 3839
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8981,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.73605578528576,
+          53.449632526075
+        ]
+      },
+      "properties": {
+        "FID": 8981,
+        "uid": "{E85B43AF-7771-4B00-9D71-9829D7A2D79A}",
+        "List_Entry": 1075879,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Tank House beside canal at Crown Glass Works, Watson Street, St Helens",
+        "Shape_Leng": 12.5859007125,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46576",
+        "ORIG_FID": 3903
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8983,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.70093857111112,
+          53.4540324782972
+        ]
+      },
+      "properties": {
+        "FID": 8983,
+        "uid": "{989DD5DE-0A16-4E68-814D-2F5BCDF633E7}",
+        "List_Entry": 1075909,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Peter, Broad Oak Road, Parr",
+        "Shape_Leng": 12.5873051155,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/16045",
+        "ORIG_FID": 3905
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9253,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.59392356488795,
+          53.3888874140395
+        ]
+      },
+      "properties": {
+        "FID": 9253,
+        "uid": "{56CBBB4A-0B47-4972-84F5-E13FF6698A85}",
+        "List_Entry": 1161522,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of the Holy Trinity, Sankey Street, Warrington",
+        "Shape_Leng": 12.56800443,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/19539",
+        "ORIG_FID": 4367
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9265,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.05958821017042,
+          53.4653246913518
+        ]
+      },
+      "properties": {
+        "FID": 9265,
+        "uid": "{0DB6BAB4-D3D3-4A7E-ACF8-163CFA76648D}",
+        "List_Entry": 1162405,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Mary, Bowers Street, Newton, Hyde",
+        "Shape_Leng": 12.5911782826,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/13051",
+        "ORIG_FID": 4379
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9267,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.99004255338711,
+          53.5542883247723
+        ]
+      },
+      "properties": {
+        "FID": 9267,
+        "uid": "{4870F7DD-3211-48B9-AEF0-5E403289AD47}",
+        "List_Entry": 1162501,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Chad, Church Lane, Saddleworth",
+        "Shape_Leng": 12.6170644312,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20731",
+        "ORIG_FID": 4381
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9386,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.08130570261285,
+          53.5001508339479
+        ]
+      },
+      "properties": {
+        "FID": 9386,
+        "uid": "{2874B8CC-8855-4172-A772-0AB09F955AE8}",
+        "List_Entry": 1162695,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St John the Evangelist, King's Road, Ashton-under-Lyne",
+        "Shape_Leng": 12.6011551531,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20764",
+        "ORIG_FID": 4500
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9388,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.35051771109801,
+          53.4451305957164
+        ]
+      },
+      "properties": {
+        "FID": 9388,
+        "uid": "{D7634F71-EAE8-4FDB-83A5-66A3D8920CD1}",
+        "List_Entry": 1162878,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Clement, Manor Avenue, Urmston",
+        "Shape_Leng": 12.5847585273,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/19077",
+        "ORIG_FID": 4502
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9389,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.13120510711442,
+          53.4100548110476
+        ]
+      },
+      "properties": {
+        "FID": 9389,
+        "uid": "{89B59F78-7B0D-4A99-A4F9-F9B44CC0C367}",
+        "List_Entry": 1162994,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Woodbank Villa and Entrance Portico, Woodbank Memorial Park",
+        "Shape_Leng": 12.5746545595,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/363153",
+        "ORIG_FID": 4503
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9390,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.4644251617128,
+          53.6955623510891
+        ]
+      },
+      "properties": {
+        "FID": 9390,
+        "uid": "{27CE0655-3C7C-46B1-9F13-7508FF61DD44}",
+        "List_Entry": 1163042,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Peter, Church Street, Darwen",
+        "Shape_Leng": 12.6590551412,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/24220",
+        "ORIG_FID": 4504
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9391,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.31612182613021,
+          53.6485345802313
+        ]
+      },
+      "properties": {
+        "FID": 9391,
+        "uid": "{F80BFBA0-40AE-4A99-94C1-99F74FDD100B}",
+        "List_Entry": 1163267,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Paul, Crow Lane, Ramsbottom",
+        "Shape_Leng": 12.6450824498,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/16526",
+        "ORIG_FID": 4505
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9398,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.17107121293628,
+          53.6551573662035
+        ]
+      },
+      "properties": {
+        "FID": 9398,
+        "uid": "{01E20F65-EFDE-4A2D-B4E3-182FD7DC9F6B}",
+        "List_Entry": 1164533,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Bartholomew, Whitworth Rake",
+        "Shape_Leng": 12.6471467169,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/15311",
+        "ORIG_FID": 4512
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9520,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.15493729975358,
+          53.6112879352528
+        ]
+      },
+      "properties": {
+        "FID": 9520,
+        "uid": "{4AB918C4-F70A-49C0-B1C9-0A5745BFAB6D}",
+        "List_Entry": 1376506,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "St John the Baptist Roman Catholic Church, Dowling Street, Rochdale",
+        "Shape_Leng": 233.439920998,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/11360",
+        "ORIG_FID": 4634
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9585,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.93896076564738,
+          53.4502323292781
+        ]
+      },
+      "properties": {
+        "FID": 9585,
+        "uid": "{DE9C44AB-22FB-4E05-A2CF-806544CC18D3}",
+        "List_Entry": 1384237,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of All Saints, Church Street South, Glossop",
+        "Shape_Leng": 12.5862903386,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/11123",
+        "ORIG_FID": 4699
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9586,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.61684616075877,
+          53.5462597898003
+        ]
+      },
+      "properties": {
+        "FID": 9586,
+        "uid": "{07C0ECD7-9B62-4CB9-A8CC-8F6CF9F2C74E}",
+        "List_Entry": 1384484,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Catherine, Lorne Street, Wigan",
+        "Shape_Leng": 12.6145677403,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20060",
+        "ORIG_FID": 4700
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9587,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.63343556740122,
+          53.5474759047286
+        ]
+      },
+      "properties": {
+        "FID": 9587,
+        "uid": "{4597D9AF-5D3A-4909-90F9-CD5B0DEF5110}",
+        "List_Entry": 1384491,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Queens Hall, Market Street, Wigan",
+        "Shape_Leng": 12.6148929551,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/21566",
+        "ORIG_FID": 4701
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9588,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.62805895638966,
+          53.5594588311459
+        ]
+      },
+      "properties": {
+        "FID": 9588,
+        "uid": "{04A0B2FC-A77F-47D7-834D-92602A75B9EE}",
+        "List_Entry": 1384570,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Haigh Hall Park Gateway and Lodges, Wigan Lane, Wigan",
+        "Shape_Leng": 12.6183537174,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46527",
+        "ORIG_FID": 4702
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9606,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.24751386497644,
+          53.5140242873615
+        ]
+      },
+      "properties": {
+        "FID": 9606,
+        "uid": "{33522FC0-61E5-44D7-8C83-48BE829A9E6C}",
+        "List_Entry": 1385841,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Higher Crumpsall Synagogue, Bury Old Road, Broughton Park",
+        "Shape_Leng": 12.6054883993,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/14669",
+        "ORIG_FID": 4720
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9610,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.25144398985288,
+          53.4874870767108
+        ]
+      },
+      "properties": {
+        "FID": 9610,
+        "uid": "{6990CB04-2FBC-407B-9E73-5DF3B4378C37}",
+        "List_Entry": 1386123,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Former public baths, Collier Street",
+        "Shape_Leng": 12.5973452495,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/46518",
+        "ORIG_FID": 4724
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9611,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.27597236471826,
+          53.4723463993704
+        ]
+      },
+      "properties": {
+        "FID": 9611,
+        "uid": "{A6E4A797-8470-44BB-8269-026982AECE7A}",
+        "List_Entry": 1386139,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Clement, Hulton Street, Salford",
+        "Shape_Leng": 12.5931204602,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/17001",
+        "ORIG_FID": 4725
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9612,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.3026606156151,
+          53.4839400337219
+        ]
+      },
+      "properties": {
+        "FID": 9612,
+        "uid": "{6F253C15-1957-40E3-8A32-A3DFC68AFCAD}",
+        "List_Entry": 1386145,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Luke, Liverpool Street, Salford",
+        "Shape_Leng": 12.5963734489,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/17002",
+        "ORIG_FID": 4726
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9622,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.42707936835375,
+          53.5819729463597
+        ]
+      },
+      "properties": {
+        "FID": 9622,
+        "uid": "{DAC06991-2E5D-46DF-869A-13693903ED27}",
+        "List_Entry": 1387858,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Ukrainian Catholic Church (Former All Saints), All Saints Street, Bolton",
+        "Shape_Leng": 12.6253249886,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/23460",
+        "ORIG_FID": 4736
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9624,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.41895523668954,
+          53.6004907995348
+        ]
+      },
+      "properties": {
+        "FID": 9624,
+        "uid": "{B8671DD4-AF19-49B9-84AB-1DA63019B772}",
+        "List_Entry": 1388052,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Hall I Th Wood, Hall I Th Wood Lane",
+        "Shape_Leng": 12.6309618339,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/356797",
+        "ORIG_FID": 4738
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9625,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.44228487628355,
+          53.5644360311972
+        ]
+      },
+      "properties": {
+        "FID": 9625,
+        "uid": "{58964375-3C84-479B-8E22-E0CCB9D9BB5F}",
+        "List_Entry": 1388071,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Building or structure",
+        "EntryName": "Swan Lane Mill No. 3, Higher Swan Lane",
+        "Shape_Leng": 12.6198695202,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/48398",
+        "ORIG_FID": 4739
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9626,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.4312019617714,
+          53.5807659048129
+        ]
+      },
+      "properties": {
+        "FID": 9626,
+        "uid": "{F352F635-2AAA-40DE-85A3-CFB5990800C1}",
+        "List_Entry": 1388093,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Bolton Methodist Mission, Knowsley Street, Bolton",
+        "Shape_Leng": 12.6251794745,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/21629",
+        "ORIG_FID": 4740
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9627,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.39285424234168,
+          53.5821263063875
+        ]
+      },
+      "properties": {
+        "FID": 9627,
+        "uid": "{16BB3241-C3E5-4E11-94AE-E98D869FA2B3}",
+        "List_Entry": 1388249,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St James, Roscow Avenue, Breightmet",
+        "Shape_Leng": 12.6254640434,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/22177",
+        "ORIG_FID": 4741
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9654,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.40737429887878,
+          53.5795528698446
+        ]
+      },
+      "properties": {
+        "FID": 9654,
+        "uid": "{B2681A65-65AE-4B3E-9278-28EF15C1C381}",
+        "List_Entry": 1390493,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Chad, Tonge Fold Road, Tonge Fold",
+        "Shape_Leng": 12.6246817557,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/18574",
+        "ORIG_FID": 4768
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9655,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.36906169100024,
+          53.491223359454
+        ]
+      },
+      "properties": {
+        "FID": 9655,
+        "uid": "{D78EDD99-C572-46DA-B611-AAA157FADC57}",
+        "List_Entry": 1390503,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Mary Magdalene, Vaughan Street, Eccles",
+        "Shape_Leng": 12.5985790191,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/20739",
+        "ORIG_FID": 4769
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9656,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.17178113803057,
+          53.5760937755967
+        ]
+      },
+      "properties": {
+        "FID": 9656,
+        "uid": "{AF41D7DB-B18E-49F7-B15E-500A2B96031D}",
+        "List_Entry": 1390504,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St John, Church Avenue, Rochdale",
+        "Shape_Leng": 12.6236919901,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/16561",
+        "ORIG_FID": 4770
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9664,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.37344661673537,
+          53.5626722835295
+        ]
+      },
+      "properties": {
+        "FID": 9664,
+        "uid": "{1BAE9612-219D-49DA-B83A-40341FBDECF1}",
+        "List_Entry": 1391096,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church of St Matthew, Church Street, Little Lever",
+        "Shape_Leng": 12.6195006448,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/14004",
+        "ORIG_FID": 4778
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9766,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.21015755324374,
+          53.5556720598953
+        ]
+      },
+      "properties": {
+        "FID": 9766,
+        "uid": "{F9E0453A-437D-4E98-AA3E-D1ADE57D3303}",
+        "List_Entry": 1474819,
+        "HeritageCa": "Listed Building",
+        "Risk_Metho": "Place of worship",
+        "EntryName": "Church Of All Saints And Martyrs, Langley",
+        "Shape_Leng": 383.304596508,
+        "Shape_Area": null,
+        "URL": "https://historicengland.org.uk/advice/heritage-at-risk/search-register/list-entry/5197266",
+        "ORIG_FID": 4880
+      }
+    }
+  ],
+  "_fetch_metadata": {
+    "fetched_at": "2026-01-21T17:16:51.356388",
+    "source": "Historic England ArcGIS",
+    "service": "HAR_2025_OTHR_WGS84_Point",
+    "layer_name": "Heritage at Risk Register 2025",
+    "region": "Greater Manchester",
+    "feature_count": 138
+  }
+}

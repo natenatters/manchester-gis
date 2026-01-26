@@ -1,0 +1,309 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source": "Curated Ancient Sites",
+    "description": "Manually curated Roman, Anglo-Saxon, and Medieval sites in Greater Manchester. Sources: Wikipedia, Historic England, academic papers.",
+    "license": "Public Domain",
+    "curator": "Claude (AI assistant)",
+    "last_updated": "2026-01-24"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.254612, 53.475005]},
+      "properties": {
+        "name": "Mamucium Roman Fort",
+        "site_type": "Roman Fort",
+        "period": "Roman",
+        "start_year": 79,
+        "end_year": 410,
+        "description": "Roman auxiliary fort established ~79 AD during Agricola's northern campaign. Garrison of 500 soldiers. Origin of Manchester.",
+        "builder": "Gnaeus Julius Agricola",
+        "dimensions": "160m x 130m",
+        "hyperlink": "https://en.wikipedia.org/wiki/Mamucium",
+        "he_list_entry": "1004903",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.2535, 53.4782]},
+      "properties": {
+        "name": "Manchester Roman Vicus",
+        "site_type": "Roman Settlement",
+        "period": "Roman",
+        "start_year": 90,
+        "end_year": 410,
+        "description": "Civilian settlement (vicus) outside Mamucium fort. Evidence of metalworking, pottery production, and trade.",
+        "hyperlink": "https://en.wikipedia.org/wiki/Mamucium",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-1.9839, 53.5608]},
+      "properties": {
+        "name": "Castleshaw Roman Forts",
+        "site_type": "Roman Fort",
+        "period": "Roman",
+        "start_year": 79,
+        "end_year": 120,
+        "description": "Two Roman forts: larger Agricolan fort (79 AD) and smaller fortlet (~105 AD). Part of road from Chester to York.",
+        "builder": "Gnaeus Julius Agricola",
+        "dimensions": "Fortlet: 40m x 33m",
+        "hyperlink": "https://en.wikipedia.org/wiki/Castleshaw_Roman_Fort",
+        "he_list_entry": "1011888",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-1.9674, 53.4442]},
+      "properties": {
+        "name": "Melandra Castle (Ardotalia)",
+        "site_type": "Roman Fort",
+        "period": "Roman",
+        "start_year": 78,
+        "end_year": 140,
+        "description": "Roman auxiliary fort controlling Longdendale pass. Latin name Ardotalia. Excavated 1899-1906.",
+        "builder": "Gnaeus Julius Agricola",
+        "dimensions": "127m x 110m",
+        "hyperlink": "https://en.wikipedia.org/wiki/Melandra_Castle",
+        "he_list_entry": "1007823",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.5847, 53.5503]},
+      "properties": {
+        "name": "Coccium (Wigan area)",
+        "site_type": "Roman Fort",
+        "period": "Roman",
+        "start_year": 90,
+        "end_year": 410,
+        "description": "Roman fort mentioned in Antonine Itinerary. Exact location uncertain, likely near modern Wigan.",
+        "hyperlink": "https://en.wikipedia.org/wiki/Coccium",
+        "certainty": "probable"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.1478, 53.5414]},
+      "properties": {
+        "name": "Nico Ditch",
+        "site_type": "Linear Earthwork",
+        "period": "Anglo-Saxon",
+        "start_year": 750,
+        "end_year": 900,
+        "description": "Six-mile defensive ditch from Ashton Moss to Stretford. Proves organized territorial administration pre-Norman.",
+        "dimensions": "6 miles long, 4-5m wide",
+        "hyperlink": "https://en.wikipedia.org/wiki/Nico_Ditch",
+        "he_list_entry": "1009952",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.4283, 53.5789]},
+      "properties": {
+        "name": "Blackrod Roman Road Section",
+        "site_type": "Roman Road",
+        "period": "Roman",
+        "start_year": 79,
+        "end_year": 410,
+        "description": "Visible agger of Roman road near Blackrod, part of route from Wigan to Ribchester.",
+        "hyperlink": "https://en.wikipedia.org/wiki/Roman_roads_in_Britain",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.3519, 53.3961]},
+      "properties": {
+        "name": "Timperley Moated Site",
+        "site_type": "Moated Site",
+        "period": "Medieval",
+        "start_year": 1200,
+        "end_year": 1500,
+        "description": "Medieval moated manor site. Moats were status symbols for minor gentry.",
+        "hyperlink": "https://en.wikipedia.org/wiki/Moated_site",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.2889, 53.4056]},
+      "properties": {
+        "name": "Baguley Hall Moat",
+        "site_type": "Moated Site",
+        "period": "Medieval",
+        "start_year": 1320,
+        "end_year": null,
+        "description": "Medieval moated manor, hall built c.1320 for de Baguley family. Best preserved timber-framed hall in GM.",
+        "hyperlink": "https://en.wikipedia.org/wiki/Baguley_Hall",
+        "he_list_entry": "1067657",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.5417, 53.5917]},
+      "properties": {
+        "name": "Cuerden Roman Road",
+        "site_type": "Roman Road",
+        "period": "Roman",
+        "start_year": 79,
+        "end_year": 410,
+        "description": "Section of Roman road on route from Wigan to Lancaster. Part of western Britain road network.",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.3000, 53.5167]},
+      "properties": {
+        "name": "Worsley Roman Road",
+        "site_type": "Roman Road",
+        "period": "Roman",
+        "start_year": 79,
+        "end_year": 410,
+        "description": "Suspected Roman road alignment through Worsley area, connecting Manchester to Wigan.",
+        "certainty": "probable"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.2408, 53.4833]},
+      "properties": {
+        "name": "Cathedral Site (Saxon Church)",
+        "site_type": "Saxon Church",
+        "period": "Anglo-Saxon",
+        "start_year": 700,
+        "end_year": null,
+        "description": "Site of Manchester's earliest church, possibly 7th century Saxon origin. Current cathedral built on same site.",
+        "hyperlink": "https://en.wikipedia.org/wiki/Manchester_Cathedral",
+        "certainty": "probable"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.2944, 53.5444]},
+      "properties": {
+        "name": "Eccles Saxon Settlement",
+        "site_type": "Saxon Settlement",
+        "period": "Anglo-Saxon",
+        "start_year": 600,
+        "end_year": null,
+        "description": "Name derives from Latin 'ecclesia' (church), indicating early Christian/Romano-British settlement. One of oldest place names in GM.",
+        "hyperlink": "https://en.wikipedia.org/wiki/Eccles,_Greater_Manchester",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.1583, 53.4833]},
+      "properties": {
+        "name": "Gorton Moated Site",
+        "site_type": "Moated Site",
+        "period": "Medieval",
+        "start_year": 1200,
+        "end_year": 1500,
+        "description": "Medieval moated site in Gorton. Evidence of manorial complex.",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.3556, 53.4500]},
+      "properties": {
+        "name": "Stretford Moated Site",
+        "site_type": "Moated Site",
+        "period": "Medieval",
+        "start_year": 1100,
+        "end_year": 1500,
+        "description": "Medieval moated manor site. Name 'Stretford' indicates Roman road crossing (street + ford).",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.4861, 53.5361]},
+      "properties": {
+        "name": "Westhoughton Moated Site",
+        "site_type": "Moated Site",
+        "period": "Medieval",
+        "start_year": 1200,
+        "end_year": 1500,
+        "description": "Medieval moated manor site near Westhoughton.",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.0833, 53.5361]},
+      "properties": {
+        "name": "Stalybridge Roman Altar Find",
+        "site_type": "Roman Findspot",
+        "period": "Roman",
+        "start_year": 100,
+        "end_year": 300,
+        "description": "Location where Roman altar stone was discovered. Dedicated to god Apollo, indicates Roman presence in area.",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.2306, 53.4056]},
+      "properties": {
+        "name": "Northenden Moated Site",
+        "site_type": "Moated Site",
+        "period": "Medieval",
+        "start_year": 1200,
+        "end_year": 1600,
+        "description": "Medieval moated manor of the Tatton family. Church nearby has Norman origins.",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.3028, 53.3889]},
+      "properties": {
+        "name": "Sale Moated Site",
+        "site_type": "Moated Site",
+        "period": "Medieval",
+        "start_year": 1250,
+        "end_year": 1500,
+        "description": "Medieval moated manor site near Sale. Part of network of moated sites in south Manchester.",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.1000, 53.4528]},
+      "properties": {
+        "name": "Denton Moated Hall",
+        "site_type": "Moated Site",
+        "period": "Medieval",
+        "start_year": 1250,
+        "end_year": null,
+        "description": "Medieval moated site, hall rebuilt in later centuries. Holland family seat.",
+        "hyperlink": "https://en.wikipedia.org/wiki/Denton_Hall,_Greater_Manchester",
+        "certainty": "certain"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-2.6278, 53.5472]},
+      "properties": {
+        "name": "Standish Roman Coin Hoard",
+        "site_type": "Roman Findspot",
+        "period": "Roman",
+        "start_year": 200,
+        "end_year": 300,
+        "description": "Location of Roman coin hoard discovery. Indicates Romano-British activity near Wigan.",
+        "certainty": "certain"
+      }
+    }
+  ]
+}

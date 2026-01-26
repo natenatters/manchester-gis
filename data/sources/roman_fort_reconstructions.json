@@ -1,0 +1,226 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source": "Roman Fort 3D Reconstructions",
+    "description": "Archaeological evidence and sources for 3D Roman fort reconstructions in Greater Manchester",
+    "license": "Public Domain",
+    "curator": "Claude (AI assistant)",
+    "last_updated": "2026-01-24",
+    "notes": "Reconstructions are schematic interpretations based on archaeological evidence. Actual layouts may have varied."
+  },
+  "forts": {
+    "mamucium": {
+      "name": "Mamucium",
+      "modern_name": "Castlefield, Manchester",
+      "coordinates": [-2.2575, 53.4772],
+      "phases": [
+        {
+          "phase": 1,
+          "name": "Timber & Turf Fort",
+          "date_range": "79-200 AD",
+          "construction": "Turf ramparts with timber palisade, wooden buildings",
+          "evidence": [
+            "Excavations by Greater Manchester Archaeological Unit (1970s-1980s)",
+            "Post-holes and beam slots found beneath stone phase",
+            "Turf rampart core identified in section"
+          ]
+        },
+        {
+          "phase": 2,
+          "name": "Stone Fort",
+          "date_range": "200-410 AD",
+          "construction": "Stone walls 2.1-2.7m thick, stone buildings",
+          "evidence": [
+            "Excavated stone foundations visible at Roman Gardens",
+            "Wall thickness measured at multiple points",
+            "Incorporated into 1980s reconstruction"
+          ]
+        },
+        {
+          "phase": 3,
+          "name": "Modern Reconstruction",
+          "date_range": "1982-present",
+          "construction": "Partial reconstruction of North Gate on original foundations",
+          "evidence": [
+            "Built directly over excavated remains",
+            "Original Roman stonework incorporated",
+            "Interpretation panels on site"
+          ]
+        }
+      ],
+      "dimensions": {
+        "length_m": 160,
+        "width_m": 130,
+        "area_ha": 2.08,
+        "wall_height_estimate_m": "4-5 (stone phase)",
+        "sources": [
+          "Britannia journal excavation reports",
+          "Historic England listing (1004903)"
+        ]
+      },
+      "garrison": {
+        "unit": "Auxiliary cohort",
+        "strength": "~500 soldiers",
+        "evidence": "Fort size consistent with auxiliary cohort standard"
+      },
+      "builder": {
+        "name": "Gnaeus Julius Agricola",
+        "date": "79 AD",
+        "context": "Northern campaign to consolidate Roman Britain"
+      },
+      "references": [
+        {
+          "type": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mamucium"
+        },
+        {
+          "type": "Historic England",
+          "url": "https://historicengland.org.uk/listing/the-list/list-entry/1004903",
+          "list_entry": "1004903"
+        },
+        {
+          "type": "Academic",
+          "citation": "Bryant, S. et al. 'Excavations at Mamucium 1978-1986', Greater Manchester Archaeological Journal"
+        }
+      ]
+    },
+    "castleshaw": {
+      "name": "Castleshaw",
+      "modern_name": "Saddleworth, Oldham",
+      "coordinates": [-1.9839, 53.5608],
+      "phases": [
+        {
+          "phase": 1,
+          "name": "Agricolan Fort",
+          "date_range": "79-95 AD",
+          "construction": "Large turf and timber fort",
+          "evidence": [
+            "Excavations 1897-1908 by Samuel Andrew",
+            "Ditch sections revealed in 1957-1964 excavations",
+            "Pottery dating to Flavian period"
+          ]
+        },
+        {
+          "phase": 2,
+          "name": "Fortlet",
+          "date_range": "105-125 AD",
+          "construction": "Smaller fortlet built within SE corner of abandoned larger fort",
+          "evidence": [
+            "Clear stratigraphic relationship to earlier fort",
+            "Smaller garrison post for road patrol",
+            "Abandoned during Hadrian's consolidation"
+          ]
+        }
+      ],
+      "dimensions": {
+        "fortlet_length_m": 40,
+        "fortlet_width_m": 33,
+        "larger_fort_area": "Unknown, partially excavated",
+        "sources": [
+          "Saddleworth Historical Society records",
+          "Thompson, F.H. 'Castleshaw: The Archaeology of a Roman Fortlet'"
+        ]
+      },
+      "location_context": "Controls road from Chester to York through Pennines",
+      "builder": {
+        "name": "Gnaeus Julius Agricola (larger fort)",
+        "date": "79 AD"
+      },
+      "references": [
+        {
+          "type": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Castleshaw_Roman_Fort"
+        },
+        {
+          "type": "Historic England",
+          "url": "https://historicengland.org.uk/listing/the-list/list-entry/1017837",
+          "list_entry": "1017837"
+        },
+        {
+          "type": "Site",
+          "note": "Visible earthworks on site, interpretation panels"
+        }
+      ]
+    },
+    "melandra": {
+      "name": "Ardotalia (Melandra Castle)",
+      "modern_name": "Glossop, Derbyshire (historic Greater Manchester)",
+      "coordinates": [-1.9674, 53.4442],
+      "phases": [
+        {
+          "phase": 1,
+          "name": "Agricolan Fort",
+          "date_range": "78-140 AD",
+          "construction": "Turf and timber, later partly rebuilt in stone",
+          "evidence": [
+            "Excavated 1899-1906 by Robert Hamnett",
+            "Further excavations 1960s",
+            "Visible earthworks remain"
+          ]
+        }
+      ],
+      "dimensions": {
+        "length_m": 127,
+        "width_m": 110,
+        "area_ha": 1.4,
+        "sources": [
+          "Hamnett excavation reports",
+          "Conway, R.S. 'Melandra Castle' (1906)"
+        ]
+      },
+      "latin_name": {
+        "name": "Ardotalia",
+        "evidence": "Ravenna Cosmography (7th century list of Roman places)",
+        "certainty": "probable"
+      },
+      "location_context": "Controls Longdendale pass through Pennines",
+      "garrison": {
+        "unit": "Cohors I Frisiavonum (1st Cohort of Frisians)",
+        "evidence": "Inscribed altar found on site"
+      },
+      "builder": {
+        "name": "Gnaeus Julius Agricola",
+        "date": "78 AD"
+      },
+      "references": [
+        {
+          "type": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Melandra_Castle"
+        },
+        {
+          "type": "Historic England",
+          "url": "https://historicengland.org.uk/listing/the-list/list-entry/1007823",
+          "list_entry": "1007823"
+        },
+        {
+          "type": "Academic",
+          "citation": "Conway, R.S. 'Melandra Castle: Being the Report of the Manchester and District Branch of the Classical Association' (1906)"
+        }
+      ]
+    }
+  },
+  "general_sources": {
+    "roman_fort_architecture": [
+      "Johnson, A. 'Roman Forts of the 1st and 2nd centuries AD in Britain and the German Provinces' (1983)",
+      "Bidwell, P. 'Roman Forts in Britain' (2007)"
+    ],
+    "roman_roads": [
+      "Margary, I.D. 'Roman Roads in Britain' (1973)",
+      "Codrington, T. 'Roman Roads in Britain' (1903)"
+    ],
+    "regional_archaeology": [
+      "Nevell, M. 'Manchester: The Hidden History' (2008)",
+      "Greater Manchester Archaeological Unit reports"
+    ]
+  },
+  "reconstruction_notes": {
+    "wall_heights": "Estimated 4-5m based on typical auxiliary fort standards. No surviving walls to full height in GM.",
+    "building_layouts": "Based on standard Roman fort plans (principia, praetorium, horrea, barracks). Internal layouts are interpretive.",
+    "gate_positions": "Four gates standard for auxiliary forts. Exact positions at Mamucium confirmed by excavation.",
+    "ditches": "Double defensive ditches (fossa) standard. Depth/width from excavated sections.",
+    "materials": {
+      "timber_phase": "Oak/ash timbers, turf ramparts, wattle-and-daub buildings",
+      "stone_phase": "Local sandstone, lime mortar, tile roofs on major buildings"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "project": "manchester-historical",
+    "description": "Greater Manchester historical GIS - Example project demonstrating curated research",
+    "author": "Nate Natters",
+    "region": "Greater Manchester, UK",
+    "created": "2026-01-26",
+    "notes": "Copy this folder to data/projects/your-project/ to start your own research"
+  },
+  "layers": {
+    "roman": {
+      "name": "Roman Sites",
+      "description": "Roman forts, roads, and settlements (79-410 AD)",
+      "default_visible": true,
+      "color": "#8B0000"
+    },
+    "medieval": {
+      "name": "Medieval Sites",
+      "description": "Domesday manors, moated sites, churches (1066-1485)",
+      "default_visible": true,
+      "color": "#DAA520"
+    },
+    "ownership": {
+      "name": "Ownership Chains",
+      "description": "Sites with documented ownership history",
+      "default_visible": false,
+      "color": "#4169E1"
+    }
+  },
+  "features": []
+}
