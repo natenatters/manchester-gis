@@ -3,6 +3,7 @@
  */
 
 import * as Cesium from 'cesium';
+import { createImageryProvider, DEFAULT_IMAGERY } from './imagery/index.js';
 
 // Fallback center if no config provided
 const DEFAULT_CENTER = {
@@ -10,67 +11,6 @@ const DEFAULT_CENTER = {
     lat: 51.5,
     height: 100000
 };
-
-// Default imagery (OSM)
-const DEFAULT_IMAGERY = {
-    type: 'osm',
-    url: 'https://a.tile.openstreetmap.org/',
-    alpha: 0.8
-};
-
-/**
- * Create an imagery provider from config
- * Supported types:
- * - osm: OpenStreetMapImageryProvider
- * - url_template: UrlTemplateImageryProvider (for NLS, local tiles, etc.)
- * - single_tile: SingleTileImageryProvider (for single georeferenced images)
- * - wmts: WebMapTileServiceImageryProvider
- */
-function createImageryProvider(imageryConfig) {
-    const cfg = imageryConfig || DEFAULT_IMAGERY;
-
-    switch (cfg.type) {
-        case 'osm':
-            return new Cesium.OpenStreetMapImageryProvider({
-                url: cfg.url || 'https://a.tile.openstreetmap.org/',
-                credit: cfg.credit
-            });
-
-        case 'url_template':
-            return new Cesium.UrlTemplateImageryProvider({
-                url: cfg.url,
-                credit: cfg.credit,
-                maximumLevel: cfg.maximumLevel || 18,
-                minimumLevel: cfg.minimumLevel || 0
-            });
-
-        case 'single_tile':
-            return new Cesium.SingleTileImageryProvider({
-                url: cfg.url,
-                rectangle: cfg.bounds ? Cesium.Rectangle.fromDegrees(
-                    cfg.bounds.west, cfg.bounds.south,
-                    cfg.bounds.east, cfg.bounds.north
-                ) : undefined,
-                credit: cfg.credit
-            });
-
-        case 'wmts':
-            return new Cesium.WebMapTileServiceImageryProvider({
-                url: cfg.url,
-                layer: cfg.layer,
-                style: cfg.style || 'default',
-                tileMatrixSetID: cfg.tileMatrixSetID,
-                credit: cfg.credit,
-                maximumLevel: cfg.maximumLevel
-            });
-
-        default:
-            console.warn(`Unknown imagery type: ${cfg.type}, falling back to OSM`);
-            return new Cesium.OpenStreetMapImageryProvider({
-                url: 'https://a.tile.openstreetmap.org/'
-            });
-    }
-}
 
 /**
  * Create and configure the Cesium viewer
