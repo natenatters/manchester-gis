@@ -2,7 +2,7 @@
  * UI Controls
  */
 
-import { LAYER_GROUPS, toggleLayer, toggleGroup, setYear } from '../layers/index.js';
+import { getLayerGroups, getLayerDefs, toggleLayer, toggleGroup, setYear } from '../layers/index.js';
 
 // Store config for building UI
 let projectConfig = {};
@@ -32,6 +32,8 @@ export function initUI(viewer, layers, config = {}) {
 function buildControlsHTML() {
     const title = projectConfig.name || 'Historical GIS';
     const defaultYear = projectConfig.defaultYear || 200;
+    const groups = getLayerGroups();
+    const layerDefs = getLayerDefs();
 
     let html = `
         <div class="controls-panel">
@@ -51,9 +53,16 @@ function buildControlsHTML() {
         </div>
     `;
 
-    // Layer groups
-    for (const [groupKey, group] of Object.entries(LAYER_GROUPS)) {
+    // Build layers organized by group
+    for (const [groupKey, group] of Object.entries(groups)) {
         const checked = group.defaultVisible ? 'checked' : '';
+
+        // Get layers belonging to this group
+        const groupLayers = Object.entries(layerDefs).filter(
+            ([_, layer]) => layer.group === groupKey
+        );
+
+        if (groupLayers.length === 0) continue;
 
         html += `
             <div class="layer-group">
@@ -66,7 +75,7 @@ function buildControlsHTML() {
                 <div class="layer-list" id="group-${groupKey}">
         `;
 
-        for (const [layerKey, layer] of Object.entries(group.layers)) {
+        for (const [layerKey, layer] of groupLayers) {
             html += `
                 <label class="layer-item">
                     <input type="checkbox" class="layer-toggle" data-layer="${layerKey}" ${checked}>

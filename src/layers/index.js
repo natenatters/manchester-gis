@@ -1,55 +1,32 @@
 /**
  * Layer Management
  *
+ * Generic layer loader that reads layer definitions from project's layers.json.
  * Each layer is a Cesium CustomDataSource that can be toggled independently.
- * Layers are organized into groups:
- * - curated: User's researched/verified data (visible by default)
- * - reference: Third-party data for research (hidden by default)
- * - reconstructions: 3D models (toggle)
  */
 
 import * as Cesium from 'cesium';
 import { loadReconstructionsDataSource, updateReconstructionsVisibility } from './reconstructions3D.js';
 
-// Current project path (set during init)
-let projectPath = '/data/projects/example';
-
-// Layer definitions
-export const LAYER_GROUPS = {
-    curated: {
-        name: 'My Project',
-        description: 'Your curated, researched sites',
-        defaultVisible: true,
-        layers: {
-            roman: { name: 'Roman Sites', color: '#8B0000' },
-            roman3d: { name: '3D Fort Reconstructions', color: '#CD853F' },
-            medieval: { name: 'Medieval Sites', color: '#DAA520' },
-            ownership: { name: 'Ownership Chains', color: '#4169E1' }
-        }
-    },
-    // Note: reconstructions group removed - 3D forts are now in curated
-    reference: {
-        name: 'Reference Data',
-        description: 'Third-party sources for research',
-        defaultVisible: false,
-        layers: {
-            romanRoads: { name: 'Roman Roads (Itiner-e)', color: '#8B0000' },
-            heListedBuildings: { name: 'Listed Buildings', color: '#1E90FF' },
-            heScheduledMonuments: { name: 'Scheduled Monuments', color: '#FFD700' },
-            heParksGardens: { name: 'Parks & Gardens', color: '#228B22' },
-            heHeritageAtRisk: { name: 'Heritage at Risk', color: '#FF4500' },
-            heBattlefields: { name: 'Battlefields', color: '#DC143C' },
-            heConservationAreas: { name: 'Conservation Areas', color: '#9370DB' },
-            domesday: { name: 'Domesday (1086)', color: '#8B4513' },
-            gb1900: { name: 'GB1900 Gazetteer', color: '#696969' },
-            wikidata: { name: 'Wikidata Sites', color: '#4682B4' },
-            osm: { name: 'OSM Buildings', color: '#708090' }
-        }
-    }
-};
-
-// Current year state (for visibility filtering)
+// Current project state
+let projectPath = '';
 let currentYear = 200;
+let layerConfig = { groups: {}, layers: {} };
+
+/**
+ * Load layer configuration from project
+ */
+async function loadLayerConfig(projPath) {
+    try {
+        const response = await fetch(`${projPath}/layers.json`);
+        if (response.ok) {
+            return await response.json();
+        }
+    } catch (err) {
+        console.warn('Could not load layers.json:', err);
+    }
+    return { groups: {}, layers: {} };
+}
 
 /**
  * Load all data layers
@@ -62,40 +39,44 @@ export async function loadAllLayers(viewer, projPath, config = {}) {
     projectPath = projPath;
     currentYear = config.defaultYear || 200;
 
+    // Load layer definitions from project
+    layerConfig = await loadLayerConfig(projPath);
+
     const layers = {};
 
-    // Create DataSource for each layer (except 3D reconstructions which load async)
-    for (const [groupKey, group] of Object.entries(LAYER_GROUPS)) {
-        for (const [layerKey, layer] of Object.entries(group.layers)) {
-            // Skip roman3d - loaded separately below
-            if (layerKey === 'roman3d') continue;
+    // Create DataSource for each layer
+    for (const [layerKey, layerDef] of Object.entries(layerConfig.layers)) {
+        const groupDef = layerConfig.groups[layerDef.group] || { defaultVisible: true };
 
+        // Handle special layer types
+        if (layerDef.type === 'reconstruction') {
+            // Load 3D reconstructions asynchronously
+            try {
+                const dataSource = await loadReconstructionsDataSource(projectPath, currentYear);
+                dataSource.show = groupDef.defaultVisible;
+                layers[layerKey] = {
+                    dataSource,
+                    group: layerDef.group,
+                    config: layerDef
+                };
+                viewer.dataSources.add(dataSource);
+                console.log(`Loaded reconstruction layer: ${layerDef.name}`);
+            } catch (err) {
+                console.warn(`Could not load reconstruction layer ${layerKey}:`, err);
+            }
+        } else {
+            // Standard layer
             const dataSource = new Cesium.CustomDataSource(layerKey);
-            dataSource.show = group.defaultVisible;
+            dataSource.show = groupDef.defaultVisible;
 
             layers[layerKey] = {
                 dataSource,
-                group: groupKey,
-                config: layer
+                group: layerDef.group,
+                config: layerDef
             };
 
             viewer.dataSources.add(dataSource);
         }
-    }
-
-    // Load 3D reconstructions asynchronously
-    try {
-        const reconstructions = await loadReconstructionsDataSource(projectPath, currentYear);
-        reconstructions.show = LAYER_GROUPS.curated.defaultVisible;
-        layers.roman3d = {
-            dataSource: reconstructions,
-            group: 'curated',
-            config: LAYER_GROUPS.curated.layers.roman3d
-        };
-        viewer.dataSources.add(reconstructions);
-        console.log('Loaded 3D reconstructions');
-    } catch (err) {
-        console.warn('Could not load 3D reconstructions:', err);
     }
 
     // Load reference data from unified GeoJSON
@@ -126,30 +107,27 @@ export async function loadAllLayers(viewer, projPath, config = {}) {
 }
 
 /**
- * Map source names to layer keys
+ * Build source-to-layer mapping from layer config
  */
-const SOURCE_TO_LAYER = {
-    'roman_roads': 'romanRoads',
-    'he_listed_buildings': 'heListedBuildings',
-    'he_scheduled_monuments': 'heScheduledMonuments',
-    'he_parks_gardens': 'heParksGardens',
-    'he_heritage_at_risk': 'heHeritageAtRisk',
-    'he_battlefields': 'heBattlefields',
-    'he_conservation_areas': 'heConservationAreas',
-    'domesday': 'domesday',
-    'gb1900': 'gb1900',
-    'wikidata': 'wikidata',
-    'osm': 'osm',
-    'curated': 'roman'  // Default curated to roman layer for now
-};
+function buildSourceMapping() {
+    const mapping = {};
+    for (const [layerKey, layerDef] of Object.entries(layerConfig.layers)) {
+        if (layerDef.source) {
+            mapping[layerDef.source] = layerKey;
+        }
+    }
+    return mapping;
+}
 
 /**
  * Populate reference layers from unified GeoJSON
  */
 function populateReferenceLayers(data, layers) {
+    const sourceMapping = buildSourceMapping();
+
     for (const feature of data.features) {
         const source = feature.properties.source;
-        const layerKey = SOURCE_TO_LAYER[source];
+        const layerKey = sourceMapping[source];
 
         if (!layerKey || !layers[layerKey]) {
             continue;
@@ -158,11 +136,12 @@ function populateReferenceLayers(data, layers) {
         const layer = layers[layerKey];
         const geom = feature.geometry;
         const props = feature.properties;
+        const color = layer.config.color || '#FF6B6B';
 
         if (geom.type === 'Point') {
-            addPointEntity(layer.dataSource, feature, props);
+            addPointEntity(layer.dataSource, feature, props, color);
         } else if (geom.type === 'LineString' || geom.type === 'MultiLineString') {
-            addPolylineEntity(layer.dataSource, feature, props);
+            addPolylineEntity(layer.dataSource, feature, props, color);
         }
     }
 }
@@ -172,28 +151,29 @@ function populateReferenceLayers(data, layers) {
  */
 function populateCuratedLayers(data, layers) {
     for (const feature of data.features) {
-        const layerKey = feature.properties.layer || 'roman';
+        const layerKey = feature.properties.layer;
 
-        if (!layers[layerKey]) {
+        if (!layerKey || !layers[layerKey]) {
             continue;
         }
 
         const layer = layers[layerKey];
-        addPointEntity(layer.dataSource, feature, feature.properties);
+        const color = layer.config.color || '#FF6B6B';
+        addPointEntity(layer.dataSource, feature, feature.properties, color);
     }
 }
 
 /**
  * Add a point entity to a DataSource
  */
-function addPointEntity(dataSource, feature, props) {
+function addPointEntity(dataSource, feature, props, color) {
     const coords = feature.geometry.coordinates;
 
     dataSource.entities.add({
         position: Cesium.Cartesian3.fromDegrees(coords[0], coords[1]),
         point: {
             pixelSize: 8,
-            color: Cesium.Color.fromCssColorString('#FF6B6B'),
+            color: Cesium.Color.fromCssColorString(color),
             outlineColor: Cesium.Color.BLACK,
             outlineWidth: 1
         },
@@ -205,7 +185,7 @@ function addPointEntity(dataSource, feature, props) {
 /**
  * Add a polyline entity to a DataSource (for roads)
  */
-function addPolylineEntity(dataSource, feature, props) {
+function addPolylineEntity(dataSource, feature, props, color) {
     const geom = feature.geometry;
 
     // Flatten MultiLineString
@@ -222,12 +202,12 @@ function addPolylineEntity(dataSource, feature, props) {
     const evidenceLevel = props.evidence_level || 'unknown';
     const isConjecture = evidenceLevel === 'conjecture';
 
-    let material = Cesium.Color.fromCssColorString('#8B0000');
+    let material = Cesium.Color.fromCssColorString(color);
     let width = 4;
 
     if (isConjecture) {
         material = new Cesium.PolylineDashMaterialProperty({
-            color: Cesium.Color.fromCssColorString('#8B0000').withAlpha(0.6),
+            color: Cesium.Color.fromCssColorString(color).withAlpha(0.6),
             dashLength: 16.0
         });
         width = 3;
@@ -275,6 +255,20 @@ function buildDescription(props) {
 }
 
 /**
+ * Get layer groups for UI
+ */
+export function getLayerGroups() {
+    return layerConfig.groups;
+}
+
+/**
+ * Get layer definitions for UI
+ */
+export function getLayerDefs() {
+    return layerConfig.layers;
+}
+
+/**
  * Toggle a layer's visibility
  */
 export function toggleLayer(layers, layerKey, visible) {
@@ -302,9 +296,11 @@ export function toggleGroup(layers, groupKey, visible) {
 export function setYear(layers, year) {
     currentYear = year;
 
-    // Update 3D reconstruction visibility
-    if (layers.roman3d) {
-        updateReconstructionsVisibility(layers.roman3d.dataSource, year);
+    // Update reconstruction layers
+    for (const [key, layer] of Object.entries(layers)) {
+        if (layer.config.type === 'reconstruction') {
+            updateReconstructionsVisibility(layer.dataSource, year);
+        }
     }
 
     // TODO: Update other layers based on year

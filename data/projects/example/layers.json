@@ -1,0 +1,103 @@
+{
+  "groups": {
+    "curated": {
+      "name": "My Project",
+      "description": "Your curated, researched sites",
+      "defaultVisible": true
+    },
+    "reference": {
+      "name": "Reference Data",
+      "description": "Third-party sources for research",
+      "defaultVisible": false
+    }
+  },
+  "layers": {
+    "roman": {
+      "name": "Roman Sites",
+      "group": "curated",
+      "color": "#8B0000"
+    },
+    "roman3d": {
+      "name": "3D Fort Reconstructions",
+      "group": "curated",
+      "color": "#CD853F",
+      "type": "reconstruction"
+    },
+    "medieval": {
+      "name": "Medieval Sites",
+      "group": "curated",
+      "color": "#DAA520"
+    },
+    "ownership": {
+      "name": "Ownership Chains",
+      "group": "curated",
+      "color": "#4169E1"
+    },
+    "romanRoads": {
+      "name": "Roman Roads (Itiner-e)",
+      "group": "reference",
+      "color": "#8B0000",
+      "source": "roman_roads"
+    },
+    "heListedBuildings": {
+      "name": "Listed Buildings",
+      "group": "reference",
+      "color": "#1E90FF",
+      "source": "he_listed_buildings"
+    },
+    "heScheduledMonuments": {
+      "name": "Scheduled Monuments",
+      "group": "reference",
+      "color": "#FFD700",
+      "source": "he_scheduled_monuments"
+    },
+    "heParksGardens": {
+      "name": "Parks & Gardens",
+      "group": "reference",
+      "color": "#228B22",
+      "source": "he_parks_gardens"
+    },
+    "heHeritageAtRisk": {
+      "name": "Heritage at Risk",
+      "group": "reference",
+      "color": "#FF4500",
+      "source": "he_heritage_at_risk"
+    },
+    "heBattlefields": {
+      "name": "Battlefields",
+      "group": "reference",
+      "color": "#DC143C",
+      "source": "he_battlefields"
+    },
+    "heConservationAreas": {
+      "name": "Conservation Areas",
+      "group": "reference",
+      "color": "#9370DB",
+      "source": "he_conservation_areas"
+    },
+    "domesday": {
+      "name": "Domesday (1086)",
+      "group": "reference",
+      "color": "#8B4513",
+      "source": "domesday"
+    },
+    "gb1900": {
+      "name": "GB1900 Gazetteer",
+      "group": "reference",
+      "color": "#696969",
+      "source": "gb1900"
+    },
+    "wikidata": {
+      "name": "Wikidata Sites",
+      "group": "reference",
+      "color": "#4682B4",
+      "source": "wikidata"
+    },
+    "osm": {
+      "name": "OSM Buildings",
+      "group": "reference",
+      "color": "#708090",
+      "source": "osm"
+    }
+  }
+}
