@@ -7,6 +7,7 @@ import { getLayerGroups, getLayerDefs, toggleLayer, toggleGroup, setYear } from 
 // Store config for building UI
 let projectConfig = {};
 let storedImageryManager = null;
+let storedTilesetManager = null;
 
 /**
  * Initialize the UI controls
@@ -14,16 +15,18 @@ let storedImageryManager = null;
  * @param {Object} layers - Layer data sources
  * @param {Object} config - Project configuration
  * @param {Object} [imageryManager] - Temporal imagery manager
+ * @param {Object} [tilesetManager] - Temporal tileset manager
  */
-export function initUI(viewer, layers, config = {}, imageryManager = null) {
+export function initUI(viewer, layers, config = {}, imageryManager = null, tilesetManager = null) {
     projectConfig = config;
     storedImageryManager = imageryManager;
+    storedTilesetManager = tilesetManager;
     const container = document.getElementById('controls');
     container.innerHTML = buildControlsHTML();
 
     // Attach event listeners
     attachLayerToggles(layers);
-    attachYearSlider(viewer, layers, imageryManager);
+    attachYearSlider(viewer, layers, imageryManager, tilesetManager);
 
     // Update status
     updateStatus('Ready');
@@ -147,14 +150,14 @@ function attachLayerToggles(layers) {
 /**
  * Attach year slider event listener
  */
-function attachYearSlider(viewer, layers, imageryManager) {
+function attachYearSlider(viewer, layers, imageryManager, tilesetManager) {
     const slider = document.getElementById('yearSlider');
     const display = document.getElementById('yearDisplay');
 
     slider.addEventListener('input', (e) => {
         const year = parseInt(e.target.value);
         display.textContent = `${year} AD`;
-        setYear(layers, year, imageryManager);
+        setYear(layers, year, imageryManager, tilesetManager);
         updateImageryDisplay(imageryManager);
         viewer.scene.requestRender();
     });

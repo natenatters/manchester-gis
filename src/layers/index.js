@@ -294,16 +294,22 @@ export function toggleGroup(layers, groupKey, visible) {
  * @param {Object} layers
  * @param {number} year
  * @param {Object} [imageryManager] - Temporal imagery manager
+ * @param {Object} [tilesetManager] - Temporal tileset manager
  */
-export function setYear(layers, year, imageryManager = null) {
+export function setYear(layers, year, imageryManager = null, tilesetManager = null) {
     currentYear = year;
 
-    // Update imagery layer
+    // Update imagery layers (2D maps)
     if (imageryManager) {
         imageryManager.setYear(year);
     }
 
-    // Update all layers
+    // Update 3D tilesets (buildings/photogrammetry)
+    if (tilesetManager) {
+        tilesetManager.setYear(year);
+    }
+
+    // Update all data layers
     for (const [key, layer] of Object.entries(layers)) {
         if (layer.config.type === 'reconstruction') {
             // Reconstruction layers have their own visibility logic
