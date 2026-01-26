@@ -12,5 +12,11 @@
   "bounds": {
     "southwest": { "lat": 53.35, "lon": -2.75 },
     "northeast": { "lat": 53.70, "lon": -1.90 }
+  },
+  "imagery": {
+    "type": "osm",
+    "url": "https://a.tile.openstreetmap.org/",
+    "alpha": 0.8,
+    "credit": "OpenStreetMap Contributors"
   }
 }
