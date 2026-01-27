@@ -15,6 +15,18 @@ import * as Cesium from 'cesium';
 
 // Known NLS tileset URLs
 const NLS_LAYERS = {
+    // 25-inch / 1:2,500 scale (very detailed)
+    'os_25inch_scotland_1': {
+        url: 'https://mapseries-tilesets.s3.amazonaws.com/25_inch/scotland_1/{z}/{x}/{y}.png',
+        maxZoom: 18,
+        name: 'OS 25-inch Scotland 1st ed 1855-1882'
+    },
+    'os_25inch_scotland_2': {
+        url: 'https://mapseries-tilesets.s3.amazonaws.com/25_inch/scotland_2/{z}/{x}/{y}.png',
+        maxZoom: 18,
+        name: 'OS 25-inch Scotland 2nd ed 1892-1905'
+    },
+    // 6-inch / 1:10,560 scale
     'os_6inch_first': {
         url: 'https://mapseries-tilesets.s3.amazonaws.com/os/6inchfirst/{z}/{x}/{y}.png',
         maxZoom: 16,
@@ -25,6 +37,7 @@ const NLS_LAYERS = {
         maxZoom: 16,
         name: 'OS 1:10,560 National Grid 1940s-1960s'
     },
+    // 1-inch scale
     'os_1inch_first': {
         url: 'https://mapseries-tilesets.s3.amazonaws.com/os/one-inch-first-bart38/{z}/{x}/{y}.png',
         maxZoom: 16,
@@ -34,6 +47,18 @@ const NLS_LAYERS = {
         url: 'https://mapseries-tilesets.s3.amazonaws.com/1inch_2nd_ed/{z}/{x}/{y}.png',
         maxZoom: 16,
         name: 'OS One-Inch Second Edition'
+    },
+    // Military/GSGS maps
+    'gsgs_3906': {
+        url: 'https://mapseries-tilesets.s3.amazonaws.com/gsgs3906/{z}/{x}/{y}.png',
+        maxZoom: 16,
+        name: 'GSGS 3906 1:25,000 1940-43 (Scotland)'
+    },
+    // Small scale overview maps
+    'os_10mile_general': {
+        url: 'https://mapseries-tilesets.s3.amazonaws.com/ten_mile/general/{z}/{x}/{y}.png',
+        maxZoom: 12,
+        name: 'OS Ten-Mile 1:633,600 General 1955'
     }
 };
 
