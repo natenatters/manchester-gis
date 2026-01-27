@@ -19,11 +19,26 @@
   },
   "imagery": [
     {
+      "type": "single_tile",
+      "name": "1650 Berry Sketch",
+      "url": "/data/tiles/berry_1650.jpg",
+      "yearStart": 1600,
+      "yearEnd": 1700,
+      "bounds": {
+        "west": -2.255,
+        "south": 53.478,
+        "east": -2.238,
+        "north": 53.488
+      },
+      "alpha": 1.0,
+      "credit": "1650 Berry - A Plan of Manchester and Salford"
+    },
+    {
       "type": "allmaps",
       "name": "1750 Berry Map",
       "mapId": "811b04a06391adb1",
       "yearStart": 1700,
-      "yearEnd": 1780,
+      "yearEnd": 1840,
       "bounds": {
         "west": -2.26377,
         "south": 53.47093,
