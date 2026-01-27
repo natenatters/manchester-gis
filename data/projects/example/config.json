@@ -21,7 +21,7 @@
     {
       "type": "single_tile",
       "name": "1650 Berry Sketch",
-      "url": "/data/tiles/berry_1650.jpg",
+      "url": "/data/tiles/berry_1650.png",
       "yearStart": 1600,
       "yearEnd": 1700,
       "bounds": {
