@@ -9,6 +9,7 @@ import { createSingleTileProvider } from './singleTile.js';
 import { createWmtsProvider } from './wmts.js';
 import { createAllmapsProvider } from './allmaps.js';
 import { createGoogleProvider } from './google.js';
+import { createNlsProvider } from './nls.js';
 
 // Default imagery configuration
 export const DEFAULT_IMAGERY = {
@@ -24,7 +25,8 @@ const providers = {
     single_tile: createSingleTileProvider,
     wmts: createWmtsProvider,
     allmaps: createAllmapsProvider,
-    google: createGoogleProvider
+    google: createGoogleProvider,
+    nls: createNlsProvider
 };
 
 /**
@@ -61,4 +63,5 @@ export { createSingleTileProvider } from './singleTile.js';
 export { createWmtsProvider } from './wmts.js';
 export { createAllmapsProvider } from './allmaps.js';
 export { createGoogleProvider } from './google.js';
+export { createNlsProvider, getNlsLayers } from './nls.js';
 export { ImageryManager } from './manager.js';

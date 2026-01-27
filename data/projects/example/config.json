@@ -64,6 +64,15 @@
       "credit": "1845 OS Lancashire - National Library of Scotland via Allmaps"
     },
     {
+      "type": "nls",
+      "name": "OS 1:10,560 (1940s-1960s)",
+      "layer": "os_10k_natgrid",
+      "yearStart": 1890,
+      "yearEnd": 1950,
+      "alpha": 1.0,
+      "credit": "National Library of Scotland"
+    },
+    {
       "type": "google",
       "name": "Modern (Google Satellite)",
       "mapType": "s",
