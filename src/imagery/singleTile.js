@@ -14,6 +14,8 @@ import * as Cesium from 'cesium';
  * @param {number} config.bounds.south - Southern latitude
  * @param {number} config.bounds.east - Eastern longitude
  * @param {number} config.bounds.north - Northern latitude
+ * @param {number} [config.tileWidth=256] - Tile width in pixels
+ * @param {number} [config.tileHeight=256] - Tile height in pixels
  * @param {string} [config.credit] - Attribution text
  * @returns {Cesium.SingleTileImageryProvider}
  */
@@ -26,6 +28,8 @@ export function createSingleTileProvider(config) {
             config.bounds.east,
             config.bounds.north
         ) : undefined,
+        tileWidth: config.tileWidth || 256,
+        tileHeight: config.tileHeight || 256,
         credit: config.credit
     });
 }
