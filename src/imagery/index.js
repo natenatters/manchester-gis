@@ -10,6 +10,7 @@ import { createWmtsProvider } from './wmts.js';
 import { createAllmapsProvider } from './allmaps.js';
 import { createGoogleProvider } from './google.js';
 import { createNlsProvider } from './nls.js';
+import { createCartoProvider } from './carto.js';
 
 // Default imagery configuration
 export const DEFAULT_IMAGERY = {
@@ -26,7 +27,8 @@ const providers = {
     wmts: createWmtsProvider,
     allmaps: createAllmapsProvider,
     google: createGoogleProvider,
-    nls: createNlsProvider
+    nls: createNlsProvider,
+    carto: createCartoProvider
 };
 
 /**
@@ -64,4 +66,5 @@ export { createWmtsProvider } from './wmts.js';
 export { createAllmapsProvider } from './allmaps.js';
 export { createGoogleProvider } from './google.js';
 export { createNlsProvider, getNlsLayers } from './nls.js';
+export { createCartoProvider } from './carto.js';
 export { ImageryManager } from './manager.js';

@@ -6,27 +6,26 @@ import { getLayerGroups, getLayerDefs, toggleLayer, toggleGroup, setYear } from 
 
 // Store config for building UI
 let projectConfig = {};
-let storedImageryManager = null;
-let storedTilesetManager = null;
+let storedLayerManager = null;
+let loadedLayers = {};
 
 /**
  * Initialize the UI controls
  * @param {Cesium.Viewer} viewer
  * @param {Object} layers - Layer data sources
  * @param {Object} config - Project configuration
- * @param {Object} [imageryManager] - Temporal imagery manager
- * @param {Object} [tilesetManager] - Temporal tileset manager
+ * @param {Object} [layerManager] - Unified temporal layer manager
  */
-export function initUI(viewer, layers, config = {}, imageryManager = null, tilesetManager = null) {
+export function initUI(viewer, layers, config = {}, layerManager = null) {
     projectConfig = config;
-    storedImageryManager = imageryManager;
-    storedTilesetManager = tilesetManager;
+    storedLayerManager = layerManager;
+    loadedLayers = layers;
     const container = document.getElementById('controls');
     container.innerHTML = buildControlsHTML();
 
     // Attach event listeners
     attachLayerToggles(layers);
-    attachYearSlider(viewer, layers, imageryManager, tilesetManager);
+    attachYearSlider(viewer, layers, layerManager);
 
     // Update status
     updateStatus('Ready');
@@ -60,14 +59,19 @@ function buildControlsHTML() {
         </div>
     `;
 
-    // Build layers organized by group
+    // Build layers organized by group (only show layers that have data)
     for (const [groupKey, group] of Object.entries(groups)) {
         const checked = group.defaultVisible ? 'checked' : '';
 
-        // Get layers belonging to this group
-        const groupLayers = Object.entries(layerDefs).filter(
-            ([_, layer]) => layer.group === groupKey
-        );
+        // Get layers belonging to this group that have actual data
+        const groupLayers = Object.entries(layerDefs).filter(([layerKey, layer]) => {
+            if (layer.group !== groupKey) return false;
+            const layerData = loadedLayers[layerKey];
+            if (!layerData) return false;
+            // Check if dataSource has entities
+            const entityCount = layerData.dataSource?.entities?.values?.length || 0;
+            return entityCount > 0 || layer.type === 'reconstruction';
+        });
 
         if (groupLayers.length === 0) continue;
 
@@ -83,11 +87,14 @@ function buildControlsHTML() {
         `;
 
         for (const [layerKey, layer] of groupLayers) {
+            const layerData = loadedLayers[layerKey];
+            const count = layerData?.dataSource?.entities?.values?.length || 0;
+            const countLabel = count > 0 ? ` (${count})` : '';
             html += `
                 <label class="layer-item">
                     <input type="checkbox" class="layer-toggle" data-layer="${layerKey}" ${checked}>
                     <span class="layer-color" style="background: ${layer.color}"></span>
-                    ${layer.name}
+                    ${layer.name}${countLabel}
                 </label>
             `;
         }
@@ -150,31 +157,29 @@ function attachLayerToggles(layers) {
 /**
  * Attach year slider event listener
  */
-function attachYearSlider(viewer, layers, imageryManager, tilesetManager) {
+function attachYearSlider(viewer, layers, layerManager) {
     const slider = document.getElementById('yearSlider');
     const display = document.getElementById('yearDisplay');
 
-    slider.addEventListener('input', (e) => {
+    slider.addEventListener('input', async (e) => {
         const year = parseInt(e.target.value);
         display.textContent = `${year} AD`;
-        setYear(layers, year, imageryManager, tilesetManager);
-        updateImageryDisplay(imageryManager);
+        await setYear(layers, year, layerManager);
+        updateLayerDisplay(layerManager);
         viewer.scene.requestRender();
     });
 }
 
 /**
- * Update the imagery layer display
+ * Update the active layer display
  */
-function updateImageryDisplay(imageryManager) {
+function updateLayerDisplay(layerManager) {
     const display = document.getElementById('imageryDisplay');
-    if (!display || !imageryManager) return;
+    if (!display || !layerManager) return;
 
-    const active = imageryManager.getActiveLayer();
-    if (active) {
-        const name = active.config.name || active.config.credit || 'Base imagery';
-        display.textContent = name;
-    }
+    const info = layerManager.getActiveInfo();
+    const names = info.imagery.join(', ') || 'None';
+    display.textContent = names;
 }
 
 /**

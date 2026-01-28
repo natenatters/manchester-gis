@@ -19,7 +19,9 @@ const tilesetFactories = {
      * Google Photorealistic 3D Tiles
      */
     google_3d: async (config) => {
-        return await Cesium.createGooglePhotorealistic3DTileset();
+        return await Cesium.createGooglePhotorealistic3DTileset({
+            onlyUsingWithGoogleGeocoder: true
+        });
     },
 
     /**
@@ -59,6 +61,7 @@ export function registerTilesetFactory(type, factory) {
 
 /**
  * Manages temporal 3D tilesets for a Cesium viewer
+ * Supports lazy loading - tilesets only load when their year range is needed
  */
 export class TilesetManager {
     /**
@@ -68,19 +71,24 @@ export class TilesetManager {
         this.viewer = viewer;
         /** @type {TemporalTileset[]} */
         this.tilesets = [];
+        /** @type {Object[]} Configs pending lazy load */
+        this.pendingConfigs = [];
         this.currentYear = null;
         this.activeTileset = null;
+        this.loadingPromise = null;
     }
 
     /**
-     * Load tileset configuration (array of tileset configs)
+     * Register tileset configurations (doesn't load them yet - lazy loading)
      * @param {Object[]} tilesetConfigs - Array of tileset configurations
+     * @param {number} [initialYear] - If provided, only load tilesets needed for this year
      */
-    async load(tilesetConfigs) {
+    async load(tilesetConfigs, initialYear = null) {
         if (!tilesetConfigs || !Array.isArray(tilesetConfigs)) {
             return;
         }
 
+        // Store all configs for lazy loading
         for (const config of tilesetConfigs) {
             const factory = tilesetFactories[config.type];
             if (!factory) {
@@ -88,28 +96,50 @@ export class TilesetManager {
                 continue;
             }
 
-            try {
-                const tileset = await factory(config);
-                tileset.show = false; // Hidden by default
+            this.pendingConfigs.push({
+                config,
+                factory,
+                yearStart: config.yearStart ?? -Infinity,
+                yearEnd: config.yearEnd ?? Infinity,
+                loaded: false
+            });
+        }
 
-                this.viewer.scene.primitives.add(tileset);
+        console.log(`Registered ${this.pendingConfigs.length} tilesets for lazy loading`);
+    }
 
-                this.tilesets.push({
-                    tileset,
-                    config,
-                    yearStart: config.yearStart ?? -Infinity,
-                    yearEnd: config.yearEnd ?? Infinity
-                });
+    /**
+     * Load a specific pending tileset
+     * @param {Object} pending - Pending config object
+     */
+    async _loadTileset(pending) {
+        if (pending.loaded) return;
 
-                console.log(`Loaded tileset: ${config.name || config.type}`);
-            } catch (err) {
-                console.warn(`Could not load tileset ${config.type}:`, err.message);
-            }
+        console.time(`  ⏱️ lazy load: ${pending.config.name || pending.config.type}`);
+        try {
+            const tileset = await pending.factory(pending.config);
+            tileset.show = false;
+
+            this.viewer.scene.primitives.add(tileset);
+
+            this.tilesets.push({
+                tileset,
+                config: pending.config,
+                yearStart: pending.yearStart,
+                yearEnd: pending.yearEnd
+            });
+
+            pending.loaded = true;
+            console.timeEnd(`  ⏱️ lazy load: ${pending.config.name || pending.config.type}`);
+            console.log(`Loaded tileset: ${pending.config.name || pending.config.type}`);
+        } catch (err) {
+            pending.loaded = true; // Mark as loaded to prevent retry
+            console.warn(`Could not load tileset ${pending.config.type}:`, err.message);
         }
     }
 
     /**
-     * Find tilesets that match a given year
+     * Find tilesets that match a given year (only loaded ones)
      * @param {number} year
      * @returns {TemporalTileset[]}
      */
@@ -120,14 +150,33 @@ export class TilesetManager {
     }
 
     /**
-     * Set the current year and update tileset visibility
+     * Find pending configs that match a given year
      * @param {number} year
-     * @returns {TemporalTileset|null} The active tileset
+     * @returns {Object[]}
      */
-    setYear(year) {
+    _getPendingForYear(year) {
+        return this.pendingConfigs.filter(p =>
+            !p.loaded && year >= p.yearStart && year <= p.yearEnd
+        );
+    }
+
+    /**
+     * Set the current year and update tileset visibility
+     * Lazy-loads tilesets if needed
+     * @param {number} year
+     * @returns {Promise<TemporalTileset|null>} The active tileset
+     */
+    async setYear(year) {
         this.currentYear = year;
 
-        // Find matching tilesets
+        // Check if we need to lazy-load any tilesets for this year
+        const pendingForYear = this._getPendingForYear(year);
+        if (pendingForYear.length > 0) {
+            // Load all needed tilesets
+            await Promise.all(pendingForYear.map(p => this._loadTileset(p)));
+        }
+
+        // Find matching tilesets (now including newly loaded ones)
         const matching = this.getTilesetsForYear(year);
 
         // Hide all tilesets

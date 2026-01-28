@@ -3,8 +3,7 @@
  */
 
 import * as Cesium from 'cesium';
-import { ImageryManager } from './imagery/manager.js';
-import { TilesetManager } from './tilesets/manager.js';
+import { TemporalLayerManager } from './layers/TemporalLayerManager.js';
 
 // Fallback center if no config provided
 const DEFAULT_CENTER = {
@@ -16,13 +15,14 @@ const DEFAULT_CENTER = {
 /**
  * Create and configure the Cesium viewer
  * @param {string} containerId - DOM element ID for the viewer
- * @param {Object} config - Project configuration with center coordinates, imagery, and tilesets
- * @returns {Promise<{ viewer: Cesium.Viewer, imageryManager: ImageryManager, tilesetManager: TilesetManager }>}
+ * @param {Object} config - Project configuration
+ * @returns {Promise<{ viewer: Cesium.Viewer, layerManager: TemporalLayerManager }>}
  */
 export async function createViewer(containerId, config = {}) {
     const center = config.center || DEFAULT_CENTER;
 
     // Initialize viewer with reduced GPU usage
+    console.time('  ⏱️ new Cesium.Viewer');
     const viewer = new Cesium.Viewer(containerId, {
         timeline: false,
         animation: false,
@@ -39,39 +39,39 @@ export async function createViewer(containerId, config = {}) {
         shadows: false,
         terrainShadows: Cesium.ShadowMode.DISABLED
     });
+    console.timeEnd('  ⏱️ new Cesium.Viewer');
 
-    // Disable expensive effects
+    // Disable expensive effects and keep it simple
     viewer.scene.fog.enabled = false;
     viewer.scene.globe.showGroundAtmosphere = false;
     viewer.scene.skyAtmosphere.show = false;
     viewer.scene.highDynamicRange = false;
+    viewer.scene.skyBox.show = false;  // No stars, just black
+    viewer.scene.sun.show = false;
+    viewer.scene.moon.show = false;
     viewer.infoBox.frame.sandbox = 'allow-same-origin allow-popups allow-forms allow-scripts';
 
-    // Set up temporal imagery manager (2D map layers)
-    const imageryManager = new ImageryManager(viewer);
-    imageryManager.load(config.imagery);
-
-    // Set up temporal tileset manager (3D buildings/photogrammetry)
-    const tilesetManager = new TilesetManager(viewer);
-    await tilesetManager.load(config.tilesets);
+    // Set up unified temporal layer manager
+    console.time('  ⏱️ layerManager.load');
+    const layerManager = new TemporalLayerManager(viewer);
+    layerManager.load(config.layers);
+    console.timeEnd('  ⏱️ layerManager.load');
 
     // Set up terrain (LIDAR/elevation) if configured
     if (config.terrain?.enabled) {
+        console.time('  ⏱️ terrain setup');
         try {
             viewer.scene.setTerrain(Cesium.Terrain.fromWorldTerrain());
 
-            // Apply vertical exaggeration (makes hills more dramatic)
             const exaggeration = config.terrain.exaggeration || 1.0;
             viewer.scene.verticalExaggeration = exaggeration;
-
-            // Store base exaggeration so tilesetManager can adjust it
-            // (reduce to 1.0 when 3D tilesets are shown - they have real elevation)
-            tilesetManager.setBaseExaggeration(exaggeration);
+            layerManager.setBaseExaggeration(exaggeration);
 
             console.log(`Cesium World Terrain enabled (${exaggeration}x exaggeration)`);
         } catch (err) {
             console.warn('Could not load terrain:', err.message);
         }
+        console.timeEnd('  ⏱️ terrain setup');
     }
 
     // Set camera over project center
@@ -88,7 +88,7 @@ export async function createViewer(containerId, config = {}) {
         }
     });
 
-    return { viewer, imageryManager, tilesetManager };
+    return { viewer, layerManager };
 }
 
 /**

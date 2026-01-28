@@ -33,10 +33,10 @@ async function loadLayerConfig(projPath) {
  * @param {Cesium.Viewer} viewer
  * @param {string} projPath - Path to project folder
  * @param {Object} config - Project configuration
- * @param {Object} imageryManager - Temporal imagery manager
+ * @param {Object} layerManager - Unified temporal layer manager
  * @returns {Object} Layer data sources by key
  */
-export async function loadAllLayers(viewer, projPath, config = {}, imageryManager = null) {
+export async function loadAllLayers(viewer, projPath, config = {}, layerManager = null) {
     projectPath = projPath;
     currentYear = config.defaultYear || 200;
 
@@ -293,20 +293,14 @@ export function toggleGroup(layers, groupKey, visible) {
  * Update the current year and refresh visibility
  * @param {Object} layers
  * @param {number} year
- * @param {Object} [imageryManager] - Temporal imagery manager
- * @param {Object} [tilesetManager] - Temporal tileset manager
+ * @param {Object} [layerManager] - Unified temporal layer manager
  */
-export function setYear(layers, year, imageryManager = null, tilesetManager = null) {
+export async function setYear(layers, year, layerManager = null) {
     currentYear = year;
 
-    // Update imagery layers (2D maps)
-    if (imageryManager) {
-        imageryManager.setYear(year);
-    }
-
-    // Update 3D tilesets (buildings/photogrammetry)
-    if (tilesetManager) {
-        tilesetManager.setYear(year);
+    // Update temporal layers (imagery + tilesets) - may lazy-load
+    if (layerManager) {
+        await layerManager.setYear(year);
     }
 
     // Update all data layers

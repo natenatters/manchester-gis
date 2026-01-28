@@ -75,6 +75,12 @@
       "color": "#9370DB",
       "source": "he_conservation_areas"
     },
+    "curatedAncient": {
+      "name": "Ancient Sites (Curated)",
+      "group": "reference",
+      "color": "#8B0000",
+      "source": "curated"
+    },
     "domesday": {
       "name": "Domesday (1086)",
       "group": "reference",

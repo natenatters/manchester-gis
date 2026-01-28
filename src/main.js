@@ -38,27 +38,40 @@ async function loadProjectConfig(projectPath) {
 
 // Initialize the application
 async function init() {
+    console.time('⏱️ TOTAL init');
+
     // Get project path from URL or use default
     const urlParams = new URLSearchParams(window.location.search);
     const projectPath = urlParams.get('project') || DEFAULT_PROJECT;
 
     // Load project config
+    console.time('⏱️ loadProjectConfig');
     const config = await loadProjectConfig(projectPath);
+    console.timeEnd('⏱️ loadProjectConfig');
     console.log(`Initializing ${config.name}...`);
 
-    // Create Cesium viewer with imagery and tileset managers (from config)
-    const { viewer, imageryManager, tilesetManager } = await createViewer('cesiumContainer', config);
+    // Create Cesium viewer with unified layer manager
+    console.time('⏱️ createViewer');
+    const { viewer, layerManager } = await createViewer('cesiumContainer', config);
+    console.timeEnd('⏱️ createViewer');
 
-    // Load all data layers
-    const layers = await loadAllLayers(viewer, projectPath, config, imageryManager);
+    // Load all data layers (entities)
+    console.time('⏱️ loadAllLayers');
+    const dataLayers = await loadAllLayers(viewer, projectPath, config, layerManager);
+    console.timeEnd('⏱️ loadAllLayers');
 
     // Initialize UI controls
-    initUI(viewer, layers, config, imageryManager, tilesetManager);
+    console.time('⏱️ initUI');
+    initUI(viewer, dataLayers, config, layerManager);
+    console.timeEnd('⏱️ initUI');
 
     // Set initial year (triggers imagery, tilesets, and entity filtering)
+    console.time('⏱️ setYear');
     const { setYear } = await import('./layers/index.js');
-    setYear(layers, config.defaultYear || 200, imageryManager, tilesetManager);
+    await setYear(dataLayers, config.defaultYear || 200, layerManager);
+    console.timeEnd('⏱️ setYear');
 
+    console.timeEnd('⏱️ TOTAL init');
     console.log('Application initialized');
 }
 
