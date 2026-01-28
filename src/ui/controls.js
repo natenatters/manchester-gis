@@ -70,7 +70,7 @@ function buildControlsHTML() {
             if (!layerData) return false;
             // Check if dataSource has entities
             const entityCount = layerData.dataSource?.entities?.values?.length || 0;
-            return entityCount > 0 || layer.type === 'reconstruction';
+            return entityCount > 0 || layer.type === 'entities3d';
         });
 
         if (groupLayers.length === 0) continue;

@@ -21,7 +21,7 @@
       "name": "3D Fort Reconstructions",
       "group": "curated",
       "color": "#CD853F",
-      "type": "reconstruction"
+      "type": "entities3d"
     },
     "medieval": {
       "name": "Medieval Sites",

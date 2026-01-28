@@ -6,7 +6,7 @@
  */
 
 import * as Cesium from 'cesium';
-import { loadReconstructionsDataSource, updateReconstructionsVisibility } from './reconstructions3D.js';
+import { loadEntities3D, updateEntities3DVisibility } from './entities3D.js';
 
 // Current project state
 let projectPath = '';
@@ -50,10 +50,10 @@ export async function loadAllLayers(viewer, projPath, config = {}, layerManager 
         const groupDef = layerConfig.groups[layerDef.group] || { defaultVisible: true };
 
         // Handle special layer types
-        if (layerDef.type === 'reconstruction') {
-            // Load 3D reconstructions asynchronously
+        if (layerDef.type === 'entities3d') {
+            // Load 3D entities from pre-generated geometry file
             try {
-                const dataSource = await loadReconstructionsDataSource(projectPath, currentYear);
+                const dataSource = await loadEntities3D(projectPath, currentYear);
                 dataSource.show = groupDef.defaultVisible;
                 layers[layerKey] = {
                     dataSource,
@@ -61,9 +61,9 @@ export async function loadAllLayers(viewer, projPath, config = {}, layerManager 
                     config: layerDef
                 };
                 viewer.dataSources.add(dataSource);
-                console.log(`Loaded reconstruction layer: ${layerDef.name}`);
+                console.log(`Loaded entities3d layer: ${layerDef.name}`);
             } catch (err) {
-                console.warn(`Could not load reconstruction layer ${layerKey}:`, err);
+                console.warn(`Could not load entities3d layer ${layerKey}:`, err);
             }
         } else {
             // Standard layer
@@ -307,9 +307,9 @@ export async function setYear(layers, year, layerManager = null) {
 
     // Update all data layers
     for (const [key, layer] of Object.entries(layers)) {
-        if (layer.config.type === 'reconstruction') {
-            // Reconstruction layers have their own visibility logic
-            updateReconstructionsVisibility(layer.dataSource, year);
+        if (layer.config.type === 'entities3d') {
+            // 3D entity layers have their own visibility logic
+            updateEntities3DVisibility(layer.dataSource, year);
         } else {
             // Standard layers: filter entities by year
             updateEntityVisibility(layer.dataSource, year);
