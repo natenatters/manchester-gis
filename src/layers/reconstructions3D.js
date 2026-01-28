@@ -131,6 +131,11 @@ function buildReconstructions(dataSource, data, currentYear) {
 
         const add = (config) => {
             config.show = show;
+            // Auto-add terrain-relative heights to all polygons
+            if (config.polygon) {
+                config.polygon.heightReference = Cesium.HeightReference.RELATIVE_TO_GROUND;
+                config.polygon.extrudedHeightReference = Cesium.HeightReference.RELATIVE_TO_GROUND;
+            }
             dataSource.entities.add(config);
             entityIds.push(config.id);
         };

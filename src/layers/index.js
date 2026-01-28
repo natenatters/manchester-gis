@@ -176,7 +176,9 @@ function addPointEntity(dataSource, feature, props, color) {
             pixelSize: 8,
             color: Cesium.Color.fromCssColorString(color),
             outlineColor: Cesium.Color.BLACK,
-            outlineWidth: 1
+            outlineWidth: 1,
+            heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY
         },
         name: props.name,
         description: buildDescription(props)
