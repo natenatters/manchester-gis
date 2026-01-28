@@ -14,6 +14,24 @@ PROJECT_ROOT = Path(__file__).parent.parent
 SOURCES_DIR = PROJECT_ROOT / "data" / "sources"
 OUTPUT_FILE = PROJECT_ROOT / "data" / "unified_sites.geojson"
 
+# Sources to skip during consolidation (for debugging/testing)
+# Add filenames here to temporarily exclude them without deleting the data
+DISABLED_SOURCES = [
+    "he_aerial_archaeology.json",  # TODO: fix date parsing, causes slowness
+    "he_scheduled_monuments.json",
+    "he_listed_buildings.json",
+    "he_parks_gardens.json",
+    "he_heritage_at_risk.json",
+    "he_battlefields.json",
+    "he_conservation_areas.json",
+    "wikidata_sites.json",
+    "osm_dated_buildings.json",
+    # "domesday_sites.json",  # 1086 - keep
+    "gb1900_sites.json",
+    # "roman_roads.json",  # Roman era - keep
+    # "curated_ancient_sites.json",  # Roman/medieval curated - keep
+]
+
 
 def ms_to_year(ms_timestamp):
     """Convert milliseconds timestamp to year, or None if invalid."""
@@ -763,6 +781,11 @@ def consolidate_sources() -> dict:
         # Skip old demo data files
         if filename in ("scheduled_monuments.json", "listed_buildings.json"):
             print(f"Skipping old demo file: {filename}")
+            continue
+
+        # Skip disabled sources
+        if filename in DISABLED_SOURCES:
+            print(f"Skipping disabled source: {filename}")
             continue
 
         normalizer = SOURCE_NORMALIZERS.get(filename)
