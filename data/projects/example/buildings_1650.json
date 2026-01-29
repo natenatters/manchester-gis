@@ -22,17 +22,58 @@
   },
   "buildings": [
     {
-      "id": "test_building",
-      "name": "Test Building",
-      "type": "house",
-      "center": [-2.2455, 53.4835],
-      "length": 15,
-      "width": 10,
-      "height": 8,
-      "rotation": 0,
-      "material": "timber",
-      "startYear": 1600,
-      "endYear": 1800
+      "id": "collegiate_church",
+      "name": "Collegiate Church (Cathedral)",
+      "type": "church",
+      "center": [-2.2442, 53.4853],
+      "naveLength": 50,
+      "naveWidth": 35,
+      "naveHeight": 18,
+      "towerSize": 12,
+      "towerHeight": 40,
+      "aisleWidth": 8,
+      "rotation": -15,
+      "material": "church",
+      "startYear": 1421,
+      "endYear": 2100,
+      "references": [
+        "https://en.wikipedia.org/wiki/Manchester_Cathedral",
+        "https://manchestercathedral.org/about-us/timeline/"
+      ],
+      "notes": "Widest nave in England (115ft). Perpendicular Gothic. Damaged in Civil War 1642."
+    },
+    {
+      "id": "salford_bridge",
+      "name": "Salford Bridge",
+      "type": "bridge",
+      "center": [-2.2485, 53.4845],
+      "span": 40,
+      "width": 5,
+      "height": 6,
+      "numArches": 4,
+      "rotation": -60,
+      "material": "bridge",
+      "startYear": 1200,
+      "endYear": 1800,
+      "notes": "Medieval stone bridge connecting Manchester to Salford. Site of Civil War battle 1642."
+    },
+    {
+      "id": "chethams",
+      "name": "Chetham's College",
+      "type": "courtyard",
+      "center": [-2.2448, 53.4860],
+      "length": 45,
+      "width": 40,
+      "wingDepth": 8,
+      "height": 12,
+      "rotation": -15,
+      "material": "stone",
+      "startYear": 1421,
+      "endYear": 2100,
+      "references": [
+        "https://library.chethams.com/"
+      ],
+      "notes": "Founded as college for priests 1421. Became Chetham's Hospital 1653 after Humphrey Chetham's death."
     }
   ]
 }

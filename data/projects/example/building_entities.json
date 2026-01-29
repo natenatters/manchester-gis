@@ -23,61 +23,497 @@
   },
   "buildings": [
     {
-      "id": "test_building",
-      "name": "Test Building",
-      "startYear": 1600,
-      "endYear": 1800,
-      "material": "timber",
+      "id": "collegiate_church",
+      "name": "Collegiate Church (Cathedral)",
+      "startYear": 1421,
+      "endYear": 2100,
+      "material": "church",
       "entities": [
         {
-          "id": "test_building_walls",
+          "id": "collegiate_church_nave",
+          "name": "Collegiate Church (Cathedral) - Nave",
           "type": "polygon",
           "coords": [
             [
-              -2.2456135485829383,
-              53.48345495495496
+              -2.244634190036053,
+              53.48520600697449
             ],
             [
-              -2.2453864514170614,
-              53.48345495495496
+              -2.243902962283915,
+              53.48508942181903
             ],
             [
-              -2.2453864514170614,
-              53.48354504504504
+              -2.2437658099639473,
+              53.48539399302552
             ],
             [
-              -2.2456135485829383,
-              53.48354504504504
+              -2.2444970377160853,
+              53.48551057818097
             ]
           ],
           "height": 0,
-          "extrudedHeight": 8,
+          "extrudedHeight": 18,
           "material": "wall"
         },
         {
-          "id": "test_building_roof",
+          "id": "collegiate_church_tower",
+          "name": "Collegiate Church (Cathedral) - Tower",
           "type": "polygon",
           "coords": [
             [
-              -2.2456135485829383,
-              53.48345495495496
+              -2.2447646203628624,
+              53.48533406080821
             ],
             [
-              -2.2453864514170614,
-              53.48345495495496
+              -2.2445891257023494,
+              53.485306080370904
             ],
             [
-              -2.2453864514170614,
-              53.48354504504504
+              -2.244542102049789,
+              53.485410504784554
             ],
             [
-              -2.2456135485829383,
-              53.48354504504504
+              -2.244717596710302,
+              53.48543848522186
             ]
           ],
-          "height": 8,
-          "extrudedHeight": 8.5,
-          "material": "roof"
+          "height": 0,
+          "extrudedHeight": 40,
+          "material": "tower"
+        },
+        {
+          "id": "collegiate_church_north_aisle",
+          "name": "Collegiate Church (Cathedral) - North Aisle",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2444970377160853,
+              53.48551057818097
+            ],
+            [
+              -2.243875494126768,
+              53.48541148079884
+            ],
+            [
+              -2.243844145025061,
+              53.485481097074604
+            ],
+            [
+              -2.2444656886143783,
+              53.48558019445674
+            ]
+          ],
+          "height": 0,
+          "extrudedHeight": 12.6,
+          "material": "wall"
+        },
+        {
+          "id": "collegiate_church_south_aisle",
+          "name": "Collegiate Church (Cathedral) - South Aisle",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.24466553913776,
+              53.48513639069871
+            ],
+            [
+              -2.244043995548443,
+              53.48503729331658
+            ],
+            [
+              -2.244012646446736,
+              53.48510690959235
+            ],
+            [
+              -2.244634190036053,
+              53.48520600697449
+            ]
+          ],
+          "height": 0,
+          "extrudedHeight": 12.6,
+          "material": "wall"
+        },
+        {
+          "id": "collegiate_church_chancel",
+          "name": "Collegiate Church (Cathedral) - Chancel",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2438892470519183,
+              53.485119878939685
+            ],
+            [
+              -2.2436698787262768,
+              53.485084903393044
+            ],
+            [
+              -2.2435601568703025,
+              53.485328560358234
+            ],
+            [
+              -2.243779525195944,
+              53.485363535904874
+            ]
+          ],
+          "height": 0,
+          "extrudedHeight": 16.2,
+          "material": "wall"
+        }
+      ]
+    },
+    {
+      "id": "salford_bridge",
+      "name": "Salford Bridge",
+      "startYear": 1200,
+      "endYear": 1800,
+      "material": "bridge",
+      "entities": [
+        {
+          "id": "salford_bridge_deck",
+          "name": "Salford Bridge - Deck",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2486841811046974,
+              53.48464477935203
+            ],
+            [
+              -2.2483813777456287,
+              53.48433269812544
+            ],
+            [
+              -2.2483158188953025,
+              53.48435522064796
+            ],
+            [
+              -2.248618622254371,
+              53.48466730187455
+            ]
+          ],
+          "height": 5,
+          "extrudedHeight": 6,
+          "material": "stone"
+        },
+        {
+          "id": "salford_bridge_pier_0",
+          "name": "Salford Bridge - Pier 1",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2486972928747626,
+              53.48464027484753
+            ],
+            [
+              -2.2486636480570885,
+              53.484605599155685
+            ],
+            [
+              -2.248571865666632,
+              53.48463713068721
+            ],
+            [
+              -2.248605510484306,
+              53.484671806379055
+            ]
+          ],
+          "height": -2,
+          "extrudedHeight": 5,
+          "material": "stone"
+        },
+        {
+          "id": "salford_bridge_pier_1",
+          "name": "Salford Bridge - Pier 2",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.248630003239414,
+              53.48457092346384
+            ],
+            [
+              -2.24859635842174,
+              53.484536247772
+            ],
+            [
+              -2.248504576031283,
+              53.484567779303525
+            ],
+            [
+              -2.2485382208489573,
+              53.48460245499537
+            ]
+          ],
+          "height": -2,
+          "extrudedHeight": 5,
+          "material": "stone"
+        },
+        {
+          "id": "salford_bridge_pier_2",
+          "name": "Salford Bridge - Pier 3",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2485627136040653,
+              53.484501572080156
+            ],
+            [
+              -2.2485290687863912,
+              53.48446689638831
+            ],
+            [
+              -2.2484372863959345,
+              53.48449842791984
+            ],
+            [
+              -2.2484709312136086,
+              53.48453310361168
+            ]
+          ],
+          "height": -2,
+          "extrudedHeight": 5,
+          "material": "stone"
+        },
+        {
+          "id": "salford_bridge_pier_3",
+          "name": "Salford Bridge - Pier 4",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2484954239687167,
+              53.48443222069647
+            ],
+            [
+              -2.2484617791510426,
+              53.484397545004626
+            ],
+            [
+              -2.248369996760586,
+              53.48442907653615
+            ],
+            [
+              -2.24840364157826,
+              53.484463752227995
+            ]
+          ],
+          "height": -2,
+          "extrudedHeight": 5,
+          "material": "stone"
+        },
+        {
+          "id": "salford_bridge_pier_4",
+          "name": "Salford Bridge - Pier 5",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.248428134333368,
+              53.48436286931278
+            ],
+            [
+              -2.248394489515694,
+              53.48432819362094
+            ],
+            [
+              -2.2483027071252373,
+              53.484359725152466
+            ],
+            [
+              -2.2483363519429114,
+              53.48439440084431
+            ]
+          ],
+          "height": -2,
+          "extrudedHeight": 5,
+          "material": "stone"
+        },
+        {
+          "id": "salford_bridge_parapet_north",
+          "name": "Salford Bridge - North Parapet",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.248618622254371,
+              53.48466730187455
+            ],
+            [
+              -2.2483158188953025,
+              53.48435522064796
+            ],
+            [
+              -2.24830926301027,
+              53.484357472900214
+            ],
+            [
+              -2.2486120663693385,
+              53.4846695541268
+            ]
+          ],
+          "height": 6,
+          "extrudedHeight": 7.2,
+          "material": "stone"
+        },
+        {
+          "id": "salford_bridge_parapet_south",
+          "name": "Salford Bridge - South Parapet",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.24869073698973,
+              53.48464252709978
+            ],
+            [
+              -2.2483879336306614,
+              53.48433044587319
+            ],
+            [
+              -2.2483813777456287,
+              53.48433269812544
+            ],
+            [
+              -2.2486841811046974,
+              53.48464477935203
+            ]
+          ],
+          "height": 6,
+          "extrudedHeight": 7.2,
+          "material": "stone"
+        }
+      ]
+    },
+    {
+      "id": "chethams",
+      "name": "Chetham's College",
+      "startYear": 1421,
+      "endYear": 2100,
+      "material": "stone",
+      "entities": [
+        {
+          "id": "chethams_north_wing",
+          "name": "Chetham's College - North Wing",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.245082033490007,
+              53.4861568877336
+            ],
+            [
+              -2.2444239176528824,
+              53.48605196109369
+            ],
+            [
+              -2.2443925680338452,
+              53.48612157736947
+            ],
+            [
+              -2.2450506838709696,
+              53.48622650400937
+            ]
+          ],
+          "height": 0,
+          "extrudedHeight": 12,
+          "material": "wall"
+        },
+        {
+          "id": "chethams_south_wing",
+          "name": "Chetham's College - South Wing",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.245207431966155,
+              53.48587842263053
+            ],
+            [
+              -2.2445493161290306,
+              53.48577349599062
+            ],
+            [
+              -2.2445179665099935,
+              53.485843112266394
+            ],
+            [
+              -2.245176082347118,
+              53.4859480389063
+            ]
+          ],
+          "height": 0,
+          "extrudedHeight": 12,
+          "material": "wall"
+        },
+        {
+          "id": "chethams_east_wing",
+          "name": "Chetham's College - East Wing",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2446349648810378,
+              53.485861765891265
+            ],
+            [
+              -2.2445179665099935,
+              53.485843112266394
+            ],
+            [
+              -2.2444239176528824,
+              53.48605196109369
+            ],
+            [
+              -2.2445409160239267,
+              53.48607061471857
+            ]
+          ],
+          "height": 0,
+          "extrudedHeight": 12,
+          "material": "wall"
+        },
+        {
+          "id": "chethams_west_wing",
+          "name": "Chetham's College - West Wing",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.245176082347118,
+              53.4859480389063
+            ],
+            [
+              -2.2450590839760736,
+              53.48592938528142
+            ],
+            [
+              -2.2449650351189625,
+              53.48613823410873
+            ],
+            [
+              -2.245082033490007,
+              53.4861568877336
+            ]
+          ],
+          "height": 0,
+          "extrudedHeight": 12,
+          "material": "wall"
+        },
+        {
+          "id": "chethams_gatehouse",
+          "name": "Chetham's College - Gatehouse",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2449222484367346,
+              53.485832954419905
+            ],
+            [
+              -2.244834499658451,
+              53.48581896420125
+            ],
+            [
+              -2.2448031500394143,
+              53.48588858047702
+            ],
+            [
+              -2.2448908988176974,
+              53.48590257069567
+            ]
+          ],
+          "height": 12,
+          "extrudedHeight": 17,
+          "material": "wall"
         }
       ]
     }
