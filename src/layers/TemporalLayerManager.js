@@ -36,6 +36,7 @@ export class TemporalLayerManager {
         this.viewer = viewer;
         this.layers = [];          // All registered layer configs
         this.imageryLayers = [];   // Active Cesium ImageryLayers
+        this.activeImageryConfigs = []; // Track which configs are active
         this.activeTileset = null; // Current 3D tileset (exclusive)
         this.loadedTilesets = new Map(); // Cache: config -> Cesium3DTileset
         this.currentYear = null;
@@ -74,6 +75,17 @@ export class TemporalLayerManager {
     }
 
     /**
+     * Check if two arrays have the same elements (by reference)
+     */
+    _arraysEqual(a, b) {
+        if (a.length !== b.length) return false;
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) return false;
+        }
+        return true;
+    }
+
+    /**
      * Set the current year - updates all layer visibility
      */
     async setYear(year) {
@@ -82,25 +94,34 @@ export class TemporalLayerManager {
 
         // === IMAGERY: show ALL matching (stacking) ===
         const matchingImagery = this._getMatchingLayers(year, 'imagery');
-        console.log(`Imagery for year ${year}:`, matchingImagery.map(l => l.config.name));
+        const matchingConfigs = matchingImagery.map(l => l.config);
 
-        // Remove old imagery layers
-        for (const layer of this.imageryLayers) {
-            this.viewer.imageryLayers.remove(layer, false);
-        }
-        this.imageryLayers = [];
+        // Check if imagery layers changed
+        const imageryChanged = !this._arraysEqual(matchingConfigs, this.activeImageryConfigs);
 
-        // Add new imagery layers
-        for (const layer of matchingImagery) {
-            try {
-                const provider = createImageryProvider(layer.config);
-                const imageryLayer = this.viewer.imageryLayers.addImageryProvider(provider);
-                imageryLayer.alpha = layer.config.alpha ?? 1.0;
-                this.imageryLayers.push(imageryLayer);
-                console.log(`  Added imagery: ${layer.config.name}`);
-            } catch (err) {
-                console.warn(`Could not create imagery layer ${layer.config.name}:`, err.message);
+        if (imageryChanged) {
+            console.log(`Imagery for year ${year}:`, matchingImagery.map(l => l.config.name));
+
+            // Remove old imagery layers
+            for (const layer of this.imageryLayers) {
+                this.viewer.imageryLayers.remove(layer, false);
             }
+            this.imageryLayers = [];
+
+            // Add new imagery layers
+            for (const layer of matchingImagery) {
+                try {
+                    const provider = createImageryProvider(layer.config);
+                    const imageryLayer = this.viewer.imageryLayers.addImageryProvider(provider);
+                    imageryLayer.alpha = layer.config.alpha ?? 1.0;
+                    this.imageryLayers.push(imageryLayer);
+                    console.log(`  Added imagery: ${layer.config.name}`);
+                } catch (err) {
+                    console.warn(`Could not create imagery layer ${layer.config.name}:`, err.message);
+                }
+            }
+
+            this.activeImageryConfigs = matchingConfigs;
         }
 
         // === TILESETS: show FIRST matching (exclusive), lazy-load ===
