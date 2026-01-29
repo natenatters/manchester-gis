@@ -23,8 +23,6 @@
       "type": "carto",
       "name": "Base Map",
       "style": "light_nolabels",
-      "yearStart": 0,
-      "yearEnd": 1600,
       "credit": "CartoDB"
     },
     {
