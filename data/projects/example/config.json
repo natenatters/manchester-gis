@@ -8,7 +8,7 @@
     "lat": 53.48,
     "height": 5000
   },
-  "defaultYear": 250,
+  "defaultYear": 1650,
   "terrain": {
     "enabled": true,
     "exaggeration": 2.0
@@ -29,17 +29,17 @@
       "kind": "imagery",
       "type": "single_tile",
       "name": "1650 Berry Sketch",
-      "url": "/data/tiles/berry_1650.png",
+      "url": "/data/tiles/berry_1650.png?v=6",
       "yearStart": 1600,
-      "yearEnd": 1700,
+      "yearEnd": 1800,
       "bounds": {
-        "west": -2.255,
-        "south": 53.478,
-        "east": -2.238,
-        "north": 53.488
+        "west": -2.2545,
+        "south": 53.4779,
+        "east": -2.2365,
+        "north": 53.4899
       },
-      "tileWidth": 2412,
-      "tileHeight": 1408,
+      "tileWidth": 2750,
+      "tileHeight": 2150,
       "credit": "1650 Berry - A Plan of Manchester and Salford"
     },
     {

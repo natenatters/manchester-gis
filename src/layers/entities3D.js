@@ -2,48 +2,57 @@
  * 3D Entity Loader
  *
  * Simple loader for pre-generated 3D geometry.
- * Reads fort_entities.json and creates Cesium entities.
+ * Reads fort_entities.json and building_entities.json and creates Cesium entities.
  */
 
 import * as Cesium from 'cesium';
 
 /**
- * Load 3D entities from generated data
+ * Load 3D entities from generated data files
  * @param {string} projectPath - Path to project folder
  * @param {number} currentYear - Current year for visibility
  * @returns {Promise<Cesium.CustomDataSource>}
  */
 export async function loadEntities3D(projectPath, currentYear = 200) {
     const dataSource = new Cesium.CustomDataSource('entities3d');
+    dataSource._allItems = []; // Track all forts + buildings for visibility
 
+    // Load forts
+    await loadEntityFile(dataSource, `${projectPath}/fort_entities.json`, 'forts', currentYear);
+
+    // Load historic buildings
+    await loadEntityFile(dataSource, `${projectPath}/building_entities.json`, 'buildings', currentYear);
+
+    return dataSource;
+}
+
+/**
+ * Load entities from a single JSON file
+ */
+async function loadEntityFile(dataSource, url, itemKey, currentYear) {
     try {
-        const response = await fetch(`${projectPath}/fort_entities.json`);
-        if (!response.ok) {
-            console.warn('No fort_entities.json found');
-            return dataSource;
-        }
+        const response = await fetch(url);
+        if (!response.ok) return;
 
         const data = await response.json();
         const materials = buildMaterials(data.materials);
+        const items = data[itemKey] || data.forts || data.buildings || [];
 
-        for (const fort of data.forts) {
-            const show = currentYear >= fort.startYear && currentYear <= fort.endYear;
+        for (const item of items) {
+            const show = currentYear >= item.startYear && currentYear <= item.endYear;
 
-            for (const entity of fort.entities) {
-                addEntity(dataSource, entity, fort, materials, show);
+            for (const entity of item.entities) {
+                addEntity(dataSource, entity, item, materials, show);
             }
+
+            dataSource._allItems.push(item);
         }
 
-        // Store for visibility updates
-        dataSource._forts = data.forts;
-
-        console.log(`Loaded ${data.forts.length} forts with pre-generated geometry`);
+        console.log(`Loaded ${items.length} ${itemKey} from ${url.split('/').pop()}`);
 
     } catch (err) {
-        console.warn('Could not load fort entities:', err);
+        // Silent fail for missing files
     }
-
-    return dataSource;
 }
 
 /**
@@ -148,12 +157,12 @@ function buildMaterials(materialsData) {
  * Update visibility based on year
  */
 export function updateEntities3DVisibility(dataSource, year) {
-    if (!dataSource?._forts) return;
+    if (!dataSource?._allItems) return;
 
-    for (const fort of dataSource._forts) {
-        const show = year >= fort.startYear && year <= fort.endYear;
+    for (const item of dataSource._allItems) {
+        const show = year >= item.startYear && year <= item.endYear;
 
-        for (const entity of fort.entities) {
+        for (const entity of item.entities) {
             const e = dataSource.entities.getById(entity.id);
             if (e) e.show = show;
         }

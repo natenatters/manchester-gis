@@ -173,7 +173,7 @@ function attachYearSlider(viewer, layers, layerManager) {
 /**
  * Update the active layer display with toggleable checkboxes
  */
-function updateLayerDisplay(layerManager) {
+export function updateLayerDisplay(layerManager) {
     const display = document.getElementById('imageryDisplay');
     if (!display || !layerManager) return;
 

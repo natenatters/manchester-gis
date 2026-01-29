@@ -1,0 +1,85 @@
+{
+  "description": "Generated 1650 Manchester building geometry",
+  "generator": "scripts/generate_historic_buildings.py",
+  "source": "Berry's Plan of Manchester and Salford, c.1650",
+  "materials": {
+    "stone": {
+      "wall": "#A09080",
+      "roof": "#5C4033"
+    },
+    "timber": {
+      "wall": "#8B7355",
+      "roof": "#4A3728"
+    },
+    "church": {
+      "wall": "#C9B896",
+      "roof": "#505050",
+      "tower": "#B8A888"
+    },
+    "bridge": {
+      "stone": "#808075",
+      "arch": "#606055"
+    }
+  },
+  "buildings": [
+    {
+      "id": "test_building",
+      "name": "Test Building",
+      "startYear": 1600,
+      "endYear": 1800,
+      "material": "timber",
+      "entities": [
+        {
+          "id": "test_building_walls",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2456135485829383,
+              53.48345495495496
+            ],
+            [
+              -2.2453864514170614,
+              53.48345495495496
+            ],
+            [
+              -2.2453864514170614,
+              53.48354504504504
+            ],
+            [
+              -2.2456135485829383,
+              53.48354504504504
+            ]
+          ],
+          "height": 0,
+          "extrudedHeight": 8,
+          "material": "wall"
+        },
+        {
+          "id": "test_building_roof",
+          "type": "polygon",
+          "coords": [
+            [
+              -2.2456135485829383,
+              53.48345495495496
+            ],
+            [
+              -2.2453864514170614,
+              53.48345495495496
+            ],
+            [
+              -2.2453864514170614,
+              53.48354504504504
+            ],
+            [
+              -2.2456135485829383,
+              53.48354504504504
+            ]
+          ],
+          "height": 8,
+          "extrudedHeight": 8.5,
+          "material": "roof"
+        }
+      ]
+    }
+  ]
+}

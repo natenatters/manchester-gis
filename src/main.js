@@ -16,7 +16,7 @@ if (cesiumToken) {
 
 // App modules
 import { createViewer } from './viewer.js';
-import { initUI } from './ui/controls.js';
+import { initUI, updateLayerDisplay } from './ui/controls.js';
 import { loadAllLayers } from './layers/index.js';
 
 // Styles
@@ -69,6 +69,7 @@ async function init() {
     console.time('⏱️ setYear');
     const { setYear } = await import('./layers/index.js');
     await setYear(dataLayers, config.defaultYear || 200, layerManager);
+    updateLayerDisplay(layerManager);
     console.timeEnd('⏱️ setYear');
 
     console.timeEnd('⏱️ TOTAL init');
