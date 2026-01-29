@@ -179,11 +179,21 @@ export class TemporalLayerManager {
      */
     getActiveInfo() {
         return {
-            imagery: this.imageryLayers.map((_, i) => {
-                const layer = this._getMatchingLayers(this.currentYear, 'imagery')[i];
-                return layer?.config.name || 'Unknown';
-            }),
+            imagery: this.imageryLayers.map((layer, i) => ({
+                name: this.activeImageryConfigs[i]?.name || 'Unknown',
+                visible: layer.show,
+                index: i
+            })),
             tileset: this.activeTileset?.config.name || null
         };
+    }
+
+    /**
+     * Toggle visibility of an imagery layer by index
+     */
+    toggleImageryLayer(index, visible) {
+        if (this.imageryLayers[index]) {
+            this.imageryLayers[index].show = visible;
+        }
     }
 }

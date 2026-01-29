@@ -171,15 +171,39 @@ function attachYearSlider(viewer, layers, layerManager) {
 }
 
 /**
- * Update the active layer display
+ * Update the active layer display with toggleable checkboxes
  */
 function updateLayerDisplay(layerManager) {
     const display = document.getElementById('imageryDisplay');
     if (!display || !layerManager) return;
 
     const info = layerManager.getActiveInfo();
-    const names = info.imagery.join(', ') || 'None';
-    display.textContent = names;
+
+    if (info.imagery.length === 0) {
+        display.innerHTML = '<span class="no-imagery">No imagery</span>';
+        return;
+    }
+
+    // Build checkbox list for each active imagery layer
+    let html = '';
+    for (const layer of info.imagery) {
+        const checked = layer.visible ? 'checked' : '';
+        html += `
+            <label class="imagery-toggle">
+                <input type="checkbox" ${checked} data-imagery-index="${layer.index}">
+                ${layer.name}
+            </label>
+        `;
+    }
+    display.innerHTML = html;
+
+    // Attach toggle handlers
+    display.querySelectorAll('input[data-imagery-index]').forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            const index = parseInt(e.target.dataset.imageryIndex);
+            layerManager.toggleImageryLayer(index, e.target.checked);
+        });
+    });
 }
 
 /**
