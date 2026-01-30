@@ -20,8 +20,13 @@ import * as Cesium from 'cesium';
  * @returns {Cesium.SingleTileImageryProvider}
  */
 export function createSingleTileProvider(config) {
+    // Prepend base URL for absolute paths
+    const url = config.url.startsWith('/')
+        ? `${import.meta.env.BASE_URL}${config.url.slice(1)}`
+        : config.url;
+
     return new Cesium.SingleTileImageryProvider({
-        url: config.url,
+        url,
         rectangle: config.bounds ? Cesium.Rectangle.fromDegrees(
             config.bounds.west,
             config.bounds.south,

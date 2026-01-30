@@ -15,8 +15,13 @@ import * as Cesium from 'cesium';
  * @returns {Cesium.UrlTemplateImageryProvider}
  */
 export function createUrlTemplateProvider(config) {
+    // Prepend base URL for absolute paths
+    const url = config.url.startsWith('/')
+        ? `${import.meta.env.BASE_URL}${config.url.slice(1)}`
+        : config.url;
+
     return new Cesium.UrlTemplateImageryProvider({
-        url: config.url,
+        url,
         credit: config.credit,
         minimumLevel: config.minimumLevel || 0,
         maximumLevel: config.maximumLevel || 18

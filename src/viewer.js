@@ -193,7 +193,9 @@ export class Viewer {
 
     async _loadJson(url) {
         try {
-            const response = await fetch(url);
+            // Prepend base URL for absolute paths
+            const fullUrl = url.startsWith('/') ? `${import.meta.env.BASE_URL}${url.slice(1)}` : url;
+            const response = await fetch(fullUrl);
             if (response.ok) return response.json();
         } catch (err) {
             console.warn(`Could not load ${url}:`, err.message);
