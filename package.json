@@ -5,7 +5,7 @@
   "description": "Historical GIS mapping for Greater Manchester (1086 - present)",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp -r dist/manchester-gis/cesium dist/cesium",
     "preview": "vite preview",
     "fetch:all": "python3 scripts/fetch_historic_england.py && python3 scripts/fetch_wikidata.py && python3 scripts/fetch_osm.py && python3 scripts/consolidate_data.py",
     "consolidate": "python3 scripts/consolidate_data.py"
