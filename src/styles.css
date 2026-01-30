@@ -201,3 +201,146 @@ input[type="checkbox"] {
 #controlsContent::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
 }
+
+/* Building Editor Panel */
+.building-editor {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    transform: translateY(100%);
+    background: rgba(38, 38, 38, 0.95);
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    min-width: 220px;
+    opacity: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.building-editor.visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.editor-close {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.editor-close:hover {
+    color: #fff;
+}
+
+.editor-content {
+    padding: 12px;
+}
+
+.editor-section {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.editor-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 8px;
+}
+
+.editor-label {
+    font-size: 11px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.editor-controls {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.editor-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    min-width: 36px;
+    transition: background 0.15s;
+}
+
+.editor-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.editor-btn:active {
+    background: rgba(79, 195, 247, 0.3);
+}
+
+.rotation-controls {
+    gap: 20px;
+}
+
+.rotation-controls .editor-btn {
+    font-size: 18px;
+    padding: 6px 14px;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.copy-btn {
+    flex: 1;
+    background: rgba(79, 195, 247, 0.2);
+    border-color: rgba(79, 195, 247, 0.4);
+}
+
+.copy-btn:hover {
+    background: rgba(79, 195, 247, 0.3);
+}
+
+.reset-btn {
+    background: rgba(255, 100, 100, 0.15);
+    border-color: rgba(255, 100, 100, 0.3);
+}
+
+.reset-btn:hover {
+    background: rgba(255, 100, 100, 0.25);
+}
+
+.step-input {
+    width: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 11px;
+    margin-left: 6px;
+}
