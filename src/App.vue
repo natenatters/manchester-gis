@@ -16,6 +16,7 @@
           <div class="layer-group-title">Time Period</div>
           <div class="year-display">{{ year }} AD</div>
           <input
+            id="yearSlider"
             type="range"
             min="0"
             max="2026"
@@ -60,13 +61,13 @@
   </div>
 
   <!-- Entity Panel -->
-  <div id="entityPanel" class="entity-panel" :class="{ visible: selectedEntity }">
-    <div class="entity-panel-header">
+  <div id="entityPanel" class="building-editor" :class="{ visible: selectedEntity }">
+    <div class="editor-header">
       <span>{{ entityName }}</span>
-      <button class="entity-panel-close" @click="clearSelection">&times;</button>
+      <button class="editor-close" @click="clearSelection">&times;</button>
     </div>
-    <div class="entity-panel-content">
-      <table v-if="selectedEntity" class="entity-props">
+    <div class="editor-content">
+      <table v-if="selectedEntity" class="cesium-infoBox-defaultTable">
         <tr><th>ID</th><td>{{ selectedEntity.id || '--' }}</td></tr>
         <tr v-if="entityGroup"><th>Group</th><td>{{ entityGroup }}</td></tr>
         <tr v-if="entityPeriod"><th>Period</th><td>{{ entityPeriod }}</td></tr>
