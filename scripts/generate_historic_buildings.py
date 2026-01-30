@@ -2,11 +2,12 @@
 """
 Generate Historic Building 3D Geometry
 
-Reads building parameters from buildings_1650.json and generates explicit
-polygon coordinates for walls, roofs, etc.
+Reads building parameters and generates explicit polygon coordinates.
+Expands buildings into separate entities per map period with positions baked in.
 
 Input:  data/projects/example/buildings_1650.json (parameters)
-Output: data/projects/example/building_entities.json (geometry)
+        data/projects/example/buildings/*.json (custom buildings)
+Output: data/projects/example/building_entities.json (flattened geometry)
 
 Usage:
     python scripts/generate_historic_buildings.py
@@ -20,8 +21,21 @@ from pathlib import Path
 PROJECT_DIR = Path(__file__).parent.parent
 DATA_DIR = PROJECT_DIR / "data" / "projects" / "example"
 INPUT_FILE = DATA_DIR / "buildings_1650.json"
-BUILDINGS_DIR = DATA_DIR / "buildings"  # Individual building files
+BUILDINGS_DIR = DATA_DIR / "buildings"
 OUTPUT_FILE = DATA_DIR / "building_entities.json"
+
+# Map periods - aligned with config.json imagery layers
+# Each building will be expanded into entities for relevant periods
+MAP_PERIODS = {
+    "berry_1650": {"start": 1650, "stop": 1749},
+    "berry_1750": {"start": 1750, "stop": 1844},
+    "os_1845": {"start": 1845, "stop": 1889},
+    "os_1950s": {"start": 1890, "stop": 1949},
+    "modern": {"start": 1950, "stop": 2100},
+}
+
+# Which map periods use "modern" (geo-correct) positioning
+GEO_CORRECT_PERIODS = {"os_1845", "os_1950s", "modern"}
 
 
 def to_lat_deg(meters):
@@ -54,6 +68,44 @@ def offsets_to_coords(cx, cy, offsets, rotation):
     return coords
 
 
+def transform_coords(coords, original_center, target_center, original_rotation, target_rotation, scale=1.0):
+    """Transform coordinates from original position to target position."""
+    delta_lng = target_center[0] - original_center[0]
+    delta_lat = target_center[1] - original_center[1]
+    delta_rotation = target_rotation - original_rotation
+
+    if delta_rotation == 0 and scale == 1.0:
+        # Simple translation
+        return [[lng + delta_lng, lat + delta_lat] for lng, lat in coords]
+
+    # Rotation + scale + translation
+    radians = math.radians(delta_rotation)
+    cos_r = math.cos(radians)
+    sin_r = math.sin(radians)
+
+    result = []
+    for lng, lat in coords:
+        # Translate to origin (relative to original center)
+        rel_lng = lng - original_center[0]
+        rel_lat = lat - original_center[1]
+
+        # Scale
+        rel_lng *= scale
+        rel_lat *= scale
+
+        # Rotate
+        rot_lng = rel_lng * cos_r - rel_lat * sin_r
+        rot_lat = rel_lng * sin_r + rel_lat * cos_r
+
+        # Translate to target
+        result.append([
+            target_center[0] + rot_lng + delta_lng,
+            target_center[1] + rot_lat + delta_lat
+        ])
+
+    return result
+
+
 # ==============================================
 # BUILDING GENERATORS
 # ==============================================
@@ -68,10 +120,7 @@ def generate_simple_building(building):
 
     entities = []
 
-    # Main walls
-    walls = [
-        [-hL, -hW], [hL, -hW], [hL, hW], [-hL, hW]
-    ]
+    walls = [[-hL, -hW], [hL, -hW], [hL, hW], [-hL, hW]]
     entities.append({
         "id": f"{building['id']}_walls",
         "type": "polygon",
@@ -81,7 +130,6 @@ def generate_simple_building(building):
         "material": "wall"
     })
 
-    # Simple flat roof (can enhance later with pitched roof)
     entities.append({
         "id": f"{building['id']}_roof",
         "type": "polygon",
@@ -99,7 +147,6 @@ def generate_church(building):
     cx, cy = building["center"]
     rotation = building.get("rotation", 0)
 
-    # Church dimensions (can be overridden in data)
     nave_length = building.get("naveLength", 40)
     nave_width = building.get("naveWidth", 12)
     nave_height = building.get("naveHeight", 15)
@@ -182,8 +229,7 @@ def generate_bridge(building):
     cx, cy = building["center"]
     rotation = building.get("rotation", 0)
 
-    # Bridge dimensions
-    span = building.get("span", 50)  # Total length
+    span = building.get("span", 50)
     width = building.get("width", 6)
     height = building.get("height", 8)
     num_arches = building.get("numArches", 5)
@@ -204,7 +250,7 @@ def generate_bridge(building):
         "material": "stone"
     })
 
-    # Piers (simplified as rectangles)
+    # Piers
     pier_width = span / (num_arches * 2 + 1)
     for i in range(num_arches + 1):
         px = -hS + pier_width * (i * 2)
@@ -215,7 +261,7 @@ def generate_bridge(building):
             "name": f"{building['name']} - Pier {i+1}",
             "type": "polygon",
             "coords": offsets_to_coords(cx, cy, pier, rotation),
-            "height": -2,  # Below water level
+            "height": -2,
             "extrudedHeight": height - 1,
             "material": "stone"
         })
@@ -237,17 +283,10 @@ def generate_bridge(building):
 
 
 def generate_neoclassical_church(building):
-    """Generate a neoclassical church (like St Peter's Manchester).
-
-    Layout based on historic plan:
-    - Long rectangular body
-    - Two small side wings in middle
-    - Tower flush with entrance end
-    """
+    """Generate a neoclassical church (like St Peter's Manchester)."""
     cx, cy = building["center"]
     rotation = building.get("rotation", 0)
 
-    # Church dimensions
     nave_length = building.get("naveLength", 30)
     nave_width = building.get("naveWidth", 15)
     nave_height = building.get("naveHeight", 12)
@@ -260,7 +299,7 @@ def generate_neoclassical_church(building):
     hL = nave_length / 2
     hW = nave_width / 2
 
-    # Main body (one long rectangle)
+    # Main body
     body = [[-hL, -hW], [hL, -hW], [hL, hW], [-hL, hW]]
     entities.append({
         "id": f"{building['id']}_body",
@@ -272,16 +311,10 @@ def generate_neoclassical_church(building):
         "material": "wall"
     })
 
-    # Side wings (small projections in middle of each side)
+    # Side wings
     wing_hw = wing_width / 2
 
-    # North wing
-    north_wing = [
-        [-wing_hw, hW],
-        [wing_hw, hW],
-        [wing_hw, hW + wing_depth],
-        [-wing_hw, hW + wing_depth]
-    ]
+    north_wing = [[-wing_hw, hW], [wing_hw, hW], [wing_hw, hW + wing_depth], [-wing_hw, hW + wing_depth]]
     entities.append({
         "id": f"{building['id']}_wing_north",
         "name": f"{building['name']} - North Wing",
@@ -292,13 +325,7 @@ def generate_neoclassical_church(building):
         "material": "wall"
     })
 
-    # South wing
-    south_wing = [
-        [-wing_hw, -hW - wing_depth],
-        [wing_hw, -hW - wing_depth],
-        [wing_hw, -hW],
-        [-wing_hw, -hW]
-    ]
+    south_wing = [[-wing_hw, -hW - wing_depth], [wing_hw, -hW - wing_depth], [wing_hw, -hW], [-wing_hw, -hW]]
     entities.append({
         "id": f"{building['id']}_wing_south",
         "name": f"{building['name']} - South Wing",
@@ -309,14 +336,9 @@ def generate_neoclassical_church(building):
         "material": "wall"
     })
 
-    # Tower (flush with entrance end, centered)
+    # Tower
     ts = tower_size / 2
-    tower = [
-        [-hL, -ts],
-        [-hL + tower_size, -ts],
-        [-hL + tower_size, ts],
-        [-hL, ts]
-    ]
+    tower = [[-hL, -ts], [-hL + tower_size, -ts], [-hL + tower_size, ts], [-hL, ts]]
     entities.append({
         "id": f"{building['id']}_tower",
         "name": f"{building['name']} - Tower",
@@ -344,7 +366,6 @@ def generate_chapel(building):
     hL = length / 2
     hW = width / 2
 
-    # Main chapel body
     body = [[-hL, -hW], [hL, -hW], [hL, hW], [-hL, hW]]
     entities.append({
         "id": f"{building['id']}_body",
@@ -356,7 +377,6 @@ def generate_chapel(building):
         "material": "wall"
     })
 
-    # Small tower at west end
     tw = width * 0.4
     tower = [[-hL - tw, -tw/2], [-hL, -tw/2], [-hL, tw/2], [-hL - tw, tw/2]]
     entities.append({
@@ -377,7 +397,6 @@ def generate_courtyard_building(building):
     cx, cy = building["center"]
     rotation = building.get("rotation", 0)
 
-    # Dimensions
     outer_length = building.get("length", 40)
     outer_width = building.get("width", 35)
     wing_depth = building.get("wingDepth", 8)
@@ -388,7 +407,6 @@ def generate_courtyard_building(building):
     hW = outer_width / 2
     wd = wing_depth
 
-    # Four wings around courtyard
     wings = [
         ("north", [[-hL, hW - wd], [hL, hW - wd], [hL, hW], [-hL, hW]]),
         ("south", [[-hL, -hW], [hL, -hW], [hL, -hW + wd], [-hL, -hW + wd]]),
@@ -407,7 +425,6 @@ def generate_courtyard_building(building):
             "material": "wall"
         })
 
-    # Gatehouse (south wing, taller section)
     gate = [[-3, -hW], [3, -hW], [3, -hW + wd], [-3, -hW + wd]]
     entities.append({
         "id": f"{building['id']}_gatehouse",
@@ -443,48 +460,146 @@ def generate_building(building):
     return generator(building)
 
 
+def get_position_for_period(building, period_id):
+    """Get the position (center, rotation, scale) for a building in a specific map period."""
+    maps = building.get("maps", {})
+    default_center = building["center"]
+    default_rotation = building.get("rotation", 0)
+
+    # Check if there's a specific position for this period
+    if period_id in maps:
+        map_data = maps[period_id]
+        return {
+            "center": map_data.get("center", default_center),
+            "rotation": map_data.get("rotation", default_rotation),
+            "scale": map_data.get("scale", 1.0)
+        }
+
+    # For geo-correct periods without explicit override, use default (modern) position
+    if period_id in GEO_CORRECT_PERIODS:
+        # Check if there's a "modern" override
+        if "modern" in maps:
+            map_data = maps["modern"]
+            return {
+                "center": map_data.get("center", default_center),
+                "rotation": map_data.get("rotation", default_rotation),
+                "scale": map_data.get("scale", 1.0)
+            }
+
+    # Default position
+    return {
+        "center": default_center,
+        "rotation": default_rotation,
+        "scale": 1.0
+    }
+
+
+def expand_building_to_periods(building, base_entities):
+    """Expand a building into entities for each relevant map period."""
+    start_year = building.get("startYear", 0)
+    end_year = building.get("endYear", 2100)
+    has_maps = "maps" in building
+
+    expanded = []
+    original_center = building["center"]
+    original_rotation = building.get("rotation", 0)
+
+    for period_id, period in MAP_PERIODS.items():
+        # Check if building exists during this period
+        period_start = max(start_year, period["start"])
+        period_end = min(end_year, period["stop"])
+
+        if period_start > period_end:
+            continue  # Building doesn't exist in this period
+
+        # Get position for this period
+        pos = get_position_for_period(building, period_id)
+
+        # Transform entities to this position
+        for entity in base_entities:
+            transformed = {
+                "id": f"{entity['id']}__{period_id}",
+                "name": entity.get("name", ""),
+                "type": entity["type"],
+                "height": entity.get("height", 0),
+                "extrudedHeight": entity.get("extrudedHeight", 0),
+                "material": entity.get("material", "wall"),
+                "availability": {
+                    "start": period_start,
+                    "stop": period_end
+                }
+            }
+
+            # Transform coordinates
+            if "coords" in entity:
+                transformed["coords"] = transform_coords(
+                    entity["coords"],
+                    original_center,
+                    pos["center"],
+                    original_rotation,
+                    pos["rotation"],
+                    pos["scale"]
+                )
+            if "outer" in entity:
+                transformed["outer"] = transform_coords(
+                    entity["outer"],
+                    original_center,
+                    pos["center"],
+                    original_rotation,
+                    pos["rotation"],
+                    pos["scale"]
+                )
+            if "inner" in entity:
+                transformed["inner"] = transform_coords(
+                    entity["inner"],
+                    original_center,
+                    pos["center"],
+                    original_rotation,
+                    pos["rotation"],
+                    pos["scale"]
+                )
+            if "position" in entity:
+                transformed["position"] = transform_coords(
+                    [entity["position"]],
+                    original_center,
+                    pos["center"],
+                    original_rotation,
+                    pos["rotation"],
+                    pos["scale"]
+                )[0]
+
+            expanded.append(transformed)
+
+    return expanded
+
+
+def process_building(building, materials):
+    """Process a building and return flattened entities."""
+    # Generate or use existing entities
+    if building.get("type") == "custom":
+        # Custom building with pre-defined entities
+        base_entities = building["entities"]
+    else:
+        # Generate entities from parameters
+        base_entities = generate_building(building)
+
+    # Expand to map periods
+    return expand_building_to_periods(building, base_entities)
+
+
 def main():
     print(f"Reading: {INPUT_FILE}")
     with open(INPUT_FILE) as f:
         data = json.load(f)
 
     materials = data.get("materials", {})
+    all_entities = []
 
-    output = {
-        "description": "Generated 1650 Manchester building geometry",
-        "generator": "scripts/generate_historic_buildings.py",
-        "source": data.get("source", ""),
-        "materials": materials,
-        "buildings": []
-    }
-
+    # Process buildings from main file
     for building in data["buildings"]:
-        print(f"  Generating: {building['name']}")
-        entities = generate_building(building)
-
-        building_output = {
-            "id": building["id"],
-            "name": building["name"],
-            "type": building.get("type", "house"),
-            "startYear": building.get("startYear", 1600),
-            "endYear": building.get("endYear", 1800),
-            "material": building.get("material", "stone"),
-            # Source parameters for UI editing
-            "center": building.get("center"),
-            "rotation": building.get("rotation", 0),
-            "entities": entities
-        }
-        # Pass through dimension parameters (varies by type)
-        for field in ["naveLength", "naveWidth", "naveHeight", "towerSize",
-                      "towerHeight", "aisleWidth", "porticoDepth", "porticoWidth",
-                      "length", "width", "height", "span", "numArches", "wingDepth"]:
-            if field in building:
-                building_output[field] = building[field]
-        # Pass through optional metadata fields
-        for field in ["images", "references", "notes"]:
-            if field in building:
-                building_output[field] = building[field]
-        output["buildings"].append(building_output)
+        print(f"  Processing: {building['name']}")
+        entities = process_building(building, materials)
+        all_entities.extend(entities)
 
     # Load individual building files from buildings/ directory
     if BUILDINGS_DIR.exists():
@@ -492,18 +607,24 @@ def main():
             try:
                 with open(building_file) as f:
                     building = json.load(f)
-                print(f"  Loading custom: {building['name']}")
-                # Custom buildings have pre-defined entities, pass through directly
-                output["buildings"].append(building)
+                print(f"  Processing custom: {building['name']}")
+                entities = process_building(building, materials)
+                all_entities.extend(entities)
             except Exception as e:
                 print(f"  Warning: Could not load {building_file.name}: {e}")
+
+    output = {
+        "description": "Flattened building entities with availability for Cesium clock",
+        "generator": "scripts/generate_historic_buildings.py",
+        "materials": materials,
+        "entities": all_entities
+    }
 
     print(f"Writing: {OUTPUT_FILE}")
     with open(OUTPUT_FILE, "w") as f:
         json.dump(output, f, indent=2)
 
-    total_entities = sum(len(b["entities"]) for b in output["buildings"])
-    print(f"Done! Generated {total_entities} entities for {len(output['buildings'])} buildings")
+    print(f"Done! Generated {len(all_entities)} entities from {len(data['buildings'])} buildings")
 
 
 if __name__ == "__main__":
