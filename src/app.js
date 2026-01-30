@@ -1,252 +1,272 @@
 /**
- * App
+ * App - UI and orchestration layer
  *
- * Central state for the application.
+ * Owns:
+ * - UI rendering (controls panel, entity info panel)
+ * - User interactions
+ * - Viewer instance
  */
 
-import * as Cesium from 'cesium';
-import { loadConfig } from './config.js';
 import { Viewer } from './viewer.js';
-import { TemporalLayerManager } from './layers/TemporalLayerManager.js';
-import { loadEntities3D, updateEntities3DVisibility } from './layers/entities3D.js';
-import { initUI } from './ui/controls.js';
-import { initBuildingEditor } from './ui/buildingEditor.js';
 
 export class App {
-    constructor() {
-        this.config = null;
-        this.layerConfig = null;
-        this.year = 200;
-        this.dataPath = null;
-        this.viewer = null;
-        this.layerManager = null;
-        this.layers = {};
-    }
-
-    /**
-     * Initialize the app
-     */
-    async init(containerId, project = 'example') {
-        // Cesium Ion token
-        const cesiumToken = import.meta.env.VITE_CESIUM_ION_TOKEN;
-        if (cesiumToken) {
-            Cesium.Ion.defaultAccessToken = cesiumToken;
-        }
-
-        this.dataPath = `/data/projects/${project}`;
-
-        // Load config
-        const { config, layerConfig } = await loadConfig(this.dataPath);
-        this.config = config;
-        this.layerConfig = layerConfig || { groups: {}, layers: {} };
-        this.year = config.defaultYear || 200;
-
-        console.log(`Initializing ${this.config.name}...`);
+    constructor(containerId, controlsId) {
+        this._container = document.getElementById(controlsId);
+        this._yearDisplay = null;
+        this._yearSlider = null;
+        this._title = 'Historical GIS';
+        this._groups = new Set();
+        this._layers = { imagery: [] };
+        this._defaultYear = 2000;
+        this._selectedEntity = null;
 
         // Create viewer
-        this.viewer = new Viewer(containerId, this.config);
-        this.viewer.render({ exaggeration: this.config.terrain?.exaggeration || 1.0 });
+        this.viewer = new Viewer(containerId);
 
-        // Create layer manager
-        this.layerManager = new TemporalLayerManager(this.viewer.cesium);
-        this.layerManager.load(this.config.layers);
-        this.layerManager.setBaseExaggeration(this.config.terrain?.exaggeration || 1.0);
-
-        // Load data layers
-        await this.loadLayers();
-
-        // Set initial year (before UI so imagery display is correct)
-        await this.setYear(this.config.defaultYear || 200);
-
-        // Initialize UI
-        initUI(this);
-        initBuildingEditor(this);
+        // Listen to viewer events
+        this.viewer.on('yearChange', (year) => this._onYearChange(year));
+        this.viewer.on('entitiesChange', (entities) => this._onEntitiesChange(entities));
+        this.viewer.on('entitySelect', (entity) => this._onEntitySelect(entity));
     }
 
-    /**
-     * Load all data layers
-     */
-    async loadLayers() {
-        // Create DataSource for each layer definition
-        for (const [key, def] of Object.entries(this.layerConfig.layers || {})) {
-            const group = this.layerConfig.groups?.[def.group] || { defaultVisible: true };
+    async init(config) {
+        this._title = config.name || 'Historical GIS';
+        this._defaultYear = config.defaultYear || 2000;
 
-            if (def.type === 'entities3d') {
-                const dataSource = await loadEntities3D(this.dataPath, this.year);
-                dataSource.show = group.defaultVisible;
-                this.viewer.cesium.dataSources.add(dataSource);
-                this.layerManager.setEntities3dDataSource(dataSource);
-                this.layers[key] = { dataSource, group: def.group, config: def };
-            } else {
-                const dataSource = new Cesium.CustomDataSource(key);
-                dataSource.show = group.defaultVisible;
-                this.viewer.cesium.dataSources.add(dataSource);
-                this.layers[key] = { dataSource, group: def.group, config: def };
-            }
-        }
+        // Initialize viewer
+        await this.viewer.init(config);
 
-        // Load reference data
-        const refData = await this.loadJson('/data/unified_sites.geojson');
-        if (refData) this.populateLayers(refData, 'source');
-
-        // Load curated project data
-        const projData = await this.loadJson(`${this.dataPath}/sites.json`);
-        if (projData) this.populateLayers(projData, 'layer');
+        // Render UI
+        this._render();
+        this._createEntityPanel();
     }
 
-    /**
-     * Load JSON with error handling
-     */
-    async loadJson(url) {
-        try {
-            const response = await fetch(url);
-            if (response.ok) return response.json();
-        } catch (err) {
-            console.warn(`Could not load ${url}:`, err.message);
-        }
-        return null;
+    // --- Viewer event handlers ---
+
+    _onYearChange(year) {
+        if (this._yearDisplay) this._yearDisplay.textContent = `${year} AD`;
+        if (this._yearSlider) this._yearSlider.value = year;
+        this._layers = this.viewer.getLayerInfo(year);
+        this._updateLayerDisplay();
     }
 
-    /**
-     * Populate layers from GeoJSON
-     */
-    populateLayers(data, keyField) {
-        const sourceToLayer = {};
-        for (const [key, def] of Object.entries(this.layerConfig.layers || {})) {
-            if (def.source) sourceToLayer[def.source] = key;
+    _onEntitiesChange(entities) {
+        // Derive groups from entities
+        this._groups = new Set();
+        for (const entity of entities) {
+            const group = entity.properties?.group?.getValue?.() || entity.properties?.group;
+            if (group) this._groups.add(group);
         }
-
-        for (const feature of data.features || []) {
-            const layerKey = keyField === 'source'
-                ? sourceToLayer[feature.properties.source]
-                : feature.properties.layer;
-
-            const layer = this.layers[layerKey];
-            if (!layer) continue;
-
-            this.addFeature(layer, feature);
-        }
+        // Debounce render for bulk entity loads
+        clearTimeout(this._renderTimeout);
+        this._renderTimeout = setTimeout(() => this._render(), 10);
     }
 
-    /**
-     * Add a GeoJSON feature to a layer
-     */
-    addFeature(layer, feature) {
-        const props = feature.properties;
-        const geom = feature.geometry;
-        const color = Cesium.Color.fromCssColorString(layer.config.color || '#FF6B6B');
+    _onEntitySelect(entity) {
+        this._selectedEntity = entity;
+        this._updateEntityPanel();
+    }
 
-        if (geom.type === 'Point') {
-            layer.dataSource.entities.add({
-                position: Cesium.Cartesian3.fromDegrees(geom.coordinates[0], geom.coordinates[1]),
-                point: {
-                    pixelSize: 8,
-                    color,
-                    outlineColor: Cesium.Color.BLACK,
-                    outlineWidth: 1,
-                    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-                    disableDepthTestDistance: Number.POSITIVE_INFINITY
-                },
-                name: props.name,
-                description: this.buildDescription(props)
+    // --- UI rendering ---
+
+    _render() {
+        this._container.innerHTML = this._buildHTML();
+        this._attachHandlers();
+        this._updateLayerDisplay();
+    }
+
+    _buildHTML() {
+        let html = `
+            <div class="controls-panel">
+                <div class="controls-header">
+                    <h2>${this._title}</h2>
+                    <button id="toggleControls" class="toggle-btn">-</button>
+                </div>
+                <div id="controlsContent">
+        `;
+
+        // Year slider
+        html += `
+            <div class="layer-group">
+                <div class="layer-group-title">Time Period</div>
+                <div id="yearDisplay" class="year-display">${this._defaultYear} AD</div>
+                <input type="range" id="yearSlider" min="0" max="2026" value="${this._defaultYear}">
+                <div id="imageryDisplay" class="imagery-display"></div>
+            </div>
+        `;
+
+        // Group toggles
+        for (const group of this._groups) {
+            html += `
+                <div class="layer-group">
+                    <div class="layer-group-title">
+                        <label>
+                            <input type="checkbox" class="group-toggle" data-group="${group}" checked>
+                            ${group}
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        html += `
+                    <div id="status" class="status">Ready</div>
+                </div>
+            </div>
+        `;
+
+        return html;
+    }
+
+    _attachHandlers() {
+        // Year slider
+        this._yearSlider = this._container.querySelector('#yearSlider');
+        this._yearDisplay = this._container.querySelector('#yearDisplay');
+
+        this._yearSlider.addEventListener('input', (e) => {
+            const year = parseInt(e.target.value);
+            localStorage.setItem('year', year);
+            this.viewer.setYear(year);
+        });
+
+        // Initialize year from localStorage or default
+        const saved = localStorage.getItem('year');
+        const initialYear = saved !== null ? parseInt(saved, 10) : this._defaultYear;
+        this.viewer.setYear(initialYear);
+
+        // Group toggles
+        this._container.querySelectorAll('.group-toggle').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                this.viewer.toggleGroup(e.target.dataset.group, e.target.checked);
             });
-        } else if (geom.type === 'LineString' || geom.type === 'MultiLineString') {
-            const coords = geom.type === 'MultiLineString'
-                ? geom.coordinates.flat()
-                : geom.coordinates;
-            const positions = coords.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
+        });
 
-            layer.dataSource.entities.add({
-                polyline: {
-                    positions,
-                    width: 4,
-                    material: color,
-                    clampToGround: true
-                },
-                name: props.name,
-                description: this.buildDescription(props)
+        // Panel collapse
+        this._container.querySelector('#toggleControls').addEventListener('click', (e) => {
+            const content = this._container.querySelector('#controlsContent');
+            const btn = e.target;
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                btn.textContent = '-';
+            } else {
+                content.style.display = 'none';
+                btn.textContent = '+';
+            }
+        });
+    }
+
+    _updateLayerDisplay() {
+        const display = this._container.querySelector('#imageryDisplay');
+        if (!display) return;
+
+        const imagery = this._layers?.imagery || [];
+
+        if (imagery.length === 0) {
+            display.innerHTML = '<span class="no-imagery">No imagery</span>';
+            return;
+        }
+
+        let html = '';
+        for (const layer of imagery) {
+            const checked = layer.visible ? 'checked' : '';
+            html += `
+                <label class="imagery-toggle">
+                    <input type="checkbox" ${checked} data-imagery-index="${layer.index}">
+                    ${layer.name}
+                </label>
+            `;
+        }
+        display.innerHTML = html;
+
+        display.querySelectorAll('input[data-imagery-index]').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                this.viewer.toggleImagery(parseInt(e.target.dataset.imageryIndex));
+                this._layers = this.viewer.getLayerInfo(this.viewer.year);
+                this._updateLayerDisplay();
             });
-        }
+        });
     }
 
-    /**
-     * Build HTML description for info popup
-     */
-    buildDescription(props) {
-        const fields = [
-            ['Type', props.site_type],
-            ['Source', props.source_display],
-            ['Date', props.start_year ? `${props.start_year}${props.end_year ? ' - ' + props.end_year : ''}` : null],
-            ['Grade', props.grade],
-            ['Description', props.description]
-        ].filter(([, v]) => v);
+    // --- Entity Info Panel ---
 
-        let html = '<table class="cesium-infoBox-defaultTable">';
-        for (const [label, value] of fields) {
-            html += `<tr><th>${label}</th><td>${value}</td></tr>`;
-        }
-        if (props.hyperlink) {
-            html += `<tr><th>Link</th><td><a href="${props.hyperlink}" target="_blank">More info</a></td></tr>`;
-        }
-        return html + '</table>';
+    _createEntityPanel() {
+        const existing = document.getElementById('entityPanel');
+        if (existing) existing.remove();
+
+        const panel = document.createElement('div');
+        panel.id = 'entityPanel';
+        panel.className = 'entity-panel';
+        panel.innerHTML = `
+            <div class="entity-panel-header">
+                <span id="entityName">Select an entity</span>
+                <button id="entityPanelClose" class="entity-panel-close">&times;</button>
+            </div>
+            <div id="entityContent" class="entity-panel-content"></div>
+        `;
+        document.body.appendChild(panel);
+
+        document.getElementById('entityPanelClose').addEventListener('click', () => {
+            this.viewer.clearSelection();
+        });
     }
 
-    /**
-     * Set the current year - ONE place for all visibility updates
-     */
-    async setYear(year) {
-        this.year = year;
+    _updateEntityPanel() {
+        const panel = document.getElementById('entityPanel');
+        const nameEl = document.getElementById('entityName');
+        const contentEl = document.getElementById('entityContent');
 
-        // Update imagery + tilesets
-        await this.layerManager.setYear(year);
+        if (!this._selectedEntity) {
+            panel.classList.remove('visible');
+            nameEl.textContent = 'Select an entity';
+            contentEl.innerHTML = '';
+            return;
+        }
 
-        // Update all data layers
-        for (const layer of Object.values(this.layers)) {
-            if (layer.config.type === 'entities3d') {
-                updateEntities3DVisibility(layer.dataSource, year);
-            } else {
-                this.updateLayerVisibility(layer.dataSource, year);
+        const entity = this._selectedEntity;
+        const name = entity.name || entity.id || 'Unknown';
+        const props = entity.properties;
+
+        nameEl.textContent = name;
+
+        // Build properties display
+        let html = '<table class="entity-props">';
+
+        // ID
+        html += `<tr><th>ID</th><td>${entity.id || '--'}</td></tr>`;
+
+        // Group
+        const group = props?.group?.getValue?.() || props?.group;
+        if (group) {
+            html += `<tr><th>Group</th><td>${group}</td></tr>`;
+        }
+
+        // Availability (years)
+        if (entity.availability) {
+            const start = entity.availability.start?.toString?.() || '';
+            const stop = entity.availability.stop?.toString?.() || '';
+            if (start || stop) {
+                // Extract years from JulianDate strings
+                const startYear = start ? new Date(start).getFullYear() : '?';
+                const stopYear = stop ? new Date(stop).getFullYear() : '?';
+                html += `<tr><th>Period</th><td>${startYear} - ${stopYear}</td></tr>`;
             }
         }
-    }
 
-    /**
-     * Update entity visibility based on year
-     */
-    updateLayerVisibility(dataSource, year) {
-        for (const entity of dataSource.entities.values) {
-            const props = entity.properties;
-            if (!props) continue;
-
-            const start = props.start_year?.getValue();
-            const end = props.end_year?.getValue();
-
-            if (start === undefined && end === undefined) {
-                entity.show = true;
-            } else {
-                entity.show = (start === undefined || year >= start)
-                           && (end === undefined || year <= end);
+        // Other properties
+        if (props) {
+            const skip = ['group'];
+            const propNames = props.propertyNames || [];
+            for (const propName of propNames) {
+                if (skip.includes(propName)) continue;
+                const value = props[propName]?.getValue?.() || props[propName];
+                if (value !== undefined && value !== null && value !== '') {
+                    html += `<tr><th>${propName}</th><td>${value}</td></tr>`;
+                }
             }
         }
-    }
 
-    /**
-     * Toggle layer visibility
-     */
-    toggleLayer(key, visible) {
-        if (this.layers[key]) {
-            this.layers[key].dataSource.show = visible;
-        }
-    }
-
-    /**
-     * Toggle group visibility
-     */
-    toggleGroup(groupKey, visible) {
-        for (const layer of Object.values(this.layers)) {
-            if (layer.group === groupKey) {
-                layer.dataSource.show = visible;
-            }
-        }
+        html += '</table>';
+        contentEl.innerHTML = html;
+        panel.classList.add('visible');
     }
 }
