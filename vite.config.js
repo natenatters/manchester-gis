@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 import cesium from 'vite-plugin-cesium';
 
 export default defineConfig({
-  plugins: [cesium()],
+  plugins: [vue(), cesium()],
+  base: '/manchester-gis/',
   server: {
     port: 3000,
     open: true
