@@ -2,43 +2,34 @@
  * UI Controls
  */
 
-import { getLayerGroups, getLayerDefs, toggleLayer, toggleGroup, setYear } from '../layers/index.js';
+import { updateMapLayerVisibility } from '../layers/entities3D.js';
 
-// Store config for building UI
-let projectConfig = {};
-let storedLayerManager = null;
-let loadedLayers = {};
+// Reference to app (set in initUI)
+let app = null;
 
 /**
  * Initialize the UI controls
- * @param {Cesium.Viewer} viewer
- * @param {Object} layers - Layer data sources
- * @param {Object} config - Project configuration
- * @param {Object} [layerManager] - Unified temporal layer manager
  */
-export function initUI(viewer, layers, config = {}, layerManager = null) {
-    projectConfig = config;
-    storedLayerManager = layerManager;
-    loadedLayers = layers;
+export function initUI(appInstance) {
+    app = appInstance;
+
     const container = document.getElementById('controls');
     container.innerHTML = buildControlsHTML();
 
-    // Attach event listeners
-    attachLayerToggles(layers);
-    attachYearSlider(viewer, layers, layerManager);
-
-    // Update status
+    attachLayerToggles();
+    attachYearSlider();
     updateStatus('Ready');
+    updateLayerDisplay();
 }
 
 /**
  * Build the controls panel HTML
  */
 function buildControlsHTML() {
-    const title = projectConfig.name || 'Historical GIS';
-    const defaultYear = projectConfig.defaultYear || 200;
-    const groups = getLayerGroups();
-    const layerDefs = getLayerDefs();
+    const title = app.config.name || 'Historical GIS';
+    const defaultYear = app.config.defaultYear || 200;
+    const groups = app.layerConfig.groups || {};
+    const layerDefs = app.layerConfig.layers || {};
 
     let html = `
         <div class="controls-panel">
@@ -59,18 +50,17 @@ function buildControlsHTML() {
         </div>
     `;
 
-    // Build layers organized by group (only show layers that have data)
+    // Build layers organized by group
     for (const [groupKey, group] of Object.entries(groups)) {
         const checked = group.defaultVisible ? 'checked' : '';
 
-        // Get layers belonging to this group that have actual data
-        const groupLayers = Object.entries(layerDefs).filter(([layerKey, layer]) => {
-            if (layer.group !== groupKey) return false;
-            const layerData = loadedLayers[layerKey];
-            if (!layerData) return false;
-            // Check if dataSource has entities
-            const entityCount = layerData.dataSource?.entities?.values?.length || 0;
-            return entityCount > 0 || layer.type === 'entities3d';
+        // Get layers in this group that have data
+        const groupLayers = Object.entries(layerDefs).filter(([key, def]) => {
+            if (def.group !== groupKey) return false;
+            const layer = app.layers[key];
+            if (!layer) return false;
+            const count = layer.dataSource?.entities?.values?.length || 0;
+            return count > 0 || def.type === 'entities3d';
         });
 
         if (groupLayers.length === 0) continue;
@@ -86,15 +76,14 @@ function buildControlsHTML() {
                 <div class="layer-list" id="group-${groupKey}">
         `;
 
-        for (const [layerKey, layer] of groupLayers) {
-            const layerData = loadedLayers[layerKey];
-            const count = layerData?.dataSource?.entities?.values?.length || 0;
+        for (const [key, def] of groupLayers) {
+            const count = app.layers[key]?.dataSource?.entities?.values?.length || 0;
             const countLabel = count > 0 ? ` (${count})` : '';
             html += `
                 <label class="layer-item">
-                    <input type="checkbox" class="layer-toggle" data-layer="${layerKey}" ${checked}>
-                    <span class="layer-color" style="background: ${layer.color}"></span>
-                    ${layer.name}${countLabel}
+                    <input type="checkbox" class="layer-toggle" data-layer="${key}" ${checked}>
+                    <span class="layer-color" style="background: ${def.color}"></span>
+                    ${def.name}${countLabel}
                 </label>
             `;
         }
@@ -114,12 +103,11 @@ function buildControlsHTML() {
 /**
  * Attach layer toggle event listeners
  */
-function attachLayerToggles(layers) {
+function attachLayerToggles() {
     // Individual layer toggles
     document.querySelectorAll('.layer-toggle').forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
-            const layerKey = e.target.dataset.layer;
-            toggleLayer(layers, layerKey, e.target.checked);
+            app.toggleLayer(e.target.dataset.layer, e.target.checked);
         });
     });
 
@@ -129,8 +117,7 @@ function attachLayerToggles(layers) {
             const groupKey = e.target.dataset.group;
             const checked = e.target.checked;
 
-            // Toggle all layers in group
-            toggleGroup(layers, groupKey, checked);
+            app.toggleGroup(groupKey, checked);
 
             // Update individual checkboxes
             const groupEl = document.getElementById(`group-${groupKey}`);
@@ -140,7 +127,7 @@ function attachLayerToggles(layers) {
         });
     });
 
-    // Panel collapse toggle
+    // Panel collapse
     document.getElementById('toggleControls').addEventListener('click', (e) => {
         const content = document.getElementById('controlsContent');
         const btn = e.target;
@@ -157,34 +144,35 @@ function attachLayerToggles(layers) {
 /**
  * Attach year slider event listener
  */
-function attachYearSlider(viewer, layers, layerManager) {
+function attachYearSlider() {
     const slider = document.getElementById('yearSlider');
     const display = document.getElementById('yearDisplay');
 
     slider.addEventListener('input', async (e) => {
         const year = parseInt(e.target.value);
         display.textContent = `${year} AD`;
-        await setYear(layers, year, layerManager);
-        updateLayerDisplay(layerManager);
-        viewer.scene.requestRender();
+        await app.setYear(year);
+        updateLayerDisplay();
+        app.viewer.requestRender();
     });
 }
 
 /**
  * Update the active layer display with toggleable checkboxes
  */
-export function updateLayerDisplay(layerManager) {
+export function updateLayerDisplay() {
     const display = document.getElementById('imageryDisplay');
-    if (!display || !layerManager) return;
+    if (!display || !app?.layerManager) return;
 
-    const info = layerManager.getActiveInfo();
+    const info = app.layerManager.getActiveInfo();
 
     if (info.imagery.length === 0) {
         display.innerHTML = '<span class="no-imagery">No imagery</span>';
+        syncMapVisibility([]);
         return;
     }
 
-    // Build checkbox list for each active imagery layer
+    // Build checkbox list
     let html = '';
     for (const layer of info.imagery) {
         const checked = layer.visible ? 'checked' : '';
@@ -197,13 +185,42 @@ export function updateLayerDisplay(layerManager) {
     }
     display.innerHTML = html;
 
+    // Sync building visibility
+    syncMapVisibility(info.imagery);
+
     // Attach toggle handlers
     display.querySelectorAll('input[data-imagery-index]').forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
             const index = parseInt(e.target.dataset.imageryIndex);
-            layerManager.toggleImageryLayer(index, e.target.checked);
+            const visible = e.target.checked;
+            app.layerManager.toggleImageryLayer(index, visible);
+
+            // Update building visibility
+            const layerName = info.imagery.find(l => l.index === index)?.name;
+            if (layerName) {
+                const entities3d = Object.values(app.layers).find(
+                    l => l.config?.type === 'entities3d'
+                );
+                if (entities3d) {
+                    updateMapLayerVisibility(entities3d.dataSource, layerName, visible);
+                }
+            }
         });
     });
+}
+
+/**
+ * Sync building map visibility with current imagery layers
+ */
+function syncMapVisibility(imageryLayers) {
+    const entities3d = Object.values(app.layers).find(
+        l => l.config?.type === 'entities3d'
+    );
+    if (!entities3d) return;
+
+    for (const layer of imageryLayers) {
+        updateMapLayerVisibility(entities3d.dataSource, layer.name, layer.visible);
+    }
 }
 
 /**
@@ -211,7 +228,5 @@ export function updateLayerDisplay(layerManager) {
  */
 function updateStatus(message) {
     const status = document.getElementById('status');
-    if (status) {
-        status.textContent = message;
-    }
+    if (status) status.textContent = message;
 }

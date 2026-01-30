@@ -8,6 +8,7 @@
 
 import * as Cesium from 'cesium';
 import { createImageryProvider } from '../imagery/index.js';
+import { updateMapLayerVisibility } from './entities3D.js';
 
 // Tileset factories
 const tilesetFactories = {
@@ -41,6 +42,14 @@ export class TemporalLayerManager {
         this.loadedTilesets = new Map(); // Cache: config -> Cesium3DTileset
         this.currentYear = null;
         this.baseExaggeration = 1.0;
+        this.entities3dDataSource = null; // For notifying buildings of map changes
+    }
+
+    /**
+     * Set the entities3D data source for building visibility updates
+     */
+    setEntities3dDataSource(dataSource) {
+        this.entities3dDataSource = dataSource;
     }
 
     /**
@@ -102,6 +111,15 @@ export class TemporalLayerManager {
         if (imageryChanged) {
             console.log(`Imagery for year ${year}:`, matchingImagery.map(l => l.config.name));
 
+            // Notify buildings: mark OLD layers as hidden
+            if (this.entities3dDataSource) {
+                for (const oldConfig of this.activeImageryConfigs) {
+                    if (!matchingConfigs.includes(oldConfig)) {
+                        updateMapLayerVisibility(this.entities3dDataSource, oldConfig.name, false);
+                    }
+                }
+            }
+
             // Remove old imagery layers
             for (const layer of this.imageryLayers) {
                 this.viewer.imageryLayers.remove(layer, false);
@@ -118,6 +136,15 @@ export class TemporalLayerManager {
                     console.log(`  Added imagery: ${layer.config.name}`);
                 } catch (err) {
                     console.warn(`Could not create imagery layer ${layer.config.name}:`, err.message);
+                }
+            }
+
+            // Notify buildings: mark NEW layers as visible
+            if (this.entities3dDataSource) {
+                for (const newConfig of matchingConfigs) {
+                    if (!this.activeImageryConfigs.includes(newConfig)) {
+                        updateMapLayerVisibility(this.entities3dDataSource, newConfig.name, true);
+                    }
                 }
             }
 
