@@ -14,7 +14,8 @@
  * - onEntitiesChange(entities)
  */
 
-import * as Cesium from 'cesium';
+import * as CesiumModule from 'cesium';
+const Cesium = window.Cesium || CesiumModule;
 import { createImageryProvider } from './imagery/index.js';
 
 export class Viewer {
