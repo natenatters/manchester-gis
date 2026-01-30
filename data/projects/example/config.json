@@ -30,8 +30,8 @@
       "type": "single_tile",
       "name": "1650 Berry Sketch",
       "url": "/data/tiles/berry_1650.png?v=6",
-      "yearStart": 1600,
-      "yearEnd": 1800,
+      "yearStart": 1650,
+      "yearEnd": 1750,
       "bounds": {
         "west": -2.2545,
         "south": 53.4779,
@@ -47,8 +47,8 @@
       "type": "allmaps",
       "name": "1750 Berry Map",
       "mapId": "811b04a06391adb1",
-      "yearStart": 1700,
-      "yearEnd": 1840,
+      "yearStart": 1750,
+      "yearEnd": 1845,
       "bounds": {
         "west": -2.26377,
         "south": 53.47093,

@@ -1,0 +1,98 @@
+{
+  "id": "sacred_trinity",
+  "name": "Sacred Trinity Church",
+  "type": "custom",
+  "startYear": 1635,
+  "endYear": 2100,
+  "material": "church",
+  "center": [-2.250722, 53.484753],
+  "rotation": -5,
+  "maps": {
+    "berry_1650": {
+      "center": [-2.2487, 53.48493],
+      "rotation": -5,
+      "scale": 0.75
+    },
+    "berry_1750": {
+      "center": [-2.25048, 53.48483],
+      "rotation": 354,
+      "scale": 0.8
+    },
+    "modern": {
+      "center": [-2.250722, 53.484753],
+      "rotation": -5
+    }
+  },
+  "entities": [
+    {
+      "id": "sacred_trinity_tower",
+      "name": "Sacred Trinity Church - Tower (1635 Gothic-survival)",
+      "type": "polygon",
+      "coords": [
+        [-2.251006, 53.484723],
+        [-2.250922, 53.484723],
+        [-2.250922, 53.484783],
+        [-2.251006, 53.484783]
+      ],
+      "height": 0,
+      "extrudedHeight": 22,
+      "material": "tower"
+    },
+    {
+      "id": "sacred_trinity_nave",
+      "name": "Sacred Trinity Church - Nave (1752 Classical, 2-storey)",
+      "type": "polygon",
+      "coords": [
+        [-2.250922, 53.484690],
+        [-2.250390, 53.484690],
+        [-2.250390, 53.484816],
+        [-2.250922, 53.484816]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "sacred_trinity_north_wing",
+      "name": "Sacred Trinity Church - North Side (1-storey)",
+      "type": "polygon",
+      "coords": [
+        [-2.250922, 53.484816],
+        [-2.250390, 53.484816],
+        [-2.250390, 53.484861],
+        [-2.250922, 53.484861]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "wall"
+    },
+    {
+      "id": "sacred_trinity_south_wing",
+      "name": "Sacred Trinity Church - South Side (1-storey)",
+      "type": "polygon",
+      "coords": [
+        [-2.250922, 53.484645],
+        [-2.250390, 53.484645],
+        [-2.250390, 53.484690],
+        [-2.250922, 53.484690]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "wall"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://www.geograph.org.uk/photo/1931614",
+      "caption": "Sacred Trinity Church exterior showing Gothic tower and Classical nave",
+      "date": "2010"
+    }
+  ],
+  "references": [
+    "https://www.salfordchurch.org/sacred-trinity/",
+    "https://manchestervictorianarchitects.org.uk/buildings/sacred-trinity-chapel-street-salford",
+    "https://historicengland.org.uk/listing/the-list/list-entry/1441038",
+    "https://en.wikipedia.org/wiki/Sacred_Trinity_Church"
+  ],
+  "notes": "First parish church in Salford. Square Gothic-survival tower (1635) retained when nave rebuilt in Classical style (1752). Foundation stone laid 1634, consecrated May 20, 1635 by Humphrey Booth. Two-storey central nave with 1-storey side wings running full length. Round-headed windows (Classical, not Gothic). Grade II* listed. Contains oldest church furniture in Greater Manchester (1690 altar, 1700 Jacobean pulpit). Only church named Sacred Trinity in British Isles."
+}

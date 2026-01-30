@@ -46,7 +46,7 @@
       "id": "salford_bridge",
       "name": "Salford Bridge",
       "type": "bridge",
-      "center": [-2.2485, 53.4845],
+      "center": [-2.24619, 53.48501],
       "span": 40,
       "width": 5,
       "height": 6,
@@ -55,6 +55,16 @@
       "material": "bridge",
       "startYear": 1200,
       "endYear": 1800,
+      "maps": {
+        "berry_1650": {
+          "center": [-2.24576, 53.48503],
+          "rotation": 308
+        },
+        "berry_1750": {
+          "center": [-2.24619, 53.48501],
+          "rotation": -60
+        }
+      },
       "notes": "Medieval stone bridge connecting Manchester to Salford. Site of Civil War battle 1642."
     },
     {
@@ -74,6 +84,69 @@
         "https://library.chethams.com/"
       ],
       "notes": "Founded as college for priests 1421. Became Chetham's Hospital 1653 after Humphrey Chetham's death."
+    },
+    {
+      "id": "st_peters_church",
+      "name": "St Peter's Church",
+      "type": "neoclassical_church",
+      "center": [-2.24371, 53.47768],
+      "naveLength": 45,
+      "naveWidth": 17,
+      "naveHeight": 14,
+      "towerSize": 8,
+      "towerHeight": 25,
+      "wingDepth": 4,
+      "wingWidth": 18,
+      "rotation": 51,
+      "material": "church",
+      "startYear": 1788,
+      "endYear": 1907,
+      "references": [
+        "https://en.wikipedia.org/wiki/St_Peter's_Church,_Manchester",
+        "https://manchesterhistory.net/manchester/churches/stpeters.html",
+        "https://manchestervictorianarchitects.org.uk/buildings/st-peters-church-st-peters-square-manchester",
+        "https://hidden-manchester.org.uk/miscellaneous/st-peters-crypt.html"
+      ],
+      "images": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/St_Peter%27s_Church%2C_Manchester.jpg/800px-St_Peter%27s_Church%2C_Manchester.jpg",
+          "caption": "St Peter's Church exterior view showing Doric portico",
+          "date": "c.1890"
+        },
+        {
+          "url": "https://manchesterhistory.net/manchester/churches/stpetersold1.jpg",
+          "caption": "St Peter's Church from Oxford Street",
+          "date": "c.1900"
+        },
+        {
+          "url": "https://manchesterhistory.net/manchester/churches/stpetersold2.jpg",
+          "caption": "St Peter's Church with tower",
+          "date": "c.1880"
+        },
+        {
+          "url": "https://manchesterhistory.net/manchester/churches/stpeterscross.jpg",
+          "caption": "St Peter's Cross memorial (1908) marking former church site",
+          "date": "1908"
+        }
+      ],
+      "notes": "Neoclassical Doric Greek Revival by James Wyatt. Runcorn sandstone. Consecrated 1794. Tower added 1824 by Francis Goodwin. 46 burial vaults (still preserved under St Peter's Square). Organ had 3,728 pipes. Carracci painting 'Descent from the Cross' (now in St Ann's). Columns salvaged to Knutsford. Peterloo Massacre occurred nearby 1819. Location was fields on Berry's 1650 map."
+    },
+    {
+      "id": "radcliffe_hall",
+      "name": "Radcliffe Hall (Pool Fold)",
+      "type": "house",
+      "center": [-2.24371, 53.48265],
+      "length": 20,
+      "width": 12,
+      "height": 8,
+      "rotation": 249,
+      "material": "timber",
+      "startYear": 1550,
+      "endYear": 1811,
+      "references": [
+        "https://100hallsaroundmanchester.wordpress.com/2021/06/12/100-halls-around-manchester-part-49-radclife-hall-pool-fold-manchester/"
+      ],
+      "notes": "Timber and plaster with huge stone chimneys. Moated with drawbridge, main entrance faced Chapel Walks. Garden flanked two sides. Occupied by Radcliffe family from late 16th century. Captain John Radclyffe (d.1645) commanded troops protecting Manchester in Civil War. Last Radcliffe resident died 1701. Became Sun Tavern pub 1780. Demolished c.1811, replaced by New Market Buildings. Now site of Boots on Market Street."
     }
   ]
 }

@@ -20,6 +20,7 @@ from pathlib import Path
 PROJECT_DIR = Path(__file__).parent.parent
 DATA_DIR = PROJECT_DIR / "data" / "projects" / "example"
 INPUT_FILE = DATA_DIR / "buildings_1650.json"
+BUILDINGS_DIR = DATA_DIR / "buildings"  # Individual building files
 OUTPUT_FILE = DATA_DIR / "building_entities.json"
 
 
@@ -235,6 +236,142 @@ def generate_bridge(building):
     return entities
 
 
+def generate_neoclassical_church(building):
+    """Generate a neoclassical church (like St Peter's Manchester).
+
+    Layout based on historic plan:
+    - Long rectangular body
+    - Two small side wings in middle
+    - Tower flush with entrance end
+    """
+    cx, cy = building["center"]
+    rotation = building.get("rotation", 0)
+
+    # Church dimensions
+    nave_length = building.get("naveLength", 30)
+    nave_width = building.get("naveWidth", 15)
+    nave_height = building.get("naveHeight", 12)
+    tower_size = building.get("towerSize", 8)
+    tower_height = building.get("towerHeight", 25)
+    wing_depth = building.get("wingDepth", 4)
+    wing_width = building.get("wingWidth", 6)
+
+    entities = []
+    hL = nave_length / 2
+    hW = nave_width / 2
+
+    # Main body (one long rectangle)
+    body = [[-hL, -hW], [hL, -hW], [hL, hW], [-hL, hW]]
+    entities.append({
+        "id": f"{building['id']}_body",
+        "name": f"{building['name']} - Body",
+        "type": "polygon",
+        "coords": offsets_to_coords(cx, cy, body, rotation),
+        "height": 0,
+        "extrudedHeight": nave_height,
+        "material": "wall"
+    })
+
+    # Side wings (small projections in middle of each side)
+    wing_hw = wing_width / 2
+
+    # North wing
+    north_wing = [
+        [-wing_hw, hW],
+        [wing_hw, hW],
+        [wing_hw, hW + wing_depth],
+        [-wing_hw, hW + wing_depth]
+    ]
+    entities.append({
+        "id": f"{building['id']}_wing_north",
+        "name": f"{building['name']} - North Wing",
+        "type": "polygon",
+        "coords": offsets_to_coords(cx, cy, north_wing, rotation),
+        "height": 0,
+        "extrudedHeight": nave_height * 0.8,
+        "material": "wall"
+    })
+
+    # South wing
+    south_wing = [
+        [-wing_hw, -hW - wing_depth],
+        [wing_hw, -hW - wing_depth],
+        [wing_hw, -hW],
+        [-wing_hw, -hW]
+    ]
+    entities.append({
+        "id": f"{building['id']}_wing_south",
+        "name": f"{building['name']} - South Wing",
+        "type": "polygon",
+        "coords": offsets_to_coords(cx, cy, south_wing, rotation),
+        "height": 0,
+        "extrudedHeight": nave_height * 0.8,
+        "material": "wall"
+    })
+
+    # Tower (flush with entrance end, centered)
+    ts = tower_size / 2
+    tower = [
+        [-hL, -ts],
+        [-hL + tower_size, -ts],
+        [-hL + tower_size, ts],
+        [-hL, ts]
+    ]
+    entities.append({
+        "id": f"{building['id']}_tower",
+        "name": f"{building['name']} - Tower",
+        "type": "polygon",
+        "coords": offsets_to_coords(cx, cy, tower, rotation),
+        "height": nave_height,
+        "extrudedHeight": tower_height,
+        "material": "tower"
+    })
+
+    return entities
+
+
+def generate_chapel(building):
+    """Generate a simple chapel with optional small tower."""
+    cx, cy = building["center"]
+    rotation = building.get("rotation", 0)
+
+    length = building.get("length", 15)
+    width = building.get("width", 8)
+    height = building.get("height", 7)
+    tower_height = building.get("towerHeight", 10)
+
+    entities = []
+    hL = length / 2
+    hW = width / 2
+
+    # Main chapel body
+    body = [[-hL, -hW], [hL, -hW], [hL, hW], [-hL, hW]]
+    entities.append({
+        "id": f"{building['id']}_body",
+        "name": f"{building['name']} - Body",
+        "type": "polygon",
+        "coords": offsets_to_coords(cx, cy, body, rotation),
+        "height": 0,
+        "extrudedHeight": height,
+        "material": "wall"
+    })
+
+    # Small tower at west end
+    tw = width * 0.4
+    tower = [[-hL - tw, -tw/2], [-hL, -tw/2], [-hL, tw/2], [-hL - tw, tw/2]]
+    entities.append({
+        "id": f"{building['id']}_tower",
+        "name": f"{building['name']} - Tower",
+        "type": "polygon",
+        "coords": offsets_to_coords(cx, cy, tower, rotation),
+        "height": 0,
+        "extrudedHeight": tower_height,
+        "material": "wall"
+    })
+
+    return entities
+
+
 def generate_courtyard_building(building):
     """Generate a medieval courtyard building (like Chetham's)."""
     cx, cy = building["center"]
@@ -292,6 +429,8 @@ def generate_courtyard_building(building):
 GENERATORS = {
     "house": generate_simple_building,
     "church": generate_church,
+    "neoclassical_church": generate_neoclassical_church,
+    "chapel": generate_chapel,
     "bridge": generate_bridge,
     "courtyard": generate_courtyard_building,
 }
@@ -323,14 +462,41 @@ def main():
         print(f"  Generating: {building['name']}")
         entities = generate_building(building)
 
-        output["buildings"].append({
+        building_output = {
             "id": building["id"],
             "name": building["name"],
+            "type": building.get("type", "house"),
             "startYear": building.get("startYear", 1600),
             "endYear": building.get("endYear", 1800),
             "material": building.get("material", "stone"),
+            # Source parameters for UI editing
+            "center": building.get("center"),
+            "rotation": building.get("rotation", 0),
             "entities": entities
-        })
+        }
+        # Pass through dimension parameters (varies by type)
+        for field in ["naveLength", "naveWidth", "naveHeight", "towerSize",
+                      "towerHeight", "aisleWidth", "porticoDepth", "porticoWidth",
+                      "length", "width", "height", "span", "numArches", "wingDepth"]:
+            if field in building:
+                building_output[field] = building[field]
+        # Pass through optional metadata fields
+        for field in ["images", "references", "notes"]:
+            if field in building:
+                building_output[field] = building[field]
+        output["buildings"].append(building_output)
+
+    # Load individual building files from buildings/ directory
+    if BUILDINGS_DIR.exists():
+        for building_file in sorted(BUILDINGS_DIR.glob("*.json")):
+            try:
+                with open(building_file) as f:
+                    building = json.load(f)
+                print(f"  Loading custom: {building['name']}")
+                # Custom buildings have pre-defined entities, pass through directly
+                output["buildings"].append(building)
+            except Exception as e:
+                print(f"  Warning: Could not load {building_file.name}: {e}")
 
     print(f"Writing: {OUTPUT_FILE}")
     with open(OUTPUT_FILE, "w") as f:
