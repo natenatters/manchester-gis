@@ -1,0 +1,88 @@
+{
+  "id": "radcliffe_tower",
+  "name": "Radcliffe Tower",
+  "type": "custom",
+  "startYear": 1403,
+  "endYear": 2100,
+  "material": "stone",
+  "center": [-2.309908, 53.563818],
+  "rotation": 0,
+  "maps": {
+    "berry_1650": {
+      "center": [-2.309908, 53.563818],
+      "rotation": 0
+    },
+    "berry_1750": {
+      "center": [-2.309908, 53.563818],
+      "rotation": 0
+    },
+    "os_1845": {
+      "center": [-2.309908, 53.563818],
+      "rotation": 0
+    },
+    "os_1950s": {
+      "center": [-2.309908, 53.563818],
+      "rotation": 0
+    },
+    "modern": {
+      "center": [-2.309908, 53.563818],
+      "rotation": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "radcliffe_tower_main",
+      "name": "Radcliffe Tower - Main Tower (1403, stone-built pele tower)",
+      "type": "polygon",
+      "coords": [
+        [-2.309981, 53.563742],
+        [-2.309835, 53.563742],
+        [-2.309835, 53.563894],
+        [-2.309981, 53.563894]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower"
+    },
+    {
+      "id": "radcliffe_tower_hall_footprint",
+      "name": "Radcliffe Tower - Great Hall Footprint (demolished 19th c., timber-framed)",
+      "type": "polygon",
+      "coords": [
+        [-2.310106, 53.563767],
+        [-2.309981, 53.563767],
+        [-2.309981, 53.563869],
+        [-2.310106, 53.563869]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.5,
+      "material": "wall"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/Category:Radcliffe_Tower",
+      "caption": "Radcliffe Tower remains showing coursed squared stone construction with remnants of ground floor vault",
+      "date": "c.2015"
+    },
+    {
+      "url": "https://historicengland.org.uk/images-books/photos/item/LON01/01/GM/010",
+      "caption": "The remains of Radcliffe Tower seen from the south (George R Long Collection)",
+      "date": "early 20th century"
+    },
+    {
+      "url": "https://historicengland.org.uk/images-books/photos/item/LON01/01/GM/011",
+      "caption": "The remains of Radcliffe Tower seen from north-west in the yard of Tower Farm",
+      "date": "early 20th century"
+    }
+  ],
+  "references": [
+    "https://historicengland.org.uk/listing/the-list/list-entry/1014721",
+    "https://historicengland.org.uk/listing/the-list/list-entry/1309271",
+    "https://en.wikipedia.org/wiki/Radcliffe_Tower",
+    "http://www.gatehouse-gazetteer.info/English%20sites/119.html",
+    "https://www.derelictmanchester.com/p/radcliffe-tower.html",
+    "https://lancashirepast.com/2016/12/01/radcliffe-tower-radcliffe-near-bury/"
+  ],
+  "notes": "Grade I listed building and Scheduled Monument (HE List Entry 1014721). Radcliffe Tower is the sole surviving element of a medieval manor house built by James de Radcliffe in 1403, following a royal licence to crenellate granted on August 15, 1403. The tower is a pele tower - a small fortified keep built during the Scottish Wars period. Dimensions: 9.6m x 17m footprint (10.5 yards x 19 yards), surviving to approximately 6.1m height (originally three stories ~8.5m). Walls are 1.5m thick at base, increasing to 1.9m via plinth. Constructed of coursed squared stone, possibly ashlar. Features include stone tunnel vault on ground floor (substantial parts remain), splayed windows in eastern wall, large fireplace (3.2m wide x 2.2m high) in center of eastern wall with flue, pointed arch doorway with roll-moulded surround in western wall. Western wall shows slot marks where timber-framed Great Hall was attached - hall measured 12.95m long internally. The hall gable outline is still visible on the tower's west wall, showing the two buildings were designed as an integrated complex. Ground floor had unusual feature of fireplaces (later converted to arched openings for agricultural use from 17th century). The de Radclyffe family, descended from Norman lord Nicholas FitzGilbert de Tabois who adopted the surname from 'red cliff' near River Irwell, were major Lancashire landholders owning estates across south-eastern Lancashire. Manor house demolished 19th century leaving only tower. Heritage Lottery Fund awarded £267,000 in 2013 for conservation and interpretation through Radcliffe Heritage Project partnership."
+}

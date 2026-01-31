@@ -2482,6 +2482,1656 @@
       ]
     },
     {
+      "id": "chethams_gatehouse__berry_1650",
+      "name": "Chetham's Library - Gatehouse (Entry from Long Millgate)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.2441,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.2441,
+          53.48661
+        ]
+      ]
+    },
+    {
+      "id": "chethams_south_wing__berry_1650",
+      "name": "Chetham's Library - South Wing (Baronial Hall)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.244,
+          53.48663
+        ]
+      ]
+    },
+    {
+      "id": "chethams_east_wing__berry_1650",
+      "name": "Chetham's Library - East Wing (Reading Room)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.4867
+        ],
+        [
+          -2.2435,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_north_wing__berry_1650",
+      "name": "Chetham's Library - North Wing (Priests' Chambers)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.4867
+        ],
+        [
+          -2.244,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_west_connector__berry_1650",
+      "name": "Chetham's Library - West Cloister Gallery",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48665
+        ],
+        [
+          -2.244,
+          53.48665
+        ]
+      ]
+    },
+    {
+      "id": "chethams_gatehouse__berry_1750",
+      "name": "Chetham's Library - Gatehouse (Entry from Long Millgate)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.2441,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.2441,
+          53.48661
+        ]
+      ]
+    },
+    {
+      "id": "chethams_south_wing__berry_1750",
+      "name": "Chetham's Library - South Wing (Baronial Hall)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.244,
+          53.48663
+        ]
+      ]
+    },
+    {
+      "id": "chethams_east_wing__berry_1750",
+      "name": "Chetham's Library - East Wing (Reading Room)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.4867
+        ],
+        [
+          -2.2435,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_north_wing__berry_1750",
+      "name": "Chetham's Library - North Wing (Priests' Chambers)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.4867
+        ],
+        [
+          -2.244,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_west_connector__berry_1750",
+      "name": "Chetham's Library - West Cloister Gallery",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48665
+        ],
+        [
+          -2.244,
+          53.48665
+        ]
+      ]
+    },
+    {
+      "id": "chethams_gatehouse__os_1845",
+      "name": "Chetham's Library - Gatehouse (Entry from Long Millgate)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.2441,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.2441,
+          53.48661
+        ]
+      ]
+    },
+    {
+      "id": "chethams_south_wing__os_1845",
+      "name": "Chetham's Library - South Wing (Baronial Hall)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.244,
+          53.48663
+        ]
+      ]
+    },
+    {
+      "id": "chethams_east_wing__os_1845",
+      "name": "Chetham's Library - East Wing (Reading Room)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.4867
+        ],
+        [
+          -2.2435,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_north_wing__os_1845",
+      "name": "Chetham's Library - North Wing (Priests' Chambers)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.4867
+        ],
+        [
+          -2.244,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_west_connector__os_1845",
+      "name": "Chetham's Library - West Cloister Gallery",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48665
+        ],
+        [
+          -2.244,
+          53.48665
+        ]
+      ]
+    },
+    {
+      "id": "chethams_gatehouse__os_1950s",
+      "name": "Chetham's Library - Gatehouse (Entry from Long Millgate)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.2441,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.2441,
+          53.48661
+        ]
+      ]
+    },
+    {
+      "id": "chethams_south_wing__os_1950s",
+      "name": "Chetham's Library - South Wing (Baronial Hall)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.244,
+          53.48663
+        ]
+      ]
+    },
+    {
+      "id": "chethams_east_wing__os_1950s",
+      "name": "Chetham's Library - East Wing (Reading Room)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.4867
+        ],
+        [
+          -2.2435,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_north_wing__os_1950s",
+      "name": "Chetham's Library - North Wing (Priests' Chambers)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.4867
+        ],
+        [
+          -2.244,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_west_connector__os_1950s",
+      "name": "Chetham's Library - West Cloister Gallery",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48665
+        ],
+        [
+          -2.244,
+          53.48665
+        ]
+      ]
+    },
+    {
+      "id": "chethams_gatehouse__modern",
+      "name": "Chetham's Library - Gatehouse (Entry from Long Millgate)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.2441,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.2441,
+          53.48661
+        ]
+      ]
+    },
+    {
+      "id": "chethams_south_wing__modern",
+      "name": "Chetham's Library - South Wing (Baronial Hall)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.244,
+          53.48663
+        ]
+      ]
+    },
+    {
+      "id": "chethams_east_wing__modern",
+      "name": "Chetham's Library - East Wing (Reading Room)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.2435,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.48656
+        ],
+        [
+          -2.24342,
+          53.4867
+        ],
+        [
+          -2.2435,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_north_wing__modern",
+      "name": "Chetham's Library - North Wing (Priests' Chambers)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.48663
+        ],
+        [
+          -2.2435,
+          53.4867
+        ],
+        [
+          -2.244,
+          53.4867
+        ]
+      ]
+    },
+    {
+      "id": "chethams_west_connector__modern",
+      "name": "Chetham's Library - West Cloister Gallery",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.244,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48661
+        ],
+        [
+          -2.24395,
+          53.48665
+        ],
+        [
+          -2.244,
+          53.48665
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_great_hall__berry_1650",
+      "name": "Ordsall Hall - Great Hall (1512, timber-framed with quatrefoils)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 11,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.469498
+        ],
+        [
+          -2.27758,
+          53.469498
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_star_chamber_wing__berry_1650",
+      "name": "Ordsall Hall - Star Chamber Wing (1360s, oldest section)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.27758,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46936
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_brick_wing__berry_1650",
+      "name": "Ordsall Hall - Brick Wing (1639)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_south_wing__berry_1650",
+      "name": "Ordsall Hall - South Wing (15th century timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 8,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46905
+        ],
+        [
+          -2.27735,
+          53.46905
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_great_hall__berry_1750",
+      "name": "Ordsall Hall - Great Hall (1512, timber-framed with quatrefoils)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 11,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.469498
+        ],
+        [
+          -2.27758,
+          53.469498
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_star_chamber_wing__berry_1750",
+      "name": "Ordsall Hall - Star Chamber Wing (1360s, oldest section)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.27758,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46936
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_brick_wing__berry_1750",
+      "name": "Ordsall Hall - Brick Wing (1639)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_south_wing__berry_1750",
+      "name": "Ordsall Hall - South Wing (15th century timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 8,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46905
+        ],
+        [
+          -2.27735,
+          53.46905
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_great_hall__os_1845",
+      "name": "Ordsall Hall - Great Hall (1512, timber-framed with quatrefoils)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 11,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.469498
+        ],
+        [
+          -2.27758,
+          53.469498
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_star_chamber_wing__os_1845",
+      "name": "Ordsall Hall - Star Chamber Wing (1360s, oldest section)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.27758,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46936
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_brick_wing__os_1845",
+      "name": "Ordsall Hall - Brick Wing (1639)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_south_wing__os_1845",
+      "name": "Ordsall Hall - South Wing (15th century timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 8,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46905
+        ],
+        [
+          -2.27735,
+          53.46905
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_great_hall__os_1950s",
+      "name": "Ordsall Hall - Great Hall (1512, timber-framed with quatrefoils)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 11,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.469498
+        ],
+        [
+          -2.27758,
+          53.469498
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_star_chamber_wing__os_1950s",
+      "name": "Ordsall Hall - Star Chamber Wing (1360s, oldest section)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.27758,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46936
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_brick_wing__os_1950s",
+      "name": "Ordsall Hall - Brick Wing (1639)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_south_wing__os_1950s",
+      "name": "Ordsall Hall - South Wing (15th century timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 8,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46905
+        ],
+        [
+          -2.27735,
+          53.46905
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_great_hall__modern",
+      "name": "Ordsall Hall - Great Hall (1512, timber-framed with quatrefoils)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 11,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.2772,
+          53.469498
+        ],
+        [
+          -2.27758,
+          53.469498
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_star_chamber_wing__modern",
+      "name": "Ordsall Hall - Star Chamber Wing (1360s, oldest section)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.27758,
+          53.46936
+        ],
+        [
+          -2.27758,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.27735,
+          53.46936
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_brick_wing__modern",
+      "name": "Ordsall Hall - Brick Wing (1639)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.2772,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46936
+        ],
+        [
+          -2.27705,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ]
+      ]
+    },
+    {
+      "id": "ordsall_hall_south_wing__modern",
+      "name": "Ordsall Hall - South Wing (15th century timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 8,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.27735,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46915
+        ],
+        [
+          -2.2772,
+          53.46905
+        ],
+        [
+          -2.27735,
+          53.46905
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_main__berry_1650",
+      "name": "Radcliffe Tower - Main Tower (1403, stone-built pele tower)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.309981,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563894
+        ],
+        [
+          -2.309981,
+          53.563894
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_hall_footprint__berry_1650",
+      "name": "Radcliffe Tower - Great Hall Footprint (demolished 19th c., timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 0.5,
+      "material": "wall",
+      "availability": {
+        "start": 1650,
+        "stop": 1749
+      },
+      "coords": [
+        [
+          -2.310106,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563869
+        ],
+        [
+          -2.310106,
+          53.563869
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_main__berry_1750",
+      "name": "Radcliffe Tower - Main Tower (1403, stone-built pele tower)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.309981,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563894
+        ],
+        [
+          -2.309981,
+          53.563894
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_hall_footprint__berry_1750",
+      "name": "Radcliffe Tower - Great Hall Footprint (demolished 19th c., timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 0.5,
+      "material": "wall",
+      "availability": {
+        "start": 1750,
+        "stop": 1844
+      },
+      "coords": [
+        [
+          -2.310106,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563869
+        ],
+        [
+          -2.310106,
+          53.563869
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_main__os_1845",
+      "name": "Radcliffe Tower - Main Tower (1403, stone-built pele tower)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.309981,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563894
+        ],
+        [
+          -2.309981,
+          53.563894
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_hall_footprint__os_1845",
+      "name": "Radcliffe Tower - Great Hall Footprint (demolished 19th c., timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 0.5,
+      "material": "wall",
+      "availability": {
+        "start": 1845,
+        "stop": 1889
+      },
+      "coords": [
+        [
+          -2.310106,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563869
+        ],
+        [
+          -2.310106,
+          53.563869
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_main__os_1950s",
+      "name": "Radcliffe Tower - Main Tower (1403, stone-built pele tower)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.309981,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563894
+        ],
+        [
+          -2.309981,
+          53.563894
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_hall_footprint__os_1950s",
+      "name": "Radcliffe Tower - Great Hall Footprint (demolished 19th c., timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 0.5,
+      "material": "wall",
+      "availability": {
+        "start": 1890,
+        "stop": 1949
+      },
+      "coords": [
+        [
+          -2.310106,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563869
+        ],
+        [
+          -2.310106,
+          53.563869
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_main__modern",
+      "name": "Radcliffe Tower - Main Tower (1403, stone-built pele tower)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.309981,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563742
+        ],
+        [
+          -2.309835,
+          53.563894
+        ],
+        [
+          -2.309981,
+          53.563894
+        ]
+      ]
+    },
+    {
+      "id": "radcliffe_tower_hall_footprint__modern",
+      "name": "Radcliffe Tower - Great Hall Footprint (demolished 19th c., timber-framed)",
+      "type": "polygon",
+      "height": 0,
+      "extrudedHeight": 0.5,
+      "material": "wall",
+      "availability": {
+        "start": 1950,
+        "stop": 2100
+      },
+      "coords": [
+        [
+          -2.310106,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563767
+        ],
+        [
+          -2.309981,
+          53.563869
+        ],
+        [
+          -2.310106,
+          53.563869
+        ]
+      ]
+    },
+    {
       "id": "sacred_trinity_tower__berry_1650",
       "name": "Sacred Trinity Church - Tower (1635 Gothic-survival)",
       "type": "polygon",

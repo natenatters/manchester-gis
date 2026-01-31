@@ -19,7 +19,7 @@ from pathlib import Path
 
 # Project paths
 PROJECT_DIR = Path(__file__).parent.parent
-DATA_DIR = PROJECT_DIR / "data" / "projects" / "example"
+DATA_DIR = PROJECT_DIR / "public" / "data" / "projects" / "example"
 INPUT_FILE = DATA_DIR / "buildings_1650.json"
 BUILDINGS_DIR = DATA_DIR / "buildings"
 OUTPUT_FILE = DATA_DIR / "building_entities.json"
