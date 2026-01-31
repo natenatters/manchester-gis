@@ -1,0 +1,115 @@
+{
+  "id": "chethams_library",
+  "name": "Chetham's Library (College of Priests)",
+  "type": "custom",
+  "startYear": 1421,
+  "endYear": 2100,
+  "material": "stone",
+  "center": [-2.243786, 53.486618],
+  "rotation": 0,
+  "maps": {
+    "berry_1650": {
+      "center": [-2.243786, 53.486618],
+      "rotation": 0
+    },
+    "berry_1750": {
+      "center": [-2.243786, 53.486618],
+      "rotation": 0
+    },
+    "modern": {
+      "center": [-2.243786, 53.486618],
+      "rotation": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "chethams_gatehouse",
+      "name": "Chetham's Library - Gatehouse (Entry from Long Millgate)",
+      "type": "polygon",
+      "coords": [
+        [-2.244100, 53.486560],
+        [-2.244000, 53.486560],
+        [-2.244000, 53.486610],
+        [-2.244100, 53.486610]
+      ],
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall"
+    },
+    {
+      "id": "chethams_south_wing",
+      "name": "Chetham's Library - South Wing (Baronial Hall)",
+      "type": "polygon",
+      "coords": [
+        [-2.244000, 53.486560],
+        [-2.243500, 53.486560],
+        [-2.243500, 53.486630],
+        [-2.244000, 53.486630]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "chethams_east_wing",
+      "name": "Chetham's Library - East Wing (Reading Room)",
+      "type": "polygon",
+      "coords": [
+        [-2.243500, 53.486560],
+        [-2.243420, 53.486560],
+        [-2.243420, 53.486700],
+        [-2.243500, 53.486700]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "chethams_north_wing",
+      "name": "Chetham's Library - North Wing (Priests' Chambers)",
+      "type": "polygon",
+      "coords": [
+        [-2.244000, 53.486630],
+        [-2.243500, 53.486630],
+        [-2.243500, 53.486700],
+        [-2.244000, 53.486700]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "chethams_west_connector",
+      "name": "Chetham's Library - West Cloister Gallery",
+      "type": "polygon",
+      "coords": [
+        [-2.244000, 53.486610],
+        [-2.243950, 53.486610],
+        [-2.243950, 53.486650],
+        [-2.244000, 53.486650]
+      ],
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Chetham's_Library_-_geograph.org.uk_-_5445835.jpg",
+      "caption": "Chetham's Library exterior showing medieval sandstone construction",
+      "date": "modern"
+    },
+    {
+      "url": "https://library.chethams.com/",
+      "caption": "Historic reading room with chained books, where Marx and Engels worked in 1845",
+      "date": "1653-present"
+    }
+  ],
+  "references": [
+    "https://historicengland.org.uk/listing/the-list/list-entry/1283015",
+    "https://library.chethams.com/about/history/the-medieval-buildings/",
+    "https://en.wikipedia.org/wiki/Chetham's_Library",
+    "https://www.countrylife.co.uk/architecture/chethams-inside-the-medieval-masterpiece-that-is-britains-oldest-library-and-one-of-its-most-famous-music-schools-211099"
+  ],
+  "notes": "Built in 1421 by Thomas de la Warre as a college for priests serving Manchester's Collegiate Church (now Cathedral). One of the most complete medieval complexes in northwest England. Sandstone construction quarried in Collyhurst and transported by river barge. Layout forms lowercase 'b' shape with three wings around inner cobbled courtyard (Cloister Court), connected by cloister galleries at ground and first-floor levels. Original accommodation included chambers for eight fellows/canons, warden's lodgings, great hall (now Baronial Hall), bakehouse, brewery, stables, and guest rooms. In 1653, established as free public reference library under the will of Humphrey Chetham (1580-1653) - oldest public library in English-speaking world. Famous Reading Room features chained books and mid-17th century oak fixtures; Marx and Engels worked here in 1845. Grade I listed (List Entry 1283015, listed 25 Feb 1952). Designated collection of national and international importance. Buildings include gatehouse entrance from Long Millgate, Baronial Hall with original timber roof and dais, Reading Room, Association Room, and Audit Room. Still operates as working library and hosts Chetham's School of Music. Located on sandstone outcrop at confluence of Rivers Irwell and Irk, adjacent to Manchester Cathedral."
+}

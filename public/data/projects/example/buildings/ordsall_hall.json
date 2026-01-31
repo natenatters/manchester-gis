@@ -1,0 +1,100 @@
+{
+  "id": "ordsall_hall",
+  "name": "Ordsall Hall",
+  "type": "custom",
+  "startYear": 1360,
+  "endYear": 2100,
+  "material": "timber",
+  "center": [-2.277426, 53.469429],
+  "rotation": 0,
+  "maps": {
+    "berry_1650": {
+      "center": [-2.277426, 53.469429],
+      "rotation": 0
+    },
+    "berry_1750": {
+      "center": [-2.277426, 53.469429],
+      "rotation": 0
+    },
+    "os_1845": {
+      "center": [-2.277426, 53.469429],
+      "rotation": 0
+    },
+    "modern": {
+      "center": [-2.277426, 53.469429],
+      "rotation": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "ordsall_hall_great_hall",
+      "name": "Ordsall Hall - Great Hall (1512, timber-framed with quatrefoils)",
+      "type": "polygon",
+      "coords": [
+        [-2.277580, 53.469360],
+        [-2.277200, 53.469360],
+        [-2.277200, 53.469498],
+        [-2.277580, 53.469498]
+      ],
+      "height": 0,
+      "extrudedHeight": 11,
+      "material": "wall"
+    },
+    {
+      "id": "ordsall_hall_star_chamber_wing",
+      "name": "Ordsall Hall - Star Chamber Wing (1360s, oldest section)",
+      "type": "polygon",
+      "coords": [
+        [-2.277580, 53.469360],
+        [-2.277580, 53.469150],
+        [-2.277350, 53.469150],
+        [-2.277350, 53.469360]
+      ],
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall"
+    },
+    {
+      "id": "ordsall_hall_brick_wing",
+      "name": "Ordsall Hall - Brick Wing (1639)",
+      "type": "polygon",
+      "coords": [
+        [-2.277200, 53.469360],
+        [-2.277050, 53.469360],
+        [-2.277050, 53.469150],
+        [-2.277200, 53.469150]
+      ],
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall"
+    },
+    {
+      "id": "ordsall_hall_south_wing",
+      "name": "Ordsall Hall - South Wing (15th century timber-framed)",
+      "type": "polygon",
+      "coords": [
+        [-2.277350, 53.469150],
+        [-2.277200, 53.469150],
+        [-2.277200, 53.469050],
+        [-2.277350, 53.469050]
+      ],
+      "height": 0,
+      "extrudedHeight": 8,
+      "material": "wall"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://www.geograph.org.uk/photo/3717",
+      "caption": "Ordsall Hall exterior showing timber-framed south range with quatrefoil patterns",
+      "date": "2001"
+    }
+  ],
+  "references": [
+    "https://historicengland.org.uk/listing/the-list/list-entry/1386169",
+    "https://ordsallhall.com/explore/the-building/",
+    "https://en.wikipedia.org/wiki/Ordsall_Hall",
+    "https://lancashirepast.com/2023/10/28/a-history-of-ordsall-hall/"
+  ],
+  "notes": "Grade I listed Tudor manor house, one of the finest timber-framed buildings in Greater Manchester. The Star Chamber (1360s) is the oldest surviving section, built by Sir John Radclyffe with a panelled ceiling embellished with gilded stars. The Great Hall was constructed c.1512 by Sir Alexander Radclyffe, featuring 2 principal bays with moulded shafts carrying cambered tie-beams with king-post and panelling. Cusped wind-braces form distinctive quatrefoil panelling in 3 tiers - a highly decorative Gothic feature visible on the exterior. The brick wing was added in 1639 by Alexander Radclyffe. Originally built around a courtyard, only two wings survive forming the current L-shaped plan - the east wing was demolished mid-18th century. Restored 1896-97 by Alfred Derbyshire, and again 2009-2011 when white paint was stripped to reveal original brickwork. Tree ring analysis confirmed 1512 construction date for Great Hall. The Radclyffe family owned Ordsall from 1354 until 1662. Hall used as clergy training school (1897), then working men's club before becoming a museum."
+}
