@@ -1,0 +1,170 @@
+{
+  "id": "wythenshawe_hall",
+  "name": "Wythenshawe Hall",
+  "type": "custom",
+  "startYear": 1540,
+  "endYear": 2100,
+  "material": "timber",
+  "center": [-2.2781604, 53.4048254],
+  "rotation": 15,
+  "maps": {
+    "berry_1650": {
+      "center": [-2.2781604, 53.4048254],
+      "rotation": 15
+    },
+    "berry_1750": {
+      "center": [-2.2781604, 53.4048254],
+      "rotation": 15
+    },
+    "os_1845": {
+      "center": [-2.2781604, 53.4048254],
+      "rotation": 15
+    },
+    "os_1950s": {
+      "center": [-2.2781604, 53.4048254],
+      "rotation": 15
+    },
+    "modern": {
+      "center": [-2.2781604, 53.4048254],
+      "rotation": 15
+    }
+  },
+  "entities": [
+    {
+      "id": "wythenshawe_hall_great_hall",
+      "name": "Wythenshawe Hall - Great Hall (Central range, 1540)",
+      "type": "polygon",
+      "coords": [
+        [-2.278300, 53.404760],
+        [-2.278020, 53.404760],
+        [-2.278020, 53.404890],
+        [-2.278300, 53.404890]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "timber"
+    },
+    {
+      "id": "wythenshawe_hall_north_wing",
+      "name": "Wythenshawe Hall - North Wing (Projecting wing, 1540)",
+      "type": "polygon",
+      "coords": [
+        [-2.278370, 53.404890],
+        [-2.278230, 53.404890],
+        [-2.278230, 53.405030],
+        [-2.278370, 53.405030]
+      ],
+      "height": 0,
+      "extrudedHeight": 11,
+      "material": "timber"
+    },
+    {
+      "id": "wythenshawe_hall_south_wing",
+      "name": "Wythenshawe Hall - South Wing (Projecting wing, 1540)",
+      "type": "polygon",
+      "coords": [
+        [-2.278090, 53.404620],
+        [-2.277950, 53.404620],
+        [-2.277950, 53.404760],
+        [-2.278090, 53.404760]
+      ],
+      "height": 0,
+      "extrudedHeight": 11,
+      "material": "timber"
+    },
+    {
+      "id": "wythenshawe_hall_entrance_porch",
+      "name": "Wythenshawe Hall - Entrance Porch (East front)",
+      "type": "polygon",
+      "coords": [
+        [-2.278020, 53.404810],
+        [-2.277970, 53.404810],
+        [-2.277970, 53.404840],
+        [-2.278020, 53.404840]
+      ],
+      "height": 0,
+      "extrudedHeight": 8,
+      "material": "timber"
+    },
+    {
+      "id": "wythenshawe_hall_dais_bay",
+      "name": "Wythenshawe Hall - Dais Bay (Upper end of hall)",
+      "type": "polygon",
+      "coords": [
+        [-2.278300, 53.404850],
+        [-2.278350, 53.404850],
+        [-2.278350, 53.404890],
+        [-2.278300, 53.404890]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "timber"
+    },
+    {
+      "id": "wythenshawe_hall_library_wing",
+      "name": "Wythenshawe Hall - Library Wing (Neo-classical addition, 1795-1800)",
+      "type": "polygon",
+      "coords": [
+        [-2.278430, 53.405030],
+        [-2.278270, 53.405030],
+        [-2.278270, 53.405120],
+        [-2.278430, 53.405120]
+      ],
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall"
+    },
+    {
+      "id": "wythenshawe_hall_servants_wing_south",
+      "name": "Wythenshawe Hall - Servants' Wing South (Early 19th c.)",
+      "type": "polygon",
+      "coords": [
+        [-2.278090, 53.404530],
+        [-2.277950, 53.404530],
+        [-2.277950, 53.404620],
+        [-2.278090, 53.404620]
+      ],
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall"
+    },
+    {
+      "id": "wythenshawe_hall_servants_courtyard",
+      "name": "Wythenshawe Hall - Servants' Courtyard East (Early 19th c.)",
+      "type": "polygon",
+      "coords": [
+        [-2.277950, 53.404530],
+        [-2.277820, 53.404530],
+        [-2.277820, 53.404760],
+        [-2.277950, 53.404760]
+      ],
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://historicengland.org.uk/listing/the-list/list-entry/1255034",
+      "caption": "Historic England listing for Wythenshawe Hall showing timber-framed Tudor architecture",
+      "date": "2022"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Wythenshawe_Hall",
+      "caption": "Wythenshawe Hall exterior showing black and white timber framing and central hall with projecting wings",
+      "date": "various"
+    },
+    {
+      "url": "https://www.alamy.com/stock-photo-wythenshawe-hall-is-a-16th-century-medieval-timber-framed-historic-77724116.html",
+      "caption": "16th-century timber-framed historic house in Wythenshawe Park",
+      "date": "historic"
+    }
+  ],
+  "references": [
+    "https://historicengland.org.uk/listing/the-list/list-entry/1255034",
+    "https://100hallsaroundmanchester.wordpress.com/2021/05/22/100-halls-around-manchester-part-46-wythenshawe-hall-wythenshawe/",
+    "https://en.wikipedia.org/wiki/Wythenshawe_Hall",
+    "https://wythenshawehall.org/"
+  ],
+  "notes": "Grade II* listed Tudor manor house built c.1540 by Robert Tatton of Chester, one of the finest timber-framed buildings in the northwest. The classic H-plan consists of a central great hall with two projecting wings, plus porch and dais bays. Robert Tatton likely built the hall in time for his 1539 marriage to Dorothy Booth, incorporating timbers from a possible earlier building. The Tatton family held Wythenshawe Hall for nearly 400 years after Robert De Tatton married Alice, heiress to the Wythenshawe Estates, in 1370. During the English Civil War (1643-44), Robert Tatton defended the hall against Parliamentarian forces led by Robert Duckenfield for eighteen months until two cannons brought from Manchester forced surrender on 27 February 1644. The hall was partially rebuilt 1795-1800 by architect Lewis Wyatt (who also worked on Tatton Park and Heaton Park), adding a neo-classical library wing to the north with adjacent billiard room. Early 19th century saw servants' wings added south of the main block around a courtyard. Mid-19th century alterations possibly by Edward Blore redirected the entrance porch from the screens passage into a new entrance hall where the kitchen had been. Victorian era additions included refurbished dining room and tenant's hall. Stucco was added to the east front leaving few timbers exposed across central gables; later restoration removed stucco and restored half-timber front (though not to original design). Tudor wall art in trompe l'oeil style discovered in the Withdrawing Room when panelling removed during restoration, revealing decorated exposed timber construction of Robert Tatton's original hall. Deathwatch beetle discovered 1946 requiring £20,000 restoration. In 1926, Robert Henry Grenville Tatton sold 2,500 acres to Manchester Corporation for housing development. Ernest Simon purchased Wythenshawe Hall and 250 acres, later gifting the park to Manchester as public space. Hall opened as public museum 1930. Devastated by arson fire March 2016 that destroyed much earliest historic fabric; added to Heritage at Risk Register 2016. Underwent £6.7 million restoration, reopened to public September 2022. Listed 25 February 1952. OSM coordinates: 53.4048254, -2.2781604."
+}

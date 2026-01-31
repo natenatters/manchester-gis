@@ -1,0 +1,276 @@
+{
+  "id": "roman_roads",
+  "name": "Roman Roads from Mamucium",
+  "type": "custom",
+  "startYear": 79,
+  "endYear": 2100,
+  "material": "stone",
+  "center": [-2.255137, 53.475574],
+  "rotation": 0,
+  "maps": {
+    "modern": {
+      "center": [-2.255137, 53.475574],
+      "rotation": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "roman_road_ribchester_1",
+      "name": "Roman Road to Ribchester (Margary 7b) - Deansgate Section",
+      "type": "polygon",
+      "coords": [
+        [-2.254500, 53.475574],
+        [-2.254400, 53.475574],
+        [-2.251000, 53.490000],
+        [-2.250900, 53.490000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_ribchester_2",
+      "name": "Roman Road to Ribchester - Prestwich Section",
+      "type": "polygon",
+      "coords": [
+        [-2.251000, 53.490000],
+        [-2.250900, 53.490000],
+        [-2.248000, 53.510000],
+        [-2.247900, 53.510000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_ribchester_3",
+      "name": "Roman Road to Ribchester - Radcliffe Section",
+      "type": "polygon",
+      "coords": [
+        [-2.248000, 53.510000],
+        [-2.247900, 53.510000],
+        [-2.246000, 53.530000],
+        [-2.245900, 53.530000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_ribchester_4",
+      "name": "Roman Road to Ribchester - Affetside Section",
+      "type": "polygon",
+      "coords": [
+        [-2.246000, 53.530000],
+        [-2.245900, 53.530000],
+        [-2.380000, 53.620000],
+        [-2.379900, 53.620000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_york_1",
+      "name": "Roman Road to York (Margary 712) - Store Street Section",
+      "type": "polygon",
+      "coords": [
+        [-2.255137, 53.475574],
+        [-2.255037, 53.475574],
+        [-2.230000, 53.478000],
+        [-2.229900, 53.478000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_york_2",
+      "name": "Roman Road to York - Newton Heath/Failsworth Section",
+      "type": "polygon",
+      "coords": [
+        [-2.230000, 53.478000],
+        [-2.229900, 53.478000],
+        [-2.180000, 53.490000],
+        [-2.179900, 53.490000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_york_3",
+      "name": "Roman Road to York - Oldham/High Moor Section",
+      "type": "polygon",
+      "coords": [
+        [-2.180000, 53.490000],
+        [-2.179900, 53.490000],
+        [-2.080000, 53.520000],
+        [-2.079900, 53.520000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_york_4",
+      "name": "Roman Road to York - Castleshaw Section",
+      "type": "polygon",
+      "coords": [
+        [-2.080000, 53.520000],
+        [-2.079900, 53.520000],
+        [-2.000000, 53.550000],
+        [-1.999900, 53.550000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_chester_1",
+      "name": "Roman Road to Chester (Margary 7a) - Deansgate/Chester Road Section",
+      "type": "polygon",
+      "coords": [
+        [-2.255137, 53.475574],
+        [-2.255237, 53.475574],
+        [-2.270000, 53.470000],
+        [-2.270100, 53.470000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_chester_2",
+      "name": "Roman Road to Chester - Stretford Section",
+      "type": "polygon",
+      "coords": [
+        [-2.270000, 53.470000],
+        [-2.270100, 53.470000],
+        [-2.305000, 53.450000],
+        [-2.305100, 53.450000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_chester_3",
+      "name": "Roman Road to Chester - Sale/Altrincham Section",
+      "type": "polygon",
+      "coords": [
+        [-2.305000, 53.450000],
+        [-2.305100, 53.450000],
+        [-2.360000, 53.400000],
+        [-2.360100, 53.400000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_chester_4",
+      "name": "Roman Road to Chester - Northwich Section",
+      "type": "polygon",
+      "coords": [
+        [-2.360000, 53.400000],
+        [-2.360100, 53.400000],
+        [-2.520000, 53.260000],
+        [-2.520100, 53.260000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_wigan_1",
+      "name": "Roman Road to Wigan (Margary 702) - Hope Hall Section",
+      "type": "polygon",
+      "coords": [
+        [-2.255137, 53.475574],
+        [-2.255237, 53.475574],
+        [-2.285000, 53.492000],
+        [-2.285100, 53.492000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_wigan_2",
+      "name": "Roman Road to Wigan - Worsley Section",
+      "type": "polygon",
+      "coords": [
+        [-2.285000, 53.492000],
+        [-2.285100, 53.492000],
+        [-2.370000, 53.510000],
+        [-2.370100, 53.510000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_wigan_3",
+      "name": "Roman Road to Wigan - Tyldesley Section",
+      "type": "polygon",
+      "coords": [
+        [-2.370000, 53.510000],
+        [-2.370100, 53.510000],
+        [-2.450000, 53.530000],
+        [-2.450100, 53.530000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    },
+    {
+      "id": "roman_road_wigan_4",
+      "name": "Roman Road to Wigan - Approach to Coccium",
+      "type": "polygon",
+      "coords": [
+        [-2.450000, 53.530000],
+        [-2.450100, 53.530000],
+        [-2.630000, 53.545000],
+        [-2.630100, 53.545000]
+      ],
+      "height": 0,
+      "extrudedHeight": 0.3,
+      "material": "stone"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://www.romanroads.org/gazetteer/M7b.htm",
+      "caption": "Roman road to Ribchester - surviving agger visible at Whitefield Golf Course and Withins Reservoir",
+      "date": "Roman period, AD 79-410"
+    },
+    {
+      "url": "https://www.romanroads.org/gazetteer/M712.htm",
+      "caption": "Roman road to Castleshaw/York - long straight alignment preserved in modern roads from Store Street through Oldham",
+      "date": "Roman period, AD 79-410"
+    },
+    {
+      "url": "https://www.romanroads.org/gazetteer/M7a.htm",
+      "caption": "Roman road to Chester - via Stretford ('street ford'), part of the major Chester-York highway",
+      "date": "Roman period, AD 79-410"
+    },
+    {
+      "url": "https://www.romanroads.org/gazetteer/M702.htm",
+      "caption": "Roman road to Wigan (Coccium) - excavated sections at Ellesmere Park and Worsley show road 23 feet wide with double ditches",
+      "date": "Roman period, AD 79-410"
+    }
+  ],
+  "references": [
+    "https://www.romanroads.org/gazetteer/M7b.htm",
+    "https://www.romanroads.org/gazetteer/M712.htm",
+    "https://www.romanroads.org/gazetteer/M7a.htm",
+    "https://www.romanroads.org/gazetteer/M702.htm",
+    "https://en.wikipedia.org/wiki/Mamucium",
+    "https://www.wiganarchsoc.co.uk/blog/?page_id=420",
+    "https://aboutmanchester.co.uk/east-manchesters-roman-road-to-saddleworth-and-beyond/",
+    "https://roadsofromanbritain.org/gazetteer/yorkshire/rr712.html",
+    "https://www.roman-britain.co.uk/places/coccium/"
+  ],
+  "notes": "Four major Roman roads radiated from Mamucium (Roman Manchester) fort in Castlefield, founded c. AD 79. The roads formed part of the Roman military infrastructure in northern Britain:\n\n1. ROAD TO RIBCHESTER (Margary 7b, 26.5 miles north): Ran along modern Deansgate, through Prestwich (later Bury Old Road), crossing the River Irwell at Radcliffe, continuing via Affetside to Bremetennacum (Ribchester). Featured long military sighting alignments. Surviving agger visible at Whitefield Golf Course and Withins Reservoir. A fortlet at Wayoh Bridge (14 miles from Manchester) shows continued military presence.\n\n2. ROAD TO YORK (Margary 712, 13.5 miles east): Part of the Chester-York highway, 'probably the most important road in northern England'. Exited via Store Street with long straight alignment to High Moor, Oldham. Preserved in Briscoe Lane, Roman Road, The Street, and Honeywell Lane. Connected to Castleshaw fort and continued east toward Eboracum (York). Built c. AD 80.\n\n3. ROAD TO CHESTER (Margary 7a, 20 miles south): Major highway to Deva Victrix (Chester). Crossed River Medlock at Knott Mill, passed through Stretford ('street ford' - named for the Roman road), Sale (Washway Road), Altrincham, to Condate (Northwich) and Chester. Modern Chester Road preserves much of the alignment. The 'Great Stone' in Stretford may be a Roman marker.\n\n4. ROAD TO WIGAN (Margary 702, 17 miles west): Connected to Coccium (Wigan), confirmed by excavations at Ellesmere Park (2005), Worsley (1984), and Wentworth School (2013). Road measured 23 feet wide with double ditches. Ran via Hope Hall, Worsley, Tyldesley, to Wigan. Distance matches Antonine Itinerary (17 Roman miles).\n\nThese roads were built using military planning with straight alignments between high points. The agger (raised road bed) was typically cambered for drainage with flanking ditches. Many sections remain visible via LIDAR imagery and are preserved in modern road alignments. Archaeological excavations have confirmed road construction: stone foundations, gravel surfaces, and engineering techniques including zig-zag patterns to manage steep gradients."
+}

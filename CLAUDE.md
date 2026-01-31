@@ -55,6 +55,22 @@ Primary free sources:
 
 Contact GMAAS (gmaas@salford.ac.uk) for Greater Manchester HER data including medieval moated sites and historic boundaries.
 
+## Validating Buildings with Chrome
+
+When Chrome integration is enabled (`claude --chrome`), validate buildings visually:
+
+1. Start dev server: `npm run dev`
+2. Use Chrome tools to navigate to `http://localhost:5173`
+3. Take screenshots of the map showing buildings
+4. Check console for errors
+5. Verify buildings appear at correct positions
+
+Quick validation command for Claude:
+```
+Start the dev server, open localhost:5173 in Chrome, wait for the map to load,
+take a screenshot, and check the console for any errors related to buildings.
+```
+
 ## Adding Buildings Workflow
 
 **Priority 1: Good, accurate information.** All research must be documented in the building's JSON file (references, images, notes). This project is as much about preserving historical knowledge as it is about visualization.

@@ -1,0 +1,105 @@
+{
+  "id": "baguley_hall",
+  "name": "Baguley Hall",
+  "type": "custom",
+  "startYear": 1320,
+  "endYear": 2100,
+  "material": "timber",
+  "center": [-2.2886, 53.3888],
+  "rotation": 0,
+  "maps": {
+    "berry_1650": {
+      "center": [-2.2886, 53.3888],
+      "rotation": 0
+    },
+    "berry_1750": {
+      "center": [-2.2886, 53.3888],
+      "rotation": 0
+    },
+    "os_1845": {
+      "center": [-2.2886, 53.3888],
+      "rotation": 0
+    },
+    "modern": {
+      "center": [-2.2886, 53.3888],
+      "rotation": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "baguley_hall_great_hall",
+      "name": "Baguley Hall - Great Hall (1320, spere truss)",
+      "type": "polygon",
+      "coords": [
+        [-2.288635, 53.388750],
+        [-2.288535, 53.388750],
+        [-2.288535, 53.388840],
+        [-2.288635, 53.388840]
+      ],
+      "height": 0,
+      "extrudedHeight": 9,
+      "material": "wall"
+    },
+    {
+      "id": "baguley_hall_north_wing",
+      "name": "Baguley Hall - North Wing (15th century, 2.5 storeys)",
+      "type": "polygon",
+      "coords": [
+        [-2.288710, 53.388840],
+        [-2.288560, 53.388840],
+        [-2.288560, 53.388920],
+        [-2.288710, 53.388920]
+      ],
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall"
+    },
+    {
+      "id": "baguley_hall_south_wing",
+      "name": "Baguley Hall - South Wing (2.5 storeys)",
+      "type": "polygon",
+      "coords": [
+        [-2.288710, 53.388670],
+        [-2.288560, 53.388670],
+        [-2.288560, 53.388750],
+        [-2.288710, 53.388750]
+      ],
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall"
+    },
+    {
+      "id": "baguley_hall_porch",
+      "name": "Baguley Hall - Porch (16th century)",
+      "type": "polygon",
+      "coords": [
+        [-2.288710, 53.388840],
+        [-2.288760, 53.388840],
+        [-2.288760, 53.388890],
+        [-2.288710, 53.388890]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "wall"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://www.geograph.org.uk/photo/125591",
+      "caption": "Baguley Hall exterior showing timber-framed construction",
+      "date": "2005"
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/Category:Baguley_Hall",
+      "caption": "Collection of historical photos and architectural documentation",
+      "date": "various"
+    }
+  ],
+  "references": [
+    "https://historicengland.org.uk/listing/the-list/list-entry/1291962",
+    "https://en.wikipedia.org/wiki/Baguley_Hall",
+    "https://www.visitmanchester.com/ideas-and-inspiration/blog/post/baguley-hall-manchesters-medieval-manor/",
+    "https://britishlistedbuildings.co.uk/101291962-baguley-hall-baguley-ward"
+  ],
+  "notes": "Grade I listed and Scheduled Ancient Monument. One of the oldest surviving timber great halls in England, built c.1320 by Sir William de Baguley, Lord of the Manor. Exceptionally rare example of spere and truss construction. The Great Hall features massive oak timber frame with planks up to 3 feet wide, unusual post-and-plank construction (rather than typical box frame). H-plan layout with 2.5-bay open hall on north-south axis with slightly bowed sides. North wing added 15th century (replacing earlier tithe barns), west porch added 16th century. Built entirely of timber with wattle and daub walls on sandstone plinth. Notable features include spere truss at north end, arch-braced open trusses, fine common-rafter roof with curved scissor-braces, cusped cross-bracing, and two-centred arched doorways. Great Hall originally ~34 feet long (may have extended 8 feet further south for high table dais). Built on site of earlier 11th/12th century aisled Anglo-Saxon hall. Massive oak timbers include sills, wall-plates, and L-shaped corner post ~1 metre square. Windows tall with narrow lights (12 inches wide), oak mullions 6 inches square, oak sills ~4 feet from floor. As of 2024, Heritage Trust North West selected to restore and operate the building. Grid reference: SJ81628874. One of the most important timber-framed houses in Europe."
+}
