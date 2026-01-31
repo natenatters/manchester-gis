@@ -27,6 +27,8 @@ OUTPUT_FILE = DATA_DIR / "building_entities.json"
 # Map periods - aligned with config.json imagery layers
 # Each building will be expanded into entities for relevant periods
 MAP_PERIODS = {
+    "roman": {"start": 0, "stop": 410},
+    "medieval": {"start": 411, "stop": 1649},
     "berry_1650": {"start": 1650, "stop": 1749},
     "berry_1750": {"start": 1750, "stop": 1844},
     "os_1845": {"start": 1845, "stop": 1889},
@@ -35,7 +37,8 @@ MAP_PERIODS = {
 }
 
 # Which map periods use "modern" (geo-correct) positioning
-GEO_CORRECT_PERIODS = {"os_1845", "os_1950s", "modern"}
+# Roman/Medieval have no historic maps, so they use modern geo-correct positions
+GEO_CORRECT_PERIODS = {"roman", "medieval", "os_1845", "os_1950s", "modern"}
 
 
 def to_lat_deg(meters):

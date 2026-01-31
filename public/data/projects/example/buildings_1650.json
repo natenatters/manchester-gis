@@ -68,24 +68,6 @@
       "notes": "Medieval stone bridge connecting Manchester to Salford. Site of Civil War battle 1642."
     },
     {
-      "id": "chethams",
-      "name": "Chetham's College",
-      "type": "courtyard",
-      "center": [-2.2448, 53.4860],
-      "length": 45,
-      "width": 40,
-      "wingDepth": 8,
-      "height": 12,
-      "rotation": -15,
-      "material": "stone",
-      "startYear": 1421,
-      "endYear": 2100,
-      "references": [
-        "https://library.chethams.com/"
-      ],
-      "notes": "Founded as college for priests 1421. Became Chetham's Hospital 1653 after Humphrey Chetham's death."
-    },
-    {
       "id": "st_peters_church",
       "name": "St Peter's Church",
       "type": "neoclassical_church",

@@ -19,11 +19,11 @@ import json
 from pathlib import Path
 
 PROJECT_DIR = Path(__file__).parent.parent
-DATA_DIR = PROJECT_DIR / "data" / "projects" / "example"
+DATA_DIR = PROJECT_DIR / "public" / "data" / "projects" / "example"
 
 # Input files
 BUILDINGS_FILE = DATA_DIR / "building_entities.json"
-UNIFIED_FILE = PROJECT_DIR / "data" / "unified_sites.geojson"
+UNIFIED_FILE = PROJECT_DIR / "public" / "data" / "unified_sites.geojson"
 SITES_FILE = DATA_DIR / "sites.json"
 LAYERS_FILE = DATA_DIR / "layers.json"
 

@@ -18,6 +18,15 @@ import * as CesiumModule from 'cesium';
 const Cesium = window.Cesium || CesiumModule;
 import { createImageryProvider } from './imagery/index.js';
 
+// Helper to create Date with correct year (JS treats years 0-99 as 1900-1999)
+function dateFromYear(year) {
+    const d = new Date(0);
+    d.setFullYear(year);
+    d.setMonth(6);
+    d.setDate(1);
+    return d;
+}
+
 export class Viewer {
     constructor(containerId) {
         // Set Cesium Ion token if available
@@ -75,18 +84,17 @@ export class Viewer {
             this._emit('entitiesChange', this.cesium.entities.values);
         });
 
-        // Clock state
-        this._lastYear = null;
+        // Clock bounds (for entity availability)
         const clock = this.cesium.clock;
-        clock.startTime = Cesium.JulianDate.fromDate(new Date(1000, 6, 1));
-        clock.stopTime = Cesium.JulianDate.fromDate(new Date(2100, 6, 1));
+        clock.startTime = Cesium.JulianDate.fromDate(dateFromYear(1));
+        clock.stopTime = Cesium.JulianDate.fromDate(dateFromYear(2100));
         clock.clockRange = Cesium.ClockRange.CLAMPED;
-        clock.onTick.addEventListener(async () => {
-            const year = this.year;
-            if (year === this._lastYear) return;
-            this._lastYear = year;
-            await this.applyLayerState(this._getLayerState(year), year);
-            if (year !== this.year) return;
+
+        // React to clock changes (Cesium is source of truth)
+        const clockViewModel = this.cesium.clockViewModel;
+        Cesium.knockout.getObservable(clockViewModel, 'currentTime').subscribe((currentTime) => {
+            const year = Cesium.JulianDate.toGregorianDate(currentTime).year;
+            this.applyLayerState(this._getLayerState(year), year);
             this._emit('yearChange', year);
             this.requestRender();
         });
@@ -116,12 +124,16 @@ export class Viewer {
 
     // --- Clock ---
 
-    get year() {
-        return Cesium.JulianDate.toDate(this.cesium.clock.currentTime).getFullYear();
+    setYear(year) {
+        this.cesium.clock.currentTime = Cesium.JulianDate.fromDate(dateFromYear(year));
     }
 
-    setYear(year) {
-        this.cesium.clock.currentTime = Cesium.JulianDate.fromDate(new Date(year, 6, 1));
+    _clockYear() {
+        return Cesium.JulianDate.toGregorianDate(this.cesium.clock.currentTime).year;
+    }
+
+    _isStale(year) {
+        return year !== undefined && year !== this._clockYear();
     }
 
     // --- Public API ---
@@ -153,12 +165,13 @@ export class Viewer {
     }
 
     toggleImagery(index) {
-        const imagery = this._getMatchingLayers(this.year, 'imagery');
+        const year = this._clockYear();
+        const imagery = this._getMatchingLayers(year, 'imagery');
         if (imagery[index]) {
             const current = this._layerVisibility.get(imagery[index]) ?? true;
             this._layerVisibility.set(imagery[index], !current);
         }
-        this.applyLayerState(this._getLayerState(this.year));
+        this.applyLayerState(this._getLayerState(year));
         this.requestRender();
     }
 
@@ -205,6 +218,7 @@ export class Viewer {
     }
 
     _loadEntities(data) {
+        this._entityIdCounts = {}; // Track ID occurrences for deduplication
         for (const entity of data.entities || []) {
             this._addEntity(entity);
         }
@@ -213,7 +227,7 @@ export class Viewer {
 
     _addEntity(entity) {
         const color = Cesium.Color.fromCssColorString(entity.color || '#888888');
-        const toJulian = (year) => Cesium.JulianDate.fromDate(new Date(year, 6, 1));
+        const toJulian = (year) => Cesium.JulianDate.fromDate(dateFromYear(year));
         const availability = entity.availability
             ? new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
                 start: toJulian(entity.availability.start || 0),
@@ -221,8 +235,15 @@ export class Viewer {
             })])
             : undefined;
 
+        // Generate unique internal ID (data can have duplicates, Cesium cannot)
+        const baseId = entity.id || `entity_${Date.now()}`;
+        this._entityIdCounts[baseId] = (this._entityIdCounts[baseId] || 0) + 1;
+        const uniqueId = this._entityIdCounts[baseId] > 1
+            ? `${baseId}__${this._entityIdCounts[baseId]}`
+            : baseId;
+
         const config = {
-            id: entity.id,
+            id: uniqueId,
             name: entity.name,
             availability,
             properties: { group: entity.group, ...entity.properties }
@@ -368,9 +389,9 @@ export class Viewer {
     // --- Layer Rendering ---
 
     async applyLayerState(state, year) {
-        if (year !== undefined && year !== this.year) return;
+        if (this._isStale(year)) return;
         await this._applyImagery(state.imagery);
-        if (year !== undefined && year !== this.year) return;
+        if (this._isStale(year)) return;
         await this._applyTileset(state.tileset, year);
     }
 
@@ -420,7 +441,7 @@ export class Viewer {
             if (!tileset) {
                 try {
                     tileset = await this._createTileset(tilesetConfig);
-                    if (year !== undefined && year !== this.year) return;
+                    if (this._isStale(year)) return;
                     if (tileset) {
                         this.cesium.scene.primitives.add(tileset);
                         this._loadedTilesets.set(tilesetConfig, tileset);
@@ -430,7 +451,7 @@ export class Viewer {
                 }
             }
 
-            if (year !== undefined && year !== this.year) return;
+            if (this._isStale(year)) return;
             if (tileset) {
                 tileset.show = true;
                 this._activeTilesetConfig = tilesetConfig;

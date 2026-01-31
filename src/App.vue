@@ -18,7 +18,7 @@
           <input
             id="yearSlider"
             type="range"
-            min="0"
+            min="1"
             max="2026"
             :value="year"
             @input="onYearInput"
@@ -68,9 +68,11 @@
     </div>
     <div class="editor-content">
       <table v-if="selectedEntity" class="cesium-infoBox-defaultTable">
-        <tr><th>ID</th><td>{{ selectedEntity.id || '--' }}</td></tr>
-        <tr v-if="entityGroup"><th>Group</th><td>{{ entityGroup }}</td></tr>
-        <tr v-if="entityPeriod"><th>Period</th><td>{{ entityPeriod }}</td></tr>
+        <tbody>
+          <tr><th>ID</th><td>{{ selectedEntity.id || '--' }}</td></tr>
+          <tr v-if="entityGroup"><th>Group</th><td>{{ entityGroup }}</td></tr>
+          <tr v-if="entityPeriod"><th>Period</th><td>{{ entityPeriod }}</td></tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -128,7 +130,7 @@ function onYearInput(e) {
 
 function toggleImagery(index) {
   viewer?.toggleImagery(index);
-  layers.value = viewer?.getLayerInfo(viewer.year) || { imagery: [] };
+  layers.value = viewer?.getLayerInfo(year.value) || { imagery: [] };
 }
 
 function toggleGroup(group, visible) {
