@@ -1,24 +1,11 @@
 /**
- * Viewer - Pure Cesium wrapper
- *
- * Manages:
- * - Cesium.Viewer instance
- * - Camera position + localStorage persistence
- * - Terrain
- * - Clock/time
- * - Layer rendering (imagery + tilesets)
- * - Entities
- *
- * Emits events via callbacks:
- * - onYearChange(year)
- * - onEntitiesChange(entities)
+ * Viewer - Cesium wrapper with time-based layer management
  */
 
 import * as CesiumModule from 'cesium';
 const Cesium = window.Cesium || CesiumModule;
 import { createImageryProvider } from './imagery/index.js';
 
-// Helper to create Date with correct year (JS treats years 0-99 as 1900-1999)
 function dateFromYear(year) {
     const d = new Date(0);
     d.setFullYear(year);
@@ -29,7 +16,6 @@ function dateFromYear(year) {
 
 export class Viewer {
     constructor(containerId) {
-        // Set Cesium Ion token if available
         const cesiumToken = import.meta.env.VITE_CESIUM_ION_TOKEN;
         if (cesiumToken) {
             Cesium.Ion.defaultAccessToken = cesiumToken;
@@ -62,141 +48,132 @@ export class Viewer {
         this.cesium.scene.moon.show = false;
         this.cesium.infoBox.frame.sandbox = 'allow-same-origin allow-popups allow-forms allow-scripts';
 
-        // Terrain state
+        // State
+        this._handlers = {};
+        this._layers = [];           // All imagery layers (created once at init)
+        this._tilesets = [];         // All tilesets (created once at init)
+        this._czmlDataSource = null;
         this._terrainEnabled = false;
         this._baseExaggeration = 1.0;
 
-        // Event bus
-        this._handlers = {};
-
-        // Layer state
-        this._layerConfigs = [];
-        this._layerVisibility = new Map();
-        this._imageryLayers = [];
-        this._activeTilesetConfig = null;
-        this._loadedTilesets = new Map();
-
-        // Persist camera to localStorage on change
-        this.cesium.camera.changed.addEventListener(() => this._saveCamera());
-
-        // Entity change event
-        this.cesium.entities.collectionChanged.addEventListener(() => {
-            this._emit('entitiesChange', this.cesium.entities.values);
-        });
-
-        // Clock bounds (for entity availability)
+        // Clock bounds
         const clock = this.cesium.clock;
         clock.startTime = Cesium.JulianDate.fromDate(dateFromYear(1));
         clock.stopTime = Cesium.JulianDate.fromDate(dateFromYear(2100));
         clock.clockRange = Cesium.ClockRange.CLAMPED;
 
-        // React to clock changes (Cesium is source of truth)
-        const clockViewModel = this.cesium.clockViewModel;
-        Cesium.knockout.getObservable(clockViewModel, 'currentTime').subscribe((currentTime) => {
-            const year = Cesium.JulianDate.toGregorianDate(currentTime).year;
-            this.applyLayerState(this._getLayerState(year), year);
+        // Camera persistence
+        this.cesium.camera.changed.addEventListener(() => this._saveCamera());
+
+        // Year change → update layer visibility
+        Cesium.knockout.getObservable(this.cesium.clockViewModel, 'currentTime').subscribe(() => {
+            const year = this._clockYear();
+            this._updateLayerVisibility(year);
             this._emit('yearChange', year);
             this.requestRender();
         });
 
-        // Entity selection event
+        // Entity events
+        this.cesium.entities.collectionChanged.addEventListener(() => {
+            this._emit('entitiesChange', this.cesium.entities.values);
+        });
         this.cesium.selectedEntityChanged.addEventListener((entity) => {
             this._emit('entitySelect', entity);
         });
     }
 
     // --- Event Bus ---
-
     on(event, callback) {
         if (!this._handlers[event]) this._handlers[event] = [];
         this._handlers[event].push(callback);
     }
 
     _emit(event, ...args) {
-        for (const handler of this._handlers[event] || []) {
-            handler(...args);
+        (this._handlers[event] || []).forEach(h => h(...args));
+    }
+
+    // --- Clock ---
+    _clockYear() {
+        return Cesium.JulianDate.toGregorianDate(this.cesium.clock.currentTime).year;
+    }
+
+    setYear(year) {
+        this.cesium.clock.currentTime = Cesium.JulianDate.fromDate(dateFromYear(year));
+    }
+
+    // --- Public API ---
+    async init(config) {
+        this.clear();
+        console.log(`Loading project: ${config.name}`);
+
+        // Camera
+        const savedCamera = this._loadCamera();
+        this.setCamera(savedCamera || config.center);
+
+        // Terrain
+        if (config.terrain?.enabled) {
+            this.cesium.scene.setTerrain(Cesium.Terrain.fromWorldTerrain());
+            this._terrainEnabled = true;
         }
+        this._baseExaggeration = config.terrain?.exaggeration || 1.0;
+        this.cesium.scene.verticalExaggeration = this._baseExaggeration;
+
+        // Create all layers upfront
+        await this._initLayers(config.layers || []);
+
+        // Load entities
+        if (config.entities?.endsWith('.czml')) {
+            await this._loadCzml(config.entities);
+        } else if (config.entities) {
+            const data = await this._loadJson(config.entities);
+            if (data) this._loadEntities(data);
+        }
+
+        // Apply initial visibility
+        this._updateLayerVisibility(this._clockYear());
+    }
+
+    getLayerInfo(year) {
+        const inRange = (l) => year >= l._yearStart && year <= l._yearEnd;
+        return {
+            imagery: this._layers.filter(inRange).map((l, i) => ({
+                name: l._config.name || 'Unknown',
+                visible: l._userVisible,
+                index: i
+            })),
+            tileset: this._tilesets.find(t => inRange(t) && t.show)?._config.name || null
+        };
+    }
+
+    toggleImagery(index) {
+        const year = this._clockYear();
+        const inRange = (l) => year >= l._yearStart && year <= l._yearEnd;
+        const visibleLayers = this._layers.filter(inRange);
+        if (visibleLayers[index]) {
+            visibleLayers[index]._userVisible = !visibleLayers[index]._userVisible;
+            this._updateLayerVisibility(year);
+            this.requestRender();
+        }
+    }
+
+    toggleGroup(groupKey, visible) {
+        const toggle = (entities) => {
+            for (const entity of entities) {
+                const group = entity.properties?.group?.getValue?.() || entity.properties?.group;
+                if (group === groupKey) entity.show = visible;
+            }
+        };
+        toggle(this.cesium.entities.values);
+        if (this._czmlDataSource) toggle(this._czmlDataSource.entities.values);
+        this.requestRender();
     }
 
     clearSelection() {
         this.cesium.selectedEntity = undefined;
     }
 
-    // --- Clock ---
-
-    setYear(year) {
-        this.cesium.clock.currentTime = Cesium.JulianDate.fromDate(dateFromYear(year));
-    }
-
-    _clockYear() {
-        return Cesium.JulianDate.toGregorianDate(this.cesium.clock.currentTime).year;
-    }
-
-    _isStale(year) {
-        return year !== undefined && year !== this._clockYear();
-    }
-
-    // --- Public API ---
-
-    async init(config) {
-        this.clear();
-
-        console.log(`Loading project: ${config.name}`);
-
-        this._initFromConfig(config);
-
-        // Load entities - support both CZML and legacy JSON formats
-        if (config.entities) {
-            if (config.entities.endsWith('.czml')) {
-                await this._loadCzml(config.entities);
-            } else {
-                const data = await this._loadJson(config.entities);
-                if (data) this._loadEntities(data);
-            }
-        }
-    }
-
-    getLayerInfo(year) {
-        const state = this._getLayerState(year);
-        return {
-            imagery: state.imagery.map((l, i) => ({
-                name: l.config.name || 'Unknown',
-                visible: l.visible,
-                index: i
-            })),
-            tileset: state.tileset?.name || null
-        };
-    }
-
-    toggleImagery(index) {
-        const year = this._clockYear();
-        const imagery = this._getMatchingLayers(year, 'imagery');
-        if (imagery[index]) {
-            const current = this._layerVisibility.get(imagery[index]) ?? true;
-            this._layerVisibility.set(imagery[index], !current);
-        }
-        this.applyLayerState(this._getLayerState(year));
-        this.requestRender();
-    }
-
-    toggleGroup(groupKey, visible) {
-        // Toggle in direct entities
-        for (const entity of this.cesium.entities.values) {
-            const group = entity.properties?.group?.getValue?.() || entity.properties?.group;
-            if (group === groupKey) {
-                entity.show = visible;
-            }
-        }
-        // Toggle in CZML dataSources
-        if (this._czmlDataSource) {
-            for (const entity of this._czmlDataSource.entities.values) {
-                const group = entity.properties?.group?.getValue?.() || entity.properties?.group;
-                if (group === groupKey) {
-                    entity.show = visible;
-                }
-            }
-        }
-        this.requestRender();
+    requestRender() {
+        this.cesium.scene.requestRender();
     }
 
     clear() {
@@ -204,27 +181,88 @@ export class Viewer {
         this.cesium.dataSources.removeAll();
         this._czmlDataSource = null;
 
-        for (const layer of this._imageryLayers) {
+        for (const layer of this._layers) {
             this.cesium.imageryLayers.remove(layer, false);
         }
-        this._imageryLayers = [];
+        this._layers = [];
 
-        for (const tileset of this._loadedTilesets.values()) {
+        for (const tileset of this._tilesets) {
             this.cesium.scene.primitives.remove(tileset);
         }
-        this._loadedTilesets.clear();
-        this._activeTilesetConfig = null;
+        this._tilesets = [];
     }
 
-    requestRender() {
-        this.cesium.scene.requestRender();
+    // --- Layer Management (the simple part) ---
+
+    async _initLayers(configs) {
+        for (const config of configs) {
+            try {
+                if (config.kind === 'imagery') {
+                    const provider = createImageryProvider(config);
+                    const layer = this.cesium.imageryLayers.addImageryProvider(provider);
+                    layer._config = config;
+                    layer._yearStart = config.yearStart ?? -Infinity;
+                    layer._yearEnd = config.yearEnd ?? Infinity;
+                    layer._userVisible = true;
+                    layer.alpha = config.alpha ?? 1.0;
+                    layer.show = false;
+                    this._layers.push(layer);
+                } else if (config.kind === 'tileset') {
+                    const tileset = await this._createTileset(config);
+                    if (tileset) {
+                        tileset._config = config;
+                        tileset._yearStart = config.yearStart ?? -Infinity;
+                        tileset._yearEnd = config.yearEnd ?? Infinity;
+                        tileset.show = false;
+                        this.cesium.scene.primitives.add(tileset);
+                        this._tilesets.push(tileset);
+                    }
+                }
+            } catch (err) {
+                console.warn(`Could not create layer ${config.name}:`, err.message);
+            }
+        }
     }
 
-    // --- Internal ---
+    _updateLayerVisibility(year) {
+        // Imagery: show if in range AND user hasn't hidden it
+        for (const layer of this._layers) {
+            const inRange = year >= layer._yearStart && year <= layer._yearEnd;
+            layer.show = inRange && layer._userVisible;
+        }
+
+        // Tilesets: show first matching one
+        let activeTileset = null;
+        for (const tileset of this._tilesets) {
+            const inRange = year >= tileset._yearStart && year <= tileset._yearEnd;
+            tileset.show = inRange && !activeTileset;
+            if (tileset.show) activeTileset = tileset;
+        }
+
+        // Adjust terrain exaggeration when 3D tileset is active
+        this.cesium.scene.verticalExaggeration = activeTileset ? 1.0 : this._baseExaggeration;
+    }
+
+    async _createTileset(config) {
+        const sse = config.maximumScreenSpaceError || 16;
+        switch (config.type) {
+            case 'google_3d':
+                return Cesium.createGooglePhotorealistic3DTileset({ onlyUsingWithGoogleGeocoder: true });
+            case 'osm_buildings':
+                return Cesium.createOsmBuildingsAsync();
+            case 'url':
+                return Cesium.Cesium3DTileset.fromUrl(config.url, { maximumScreenSpaceError: sse });
+            case 'ion':
+                return Cesium.Cesium3DTileset.fromIonAssetId(config.assetId, { maximumScreenSpaceError: sse });
+            default:
+                return null;
+        }
+    }
+
+    // --- Entity Loading ---
 
     async _loadJson(url) {
         try {
-            // Prepend base URL for absolute paths
             const fullUrl = url.startsWith('/') ? `${import.meta.env.BASE_URL}${url.slice(1)}` : url;
             const response = await fetch(fullUrl);
             if (response.ok) return response.json();
@@ -247,7 +285,7 @@ export class Viewer {
     }
 
     _loadEntities(data) {
-        this._entityIdCounts = {}; // Track ID occurrences for deduplication
+        this._entityIdCounts = {};
         for (const entity of data.entities || []) {
             this._addEntity(entity);
         }
@@ -264,12 +302,9 @@ export class Viewer {
             })])
             : undefined;
 
-        // Generate unique internal ID (data can have duplicates, Cesium cannot)
         const baseId = entity.id || `entity_${Date.now()}`;
         this._entityIdCounts[baseId] = (this._entityIdCounts[baseId] || 0) + 1;
-        const uniqueId = this._entityIdCounts[baseId] > 1
-            ? `${baseId}__${this._entityIdCounts[baseId]}`
-            : baseId;
+        const uniqueId = this._entityIdCounts[baseId] > 1 ? `${baseId}__${this._entityIdCounts[baseId]}` : baseId;
 
         const config = {
             id: uniqueId,
@@ -281,19 +316,15 @@ export class Viewer {
         if (entity.type === 'point') {
             config.position = Cesium.Cartesian3.fromDegrees(entity.coords[0], entity.coords[1]);
             config.point = {
-                pixelSize: 8,
-                color,
-                outlineColor: Cesium.Color.BLACK,
-                outlineWidth: 1,
+                pixelSize: 8, color,
+                outlineColor: Cesium.Color.BLACK, outlineWidth: 1,
                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
                 disableDepthTestDistance: Number.POSITIVE_INFINITY
             };
         } else if (entity.type === 'polyline') {
             config.polyline = {
                 positions: Cesium.Cartesian3.fromDegreesArray(entity.coords.flat()),
-                width: 4,
-                material: color,
-                clampToGround: true
+                width: 4, material: color, clampToGround: true
             };
         } else if (entity.type === 'polygon') {
             config.polygon = {
@@ -302,9 +333,7 @@ export class Viewer {
                 extrudedHeight: entity.extrudedHeight || 0,
                 heightReference: Cesium.HeightReference.RELATIVE_TO_GROUND,
                 extrudedHeightReference: Cesium.HeightReference.RELATIVE_TO_GROUND,
-                material: color,
-                outline: true,
-                outlineColor: Cesium.Color.BLACK
+                material: color, outline: true, outlineColor: Cesium.Color.BLACK
             };
         }
 
@@ -336,65 +365,7 @@ export class Viewer {
         return html + '</table>';
     }
 
-    _initFromConfig(config) {
-        // Store layer configs
-        this._layerConfigs = config.layers || [];
-        this._layerVisibility = new Map();
-        for (const layer of this._layerConfigs) {
-            this._layerVisibility.set(layer, true);
-        }
-
-        // Camera (restore from localStorage or use config default)
-        const savedCamera = this._loadCamera();
-        this.setCamera(savedCamera || config.center);
-
-        // Terrain
-        if (config.terrain?.enabled) {
-            this.enableTerrain();
-        }
-        const exaggeration = config.terrain?.exaggeration || 1.0;
-        this._baseExaggeration = exaggeration;
-        this.cesium.scene.verticalExaggeration = exaggeration;
-    }
-
-    // --- Layer State ---
-
-    _getLayerState(year) {
-        const imagery = this._getMatchingLayers(year, 'imagery').map(config => ({
-            config,
-            visible: this._layerVisibility.get(config) ?? true
-        }));
-        const tileset = this._getMatchingLayers(year, 'tileset')[0] || null;
-        return { imagery, tileset };
-    }
-
-    _getMatchingLayers(year, kind) {
-        return this._layerConfigs.filter(l =>
-            l.kind === kind &&
-            year >= (l.yearStart ?? -Infinity) &&
-            year <= (l.yearEnd ?? Infinity)
-        );
-    }
-
-    _saveCamera() {
-        const camera = this.cesium.camera;
-        const pos = camera.positionCartographic;
-        localStorage.setItem('camera', JSON.stringify({
-            lon: Cesium.Math.toDegrees(pos.longitude),
-            lat: Cesium.Math.toDegrees(pos.latitude),
-            height: pos.height,
-            heading: camera.heading,
-            pitch: camera.pitch
-        }));
-    }
-
-    _loadCamera() {
-        try {
-            const saved = localStorage.getItem('camera');
-            if (saved) return JSON.parse(saved);
-        } catch (e) { /* ignore */ }
-        return null;
-    }
+    // --- Camera ---
 
     setCamera(pos) {
         if (!pos) return;
@@ -408,103 +379,23 @@ export class Viewer {
         });
     }
 
-    enableTerrain() {
-        if (!this._terrainEnabled) {
-            this.cesium.scene.setTerrain(Cesium.Terrain.fromWorldTerrain());
-            this._terrainEnabled = true;
-        }
+    _saveCamera() {
+        const cam = this.cesium.camera;
+        const pos = cam.positionCartographic;
+        localStorage.setItem('camera', JSON.stringify({
+            lon: Cesium.Math.toDegrees(pos.longitude),
+            lat: Cesium.Math.toDegrees(pos.latitude),
+            height: pos.height,
+            heading: cam.heading,
+            pitch: cam.pitch
+        }));
     }
 
-    // --- Layer Rendering ---
-
-    async applyLayerState(state, year) {
-        if (this._isStale(year)) return;
-        await this._applyImagery(state.imagery);
-        if (this._isStale(year)) return;
-        await this._applyTileset(state.tileset, year);
-    }
-
-    async _applyImagery(imageryState) {
-        const newConfigs = imageryState.map(i => i.config);
-        const oldConfigs = this._imageryLayers.map(l => l._config);
-
-        const configsChanged = newConfigs.length !== oldConfigs.length ||
-            newConfigs.some((c, i) => c !== oldConfigs[i]);
-
-        if (configsChanged) {
-            for (const layer of this._imageryLayers) {
-                this.cesium.imageryLayers.remove(layer, false);
-            }
-            this._imageryLayers = [];
-
-            for (const { config, visible } of imageryState) {
-                try {
-                    const provider = createImageryProvider(config);
-                    const layer = this.cesium.imageryLayers.addImageryProvider(provider);
-                    layer.alpha = config.alpha ?? 1.0;
-                    layer.show = visible;
-                    layer._config = config;
-                    this._imageryLayers.push(layer);
-                } catch (err) {
-                    console.warn(`Could not create imagery layer ${config.name}:`, err.message);
-                }
-            }
-        } else {
-            for (let i = 0; i < imageryState.length; i++) {
-                if (this._imageryLayers[i]) {
-                    this._imageryLayers[i].show = imageryState[i].visible;
-                }
-            }
-        }
-    }
-
-    async _applyTileset(tilesetConfig, year) {
-        if (this._activeTilesetConfig && this._activeTilesetConfig !== tilesetConfig) {
-            const tileset = this._loadedTilesets.get(this._activeTilesetConfig);
-            if (tileset) tileset.show = false;
-        }
-
-        if (tilesetConfig) {
-            let tileset = this._loadedTilesets.get(tilesetConfig);
-
-            if (!tileset) {
-                try {
-                    tileset = await this._createTileset(tilesetConfig);
-                    if (this._isStale(year)) return;
-                    if (tileset) {
-                        this.cesium.scene.primitives.add(tileset);
-                        this._loadedTilesets.set(tilesetConfig, tileset);
-                    }
-                } catch (err) {
-                    console.warn(`Could not load tileset ${tilesetConfig.name}:`, err.message);
-                }
-            }
-
-            if (this._isStale(year)) return;
-            if (tileset) {
-                tileset.show = true;
-                this._activeTilesetConfig = tilesetConfig;
-            }
-        } else {
-            this._activeTilesetConfig = null;
-        }
-
-        this.cesium.scene.verticalExaggeration = this._activeTilesetConfig ? 1.0 : this._baseExaggeration;
-    }
-
-    async _createTileset(config) {
-        const sse = config.maximumScreenSpaceError || 16;
-        switch (config.type) {
-            case 'google_3d':
-                return Cesium.createGooglePhotorealistic3DTileset({ onlyUsingWithGoogleGeocoder: true });
-            case 'osm_buildings':
-                return Cesium.createOsmBuildingsAsync();
-            case 'url':
-                return Cesium.Cesium3DTileset.fromUrl(config.url, { maximumScreenSpaceError: sse });
-            case 'ion':
-                return Cesium.Cesium3DTileset.fromIonAssetId(config.assetId, { maximumScreenSpaceError: sse });
-            default:
-                return null;
-        }
+    _loadCamera() {
+        try {
+            const saved = localStorage.getItem('camera');
+            if (saved) return JSON.parse(saved);
+        } catch (e) { /* ignore */ }
+        return null;
     }
 }
