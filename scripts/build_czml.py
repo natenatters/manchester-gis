@@ -52,10 +52,68 @@ MAP_PERIODS = {
 # Which map periods use "modern" (geo-correct) positioning
 GEO_CORRECT_PERIODS = {"roman", "medieval", "os_1845", "os_1950s", "modern"}
 
+# Material name -> RGBA color mapping (for legacy format support)
+# New format should use inline "color": [r, g, b, a] instead
+MATERIAL_COLORS = {
+    "wall": [201, 184, 150, 255],      # #C9B896 - sandstone
+    "tower": [184, 168, 136, 255],     # #B8A888 - slightly darker
+    "stone": [160, 144, 128, 255],     # #A09080 - grey stone
+    "roof": [80, 80, 80, 255],         # #505050 - dark slate
+    "timber": [139, 115, 85, 255],     # #8B7355 - oak brown
+}
+
 
 # =============================================================================
 # CZML Utilities
 # =============================================================================
+
+def parse_availability(building):
+    """Parse availability from either old or new format.
+
+    Old format: startYear/endYear integers
+    New format: availability ISO8601 string "YYYY-MM-DD/YYYY-MM-DD"
+    """
+    if "availability" in building:
+        # New format - already ISO8601
+        return building["availability"]
+    else:
+        # Old format - convert integers to ISO
+        start = building.get("startYear", 0)
+        end = building.get("endYear", 2100)
+        return availability_interval(start, end)
+
+
+def get_entity_color(entity, building_color):
+    """Get color for an entity, supporting both old and new formats.
+
+    Priority:
+    1. Entity's inline "color" array [r, g, b, a]
+    2. Entity's "material" string -> lookup
+    3. Building's default color
+    """
+    if "color" in entity:
+        # New format - inline RGBA
+        return entity["color"]
+    elif "material" in entity:
+        # Old format - lookup from material name
+        return MATERIAL_COLORS.get(entity["material"], building_color)
+    else:
+        return building_color
+
+
+def get_building_color(building, default_color):
+    """Get default color for a building.
+
+    Supports:
+    - New format: "color": [r, g, b, a]
+    - Old format: "material": "timber" -> lookup
+    """
+    if "color" in building:
+        return building["color"]
+    elif "material" in building:
+        return MATERIAL_COLORS.get(building["material"], default_color)
+    else:
+        return default_color
 
 def year_to_iso(year):
     """Convert a year integer to ISO8601 date string."""
@@ -572,11 +630,30 @@ def generate_building(building):
 # =============================================================================
 
 def get_position_for_period(building, period_id):
-    """Get the position for a building in a specific map period."""
-    maps = building.get("maps", {})
+    """Get the position for a building in a specific map period.
+
+    Supports two formats:
+    - Old format: "maps": {"berry_1650": {"center": [...], "rotation": 0, "scale": 1.0}}
+    - New format: "mapOffsets": {"berry_1650": {"dx": 0.001, "dy": -0.002, "rotation": 5}}
+    """
     default_center = building["center"]
     default_rotation = building.get("rotation", 0)
 
+    # Check for new simplified mapOffsets format first
+    offsets = building.get("mapOffsets", {})
+    if period_id in offsets:
+        offset = offsets[period_id]
+        return {
+            "center": [
+                default_center[0] + offset.get("dx", 0),
+                default_center[1] + offset.get("dy", 0)
+            ],
+            "rotation": default_rotation + offset.get("rotation", 0),
+            "scale": offset.get("scale", 1.0)
+        }
+
+    # Fall back to old full "maps" format
+    maps = building.get("maps", {})
     if period_id in maps:
         map_data = maps[period_id]
         return {
@@ -602,7 +679,15 @@ def get_position_for_period(building, period_id):
 
 
 def expand_building_to_czml(building, base_entities, default_color):
-    """Expand a building into CZML packets for each relevant map period."""
+    """Expand a building into CZML packets for each relevant map period.
+
+    Supports both old format (startYear/endYear, material strings) and
+    new format (availability ISO, inline colors).
+    """
+    # Get building's default color (supports both formats)
+    building_color = get_building_color(building, default_color)
+
+    # Parse date range (supports both formats)
     start_year = building.get("startYear", 0)
     end_year = building.get("endYear", 2100)
 
@@ -630,13 +715,16 @@ def expand_building_to_czml(building, base_entities, default_color):
                 pos["scale"]
             )
 
+            # Get entity color (supports both material strings and inline colors)
+            entity_color = get_entity_color(entity, building_color)
+
             packet = make_polygon_packet(
                 id=f"{entity['id']}__{period_id}",
                 name=entity.get("name", ""),
                 coords=transformed_coords,
                 height=entity.get("height", 0),
                 extruded_height=entity.get("extrudedHeight", 0),
-                color_rgba=default_color,
+                color_rgba=entity_color,
                 availability_str=avail,
                 group="curated"
             )
