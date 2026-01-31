@@ -91,29 +91,18 @@ take a screenshot, and check the console for any errors related to buildings.
 python3 scripts/build_czml.py
 ```
 
-**Building format (supports two styles):**
-
-Old format (still works):
+**Building format:**
 ```json
 {
   "startYear": 1421, "endYear": 2100,
   "material": "wall",
-  "maps": { "berry_1650": { "center": [...], "rotation": 0 } }
+  "maps": { "berry_1650": { "center": [-2.248, 53.485], "rotation": 0 } }
 }
 ```
 
-New format (simpler):
-```json
-{
-  "startYear": 1421, "endYear": 2100,
-  "color": [201, 184, 150, 255],
-  "mapOffsets": { "berry_1650": { "dx": 0.001, "dy": -0.002 } }
-}
-```
-
-Available map IDs: `berry_1650`, `berry_1750`, `os_1845`, `os_1950s`, `modern`
-
-**Material colors (for old format):** wall, tower, stone, roof, timber
+- `material`: Color lookup - one of `wall`, `tower`, `stone`, `roof`, `timber`
+- `maps`: Per-period position adjustments for historical map alignment
+- Available map IDs: `berry_1650`, `berry_1750`, `os_1845`, `os_1950s`, `modern`
 
 ## Data Pipeline
 

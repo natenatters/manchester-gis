@@ -8,7 +8,7 @@ Reads:
   - buildings/*.json (custom buildings)
   - sites.json (curated GeoJSON)
   - unified_sites.geojson (reference data)
-  - layers.json (colors and groups)
+  - entity_styles.json (colors and groups for data sources)
 
 Outputs:
   - entities.czml (native Cesium format)
@@ -32,7 +32,7 @@ BUILDINGS_1650_FILE = DATA_DIR / "buildings_1650.json"
 BUILDINGS_DIR = DATA_DIR / "buildings"
 SITES_FILE = DATA_DIR / "sites.json"
 UNIFIED_FILE = PROJECT_DIR / "public" / "data" / "unified_sites.geojson"
-LAYERS_FILE = DATA_DIR / "layers.json"
+ENTITY_STYLES_FILE = DATA_DIR / "entity_styles.json"
 
 # Output
 OUTPUT_FILE = DATA_DIR / "entities.czml"
@@ -663,27 +663,12 @@ def generate_building(building):
 def get_position_for_period(building, period_id):
     """Get the position for a building in a specific map period.
 
-    Supports two formats:
-    - Old format: "maps": {"berry_1650": {"center": [...], "rotation": 0, "scale": 1.0}}
-    - New format: "mapOffsets": {"berry_1650": {"dx": 0.001, "dy": -0.002, "rotation": 5}}
+    Uses "maps" to define per-period position adjustments:
+        "maps": {"berry_1650": {"center": [...], "rotation": 0, "scale": 1.0}}
     """
     default_center = building["center"]
     default_rotation = building.get("rotation", 0)
 
-    # Check for new simplified mapOffsets format first
-    offsets = building.get("mapOffsets", {})
-    if period_id in offsets:
-        offset = offsets[period_id]
-        return {
-            "center": [
-                default_center[0] + offset.get("dx", 0),
-                default_center[1] + offset.get("dy", 0)
-            ],
-            "rotation": default_rotation + offset.get("rotation", 0),
-            "scale": offset.get("scale", 1.0)
-        }
-
-    # Fall back to old full "maps" format
     maps = building.get("maps", {})
     if period_id in maps:
         map_data = maps[period_id]
@@ -779,7 +764,7 @@ def load_json(path):
 
 def load_layers_config():
     """Load layer configuration for colors and groups."""
-    layers_config = load_json(LAYERS_FILE) or {"groups": {}, "layers": {}}
+    layers_config = load_json(ENTITY_STYLES_FILE) or {"groups": {}, "layers": {}}
     groups = layers_config.get("groups", {})
     layer_defs = layers_config.get("layers", {})
 
@@ -913,7 +898,7 @@ def process_sites(sites_data, layers_config, start_index):
     if not sites_data:
         return packets
 
-    layer_defs = load_json(LAYERS_FILE) or {}
+    layer_defs = load_json(ENTITY_STYLES_FILE) or {}
     layer_defs = layer_defs.get("layers", {})
 
     features = sites_data.get("features", [])
