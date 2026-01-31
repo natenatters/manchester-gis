@@ -3,12 +3,12 @@
 Build CZML - Single script to generate Cesium-native CZML from all data sources.
 
 Reads:
+  - project.json (map periods, material colors, project config)
   - buildings_1650.json (parametric buildings)
   - buildings/*.json (custom buildings)
   - sites.json (curated GeoJSON)
   - unified_sites.geojson (reference data)
   - layers.json (colors and groups)
-  - config.json (map periods from layer yearStart/yearEnd)
 
 Outputs:
   - entities.czml (native Cesium format)

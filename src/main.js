@@ -8,7 +8,7 @@ import App from './App.vue';
 
 async function main() {
     const base = import.meta.env.BASE_URL;
-    const configUrl = `${base}data/projects/example/config.json`;
+    const configUrl = `${base}data/projects/example/project.json`;
 
     const response = await fetch(configUrl);
     if (!response.ok) {

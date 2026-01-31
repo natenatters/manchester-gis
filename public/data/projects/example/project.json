@@ -19,6 +19,13 @@
 
   "defaultYear": 1650,
 
+  "terrain": {
+    "enabled": true,
+    "exaggeration": 2.0
+  },
+
+  "entities": "/data/projects/example/entities.czml",
+
   "mapPeriods": [
     {"id": "roman", "start": 0, "stop": 410, "geoCorrect": true},
     {"id": "medieval", "start": 411, "stop": 1649, "geoCorrect": true},
@@ -35,5 +42,87 @@
     "stone": [160, 144, 128, 255],
     "roof": [80, 80, 80, 255],
     "timber": [139, 115, 85, 255]
-  }
+  },
+
+  "layers": [
+    {
+      "kind": "imagery",
+      "type": "carto",
+      "name": "Base Map",
+      "style": "light_nolabels",
+      "credit": "CartoDB"
+    },
+    {
+      "kind": "imagery",
+      "type": "single_tile",
+      "name": "1650 Berry Sketch",
+      "url": "/data/tiles/berry_1650.png?v=6",
+      "yearStart": 1650,
+      "yearEnd": 1750,
+      "bounds": {
+        "west": -2.2545,
+        "south": 53.4779,
+        "east": -2.2365,
+        "north": 53.4899
+      },
+      "tileWidth": 2750,
+      "tileHeight": 2150,
+      "credit": "1650 Berry - A Plan of Manchester and Salford"
+    },
+    {
+      "kind": "imagery",
+      "type": "allmaps",
+      "name": "1750 Berry Map",
+      "mapId": "811b04a06391adb1",
+      "yearStart": 1750,
+      "yearEnd": 1845,
+      "bounds": {
+        "west": -2.26377,
+        "south": 53.47093,
+        "east": -2.22844,
+        "north": 53.4907
+      },
+      "credit": "1750 Berry - University of Manchester via Allmaps"
+    },
+    {
+      "kind": "imagery",
+      "type": "allmaps",
+      "name": "1845 OS Lancashire",
+      "mapId": "a3940ebbf9b3662d",
+      "yearStart": 1840,
+      "yearEnd": 1890,
+      "bounds": {
+        "west": -2.2955,
+        "south": 53.4565,
+        "east": -2.1655,
+        "north": 53.5095
+      },
+      "credit": "1845 OS Lancashire - National Library of Scotland via Allmaps"
+    },
+    {
+      "kind": "imagery",
+      "type": "nls",
+      "name": "OS 1:10,560 (1940s-1960s)",
+      "layer": "os_10k_natgrid",
+      "yearStart": 1890,
+      "yearEnd": 1950,
+      "credit": "National Library of Scotland"
+    },
+    {
+      "kind": "imagery",
+      "type": "google",
+      "name": "Modern (Google Satellite)",
+      "mapType": "s",
+      "yearStart": 1950,
+      "yearEnd": 2100,
+      "credit": "Google Maps"
+    },
+    {
+      "kind": "tileset",
+      "type": "google_3d",
+      "name": "Google Photorealistic 3D",
+      "yearStart": 1950,
+      "yearEnd": 2100
+    }
+  ]
 }
