@@ -145,10 +145,14 @@ export class Viewer {
 
         this._initFromConfig(config);
 
-        // Load entities
+        // Load entities - support both CZML and legacy JSON formats
         if (config.entities) {
-            const data = await this._loadJson(config.entities);
-            if (data) this._loadEntities(data);
+            if (config.entities.endsWith('.czml')) {
+                await this._loadCzml(config.entities);
+            } else {
+                const data = await this._loadJson(config.entities);
+                if (data) this._loadEntities(data);
+            }
         }
     }
 
@@ -176,10 +180,20 @@ export class Viewer {
     }
 
     toggleGroup(groupKey, visible) {
+        // Toggle in direct entities
         for (const entity of this.cesium.entities.values) {
             const group = entity.properties?.group?.getValue?.() || entity.properties?.group;
             if (group === groupKey) {
                 entity.show = visible;
+            }
+        }
+        // Toggle in CZML dataSources
+        if (this._czmlDataSource) {
+            for (const entity of this._czmlDataSource.entities.values) {
+                const group = entity.properties?.group?.getValue?.() || entity.properties?.group;
+                if (group === groupKey) {
+                    entity.show = visible;
+                }
             }
         }
         this.requestRender();
@@ -187,6 +201,9 @@ export class Viewer {
 
     clear() {
         this.cesium.entities.removeAll();
+        this.cesium.dataSources.removeAll();
+        this._czmlDataSource = null;
+
         for (const layer of this._imageryLayers) {
             this.cesium.imageryLayers.remove(layer, false);
         }
@@ -215,6 +232,18 @@ export class Viewer {
             console.warn(`Could not load ${url}:`, err.message);
         }
         return null;
+    }
+
+    async _loadCzml(url) {
+        try {
+            const fullUrl = url.startsWith('/') ? `${import.meta.env.BASE_URL}${url.slice(1)}` : url;
+            const dataSource = await Cesium.CzmlDataSource.load(fullUrl);
+            this.cesium.dataSources.add(dataSource);
+            this._czmlDataSource = dataSource;
+            console.log(`Loaded CZML with ${dataSource.entities.values.length} entities`);
+        } catch (err) {
+            console.warn(`Could not load CZML ${url}:`, err.message);
+        }
     }
 
     _loadEntities(data) {

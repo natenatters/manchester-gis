@@ -3,7 +3,7 @@
   "description": "Land ownership from Domesday (1086) to present day",
   "author": "Nate Natters",
   "region": "Greater Manchester, UK",
-  "entities": "/data/projects/example/entities.json",
+  "entities": "/data/projects/example/entities.czml",
   "center": {
     "lon": -2.25,
     "lat": 53.48,
