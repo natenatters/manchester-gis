@@ -1,0 +1,257 @@
+{
+  "id": "manchester_cathedral",
+  "name": "Manchester Cathedral (Collegiate Church)",
+  "type": "custom",
+  "startYear": 1421,
+  "endYear": 2100,
+  "material": "church",
+  "center": [-2.2443156, 53.4851459],
+  "rotation": 0,
+  "maps": {
+    "berry_1650": {
+      "center": [-2.2443156, 53.4851459],
+      "rotation": 0,
+      "scale": 1.0
+    },
+    "berry_1750": {
+      "center": [-2.2443156, 53.4851459],
+      "rotation": 0,
+      "scale": 1.0
+    },
+    "os_1845": {
+      "center": [-2.2443156, 53.4851459],
+      "rotation": 0
+    },
+    "modern": {
+      "center": [-2.2443156, 53.4851459],
+      "rotation": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "manchester_cathedral_tower",
+      "name": "Manchester Cathedral - West Tower (1330s, heightened 1868)",
+      "type": "polygon",
+      "coords": [
+        [-2.244736, 53.485046],
+        [-2.244556, 53.485046],
+        [-2.244556, 53.485196],
+        [-2.244736, 53.485196]
+      ],
+      "height": 0,
+      "extrudedHeight": 42,
+      "material": "tower"
+    },
+    {
+      "id": "manchester_cathedral_west_porch",
+      "name": "Manchester Cathedral - West Porch",
+      "type": "polygon",
+      "coords": [
+        [-2.244676, 53.485046],
+        [-2.244616, 53.485046],
+        [-2.244616, 53.484996],
+        [-2.244676, 53.484996]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_nave",
+      "name": "Manchester Cathedral - Nave (1465-1481, Ralph Langley)",
+      "type": "polygon",
+      "coords": [
+        [-2.244556, 53.485046],
+        [-2.244160, 53.485046],
+        [-2.244160, 53.485246],
+        [-2.244556, 53.485246]
+      ],
+      "height": 0,
+      "extrudedHeight": 18,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_north_aisle",
+      "name": "Manchester Cathedral - North Aisle",
+      "type": "polygon",
+      "coords": [
+        [-2.244556, 53.485246],
+        [-2.244160, 53.485246],
+        [-2.244160, 53.485346],
+        [-2.244556, 53.485346]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_south_aisle",
+      "name": "Manchester Cathedral - South Aisle",
+      "type": "polygon",
+      "coords": [
+        [-2.244556, 53.484946],
+        [-2.244160, 53.484946],
+        [-2.244160, 53.485046],
+        [-2.244556, 53.485046]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_south_porch",
+      "name": "Manchester Cathedral - South Porch",
+      "type": "polygon",
+      "coords": [
+        [-2.244400, 53.484946],
+        [-2.244320, 53.484946],
+        [-2.244320, 53.484886],
+        [-2.244400, 53.484886]
+      ],
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_north_porch",
+      "name": "Manchester Cathedral - North Porch",
+      "type": "polygon",
+      "coords": [
+        [-2.244400, 53.485346],
+        [-2.244320, 53.485346],
+        [-2.244320, 53.485406],
+        [-2.244400, 53.485406]
+      ],
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_choir",
+      "name": "Manchester Cathedral - Choir (1440-1458, John Huntington)",
+      "type": "polygon",
+      "coords": [
+        [-2.244160, 53.485046],
+        [-2.243700, 53.485046],
+        [-2.243700, 53.485246],
+        [-2.244160, 53.485246]
+      ],
+      "height": 0,
+      "extrudedHeight": 18,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_choir_north_aisle",
+      "name": "Manchester Cathedral - Choir North Aisle",
+      "type": "polygon",
+      "coords": [
+        [-2.244160, 53.485246],
+        [-2.243700, 53.485246],
+        [-2.243700, 53.485326],
+        [-2.244160, 53.485326]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_choir_south_aisle",
+      "name": "Manchester Cathedral - Choir South Aisle",
+      "type": "polygon",
+      "coords": [
+        [-2.244160, 53.484966],
+        [-2.243700, 53.484966],
+        [-2.243700, 53.485046],
+        [-2.244160, 53.485046]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_derby_chapel",
+      "name": "Manchester Cathedral - Derby Chapel (1513, south)",
+      "type": "polygon",
+      "coords": [
+        [-2.243940, 53.484966],
+        [-2.243760, 53.484966],
+        [-2.243760, 53.484826],
+        [-2.243940, 53.484826]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_regimental_chapel",
+      "name": "Manchester Cathedral - Regimental Chapel (north)",
+      "type": "polygon",
+      "coords": [
+        [-2.243940, 53.485326],
+        [-2.243760, 53.485326],
+        [-2.243760, 53.485466],
+        [-2.243940, 53.485466]
+      ],
+      "height": 0,
+      "extrudedHeight": 12,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_lady_chapel",
+      "name": "Manchester Cathedral - Lady Chapel (1330s, rebuilt 1940s)",
+      "type": "polygon",
+      "coords": [
+        [-2.243700, 53.485016],
+        [-2.243520, 53.485016],
+        [-2.243520, 53.485276],
+        [-2.243700, 53.485276]
+      ],
+      "height": 0,
+      "extrudedHeight": 15,
+      "material": "wall"
+    },
+    {
+      "id": "manchester_cathedral_chapter_house",
+      "name": "Manchester Cathedral - Chapter House (octagonal)",
+      "type": "polygon",
+      "coords": [
+        [-2.244160, 53.485346],
+        [-2.244100, 53.485386],
+        [-2.244020, 53.485386],
+        [-2.243960, 53.485346],
+        [-2.243960, 53.485266],
+        [-2.244020, 53.485226],
+        [-2.244100, 53.485226],
+        [-2.244160, 53.485266]
+      ],
+      "height": 0,
+      "extrudedHeight": 14,
+      "material": "wall"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://www.geograph.org.uk/photo/2116082",
+      "caption": "Manchester Cathedral exterior showing Perpendicular Gothic west tower",
+      "date": "2010"
+    },
+    {
+      "url": "https://historicengland.org.uk/images-books/photos/item/AA42/00073",
+      "caption": "Interior view showing the east end of the nave",
+      "date": "c.1950"
+    },
+    {
+      "url": "https://historicengland.org.uk/images-books/photos/item/AA42/00074",
+      "caption": "Nave roof from under the west tower arch",
+      "date": "c.1950"
+    }
+  ],
+  "references": [
+    "https://historicengland.org.uk/listing/the-list/list-entry/1207732",
+    "https://www.british-history.ac.uk/vch/lancs/vol4/pp187-192",
+    "https://en.wikipedia.org/wiki/Manchester_Cathedral",
+    "https://manchestercathedral.org/timeline",
+    "https://www.nationalchurchestrust.org/church/manchester-cathedral-manchester"
+  ],
+  "notes": "Originally St Mary's Church (mentioned in Domesday 1086), became Collegiate Church of St Mary, St Denys and St George in 1421 under royal charter from Henry V. Cathedral status granted 1847 with creation of Diocese of Manchester. Perpendicular Gothic style construction primarily 1421-1506. West tower base dates to 1330s, heightened 1868 to 139ft (42m). Nave rebuilt 1465-1481 by Warden Ralph Langley. Choir built 1440-1458 by Warden John Huntington. Total length 220ft, width 116ft across double-aisled nave. Lady Chapel rebuilt by Hubert Worthington after WWII bombing (1940). Contains finest set of medieval choir stalls in England (early 16th century). Derby Chapel completed 1513 (24ft wide). Octagonal chapter house. Grade I listed 1952. Constructed of Collyhurst sandstone (purple-brown), with Victorian refacing 1850-1870. Interior reconstructed stone-by-stone 1882-1883. 600th anniversary of collegiate foundation celebrated 2021."
+}

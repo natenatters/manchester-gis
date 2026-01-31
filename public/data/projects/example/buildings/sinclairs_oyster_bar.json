@@ -1,0 +1,91 @@
+{
+  "id": "sinclairs_oyster_bar",
+  "name": "Sinclair's Oyster Bar",
+  "type": "custom",
+  "startYear": 1720,
+  "endYear": 2100,
+  "material": "timber",
+  "center": [-2.2397, 53.4840],
+  "rotation": 0,
+  "maps": {
+    "berry_1650": {
+      "center": [-2.2397, 53.4840],
+      "rotation": 0
+    },
+    "berry_1750": {
+      "center": [-2.2397, 53.4840],
+      "rotation": 0
+    },
+    "os_1845": {
+      "center": [-2.2397, 53.4840],
+      "rotation": 0
+    },
+    "modern": {
+      "center": [-2.2397, 53.4840],
+      "rotation": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "sinclairs_main_block",
+      "name": "Sinclair's Oyster Bar - Main Range (3 low storeys, timber-framed)",
+      "type": "polygon",
+      "coords": [
+        [-2.239820, 53.484050],
+        [-2.239580, 53.484050],
+        [-2.239580, 53.483950],
+        [-2.239820, 53.483950]
+      ],
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall"
+    },
+    {
+      "id": "sinclairs_corner_block",
+      "name": "Sinclair's Oyster Bar - Corner Block (4 high storeys, reversed-slope roof)",
+      "type": "polygon",
+      "coords": [
+        [-2.239820, 53.484050],
+        [-2.239720, 53.484050],
+        [-2.239720, 53.483920],
+        [-2.239820, 53.483920]
+      ],
+      "height": 0,
+      "extrudedHeight": 13,
+      "material": "wall"
+    },
+    {
+      "id": "sinclairs_rear_wing",
+      "name": "Sinclair's Oyster Bar - Rear Wing (timber-framed)",
+      "type": "polygon",
+      "coords": [
+        [-2.239580, 53.484050],
+        [-2.239480, 53.484050],
+        [-2.239480, 53.483850],
+        [-2.239580, 53.483850]
+      ],
+      "height": 0,
+      "extrudedHeight": 10,
+      "material": "wall"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://www.geograph.org.uk/photo/2221577",
+      "caption": "Sinclair's Oyster Bar in Shambles Square, showing black and white timber framing",
+      "date": "2011"
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Manchester_Sinclairs_oyster_bar.JPG",
+      "caption": "Exterior view showing distinctive corner block with reversed-slope roof",
+      "date": "c.2010"
+    }
+  ],
+  "references": [
+    "https://historicengland.org.uk/listing/the-list/list-entry/1254647",
+    "https://en.wikipedia.org/wiki/Shambles_Square,_Manchester",
+    "https://www.geograph.org.uk/photo/2221577",
+    "https://themanc.com/food-and-drink/the-incredible-history-of-manchesters-sinclairs-oyster-bar/"
+  ],
+  "notes": "Grade II listed timber-framed pub dating to late C17 or early C18 (c.1720). Originally named John Shaw's Punch House when built in 1738. Construction is stucco painted black and white to resemble half-timbering, with slate roof. Main range has 3 low storeys, with distinctive 4-storey corner block featuring unusual reversed-slope roof with prominent bracketed cornice. One of the oldest oyster bars and chop houses in England, and the only surviving example of timber framing typical of Manchester in the 16th and 17th centuries (though ironically this building is a late C17/early C18 parody of Tudor style). Interior contains early C19 chop house fittings. Building raised 30 feet in 1971 to match new street level. Following 1996 IRA bombing, dismantled into over 10,000 separate parts (March 1998), each piece numbered, photographed and stored on computer, then moved 300 metres northwards and meticulously reassembled (completed late 1999) to create Shambles Square next to Manchester Cathedral. Now positioned at 90 degrees to the Old Wellington Inn, joined by stone extension. Located at 4 Cathedral Gates, Manchester M3 1SW. Listed NGR: SJ8391698681."
+}

@@ -1,0 +1,124 @@
+{
+  "id": "old_wellington_inn",
+  "name": "The Old Wellington Inn",
+  "type": "custom",
+  "startYear": 1552,
+  "endYear": 2100,
+  "material": "timber",
+  "center": [-2.243992, 53.484684],
+  "rotation": 0,
+  "maps": {
+    "berry_1650": {
+      "center": [-2.24457, 53.48364],
+      "rotation": 0,
+      "scale": 1.0
+    },
+    "berry_1750": {
+      "center": [-2.24457, 53.48364],
+      "rotation": 0,
+      "scale": 1.0
+    },
+    "os_1845": {
+      "center": [-2.24457, 53.48364],
+      "rotation": 0
+    },
+    "os_1950s": {
+      "center": [-2.24457, 53.48364],
+      "rotation": 0
+    },
+    "modern": {
+      "center": [-2.243992, 53.484684],
+      "rotation": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "old_wellington_main_block",
+      "name": "Old Wellington Inn - Main Block (Three-bay timber frame)",
+      "type": "polygon",
+      "coords": [
+        [-2.244050, 53.484664],
+        [-2.243934, 53.484664],
+        [-2.243934, 53.484704],
+        [-2.244050, 53.484704]
+      ],
+      "height": 0,
+      "extrudedHeight": 11,
+      "material": "timber"
+    },
+    {
+      "id": "old_wellington_north_gable",
+      "name": "Old Wellington Inn - North Gable (Bay 1)",
+      "type": "polygon",
+      "coords": [
+        [-2.244050, 53.484704],
+        [-2.244010, 53.484704],
+        [-2.244010, 53.484710],
+        [-2.244050, 53.484710]
+      ],
+      "height": 11,
+      "extrudedHeight": 13.5,
+      "material": "timber"
+    },
+    {
+      "id": "old_wellington_south_gable",
+      "name": "Old Wellington Inn - South Gable (Bay 3)",
+      "type": "polygon",
+      "coords": [
+        [-2.243974, 53.484664],
+        [-2.243934, 53.484664],
+        [-2.243934, 53.484658],
+        [-2.243974, 53.484658]
+      ],
+      "height": 11,
+      "extrudedHeight": 13.5,
+      "material": "timber"
+    },
+    {
+      "id": "old_wellington_jetty_first_floor",
+      "name": "Old Wellington Inn - First Floor Jetty (Overhang)",
+      "type": "polygon",
+      "coords": [
+        [-2.244056, 53.484664],
+        [-2.243928, 53.484664],
+        [-2.243928, 53.484710],
+        [-2.244056, 53.484710]
+      ],
+      "height": 3.5,
+      "extrudedHeight": 7,
+      "material": "timber"
+    },
+    {
+      "id": "old_wellington_jetty_second_floor",
+      "name": "Old Wellington Inn - Second Floor Jetty (Upper overhang)",
+      "type": "polygon",
+      "coords": [
+        [-2.244062, 53.484664],
+        [-2.243922, 53.484664],
+        [-2.243922, 53.484710],
+        [-2.244062, 53.484710]
+      ],
+      "height": 7,
+      "extrudedHeight": 11,
+      "material": "timber"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://historicengland.org.uk/education/schools-resources/educational-images/old-wellington-inn-cateaton-street-manchester-8453",
+      "caption": "Old Wellington Inn showing distinctive Tudor timber-framed construction with jettied upper floors",
+      "date": "historic"
+    },
+    {
+      "url": "https://artsandculture.google.com/story/the-old-wellington-pub-greater-manchester-chamber-of-commerce/4wWxLrdH6YXnVQ?hl=en",
+      "caption": "The Old Wellington Pub - historic photos and story",
+      "date": "various"
+    }
+  ],
+  "references": [
+    "https://historicengland.org.uk/listing/the-list/list-entry/1270698",
+    "https://en.wikipedia.org/wiki/The_Old_Wellington_Inn",
+    "https://britishlistedbuildings.co.uk/101270698-the-old-wellington-inn-city-centre-ward"
+  ],
+  "notes": "Built in 1552 next to Manchester's market square (the old Shambles meat market), the Old Wellington Inn is the oldest surviving Tudor building in Manchester city centre and the only remaining example of 16th-17th century timber framing typical of the city's vernacular architecture. Originally constructed as a two-storey timber-framed building with close studding and angle braces on the first floor, and square small-panelled framing on the second floor. A third storey was added in the 17th century. The building has three structural bays with gabled ends on the first and third bays. Features distinctive jettied (overhanging) upper floors characteristic of Tudor construction. Part of the building became a draper's shop owned by the Byrom family in 1554; the writer John Byrom was born here in 1692. By 1830 it became a licensed public house known as The Vintners Arms, later The Kenyon Vaults, and by 1865 the ground floor was known as The Wellington Inn. In 1971, the building was raised 5 feet (1.5m) using hydraulic jacks over three months to align with new street level for an underground car park. Survived the 1996 IRA bombing but was subsequently dismantled and moved 300 metres (70m northwards according to some sources) from its original location near Market Street/Old Shambles to its current position at Shambles Square (4 Cathedral Gates) near Manchester Cathedral in 1999. Each timber and stone was catalogued during the move. The building was rebuilt at 90 degrees to its neighbour Sinclair's Oyster Bar, joined by a stone extension to form two sides of the new Shambles Square. Grade II listed (List Entry 1270698, first listed 25 February 1952, amended 6 June 1994). Still operates as a traditional pub. Original location coordinates: 53°29'1.111\"N, 2°14'40.567\"W (1552-1999). Current location: 53°29'4.837\"N, 2°14'38.454\"W (1999-present)."
+}

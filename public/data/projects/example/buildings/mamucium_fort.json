@@ -1,0 +1,305 @@
+{
+  "id": "mamucium_fort",
+  "name": "Mamucium Roman Fort",
+  "type": "custom",
+  "startYear": 79,
+  "endYear": 410,
+  "material": "stone",
+  "center": [-2.25463, 53.47514],
+  "rotation": 0,
+  "maps": {
+    "modern": {
+      "center": [-2.25463, 53.47514],
+      "rotation": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "mamucium_north_wall",
+      "name": "Mamucium - North Wall",
+      "type": "polygon",
+      "coords": [
+        [-2.25574, 53.47579],
+        [-2.25352, 53.47579],
+        [-2.25352, 53.47573],
+        [-2.25574, 53.47573]
+      ],
+      "height": 0,
+      "extrudedHeight": 5,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_east_wall",
+      "name": "Mamucium - East Wall",
+      "type": "polygon",
+      "coords": [
+        [-2.25352, 53.47573],
+        [-2.25352, 53.47455],
+        [-2.25358, 53.47455],
+        [-2.25358, 53.47573]
+      ],
+      "height": 0,
+      "extrudedHeight": 5,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_south_wall",
+      "name": "Mamucium - South Wall",
+      "type": "polygon",
+      "coords": [
+        [-2.25352, 53.47455],
+        [-2.25574, 53.47455],
+        [-2.25574, 53.47461],
+        [-2.25352, 53.47461]
+      ],
+      "height": 0,
+      "extrudedHeight": 5,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_west_wall",
+      "name": "Mamucium - West Wall",
+      "type": "polygon",
+      "coords": [
+        [-2.25574, 53.47461],
+        [-2.25574, 53.47573],
+        [-2.25568, 53.47573],
+        [-2.25568, 53.47461]
+      ],
+      "height": 0,
+      "extrudedHeight": 5,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_ne_corner",
+      "name": "Mamucium - Northeast Corner Tower",
+      "type": "polygon",
+      "coords": [
+        [-2.25358, 53.47573],
+        [-2.25352, 53.47573],
+        [-2.25352, 53.47567],
+        [-2.25358, 53.47567]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower"
+    },
+    {
+      "id": "mamucium_se_corner",
+      "name": "Mamucium - Southeast Corner Tower",
+      "type": "polygon",
+      "coords": [
+        [-2.25358, 53.47461],
+        [-2.25352, 53.47461],
+        [-2.25352, 53.47455],
+        [-2.25358, 53.47455]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower"
+    },
+    {
+      "id": "mamucium_sw_corner",
+      "name": "Mamucium - Southwest Corner Tower",
+      "type": "polygon",
+      "coords": [
+        [-2.25574, 53.47455],
+        [-2.25568, 53.47455],
+        [-2.25568, 53.47461],
+        [-2.25574, 53.47461]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower"
+    },
+    {
+      "id": "mamucium_nw_corner",
+      "name": "Mamucium - Northwest Corner Tower",
+      "type": "polygon",
+      "coords": [
+        [-2.25574, 53.47579],
+        [-2.25568, 53.47579],
+        [-2.25568, 53.47573],
+        [-2.25574, 53.47573]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "tower"
+    },
+    {
+      "id": "mamucium_north_gate",
+      "name": "Mamucium - North Gate (Porta Praetoria)",
+      "type": "polygon",
+      "coords": [
+        [-2.25476, 53.47579],
+        [-2.25450, 53.47579],
+        [-2.25450, 53.47573],
+        [-2.25476, 53.47573]
+      ],
+      "height": 0,
+      "extrudedHeight": 7,
+      "material": "tower"
+    },
+    {
+      "id": "mamucium_south_gate",
+      "name": "Mamucium - South Gate (Porta Decumana)",
+      "type": "polygon",
+      "coords": [
+        [-2.25476, 53.47455],
+        [-2.25450, 53.47455],
+        [-2.25450, 53.47461],
+        [-2.25476, 53.47461]
+      ],
+      "height": 0,
+      "extrudedHeight": 7,
+      "material": "tower"
+    },
+    {
+      "id": "mamucium_east_gate",
+      "name": "Mamucium - East Gate (Porta Principalis Dextra)",
+      "type": "polygon",
+      "coords": [
+        [-2.25352, 53.47523],
+        [-2.25352, 53.47511],
+        [-2.25358, 53.47511],
+        [-2.25358, 53.47523]
+      ],
+      "height": 0,
+      "extrudedHeight": 7,
+      "material": "tower"
+    },
+    {
+      "id": "mamucium_west_gate",
+      "name": "Mamucium - West Gate (Porta Principalis Sinistra)",
+      "type": "polygon",
+      "coords": [
+        [-2.25574, 53.47523],
+        [-2.25574, 53.47511],
+        [-2.25568, 53.47511],
+        [-2.25568, 53.47523]
+      ],
+      "height": 0,
+      "extrudedHeight": 7,
+      "material": "tower"
+    },
+    {
+      "id": "mamucium_principia",
+      "name": "Mamucium - Principia (Headquarters)",
+      "type": "polygon",
+      "coords": [
+        [-2.25484, 53.47527],
+        [-2.25442, 53.47527],
+        [-2.25442, 53.47507],
+        [-2.25484, 53.47507]
+      ],
+      "height": 0,
+      "extrudedHeight": 8,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_granary_1",
+      "name": "Mamucium - Granary 1",
+      "type": "polygon",
+      "coords": [
+        [-2.25520, 53.47550],
+        [-2.25490, 53.47550],
+        [-2.25490, 53.47533],
+        [-2.25520, 53.47533]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_granary_2",
+      "name": "Mamucium - Granary 2",
+      "type": "polygon",
+      "coords": [
+        [-2.25436, 53.47550],
+        [-2.25406, 53.47550],
+        [-2.25406, 53.47533],
+        [-2.25436, 53.47533]
+      ],
+      "height": 0,
+      "extrudedHeight": 6,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_barracks_1",
+      "name": "Mamucium - Barracks Block 1",
+      "type": "polygon",
+      "coords": [
+        [-2.25550, 53.47560],
+        [-2.25500, 53.47560],
+        [-2.25500, 53.47550],
+        [-2.25550, 53.47550]
+      ],
+      "height": 0,
+      "extrudedHeight": 5,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_barracks_2",
+      "name": "Mamucium - Barracks Block 2",
+      "type": "polygon",
+      "coords": [
+        [-2.25426, 53.47560],
+        [-2.25376, 53.47560],
+        [-2.25376, 53.47550],
+        [-2.25426, 53.47550]
+      ],
+      "height": 0,
+      "extrudedHeight": 5,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_barracks_3",
+      "name": "Mamucium - Barracks Block 3",
+      "type": "polygon",
+      "coords": [
+        [-2.25550, 53.47484],
+        [-2.25500, 53.47484],
+        [-2.25500, 53.47474],
+        [-2.25550, 53.47474]
+      ],
+      "height": 0,
+      "extrudedHeight": 5,
+      "material": "wall"
+    },
+    {
+      "id": "mamucium_barracks_4",
+      "name": "Mamucium - Barracks Block 4",
+      "type": "polygon",
+      "coords": [
+        [-2.25426, 53.47484],
+        [-2.25376, 53.47484],
+        [-2.25376, 53.47474],
+        [-2.25426, 53.47474]
+      ],
+      "height": 0,
+      "extrudedHeight": 5,
+      "material": "wall"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://www.geograph.org.uk/photo/4895359",
+      "caption": "Site of the Roman Vicus at Castlefield showing defensive walls and reconstruction",
+      "date": "2017"
+    },
+    {
+      "url": "https://www.flickr.com/photos/155697130@N05/51852729061/",
+      "caption": "Mamucium Roman Fort Reconstruction - North Gate",
+      "date": "2022"
+    }
+  ],
+  "references": [
+    "https://en.wikipedia.org/wiki/Mamucium",
+    "https://www.roman-britain.co.uk/places/mamucium/",
+    "https://www.historyhit.com/locations/castlefield-roman-fort/",
+    "https://historicengland.org.uk/listing/the-list/list-entry/1002042",
+    "https://lancashirepast.com/2015/11/15/manchester-roman-fort-and-vicus/",
+    "https://www.ourcastlefield.co.uk/the-roman-gardens"
+  ],
+  "notes": "Mamucium (also Mancunium) was a Roman auxiliary fort founded c. AD 79, likely by Agricola's forces during the conquest of northern Britain. The fort occupied a naturally defensible sandstone bluff near the confluence of the Rivers Medlock and Irwell. The fort underwent three main construction phases: (1) AD 79 - turf and timber construction, 160m x 130m; (2) AD 160 - larger fort of 2 hectares with extra granaries; (3) AD 200 - gatehouses rebuilt in stone, walls given stone facing 2.1-2.7m thick. The fort followed standard Roman auxiliary fort layout with principia (headquarters) at center, granaries (horrea) with raised floors for ventilation, and barracks for the cohort. Four gates with twin towers provided access: Porta Praetoria (north), Porta Decumana (south), and two Portae Principales (east and west). The fort was garrisoned by Roman auxiliaries guarding the crossing of two major Roman roads. Abandoned c. AD 410 when Roman forces withdrew from Britain. Site became UK's first Urban Heritage Park in 1982. North gate reconstructed by Greater Manchester Archaeological Unit in 1984 incorporating original Roman stones. Now a Scheduled Ancient Monument with visible remains of walls, gate foundations, and internal buildings. The name Mamucium likely derives from Celtic 'mamm' (breast) + suffix, referring to the breast-shaped hill, or possibly from the Celtic name for the River Medlock."
+}
