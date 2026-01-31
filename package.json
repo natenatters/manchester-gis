@@ -6,9 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && cp -r dist/manchester-gis/cesium dist/cesium",
-    "preview": "vite preview",
-    "fetch:all": "python3 scripts/fetch_historic_england.py && python3 scripts/fetch_wikidata.py && python3 scripts/fetch_osm.py && python3 scripts/consolidate_data.py",
-    "consolidate": "python3 scripts/consolidate_data.py"
+    "build:data": "python3 data/scripts/build_czml.py",
+    "preview": "vite preview"
   },
   "keywords": ["gis", "cesium", "history", "manchester", "roman", "domesday"],
   "author": "Nate Natters",

@@ -23,14 +23,8 @@ venv/
 # Logs
 *.log
 
-# Generated data files
-data/unified_sites.geojson
+# Generated CZML (built by CI)
 public/data/projects/*/entities.czml
-
-# User projects (each person creates their own)
-data/projects/*
-!data/projects/example/
-!data/projects/README.md
 
 # Environment
 .env
@@ -38,6 +32,3 @@ data/projects/*
 
 # Claude Code
 .claude/
-
-# Cache
-data/cache/

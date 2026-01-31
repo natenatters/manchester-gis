@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Build CZML data
-        run: python3 scripts/build_czml.py
+        run: python3 data/scripts/build_czml.py
 
       - name: Build
         run: npm run build
