@@ -25,15 +25,15 @@
           >
           <!-- Imagery Toggles -->
           <div class="imagery-display">
-            <template v-if="layers.imagery.length === 0">
+            <template v-if="layers.length === 0">
               <span class="no-imagery">No imagery</span>
             </template>
             <template v-else>
-              <label v-for="layer in layers.imagery" :key="layer.index" class="imagery-toggle">
+              <label v-for="layer in layers" :key="layer.index" class="imagery-toggle">
                 <input
                   type="checkbox"
                   :checked="layer.visible"
-                  @change="toggleImagery(layer.index)"
+                  @change="toggleLayer(layer.index)"
                 >
                 {{ layer.name }}
               </label>
@@ -82,21 +82,16 @@
 import { ref, computed, onMounted } from 'vue';
 import { Viewer } from './viewer.js';
 
-// Props
-const props = defineProps({
-  config: Object
-});
+const props = defineProps({ config: Object });
 
 // State
 const title = ref('Historical GIS');
 const year = ref(2000);
-const defaultYear = ref(2000);
 const groups = ref([]);
-const layers = ref({ imagery: [] });
+const layers = ref([]);
 const selectedEntity = ref(null);
 const controlsOpen = ref(true);
 
-// Viewer instance
 let viewer = null;
 
 // Computed
@@ -106,31 +101,29 @@ const entityName = computed(() => {
 });
 
 const entityGroup = computed(() => {
-  if (!selectedEntity.value) return null;
-  const props = selectedEntity.value.properties;
+  const props = selectedEntity.value?.properties;
   return props?.group?.getValue?.() || props?.group || null;
 });
 
 const entityPeriod = computed(() => {
-  if (!selectedEntity.value?.availability) return null;
-  const start = selectedEntity.value.availability.start?.toString?.() || '';
-  const stop = selectedEntity.value.availability.stop?.toString?.() || '';
+  const avail = selectedEntity.value?.availability;
+  if (!avail) return null;
+  const start = avail.start?.toString?.() || '';
+  const stop = avail.stop?.toString?.() || '';
   if (!start && !stop) return null;
-  const startYear = start ? new Date(start).getFullYear() : '?';
-  const stopYear = stop ? new Date(stop).getFullYear() : '?';
-  return `${startYear} - ${stopYear}`;
+  return `${start ? new Date(start).getFullYear() : '?'} - ${stop ? new Date(stop).getFullYear() : '?'}`;
 });
 
 // Methods
 function onYearInput(e) {
-  const newYear = parseInt(e.target.value);
-  localStorage.setItem('year', newYear);
-  viewer?.setYear(newYear);
+  const y = parseInt(e.target.value);
+  localStorage.setItem('year', y);
+  viewer.year = y;
 }
 
-function toggleImagery(index) {
-  viewer?.toggleImagery(index);
-  layers.value = viewer?.getLayerInfo(year.value) || { imagery: [] };
+function toggleLayer(index) {
+  viewer?.toggleLayer(index);
+  layers.value = viewer?.getVisibleLayers(year.value) || [];
 }
 
 function toggleGroup(group, visible) {
@@ -138,42 +131,38 @@ function toggleGroup(group, visible) {
 }
 
 function clearSelection() {
-  viewer?.clearSelection();
+  viewer.cesium.selectedEntity = undefined;
 }
 
 // Lifecycle
 onMounted(async () => {
-  // Create viewer
   viewer = new Viewer('cesiumContainer');
+  title.value = props.config.name || 'Historical GIS';
 
-  // Listen to viewer events
-  viewer.on('yearChange', (y) => {
+  // Year change callback
+  viewer.onYearChange = (y) => {
     year.value = y;
-    layers.value = viewer.getLayerInfo(y);
-  });
+    layers.value = viewer.getVisibleLayers(y);
+  };
 
-  viewer.on('entitiesChange', (entities) => {
-    const groupSet = new Set();
-    for (const entity of entities) {
-      const group = entity.properties?.group?.getValue?.() || entity.properties?.group;
-      if (group) groupSet.add(group);
-    }
-    groups.value = [...groupSet];
-  });
-
-  viewer.on('entitySelect', (entity) => {
+  // Entity selection
+  viewer.cesium.selectedEntityChanged.addEventListener((entity) => {
     selectedEntity.value = entity;
   });
 
-  // Initialize
-  title.value = props.config.name || 'Historical GIS';
-  defaultYear.value = props.config.defaultYear || 2000;
-
+  // Init
   await viewer.init(props.config);
 
-  // Set initial year from localStorage or default
+  // Extract groups from loaded entities
+  const groupSet = new Set();
+  for (const e of viewer._dataSource?.entities.values || []) {
+    const g = e.properties?.group?.getValue?.() || e.properties?.group;
+    if (g) groupSet.add(g);
+  }
+  groups.value = [...groupSet];
+
+  // Set initial year
   const saved = localStorage.getItem('year');
-  const initialYear = saved !== null ? parseInt(saved, 10) : defaultYear.value;
-  viewer.setYear(initialYear);
+  viewer.year = saved !== null ? parseInt(saved, 10) : (props.config.defaultYear || 2000);
 });
 </script>
