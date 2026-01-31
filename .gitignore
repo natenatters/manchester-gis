@@ -25,6 +25,7 @@ venv/
 
 # Generated data files
 data/unified_sites.geojson
+public/data/projects/*/entities.czml
 
 # User projects (each person creates their own)
 data/projects/*
