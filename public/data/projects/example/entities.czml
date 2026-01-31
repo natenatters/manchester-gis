@@ -1,7 +1,7 @@
 [
   {
     "id": "document",
-    "name": "Manchester Historical GIS",
+    "name": "Greater Manchester Historical GIS",
     "version": "1.0",
     "clock": {
       "interval": "0001-01-01T00:00:00Z/2100-12-31T00:00:00Z",

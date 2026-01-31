@@ -27,40 +27,71 @@ PROJECT_DIR = Path(__file__).parent.parent
 DATA_DIR = PROJECT_DIR / "public" / "data" / "projects" / "example"
 
 # Input files
+PROJECT_FILE = DATA_DIR / "project.json"
 BUILDINGS_1650_FILE = DATA_DIR / "buildings_1650.json"
 BUILDINGS_DIR = DATA_DIR / "buildings"
 SITES_FILE = DATA_DIR / "sites.json"
 UNIFIED_FILE = PROJECT_DIR / "public" / "data" / "unified_sites.geojson"
 LAYERS_FILE = DATA_DIR / "layers.json"
-CONFIG_FILE = DATA_DIR / "config.json"
 
 # Output
 OUTPUT_FILE = DATA_DIR / "entities.czml"
 
-# Map periods - derived from config.json layer yearStart/yearEnd
-# These define when buildings get different positions for non-geo-correct maps
-MAP_PERIODS = {
-    "roman": {"start": 0, "stop": 410},
-    "medieval": {"start": 411, "stop": 1649},
-    "berry_1650": {"start": 1650, "stop": 1749},
-    "berry_1750": {"start": 1750, "stop": 1844},
-    "os_1845": {"start": 1845, "stop": 1889},
-    "os_1950s": {"start": 1890, "stop": 1949},
-    "modern": {"start": 1950, "stop": 2100},
-}
+# Default values (overridden by project.json if present)
+DEFAULT_MAP_PERIODS = [
+    {"id": "roman", "start": 0, "stop": 410, "geoCorrect": True},
+    {"id": "medieval", "start": 411, "stop": 1649, "geoCorrect": True},
+    {"id": "berry_1650", "start": 1650, "stop": 1749, "geoCorrect": False},
+    {"id": "berry_1750", "start": 1750, "stop": 1844, "geoCorrect": False},
+    {"id": "os_1845", "start": 1845, "stop": 1889, "geoCorrect": True},
+    {"id": "os_1950s", "start": 1890, "stop": 1949, "geoCorrect": True},
+    {"id": "modern", "start": 1950, "stop": 2100, "geoCorrect": True},
+]
 
-# Which map periods use "modern" (geo-correct) positioning
-GEO_CORRECT_PERIODS = {"roman", "medieval", "os_1845", "os_1950s", "modern"}
-
-# Material name -> RGBA color mapping (for legacy format support)
-# New format should use inline "color": [r, g, b, a] instead
-MATERIAL_COLORS = {
+DEFAULT_MATERIAL_COLORS = {
     "wall": [201, 184, 150, 255],      # #C9B896 - sandstone
     "tower": [184, 168, 136, 255],     # #B8A888 - slightly darker
     "stone": [160, 144, 128, 255],     # #A09080 - grey stone
     "roof": [80, 80, 80, 255],         # #505050 - dark slate
     "timber": [139, 115, 85, 255],     # #8B7355 - oak brown
 }
+
+# These will be set from project.json in load_project_config()
+MAP_PERIODS = {}
+GEO_CORRECT_PERIODS = set()
+MATERIAL_COLORS = {}
+
+
+def load_project_config():
+    """Load project configuration from project.json.
+
+    Sets global MAP_PERIODS, GEO_CORRECT_PERIODS, and MATERIAL_COLORS.
+    Falls back to defaults if project.json doesn't exist.
+    """
+    global MAP_PERIODS, GEO_CORRECT_PERIODS, MATERIAL_COLORS
+
+    project_config = None
+    if PROJECT_FILE.exists():
+        with open(PROJECT_FILE) as f:
+            project_config = json.load(f)
+        print(f"Loaded project config: {project_config.get('name', 'Unknown')}")
+
+    # Load map periods
+    periods_list = (project_config.get("mapPeriods") if project_config
+                    else DEFAULT_MAP_PERIODS)
+    MAP_PERIODS = {
+        p["id"]: {"start": p["start"], "stop": p["stop"]}
+        for p in periods_list
+    }
+    GEO_CORRECT_PERIODS = {
+        p["id"] for p in periods_list if p.get("geoCorrect", True)
+    }
+
+    # Load material colors
+    MATERIAL_COLORS = (project_config.get("materialColors") if project_config
+                       else DEFAULT_MATERIAL_COLORS)
+
+    return project_config
 
 
 # =============================================================================
@@ -908,17 +939,22 @@ def process_sites(sites_data, layers_config, start_index):
 def main():
     print("Building CZML...")
 
-    # Load configuration
+    # Load project configuration (sets MAP_PERIODS, MATERIAL_COLORS, etc.)
+    project_config = load_project_config()
+    project_name = project_config.get("name", "Historical GIS") if project_config else "Historical GIS"
+    default_year = project_config.get("defaultYear", 1650) if project_config else 1650
+
+    # Load layer configuration
     layers_config = load_layers_config()
 
     # Initialize CZML document
     czml = [{
         "id": "document",
-        "name": "Manchester Historical GIS",
+        "name": project_name,
         "version": "1.0",
         "clock": {
             "interval": "0001-01-01T00:00:00Z/2100-12-31T00:00:00Z",
-            "currentTime": "1650-07-01T00:00:00Z",
+            "currentTime": f"{default_year:04d}-07-01T00:00:00Z",
             "multiplier": 1
         }
     }]

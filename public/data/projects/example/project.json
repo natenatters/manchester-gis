@@ -1,0 +1,39 @@
+{
+  "name": "Greater Manchester Historical GIS",
+  "description": "Land ownership from Domesday (1086) to present day",
+  "author": "Nate Natters",
+  "region": "Greater Manchester, UK",
+
+  "bounds": {
+    "west": -2.75,
+    "south": 53.35,
+    "east": -1.90,
+    "north": 53.70
+  },
+
+  "center": {
+    "lon": -2.25,
+    "lat": 53.48,
+    "height": 5000
+  },
+
+  "defaultYear": 1650,
+
+  "mapPeriods": [
+    {"id": "roman", "start": 0, "stop": 410, "geoCorrect": true},
+    {"id": "medieval", "start": 411, "stop": 1649, "geoCorrect": true},
+    {"id": "berry_1650", "start": 1650, "stop": 1749, "geoCorrect": false},
+    {"id": "berry_1750", "start": 1750, "stop": 1844, "geoCorrect": false},
+    {"id": "os_1845", "start": 1845, "stop": 1889, "geoCorrect": true},
+    {"id": "os_1950s", "start": 1890, "stop": 1949, "geoCorrect": true},
+    {"id": "modern", "start": 1950, "stop": 2100, "geoCorrect": true}
+  ],
+
+  "materialColors": {
+    "wall": [201, 184, 150, 255],
+    "tower": [184, 168, 136, 255],
+    "stone": [160, 144, 128, 255],
+    "roof": [80, 80, 80, 255],
+    "timber": [139, 115, 85, 255]
+  }
+}
